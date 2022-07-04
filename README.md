@@ -1,7 +1,8 @@
 
 # Timeline Block For Gutenberg
 
-A brief description of what this project does and who it's for
+Showcase your story or company history,events,process steps and Roadmap in precise and elegant way using powerful and advance Gutenberg Timeline Block
+
 ### ⚡ Timeline Block for Gutenberg/Block Editor
 
 **Timeline Block** is a responsive WordPress block plugin for Gutenberg block editor that allows you to create beautiful vertical history timeline with one click. Just search '**Timeline Block**' from block editor '**Add Block**' section and create a beautiful story timeline immediately.
