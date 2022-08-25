@@ -40,7 +40,7 @@ const { compose, createHigherOrderComponent } = wp.compose;
  */
 
 const enhance = compose(
-	
+
 	withSelect( ( select ) => {
 		return {
 			selected: select( 'core/block-editor' ).getSelectedBlock(),
@@ -81,10 +81,10 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 		const blockProps = useBlockProps( {
 			className: 'Cool-Content-Timeline-'+props.attributes.timelineDesign,
 		  } );
-		return ( 
+		return (
 		<div {...blockProps}>
 		<Edit { ...props } />
-	
+
 		</div> );
 	},
 	save:props=>{
@@ -92,9 +92,13 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 		return(
 		<div {...blockProps}>
 		<Save { ...props } />
-	
+
 		</div> );
 	},
+        providesContext: {
+            'cp-timeline/timelineLayout': 'timelineLayout',
+            'cp-timeline/timelineDesign': 'timelineDesign',
+        },
 	example: {
 		attributes: {
 			backgroundColor: '#000000',

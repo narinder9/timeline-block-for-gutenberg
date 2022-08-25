@@ -12,7 +12,7 @@ const date_arr = []
 for (var i = 1; i <= ITEM_COUNT; i++) {
 
 	if(i%2==0){
-		var class_postion="left" 
+		var class_postion="left"
 	}
 	else{
 		var class_postion="right"
