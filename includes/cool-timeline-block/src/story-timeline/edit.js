@@ -50,7 +50,7 @@ const {
 	withSelect
 } = wp.data
 
-const ALLOWED_BLOCKS = [ "cp-timeline/content-timeline-child" ]
+const ALLOWED_BLOCKS = [ "cp-timeline/content-timeline-block-child" ]
 
 
 
@@ -63,7 +63,7 @@ class Edit extends Component {
 	
 		let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
 		
-		let name = 'cp-timeline/content-timeline-child';
+		let name = 'cp-timeline/content-timeline-block-child';
 		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false
 		}	);
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);	
@@ -322,7 +322,7 @@ render() {
 			</InspectorControls>
 
 			const getContentTimelineTemplate = memoize( ( icon_block, tm_content ) => {
-				return times( icon_block, n => [ 'cp-timeline/content-timeline-child',tm_content[n]] )
+				return times( icon_block, n => [ 'cp-timeline/content-timeline-block-child',tm_content[n]] )
 			} )
 
 				let loadHeadGoogleFonts
@@ -413,7 +413,7 @@ render() {
 										}
 								</div>	
 							</div><div onClick={e => this.addBlock(e)} className="timeline-block-add-story">
-									<button type="button" visible="true" class="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
+									<button type="button" visible="true" className="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
 								</div>
 								</div>
 			</div>

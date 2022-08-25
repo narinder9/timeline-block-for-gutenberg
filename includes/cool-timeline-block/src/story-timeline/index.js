@@ -63,7 +63,7 @@ const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
 	} );
 }, 'withcontentTimeline' );
 
-registerBlockType( "cp-timeline/content-timeline", {
+registerBlockType( "cp-timeline/content-timeline-block", {
 
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Cool Timeline Block ', 'cool-timeline' ), // Block title.
@@ -108,6 +108,6 @@ registerBlockType( "cp-timeline/content-timeline", {
 } )
 addFilter(
 	'editor.BlockEdit',
-	'cp-timeline/content-timeline',
+	'cp-timeline/content-timeline-block',
 	withcontentTimeline
 );

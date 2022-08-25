@@ -139,7 +139,7 @@ import renderSVG from "../component/icon/renderIcon"
 						placeholder={ __( 'Enter Story Title', 'timeline-block' ) }
 						value={ time_heading }
 						onChange={ ( value ) => setAttributes( { time_heading: value } ) }
-						keepPlaceholderOnFocus={true}
+						keepplaceholderonfocus="true"
 						
 					/>
 					<RichText
@@ -147,7 +147,7 @@ import renderSVG from "../component/icon/renderIcon"
 						placeholder={ __( 'Enter story description here.', 'timeline-block' ) }
 						value={ time_desc }
 						onChange={ ( value ) => setAttributes({time_desc:value})}
-						keepPlaceholderOnFocus={true}
+						keepplaceholderonfocus="true"
 					
 					/>
 					</div>

@@ -58,7 +58,7 @@ if (!class_exists('CoolTimelineBlock')) {
             //Setup your plugin object here
             /* including required files */
             add_action('plugins_loaded', array($this, 'ctlb_include_files'));
-            add_action( 'init', 'create_block_cool_plugin_timeline_block_init' );
+            add_action('init', [__CLASS__, 'create_block_cool_plugin_timeline_block_init']);
         }
 
         /*
@@ -76,9 +76,9 @@ if (!class_exists('CoolTimelineBlock')) {
          *
          * @see https://developer.wordpress.org/reference/functions/register_block_type/
          */
-        function create_block_cool_plugin_timeline_block_init() {
-            register_block_type( __DIR__ . '/includes/cool-timeline-block/build/content-timeline-block.json' );
-            register_block_type( __DIR__ . '/includes/cool-timeline-block/build/content-timeline-child-block.json' );
+        public static function create_block_cool_plugin_timeline_block_init() {
+            register_block_type( __DIR__ . '/includes/cool-timeline-block/build/story-timeline/block.json' );
+            register_block_type( __DIR__ . '/includes/cool-timeline-block/build/story-timeline-child/block.json' );
         }
     }
 }

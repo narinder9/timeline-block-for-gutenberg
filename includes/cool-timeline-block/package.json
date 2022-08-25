@@ -4,7 +4,7 @@
 	"description": "Showcase your story or company history,events,process steps and Roadmap in precise and elegant way using powerful and advance Gutenberg Timeline Block",
 	"author": "Cool Timeline",
 	"license": "GPL-2.0-or-later",
-	"main": "src/index.js",
+	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
