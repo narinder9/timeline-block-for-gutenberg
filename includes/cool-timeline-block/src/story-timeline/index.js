@@ -40,7 +40,7 @@ const { compose, createHigherOrderComponent } = wp.compose;
  */
 
 const enhance = compose(
-	
+
 	withSelect( ( select ) => {
 		return {
 			selected: select( 'core/block-editor' ).getSelectedBlock(),
@@ -63,7 +63,7 @@ const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
 	} );
 }, 'withcontentTimeline' );
 
-registerBlockType( "cp-timeline/content-timeline", {
+registerBlockType( "cp-timeline/content-timeline-block", {
 
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Cool Timeline Block ', 'cool-timeline' ), // Block title.
@@ -81,10 +81,10 @@ registerBlockType( "cp-timeline/content-timeline", {
 		const blockProps = useBlockProps( {
 			className: 'Cool-Content-Timeline-'+props.attributes.timelineDesign,
 		  } );
-		return ( 
+		return (
 		<div {...blockProps}>
 		<Edit { ...props } />
-	
+
 		</div> );
 	},
 	save:props=>{
@@ -92,9 +92,13 @@ registerBlockType( "cp-timeline/content-timeline", {
 		return(
 		<div {...blockProps}>
 		<Save { ...props } />
-	
+
 		</div> );
 	},
+        providesContext: {
+            'cp-timeline/timelineLayout': 'timelineLayout',
+            'cp-timeline/timelineDesign': 'timelineDesign',
+        },
 	example: {
 		attributes: {
 			backgroundColor: '#000000',
@@ -108,6 +112,6 @@ registerBlockType( "cp-timeline/content-timeline", {
 } )
 addFilter(
 	'editor.BlockEdit',
-	'cp-timeline/content-timeline',
+	'cp-timeline/content-timeline-block',
 	withcontentTimeline
 );

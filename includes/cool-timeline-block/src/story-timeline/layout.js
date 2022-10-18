@@ -5,17 +5,17 @@ import {
 } from '@wordpress/block-editor';
 
 const TEMPLATE = [
-    [ 'cp-timeline/content-timeline-child', {}, [
+    [ 'cp-timeline/content-timeline-block-child', {}, [
         [ 'core/paragraph', { placeholder: 'Enter slide content...' } ],
     ] ],
-    [ 'cp-timeline/content-timeline-child', {}, [
+    [ 'cp-timeline/content-timeline-block-child', {}, [
         [ 'core/paragraph', { placeholder: 'Enter slide content...' } ],
     ] ]
 ];
 export function LayoutInit(props){
     const blockProps = useBlockProps();
     const innerBlocksProps = useInnerBlocksProps( blockProps, {
-        allowedBlocks: [ 'cp-timeline/content-timeline-child' ],
+        allowedBlocks: [ 'cp-timeline/content-timeline-block-child' ],
         template: TEMPLATE,
         orientation:"horizontal"
     });
