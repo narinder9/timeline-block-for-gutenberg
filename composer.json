@@ -1,0 +1,18 @@
+{
+    "name" : "narinder9/cool-timeline",
+    "description": "Vertical and horizontal history timeline Gutenberg blocks",
+    "type": "wordpress-plugin",
+    "homepage" : "https://wordpress.org/plugins/cool-timeline/",
+    "license" : "GPL-2.0+",
+    "keywords": [
+        "WordPress",
+        "Gutenberg"
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "composer/installers": "~1.0|~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}

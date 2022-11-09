@@ -447,7 +447,11 @@ class Edit extends Component {
 		// Recalculate alternating sides if new child block was added or removed
 		this.childCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
 		wp.data.subscribe(() => {
-			const currentChildCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
+			const childBlocks = select("core/block-editor").getBlock(this.props.clientId);
+                       if (!childBlocks || !childBlocks.innerBlocks) {
+                               return;
+                       }
+			const currentChildCount = childBlocks.innerBlocks.length;
 			const childWasAddedOrRemoved = this.childCount !== currentChildCount;
 
 			this.childCount = currentChildCount;
