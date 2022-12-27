@@ -126,6 +126,10 @@ const attributes = {
 		type:"array",
 		default:[{label:"Full",value:"full"}]
 	},
+	imageAlt:{
+		type:"string",
+		default:"",
+	}
 }
 
 export default attributes

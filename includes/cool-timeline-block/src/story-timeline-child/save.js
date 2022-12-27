@@ -27,7 +27,7 @@ export default function Save( props ) {
 	const StoryDetail = () => (
 		<div className="story-details">
 			{timeLineImage !== "none" ?
-			<div className="story-image">
+			<div className={`story-image ${imageSize}`}>
 			<img  src={timeLineImage} />
 			</div>
 			:

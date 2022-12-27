@@ -44,7 +44,8 @@ class Edit extends Component {
 				blockPosition,
 				imageSize,
 				imageOption,
-				timeLineImage
+				timeLineImage,
+				imageAlt
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
@@ -79,7 +80,6 @@ class Edit extends Component {
 			renderFunc: renderSVG,
 			noSelectedPlaceholder: __( "Select Icon" )
 		};
-
 		const StoryDetail = () => (
 			<div className="story-details">
 			  <MediaUpload
@@ -98,8 +98,8 @@ class Edit extends Component {
 				    <Fragment>
 				      {timeLineImage !== "none" ?
 				       <Fragment>
-					 <div className="story-image">
-					   <img src={timeLineImage}  />
+					 <div className={`story-image ${imageSize}`}>
+					   <img src={timeLineImage}  alt={imageAlt}/>
 					 </div>
 					 <Button isSecondary onClick={(value) => setAttributes({timeLineImage:'none'})}>
 					   {__('Remove Image')}</Button>
@@ -163,20 +163,22 @@ class Edit extends Component {
 			      value={ t_date }
 			      onChange={ ( value ) => setAttributes({t_date:value})}
 			    />
-
-			    {	timelineLayout == "vertical" && timelineDesign == "both-sided" ?
 				<RadioControl
-				  label="Story position"
-				  selected={ blockPosition }
-				  options={ [
-					  { label: 'Left',value:"left"},
-					  { label: 'Right',value:"right"},
-				  ] }
-				  onChange={( value )=>setAttributes({blockPosition:value,block_position_active:true})}
-				/>
-				:null
-		            }
+						label="Story Icon"
+						selected={ iconToggle }
+						options={ [
+							{ label: 'Default(dot)',value:"false"},
+							{ label: 'Custom(Font Awesome Icon)',value:"true"},
+						] } 
+						onChange={( value )=>setAttributes({iconToggle:value})}
+					/>
+					{iconToggle == "true" ?
+					<Fragment> <div className="timeline-block-iconpicker" ><FontIconPicker {...icon_props} /> </div>
 
+				</Fragment>
+					: null}	
+					
+				<hr className="timeline-block-editor__separator"></hr>
 			    <label>Story Image</label>
 			    <br></br>
 			    <MediaUpload
@@ -208,7 +210,22 @@ class Edit extends Component {
 			      ) }
 
                             />
-
+				{	timelineLayout == "vertical" && timelineDesign == "both-sided" ?
+				<Fragment>
+				<hr className="timeline-block-editor__separator"></hr>
+				<RadioControl
+				  label="Story position"
+				  selected={ blockPosition }
+				  options={ [
+					  { label: 'Left',value:"left"},
+					  { label: 'Right',value:"right"},
+				  ] }
+				  onChange={( value )=>setAttributes({blockPosition:value,block_position_active:true})}
+				/>
+				  </Fragment>
+				:null
+			}
+			<hr className="timeline-block-editor__separator"></hr>
 			    {timelineLayout == "vertical" && timeLineImage !== "none"  ?
 			     <SelectControl
 			       label="Image Size"
@@ -221,24 +238,7 @@ class Edit extends Component {
 			     />:
 			     null
 		 	    }
-
-			    <hr className="timeline-block-editor__separator"></hr>
-
-			    <RadioControl
-			      label="Story Icon"
-			      selected={ iconToggle }
-			      options={ [
-				      { label: 'Default(dot)',value:"false"},
-				      { label: 'Custom(Font Awesome Icon)',value:"true"},
-			      ] }
-			      onChange={( value )=>setAttributes({iconToggle:value})}
-			    />
-			    {iconToggle == "true" ?
-			     <Fragment> <div className="timeline-block-iconpicker" ><FontIconPicker {...icon_props} /> </div>
-
-			     </Fragment>
-			     : null}
-			  </PanelBody>
+				</PanelBody>
 			</InspectorControls>
 		);
 

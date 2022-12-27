@@ -1,25 +1,25 @@
 {
-	"name": "cool-timeline-block",
-	"version": "1.2.2",
-	"description": "Showcase your story or company history,events,process steps and Roadmap in precise and elegant way using powerful and advance Gutenberg Timeline Block",
-	"author": "Cool Timeline",
-	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
-	"scripts": {
-		"build": "wp-scripts build",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
-	},
-	"devDependencies": {
-		"@fonticonpicker/react-fonticonpicker": "^1.2.0",
-		"@wordpress/scripts": "^23.7.2",
-		"classnames": "^2.3.1",
-		"memize": "^1.1.0",
-		"react-select": "^5.4.0",
-		"webfontloader": "^1.6.28"
-	}
+  "name": "cool-timeline-block",
+  "version": "1.2.2",
+  "description": "Showcase your story or company history,events,process steps and Roadmap in precise and elegant way using powerful and advance Gutenberg Timeline Block",
+  "author": "Cool Timeline",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@fonticonpicker/react-fonticonpicker": "^1.2.0",
+    "@wordpress/scripts": "^23.7.2",
+    "classnames": "^2.3.1",
+    "memize": "^1.1.0",
+    "react-select": "^5.4.0",
+    "webfontloader": "^1.6.28"
+  }
 }

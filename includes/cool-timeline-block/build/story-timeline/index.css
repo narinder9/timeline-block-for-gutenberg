@@ -1,1 +1,536 @@
-.timeline-block-box-shadow-advanced,.timeline-block-typography-advanced{background:#fff;border:1px solid #e2e4e7;box-shadow:0 3px 30px rgba(25,30,35,.1);margin-bottom:10px;margin-top:10px;padding:10px;position:relative}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/component/typography/editor.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.timeline-block-typography-advanced,
+.timeline-block-box-shadow-advanced {
+  box-shadow: 0 3px 30px rgba(25, 30, 35, 0.1);
+  border: 1px solid #e2e4e7;
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.cp-timeline-block-style-settings,
+.timeline-block-control__actions {
+  display: flex;
+  padding: 0px 0px !important;
+  margin: 0px !important;
+  align-items: center;
+}
+
+.cool-timeline-content-alignment-buttons {
+  width: 100%;
+}
+
+.cool-timeline-content-alignment-buttons button {
+  width: 33%;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px #ccc !important;
+  color: #ccc !important;
+}
+
+.cool-timeline-content-alignment-buttons button.active {
+  color: var(--wp-admin-theme-color) !important;
+  background-color: #dff4ff;
+}
+
+.cp-timeline-block-style-settings button {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50%;
+}
+
+.timeline-block-typography-reset-btn,
+.timeline-block-colorpallete-reset {
+  margin-right: auto;
+}
+
+.timeline-block-colorpallete-reset span,
+.timeline-block-typography-reset-btn span,
+.timeline-block-control__actions_reset span {
+  height: 15px;
+  width: 15px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+.timeline-block-typography-option-actions {
+  display: flex;
+  align-items: center;
+}
+
+.cp-timeline-block-color-palates {
+  color: transparent !important;
+  font-size: 0px !important;
+}
+
+.cp-timeline-block-color-palates div:nth-child(1) {
+  display: block;
+}
+
+.cp-timeline-block-color-palates div {
+  display: none;
+}
+
+.cp-timeline-block-range__control button {
+  margin-block: 0px !important;
+}
+
+.timeline-block-typography-control-btn {
+  margin-left: auto;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  padding: 0px 5px !important;
+}
+
+.cool-timeline-gt-block-review-tab {
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1882352941);
+  padding: 10px 0px !important;
+  border-radius: 5px !important;
+}
+
+.cool-timeline-gt-block-review-tab a {
+  text-decoration: none;
+  color: #ffb900;
+  font-size: 20px;
+}
+
+.cp-timeline-block-demo-button {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0px !important;
+}
+
+.timeline-block-add-story button {
+  width: 10%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-block-add-story {
+  margin: 10px 0px 20px 0px;
+}
+
+.cooltimeline-tab-settings .active-tab {
+  border-width: 1px 1px 0px 1px;
+  border-color: #e5e5e5;
+  border-style: solid;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 0px transparent;
+}
+
+.cooltimeline-tab-settings .components-tab-panel__tabs {
+  justify-content: space-between;
+}
+
+.rfipbtn,
+.rfipdropdown {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 1.71429;
+  vertical-align: baseline;
+}
+
+.rfipbtn,
+.rfipbtn *,
+.rfipdropdown,
+.rfipdropdown * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rfipbtn input,
+.rfipbtn select,
+.rfipdropdown input,
+.rfipdropdown select {
+  font-size: 14px;
+}
+
+.rfip {
+  position: relative;
+  margin: 8px 0;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.rfipbtn {
+  width: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 50px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: box-shadow 0.25s, border-color 0.25s;
+  outline: 0 none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  height: 40px;
+}
+
+.rfipbtn--open {
+  border-radius: 2px 2px 0 0;
+}
+
+.rfipbtn__button {
+  width: 48px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.rfipbtn__button i {
+  font-size: 26px;
+  line-height: 26px;
+  height: 26px;
+  width: 26px;
+  transition: transform 0.25s;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rfipbtn__button--open i {
+  transform: rotate(-180deg);
+}
+
+.rfipbtn__current {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-flex: 0;
+  padding: 2px;
+}
+
+.rfipbtn--multi {
+  width: 258px;
+}
+
+.rfipbtn--multi .rfipbtn__current {
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  flex-basis: 212px;
+  align-content: center;
+}
+
+.rfipbtn--multi .rfipbtn__current,
+.rfipbtn__icon {
+  -webkit-box-orient: horizontal;
+}
+
+.rfipbtn__icon {
+  margin: 2px;
+  padding: 0;
+  height: 28px;
+  width: 48px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 2px;
+}
+
+.rfipbtn__icon--empty {
+  font-size: 14px;
+  line-height: 16px;
+  margin-left: 8px;
+  text-align: center;
+  text-transform: lowercase;
+  font-style: italic;
+}
+
+.rfipbtn__elm {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.rfipbtn__elm img,
+.rfipbtn__elm svg {
+  height: 18px;
+  width: 18px;
+}
+
+.rfipbtn__elm svg {
+  fill: #333;
+}
+
+i.fipicon-angle-down:before {
+  content: "\f140";
+  font-family: dashicons;
+}
+
+i.fipicon-angle-up:before {
+  content: "\f142";
+  font-family: dashicons;
+}
+
+i.fipicon-angle-right:before {
+  content: "\f345";
+  font-family: dashicons;
+}
+
+i.fipicon-angle-left:before {
+  content: "\f341";
+  font-family: dashicons;
+}
+
+[class^=fipicon-] {
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.components-panel .rfipicons__ibox {
+  font-size: 15px;
+}
+
+.components-panel .rfipicons__ibox:hover > * {
+  transform: scale(1.45);
+}
+
+.rfipicons__ibox,
+.rfipicons__selector {
+  display: flex;
+}
+
+.rfipicons__ibox {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  transition: background-color 0.25s, border 0.25s;
+  border-radius: 2px;
+  outline: 0 none;
+  font-size: 20px;
+}
+
+.rfipicons__ibox img,
+.rfipicons__ibox svg {
+  max-height: 24px;
+  height: 18px;
+  width: 18px;
+}
+
+.rfipicons__ibox svg {
+  fill: #333;
+}
+
+.rfipicons__ibox > * {
+  transform: scale(1);
+  transition: transform 0.25s;
+  transform-origin: center;
+}
+
+.rfipicons__ibox:hover > * {
+  transform: scale(1.8);
+}
+
+.rfipicons__selector {
+  flex: 1 1 20%;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.rfipicons__ibox,
+.rfipicons__selector {
+  display: flex;
+}
+
+.rfipdropdown--default .rfipicons__ibox {
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  color: #424242;
+}
+
+.rfipdropdown--default .rfipicons__ibox:hover {
+  background-color: #bdbdbd;
+  border: 1px solid #bdbdbd;
+}
+
+.rfipdropdown--default .rfipicons__ibox:active,
+.rfipdropdown--default .rfipicons__ibox:focus {
+  border: 1px solid #bdbdbd;
+}
+
+.rfipicons__pager {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 24px;
+  line-height: 24px;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.rfipicons__icon {
+  width: 20%;
+  height: 64px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rfipicons__icon--error {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  line-height: 1;
+}
+
+.rfipicons__num {
+  width: 100px;
+  margin-right: auto;
+}
+
+.rfipicons__cp {
+  width: 32px;
+  height: 24px;
+  line-height: 24px;
+  text-align: right;
+}
+
+.rfipicons__cp,
+.rfipicons__sp,
+.rfipicons__tp {
+  margin-right: 8px;
+}
+
+.rfipdropdown__selector {
+  overflow: hidden;
+  padding: 16px;
+}
+
+.rfipdropdown.fipappear-enter-active .rfipdropdown__selector,
+.rfipdropdown.fipappear-exit-active .rfipdropdown__selector {
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding: 16px;
+}
+
+.components-panel .rfipdropdown.rfipdropdown--default.fipappear-enter-done,
+.components-panel .rfipdropdown {
+  left: 0 !important;
+  width: 230px;
+}
+
+.rfipbtn--default {
+  border: 1px solid gray;
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/component/customComponents/styling.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.timeline-block-spacing-control {
+  position: relative;
+  display: inline-block;
+}
+
+.timeline-block-spacing-control input[type=number].cp-block-timeline-number_control,
+.timeline-block-spacing-control .cp-timeline-block_control__link {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #E6E7E9;
+  color: #50575E;
+  border-radius: 0;
+  box-shadow: none !important;
+  height: 30px;
+  margin: 0 -1px 0 0;
+  padding-right: 1px;
+  width: 25%;
+}
+
+.timeline-block-spacing-control input[type=number].cp-block-timeline-number_control:focus {
+  z-index: 1;
+  outline-offset: -1px;
+  outline: 1px solid #CCCCCC;
+}
+
+.timeline-block-spacing-control .cp-timeline-block_control__link {
+  border: 1px solid #959595;
+  background-color: #959595;
+  color: #FFFFFF;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+  font-size: 12px;
+  line-height: 28px;
+  cursor: pointer;
+  transition: none;
+}
+
+.timeline-block-spacing-control .cp-timeline-block_control__link.timeline-block-spacing-control-disconnected {
+  border-color: #E6E7E9;
+  background-color: #FFFFFF;
+  color: #959595;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__inputs > :first-child.cp-block-timeline-number_control {
+  border-radius: 3px 0 0 3px;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__inputs > :last-child {
+  border-radius: 0 3px 3px 0;
+}
+
+.timeline-block-spacing-control .timeline-block-control__actions .components-tab-panel__tabs {
+  padding-right: 4px;
+  margin-right: 0;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__inputs {
+  display: flex;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__input-labels {
+  display: flex;
+  margin-bottom: -3px;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__input-labels span {
+  text-align: center;
+  width: 20%;
+}
+
+.timeline-block-spacing-control .timeline-block-spacing-control__input-labels .cp-timeline-block_control__link-label {
+  width: 10%;
+}
+
+.timeline-block-spacing-control .cp-block-timeline-number_control-label {
+  color: #CCCCCC;
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.timeline-block-control__actions h2 {
+  display: inline-flex;
+  margin-bottom: 1em;
+}
+
+.timeline-block-spacing-control .timeline-block-control__units {
+  margin-left: auto;
+}
+
+/*# sourceMappingURL=index.css.map*/

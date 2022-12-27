@@ -1,17 +1,14 @@
-/**
- * BLOCK: Story Timeline.
- */
-
 import classnames from "classnames"
 // import map from "lodash/map"
 import times from "lodash/times"
 import memoize from "memize"
 
 import contentTimelineStyle from "./styling"
-import {LayoutInit} from "./layout"
 
 // Import all of our Text Options requirements.
 import TypographyControl from "../component/typography"
+
+import SpacingControl from "../component/customComponents/MultipleUnits"
 
 // // Import Web font loader for google fonts.y
 import WebfontLoader from "../component/typography/fontloader"
@@ -21,6 +18,7 @@ const { dateI18n } = wp.date
 const { Component, Fragment } = wp.element
 
 import { __ } from '@wordpress/i18n';
+import { sentenceCaseTransform } from "sentence-case"
 
 
 const {
@@ -42,17 +40,23 @@ const {
 	Spinner,
 	ColorPicker,
 	ColorPalette,
-        RadioControl
+    RadioControl,
+	ExternalLink,
+	Card,
+	CardBody,
+	CardFooter,
+	Button,
+	ButtonGroup,
+	__experimentalUnitControl
 } = wp.components
 
 const {
 	dispatch,
 	select,
-	withSelect
+	withSelect,
 } = wp.data
 
 const ALLOWED_BLOCKS = [ "cp-timeline/content-timeline-block-child" ]
-
 
 
 const $ = jQuery;
@@ -64,26 +68,26 @@ class Edit extends Component {
 	}
 
 	addBlock(e){
-
-		let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
-
+		let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
 		let name = 'cp-timeline/content-timeline-block-child';
-		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false
+		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,blockPosition:index % 2 ? 'left':'right',
 		}	);
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
-
-			}
-
+		
+	}
+	
 	onUpdateOrientation(newOrientation) {
 		this.props.setAttributes({Orientation: newOrientation});
-                if (this.props.attributes.timelineLayout == "vertical" && this.props.attributes.timelineDesign == "alternating-sided") {
-		        const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks,
-		              evenPosition = newOrientation,
-		              oddPosition = newOrientation === 'left' ? 'right' : 'left';
-		        blocks.forEach((block, index) => block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition);
-                }
-        }
+		if (this.props.attributes.timelineLayout == "vertical" && this.props.attributes.timelineDesign == "both-sided") {
+			const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks,
+			evenPosition = newOrientation,
+			oddPosition = newOrientation === 'left' ? 'right' : 'left';
+			console.log(evenPosition);
+			console.log(oddPosition);
+			blocks.forEach((block, index) => block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition);
+		}
+	}
 
         render() {
 
@@ -91,11 +95,14 @@ class Edit extends Component {
 		const {
 			setAttributes,
 			attributes: {
+				itemSpacing,
+				contentAlignment,
 				LineColor,
 				timelineLayout,
 				tm_content,
 				headingColor,
 				subHeadingColor,
+				titileBtSpacing,
 				headFontSizeType,
 				headFontSize,
 				headFontSizeTablet,
@@ -109,6 +116,7 @@ class Edit extends Component {
 				headLineHeightMobile,
 				headLoadGoogleFonts,
 				timelineItem,
+				descBtSpacing,
 				subHeadFontSizeType,
 				subHeadFontSize,
 				subHeadFontSizeTablet,
@@ -140,8 +148,23 @@ class Edit extends Component {
 				timelineDesign,
 				slidePerView,
 				iconColor,
+				iconSize,
+				iconSizeType,
+				iconBoxSize,
+				iconBoxSizeType,
+				middleLineSize,
+				middleLineSizeType,
+				containerTopPadding,
+				containerRightPadding,
+				containerBottomPadding,
+				containerLeftPadding,
+				desktopConatinerPaddingType,
+				marginLink,
 			},
 		} = this.props
+		const resetcolorpalate = (e) => {
+			setAttributes( e )
+		};
 
 		const colors = [
 			{ name: 'red', color: '#f00' },
@@ -154,8 +177,8 @@ class Edit extends Component {
 			element.innerHTML = contentTimelineStyle( this.props )
 			}
 
-		const orientation_setting = <SelectControl
-						label={ timelineDesign == "alternating-sided" ? __("First story's side") : __( "Alignment" ) }
+		const orientation_setting = <Fragment><SelectControl
+						label={ timelineDesign == "both-sided" ? __("first story Based") : __( "Alignment" ) }
 						value={ Orientation }
 						onChange={ this.onUpdateOrientation }
 						options={ [
@@ -163,7 +186,9 @@ class Edit extends Component {
 							{ value: "left", label: __( "Left Sided") },
 						] }
 						/>
-		const general_setting= <PanelBody title={__("General Settings")} initialOpen={ false }>
+						<p>Using this settings user need to select first story position from the Story Position. other stories  would be placed on the left/right automatically in alternatively.</p></Fragment>
+		
+		const general_setting=<CardBody>
 			<h2 style={{fontWeight: 600}}>Story Heading</h2>
 			<TypographyControl
 			label={ __( "Typography",'timeline-block' ) }
@@ -182,13 +207,29 @@ class Edit extends Component {
 			lineHeightMobile = { { value: headLineHeightMobile, label: 'headLineHeightMobile' } }
 			lineHeightTablet= { { value: headLineHeightTablet, label: 'headLineHeightTablet' } }
 		/>
-		<div style ={{'margin-top':10 +'px'}}></div>
-		<ColorPalette
-			colors = {colors}
+		<div style ={{'margin-top':15 +'px'}}></div>
+		<CardBody className="cp-timeline-block-style-settings">
+		<div>{__("Text Color")}</div>
+		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({headingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<ColorPalette className="cp-timeline-block-color-palates"
+			// colors = {colors}
+			clearable={false}
 			value={headingColor}
             onChange = {( colorValue ) => setAttributes( { headingColor: colorValue } )}
 
         />
+
+		</CardBody>
+		<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing")}</div>
+		<RangeControl
+		className="cp-timeline-block-range__control"
+		value={ titileBtSpacing }
+		onChange={ (value) => setAttributes({titileBtSpacing: value}) }
+		resetFallbackValue={0}
+		allowReset={ true }
+		min={ 0 }
+        max={ 200 }
+		/>
 		<hr className="timeline-block-editor__separator"></hr>
 		<h2 style={{fontWeight: 600}}>Story Description</h2>
 			<TypographyControl
@@ -209,12 +250,27 @@ class Edit extends Component {
 			lineHeightTablet= { { value: subHeadLineHeightTablet, label: 'subHeadLineHeightTablet' } }
 		/>
 		<div style ={{'margin-top':10 +'px'}}></div>
-		<ColorPalette
-			colors = {colors}
-            value={subHeadingColor}
-            onChange = {( colorValue ) => setAttributes( { subHeadingColor: colorValue } )}
-
-        />
+		<CardBody className="cp-timeline-block-style-settings">
+		<div>{__("Text Color")}</div>
+		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({subHeadingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		{/* <div style ={{'margin-top':10 +'px'}}></div> */}
+		<ColorPalette className="cp-timeline-block-color-palates"
+			// colors = {colors}
+			clearable={false}
+			value={subHeadingColor}
+			onChange = {( colorValue ) => setAttributes( { subHeadingColor: colorValue } )}
+		/>
+		</CardBody>
+		<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing")}</div>
+		<RangeControl
+		className="cp-timeline-block-range__control"
+		value={ descBtSpacing }
+		onChange={ (value) => setAttributes({descBtSpacing: value}) }
+		resetFallbackValue = {0}
+		allowReset={ true }
+		min={ 0 }
+        max={ 200 }
+		/>
 		<hr className="timeline-block-editor__separator"></hr>
 		<h2 style={{fontWeight: 600}}>Primary Label(Date/Steps)</h2>
 			<TypographyControl
@@ -235,46 +291,141 @@ class Edit extends Component {
 			lineHeightTablet= { { value: dateLineHeightTablet, label: 'dateLineHeightTablet' } }
 		/>
 		<div style ={{'margin-top':10 +'px'}}></div>
-		<ColorPalette
-			colors = {colors}
+		<CardBody className="cp-timeline-block-style-settings">
+		<div>{__("Text Color")}</div>
+		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({dateColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		{/* <div style ={{'margin-top':10 +'px'}}></div> */}
+		<ColorPalette className="cp-timeline-block-color-palates"
+			// colors = {colors}
+			clearable={false}
             value={dateColor}
             onChange = {( colorValue ) => setAttributes( { dateColor: colorValue} )}
 
         />
-
-	</PanelBody>
+		</CardBody>
+	</CardBody>
 	const advanced_setting =
-				<PanelBody title={__("Advanced Settings")} initialOpen={ false }>
+				<CardBody>
+				<CardBody className="cp-timeline-block-style-settings">
 				<h2>Line Color</h2>
-				<ColorPalette
-				colors = {colors}
+				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({LineColor : '#000'}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+				// colors = {colors}
+				clearable={false}
 				value={LineColor}
 				onChange = {( colorValue ) => setAttributes( { LineColor: colorValue} )}
 				/>
-
+				</CardBody>
+				<CardBody className="cp-timeline-block-style-settings">
 				<h2>Icon Color</h2>
-				<ColorPalette
-				colors = {colors}
+				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({iconColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+				// colors = {colors}
+				clearable={false}
 				value={iconColor}
 				onChange = {( colorValue ) => setAttributes( { iconColor: colorValue } )}
 				/>
-
+				</CardBody>
+				<CardBody className="cp-timeline-block-style-settings">
 				<h2>Icon Background</h2>
-				<ColorPalette
-				colors = {colors}
+				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({iconBg : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+				// colors = {colors}
+				clearable={false}
 				value={iconBg}
 				onChange = {( colorValue ) => setAttributes( { iconBg: colorValue } )}
 				/>
+				</CardBody>
+				<CardBody className="cp-timeline-block-style-settings">
 				<h2>Story Border Color</h2>
-				<ColorPalette
-				colors = {colors}
+				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => resetcolorpalate({storyBorderColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+				// colors = {colors}
+				clearable={false}
 				value={storyBorderColor}
 				onChange = {( colorValue ) => setAttributes( { storyBorderColor: colorValue } )}
 				/>
-
-			</PanelBody>
-		const timeline_setting = <InspectorControls>
-			<PanelBody title={__("Timeline Settings")} >
+				</CardBody>
+				<h2>{__("Item Spacing")}</h2>
+				<RangeControl
+				className="cp-timeline-block-range__control"
+				value={ itemSpacing }
+				onChange={ (value) => setAttributes({itemSpacing: value}) }
+				resetFallbackValue = {0}
+				allowReset={ true }
+				min={ 0 }
+				max={ 200 }
+				/>
+				<h2>{__("Icon Box Size")}</h2>
+				<RangeControl
+				className="cp-timeline-block-range__control"
+				value={ iconBoxSize }
+				onChange={ (value) => setAttributes({iconBoxSize: value}) }
+				resetFallbackValue = {0}
+				allowReset={ true }
+				min={ 0 }
+				max={ 100 }
+				/>
+				<h2>{__("Icon Size")}</h2>
+				<RangeControl
+				className="cp-timeline-block-range__control"
+				value={ iconSize }
+				onChange={ (value) => setAttributes({iconSize: value}) }
+				resetFallbackValue = {0}
+				allowReset={ true }
+				min={ 0 }
+				max={ iconBoxSize }
+				/>
+				<h2>{__("Line Size")}</h2>
+				<RangeControl
+				className="cp-timeline-block-range__control"
+				value={ middleLineSize }
+				onChange={ (value) => setAttributes({middleLineSize: value}) }
+				resetFallbackValue = {0}
+				allowReset={ true }
+				min={ 0 }
+				max={ 10 }
+				/>
+				<SpacingControl
+					{ ...this.props }
+					label={ __( 'Margin', 'timeline-block' ) }
+					valueTop={ {
+						value: containerTopPadding,
+						label: 'containerTopPadding',
+					} }
+					valueRight={ {
+						value: containerRightPadding,
+						label: 'containerRightPadding',
+					} }
+					valueBottom={ {
+						value: containerBottomPadding,
+						label: 'containerBottomPadding',
+					} }
+					valueLeft={ {
+						value: containerLeftPadding,
+						label: 'containerLeftPadding',
+					} }
+					unit={ {
+						value: desktopConatinerPaddingType,
+						label: 'desktopConatinerPaddingType',
+					} }
+					attributes={ this.props.attributes }
+					setAttributes={ setAttributes }
+					link={ {
+						value: marginLink,
+						label: 'marginLink',
+					} }
+				/>
+			</CardBody>
+		const rating_box = <PanelBody title={__("Please Share Your Valuable Feedback.")}>
+			<CardBody className={"cool-timeline-gt-block-review-tab"}>{__("We hope you liked our plugin created timelines. Please share your valuable feedback.")}<br></br><a href="https://wordpress.org/support/plugin/timeline-block/reviews/" target="_blank" >★★★★★</a>
+			{/* <CardFooter className={"cool-timeline-gt-block-review-tab-button"}>
+				<Button className={"button-primary"}>{__("Already Rated")}</Button>
+				<Button className={"button-primary"}>{__("Not Interesetd")}</Button>
+			</CardFooter> */}
+			</CardBody>
+		</PanelBody>
+		const timeline_setting =<CardBody>
 			<SelectControl
 						label={ __( "Timeline Layout" ) }
 						value={ timelineLayout }
@@ -289,7 +440,8 @@ class Edit extends Component {
 						}
 					}
 						options={ [
-							{ value: "vertical", label: __( "Vertical") }
+							{ value: "vertical", label: __( "Vertical") },
+							{ value: "horizontal", label: __( "Horizontal Pro"), disabled: true }
 
 						] }
 						/>
@@ -301,7 +453,6 @@ class Edit extends Component {
 					} }
 						options={ [
 							{ value: "both-sided", label: __( "Both Sided") },
-							{ value: "alternating-sided", label: __( "Alternating Sided") },
 							{ value: "one-sided", label: __( "One Sided",) },
 
 						] }
@@ -321,12 +472,50 @@ class Edit extends Component {
 					// />
 					}
 
-					{ ["one-sided", "alternating-sided"].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null }
-			</PanelBody>
-			{general_setting}
-			{advanced_setting}
+					{ ["one-sided",'both-sided'].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null }
+			<div style={{"margin-bottom":10+"px"}}>{__("Content Alignment")}</div>
+			<ButtonGroup className="cool-timeline-content-alignment-buttons">
+				<Button onClick={(e) => {setAttributes({contentAlignment: 'left'})}} className={`${contentAlignment == 'left' ? 'active': ''}`}><span className="dashicons dashicons-editor-alignleft"></span></Button>
+				<Button onClick={(e) => {setAttributes({contentAlignment: 'center'})}} className={`${contentAlignment == 'center' ? 'active': ''}`}><span className="dashicons dashicons-editor-aligncenter"></span></Button>
+				<Button onClick={(e) => {setAttributes({contentAlignment: 'right'})}} className={`${contentAlignment == 'right' ? 'active': ''}`}><span className="dashicons dashicons-editor-alignright"></span></Button>
+			</ButtonGroup>
+			</CardBody>
+			let settingTabs = 
+			<InspectorControls>
+				<TabPanel
+					className="cooltimeline-tab-settings"
+					activeClass="active-tab"
+					tabs={ [
+						{
+							name: 'timeline_setting',
+							title: 'General',
+							className: 'tab-one',
+							content: timeline_setting
+						},
+						{
+							name: 'general_setting',
+							title: 'Styling',
+							className: 'tab-two',
+							content: general_setting
+						},
+						{
+							name: 'advanced_setting',
+							title: 'Advanced',
+							className: 'tab-three',
+							content: advanced_setting
+						},
+					] }
+				>
+					{ ( tab ) => <Card>{tab.content}</Card> }
+				</TabPanel>
+				<PanelBody title={__("View Timeline Demos")} initialOpen={false}>
+					<CardBody className="cp-timeline-block-demo-button">
+						<a target="_blank" class="button button-primary" href="https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos">View Demos</a>
+						<a target="_blank" class="button button-primary" href="https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/">Watch Videos</a>
+					</CardBody>
+				</PanelBody>
+				{rating_box}
 			</InspectorControls>
-
 			const getContentTimelineTemplate = memoize( ( icon_block, tm_content ) => {
 				return times( icon_block, n => [ 'cp-timeline/content-timeline-block-child',tm_content[n]] )
 			} )
@@ -393,10 +582,6 @@ class Edit extends Component {
 									onClick: () => setAttributes({timelineDesign:"both-sided"}) ,
 								},
 								{
-									title: 'Alternating side',
-									onClick: () => setAttributes({timelineDesign:"alternating-sided"}) ,
-								},
-								{
 									title: 'One Sided',
 									onClick: () => setAttributes({timelineDesign:"one-sided"}),
 								},
@@ -406,24 +591,21 @@ class Edit extends Component {
 						:null}
 					{ loadHeadGoogleFonts }
 					 {loadSubHeadGoogleFonts }
-					{timeline_setting}
+					{settingTabs}
 					{loadDateGoogleFonts }
 
 				<div className={"cool-timeline-block-" + this.props.clientId + " cool-timeline-block"}>
-								<div className={"cool-" + (timelineLayout == 'alternating-sided' ? 'both-sided' : timelineLayout) + "-timeline-body " + timelineDesign + " " + Orientation + ""}>
-									<div className="list">
-									{timelineLayout == "vertical" ?
+								<div className={"cool-" + (timelineLayout) + "-timeline-body " + timelineDesign + " " + Orientation + ""}>
+									<div className="cool-timeline-block-list">
 										<InnerBlocks
                                             allowedBlocks={ALLOWED_BLOCKS}
                                             orientation="vertical"
                                             template={ getContentTimelineTemplate( timelineItem, tm_content ) }
 
-                                            />:
-											<LayoutInit />
-										}
+                                        />
 								</div>
-							</div><div onClick={e => this.addBlock(e)} className="timeline-block-add-story">
-									<button type="button" visible="true" className="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
+							</div><div className="timeline-block-add-story">
+									<button onClick={e => this.addBlock(e)}  type="button" visible="true" className="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
 								</div>
 								</div>
 			</div>
@@ -445,22 +627,21 @@ class Edit extends Component {
 		let timelineDesign= this.props.attributes.timelineDesign
 
 		// Recalculate alternating sides if new child block was added or removed
-		this.childCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
+		// this.childCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
 		wp.data.subscribe(() => {
 			const childBlocks = select("core/block-editor").getBlock(this.props.clientId);
-                       if (!childBlocks || !childBlocks.innerBlocks) {
-                               return;
-                       }
+			if (!childBlocks || !childBlocks.innerBlocks) {
+				return;
+			}
 			const currentChildCount = childBlocks.innerBlocks.length;
 			const childWasAddedOrRemoved = this.childCount !== currentChildCount;
-
+			
 			this.childCount = currentChildCount;
-
-			if (!childWasAddedOrRemoved || this.props.attributes.timelineDesign !== 'alternating-sided') {
+			if (!childWasAddedOrRemoved) {
 				return;
 			}
 
-			this.onUpdateOrientation(this.props.attributes.Orientation);
+			// this.onUpdateOrientation(this.props.attributes.Orientation);
 		});
 	}
 

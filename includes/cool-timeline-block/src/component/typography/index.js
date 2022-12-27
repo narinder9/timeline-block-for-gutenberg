@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
- import { __ } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -153,12 +153,16 @@ class TypographyControl extends Component {
 			)
 
 			resetFontAdvancedControls =  (
-				<Button
-					className="timeline-block-size-btn timeline-block-typography-reset-btn"
-					isSmall
-					aria-pressed={ ( this.state !== null ) }
+				// <Button
+				// 	className="timeline-block-size-btn timeline-block-typography-reset-btn"
+				// 	isSmall
+				// 	aria-pressed={ ( this.state !== null ) }
+				// 	onClick={ this.onAdvancedControlReset }
+				// ><Dashicon icon="image-rotate" /></Button>
+				<div
+					className="components-button timeline-block-size-btn timeline-block-typography-reset-btn is-small"
 					onClick={ this.onAdvancedControlReset }
-				><Dashicon icon="image-rotate" /></Button>
+				><Dashicon icon="image-rotate" /></div>
 			)
 		} else {
 			showAdvancedFontControls = (
@@ -185,9 +189,9 @@ class TypographyControl extends Component {
 		if( true !== disableFontFamily && true !== disableFontSize ) {
 			fontTypoAdvancedControls =  (
 				<div className="timeline-block-typography-option-actions">
-					<span>{ this.props.label }</span>
-					{ fontAdvancedControls }
+					<div>{ this.props.label }</div>
 					{ resetFontAdvancedControls }
+					{ fontAdvancedControls }
 				</div>
 			)
 		}
