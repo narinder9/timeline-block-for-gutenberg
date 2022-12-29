@@ -21,14 +21,15 @@ export default function Save( props ) {
 		timelineDesign,
 		timelineLayout,
 		imageSize,
-		timeLineImage
+		timeLineImage,
+		imageAlt
 	} = props.attributes
 
 	const StoryDetail = () => (
 		<div className="story-details">
 			{timeLineImage !== "none" ?
-			<div className={`story-image ${imageSize}`}>
-			<img  src={timeLineImage} />
+			<div className={`story-image`}>
+			<img  src={timeLineImage}  alt={imageAlt}/>
 			</div>
 			:
 			null}

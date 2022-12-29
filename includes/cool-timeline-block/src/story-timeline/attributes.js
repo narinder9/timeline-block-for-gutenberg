@@ -165,6 +165,10 @@ const attributes = {
 		type : "string",
 		default : "#5cb85c",
 	},
+	isPreview: {
+		type: 'boolean',
+		default: false,
+	},
 	headingTag : {
 		type : "string",
 		default : "h4",
@@ -413,6 +417,10 @@ const attributes = {
 		type:"string",
 		default:"left"
 	},
+	BothsidedOrientation:{
+		type:"string",
+		default:"right",
+	},
 	LineColor:{
 		type:"string",
 		default:""
@@ -478,9 +486,10 @@ const attributes = {
 		type:"boolean",
 		default: false
 	},
-
-
-
+	OrientationCheckBox:{
+		type:"boolean",
+		default:false,
+	}
 }
 
 export default attributes

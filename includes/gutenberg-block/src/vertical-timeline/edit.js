@@ -149,7 +149,7 @@ export default class Edit extends Component {
                         tagName="p"
                         placeholder={ __( 'Date / Custom Text', 'timeline-block' ) }
                         value={ item.time }
-                        keepPlaceholderOnFocus="true"
+                        keepPlaceholderOnFocus={true}
                         onChange={ ( value ) => this.onChangePropertyItem( 'time', value, index, false ) }
                         style={ {
                             color:attributes.textColor,
@@ -205,7 +205,7 @@ export default class Edit extends Component {
                         tagName="h3"
                         placeholder={ __( 'Enter Story Title', 'timeline-block' ) }
                         value={ item.title }
-                        keepPlaceholderOnFocus="true"
+                        keepPlaceholderOnFocus={true}
                         onChange={ ( value ) => this.onChangePropertyItem( 'title', value, index, false ) }
                         style={ {
                             color:attributes.textColor,
@@ -218,7 +218,7 @@ export default class Edit extends Component {
                         tagName="p"
                         placeholder={ __( 'Enter story description here.', 'timeline-block' ) }
                         value={ item.description }
-                        keepPlaceholderOnFocus="true"
+                        keepPlaceholderOnFocus={true}
                         onChange={ ( value ) => this.onChangePropertyItem( 'description', value, index, false ) }
                         style={ {
                             color:attributes.textColor,

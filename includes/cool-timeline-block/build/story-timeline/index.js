@@ -2259,7 +2259,7 @@ const SpacingControl = props => {
     className: "timeline-block-control__actions"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "timeline-block-control__actions_label"
-  }, "label"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+  }, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     type: "button",
     onClick: () => {
       resetValues();
@@ -8703,6 +8703,10 @@ const attributes = {
     type: "string",
     default: "#5cb85c"
   },
+  isPreview: {
+    type: 'boolean',
+    default: false
+  },
   headingTag: {
     type: "string",
     default: "h4"
@@ -8951,6 +8955,10 @@ const attributes = {
     type: "string",
     default: "left"
   },
+  BothsidedOrientation: {
+    type: "string",
+    default: "right"
+  },
   LineColor: {
     type: "string",
     default: ""
@@ -9014,6 +9022,10 @@ const attributes = {
   marginLink: {
     type: "boolean",
     default: false
+  },
+  OrientationCheckBox: {
+    type: "boolean",
+    default: false
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -9032,20 +9044,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/times */ "./node_modules/lodash/times.js");
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_times__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _styling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styling */ "./src/story-timeline/styling.js");
-/* harmony import */ var _component_typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/typography */ "./src/component/typography/index.js");
-/* harmony import */ var _component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/customComponents/MultipleUnits */ "./src/component/customComponents/MultipleUnits.js");
-/* harmony import */ var _component_typography_fontloader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/typography/fontloader */ "./src/component/typography/fontloader.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/icon/timeline.png */ "./src/component/icon/timeline.png");
+/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash/times */ "./node_modules/lodash/times.js");
+/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_times__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _styling__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styling */ "./src/story-timeline/styling.js");
+/* harmony import */ var _component_typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/typography */ "./src/component/typography/index.js");
+/* harmony import */ var _component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/customComponents/MultipleUnits */ "./src/component/customComponents/MultipleUnits.js");
+/* harmony import */ var _component_typography_fontloader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../component/typography/fontloader */ "./src/component/typography/fontloader.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./attributes */ "./src/story-timeline/attributes.js");
+
+
 
 
  // import map from "lodash/map"
@@ -9065,6 +9082,7 @@ const {
   Component,
   Fragment
 } = wp.element;
+
 
 
 const {
@@ -9091,7 +9109,8 @@ const {
   CardFooter,
   Button,
   ButtonGroup,
-  __experimentalUnitControl
+  __experimentalUnitControl,
+  ToggleControl
 } = wp.components;
 const {
   dispatch,
@@ -9104,21 +9123,39 @@ const $ = jQuery;
 class Edit extends Component {
   constructor() {
     super();
+
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "resetcolorpalate", e => {
+      this.props.setAttributes.setAttributes(e);
+    });
+
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "OrientationCheck", e => {
+      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
+      const position = blocks[0]['attributes']['blockPosition'];
+      this.onUpdateOrientation(position, e);
+    });
+
     this.onUpdateOrientation = this.onUpdateOrientation.bind(this);
   }
 
   addBlock(e) {
+    let position = this.props.attributes.BothsidedOrientation;
     let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
     let name = 'cp-timeline/content-timeline-block-child';
+    const oddPosition = position,
+          evenPosition = position == 'right' ? 'left' : 'right';
     let insertedBlock = wp.blocks.createBlock(name, {
       block_position_active: false,
-      blockPosition: index % 2 ? 'left' : 'right'
+      blockPosition: index % 2 ? evenPosition : oddPosition
     });
     wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
     let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
   }
 
-  onUpdateOrientation(newOrientation) {
+  onUpdateOrientation(newOrientation, position) {
+    console.log(position);
+    this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
+      BothsidedOrientation: newOrientation
+    });
     this.props.setAttributes({
       Orientation: newOrientation
     });
@@ -9127,9 +9164,9 @@ class Edit extends Component {
       const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks,
             evenPosition = newOrientation,
             oddPosition = newOrientation === 'left' ? 'right' : 'left';
-      console.log(evenPosition);
-      console.log(oddPosition);
-      blocks.forEach((block, index) => block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition);
+      blocks.forEach((block, index) => {
+        block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition, block.attributes.storyPositionHide = !position;
+      });
     }
   }
 
@@ -9202,14 +9239,11 @@ class Edit extends Component {
         containerBottomPadding,
         containerLeftPadding,
         desktopConatinerPaddingType,
-        marginLink
+        marginLink,
+        isPreview,
+        OrientationCheckBox
       }
     } = this.props;
-
-    const resetcolorpalate = e => {
-      setAttributes(e);
-    };
-
     const colors = [{
       name: 'red',
       color: '#f00'
@@ -9223,27 +9257,27 @@ class Edit extends Component {
     var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId);
 
     if (element) {
-      element.innerHTML = (0,_styling__WEBPACK_IMPORTED_MODULE_5__["default"])(this.props);
+      element.innerHTML = (0,_styling__WEBPACK_IMPORTED_MODULE_7__["default"])(this.props);
     }
 
-    const orientation_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(SelectControl, {
-      label: timelineDesign == "both-sided" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("first story Based") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Alignment"),
+    const orientation_setting = timelineLayout == "vertical" && timelineDesign == 'one-sided' || timelineLayout == "vertical" && timelineDesign == 'both-sided' && OrientationCheckBox ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+      label: timelineDesign == "both-sided" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("first story Based") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Alignment"),
       value: Orientation,
       onChange: this.onUpdateOrientation,
       options: [{
         value: "right",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Right Sided")
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Right Sided", "timeline-block")
       }, {
         value: "left",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Left Sided")
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Left Sided", "timeline-block")
       }]
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, "Using this settings user need to select first story position from the Story Position. other stories  would be placed on the left/right automatically in alternatively."));
-    const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", {
+    })) : null;
+    const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
       style: {
         fontWeight: 600
       }
-    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Typography", 'timeline-block'),
+    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
       setAttributes: setAttributes,
       loadGoogleFonts: {
@@ -9294,20 +9328,20 @@ class Edit extends Component {
         value: headLineHeightTablet,
         label: 'headLineHeightTablet'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 15 + 'px'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Text Color")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         headingColor: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9315,13 +9349,13 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         headingColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 15 + 'px'
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Bottom Spacing")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: titileBtSpacing,
+      value: Number(`${titileBtSpacing != '' ? titileBtSpacing : 0}`),
       onChange: value => setAttributes({
         titileBtSpacing: value
       }),
@@ -9329,14 +9363,14 @@ class Edit extends Component {
       allowReset: true,
       min: 0,
       max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("hr", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
       className: "timeline-block-editor__separator"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
       style: {
         fontWeight: 600
       }
-    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Typography", 'timeline-block'),
+    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
       setAttributes: setAttributes,
       loadGoogleFonts: {
@@ -9387,20 +9421,20 @@ class Edit extends Component {
         value: subHeadLineHeightTablet,
         label: 'subHeadLineHeightTablet'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 10 + 'px'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Text Color")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         subHeadingColor: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9408,13 +9442,13 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         subHeadingColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 15 + 'px'
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Bottom Spacing")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: descBtSpacing,
+      value: Number(`${descBtSpacing != '' ? descBtSpacing : 0}`),
       onChange: value => setAttributes({
         descBtSpacing: value
       }),
@@ -9422,14 +9456,14 @@ class Edit extends Component {
       allowReset: true,
       min: 0,
       max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("hr", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
       className: "timeline-block-editor__separator"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
       style: {
         fontWeight: 600
       }
-    }, "Primary Label(Date/Steps)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Typography", 'timeline-block'),
+    }, "Primary Label(Date/Steps)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
       setAttributes: setAttributes,
       loadGoogleFonts: {
@@ -9480,20 +9514,20 @@ class Edit extends Component {
         value: dateLineHeightTablet,
         label: 'dateLineHeightTablet'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 10 + 'px'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Text Color")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         dateColor: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9502,16 +9536,16 @@ class Edit extends Component {
         dateColor: colorValue
       })
     })));
-    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         LineColor: '#000'
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9519,16 +9553,16 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         LineColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         iconColor: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9536,16 +9570,16 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         iconColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         iconBg: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9553,16 +9587,16 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         iconBg: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
-      onClick: e => resetcolorpalate({
+      onClick: e => this.resetcolorpalate({
         storyBorderColor: ''
       })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates" // colors = {colors}
       ,
       clearable: false,
@@ -9570,9 +9604,9 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         storyBorderColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Item Spacing")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Item Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: itemSpacing,
+      value: Number(`${itemSpacing != '' ? itemSpacing : 0}`),
       onChange: value => setAttributes({
         itemSpacing: value
       }),
@@ -9580,9 +9614,9 @@ class Edit extends Component {
       allowReset: true,
       min: 0,
       max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Icon Box Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Icon Box Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: iconBoxSize,
+      value: Number(`${iconBoxSize != '' ? iconBoxSize : 0}`),
       onChange: value => setAttributes({
         iconBoxSize: value
       }),
@@ -9590,19 +9624,19 @@ class Edit extends Component {
       allowReset: true,
       min: 0,
       max: 100
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Icon Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Icon Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: iconSize,
+      value: Number(`${iconSize != '' ? iconSize : 0}`),
       onChange: value => setAttributes({
         iconSize: value
       }),
       resetFallbackValue: 0,
       allowReset: true,
       min: 0,
-      max: iconBoxSize
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Line Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RangeControl, {
+      max: 100
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Line Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
       className: "cp-timeline-block-range__control",
-      value: middleLineSize,
+      value: Number(`${middleLineSize != '' ? middleLineSize : 0}`),
       onChange: value => setAttributes({
         middleLineSize: value
       }),
@@ -9610,8 +9644,8 @@ class Edit extends Component {
       allowReset: true,
       min: 0,
       max: 10
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_7__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)('Margin', 'timeline-block'),
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_9__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Container Padding', 'timeline-block'),
       valueTop: {
         value: containerTopPadding,
         label: 'containerTopPadding'
@@ -9639,16 +9673,16 @@ class Edit extends Component {
         label: 'marginLink'
       }
     })));
-    const rating_box = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Please Share Your Valuable Feedback.")
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    const rating_box = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Please Share Your Valuable Feedback.", "timeline-block")
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cool-timeline-gt-block-review-tab"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("We hope you liked our plugin created timelines. Please share your valuable feedback."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("We hope you liked our plugin created timelines. Please share your valuable feedback.", "timeline-block"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
       href: "https://wordpress.org/support/plugin/timeline-block/reviews/",
       target: "_blank"
     }, "\u2605\u2605\u2605\u2605\u2605")));
-    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Timeline Layout"),
+    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Layout", "timeline-block"),
       value: timelineLayout,
       onChange: value => {
         if (value == "vertical") {
@@ -9665,14 +9699,14 @@ class Edit extends Component {
       },
       options: [{
         value: "vertical",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Vertical")
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Vertical", "timeline-block")
       }, {
         value: "horizontal",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Horizontal Pro"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal Pro", "timeline-block"),
         disabled: true
       }]
-    }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Timeline Design"),
+    }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Design", "timeline-block"),
       value: timelineDesign,
       onChange: value => {
         setAttributes({
@@ -9681,10 +9715,10 @@ class Edit extends Component {
       },
       options: [{
         value: "both-sided",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Both Sided")
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Both Sided", "timeline-block")
       }, {
         value: "one-sided",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("One Sided")
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("One Sided", "timeline-block")
       }]
     }) : null // 	<RangeControl
     // 	label="Slides"
@@ -9697,41 +9731,51 @@ class Edit extends Component {
     // 	max={ 4 }
     // 	step={ 1 }
     // />
-    , ["one-sided", 'both-sided'].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      style: {
-        "margin-bottom": 10 + "px"
+    , timelineLayout == "vertical" && timelineDesign == 'both-sided' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "components-base-control"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
+      className: "timeline-block-settings-labels"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Alternating Sided", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToggleControl, {
+      className: "timeline-block-Orientation_checkbox",
+      checked: OrientationCheckBox,
+      onChange: state => {
+        setAttributes({
+          OrientationCheckBox: state
+        }), this.OrientationCheck(state);
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Content Alignment")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ButtonGroup, {
+    })) : null, ["one-sided", 'both-sided'].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "timeline-block-settings-labels"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Content Alignment", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ButtonGroup, {
       className: "cool-timeline-content-alignment-buttons"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
       onClick: e => {
         setAttributes({
           contentAlignment: 'left'
         });
       },
       className: `${contentAlignment == 'left' ? 'active' : ''}`
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       className: "dashicons dashicons-editor-alignleft"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
       onClick: e => {
         setAttributes({
           contentAlignment: 'center'
         });
       },
       className: `${contentAlignment == 'center' ? 'active' : ''}`
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       className: "dashicons dashicons-editor-aligncenter"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
       onClick: e => {
         setAttributes({
           contentAlignment: 'right'
         });
       },
       className: `${contentAlignment == 'right' ? 'active' : ''}`
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       className: "dashicons dashicons-editor-alignright"
     }))));
-    let settingTabs = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(TabPanel, {
+    let settingTabs = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(TabPanel, {
       className: "cooltimeline-tab-settings",
       activeClass: "active-tab",
       tabs: [{
@@ -9750,22 +9794,22 @@ class Edit extends Component {
         className: 'tab-three',
         content: advanced_setting
       }]
-    }, tab => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Card, null, tab.content)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("View Timeline Demos"),
+    }, tab => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Card, null, tab.content)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("View Timeline Demos", "timeline-block"),
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CardBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-demo-button"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
       target: "_blank",
       class: "button button-primary",
       href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos"
-    }, "View Demos"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+    }, "View Demos"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
       target: "_blank",
       class: "button button-primary",
       href: "https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/"
     }, "Watch Videos"))), rating_box);
-    const getContentTimelineTemplate = memize__WEBPACK_IMPORTED_MODULE_4___default()((icon_block, tm_content) => {
-      return lodash_times__WEBPACK_IMPORTED_MODULE_3___default()(icon_block, n => ['cp-timeline/content-timeline-block-child', tm_content[n]]);
+    const getContentTimelineTemplate = memize__WEBPACK_IMPORTED_MODULE_6___default()((icon_block, tm_content) => {
+      return lodash_times__WEBPACK_IMPORTED_MODULE_5___default()(icon_block, n => ['cp-timeline/content-timeline-block-child', tm_content[n]]);
     });
     let loadHeadGoogleFonts;
     let loadSubHeadGoogleFonts;
@@ -9777,7 +9821,7 @@ class Edit extends Component {
           families: [headFontFamily + (headFontWeight ? ":" + headFontWeight : "")]
         }
       };
-      loadHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      loadHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_10__["default"], {
         config: headconfig
       });
     }
@@ -9788,7 +9832,7 @@ class Edit extends Component {
           families: [subHeadFontFamily + (subHeadFontWeight ? ":" + subHeadFontWeight : "")]
         }
       };
-      loadSubHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      loadSubHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_10__["default"], {
         config: subHeadconfig
       });
     }
@@ -9799,14 +9843,18 @@ class Edit extends Component {
           families: [dateFontFamily + (dateFontWeight ? ":" + dateFontWeight : "")]
         }
       };
-      loadDateGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      loadDateGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_10__["default"], {
         config: dateconfig
       });
     }
 
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, timelineDesign == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BlockControls, {
+    return isPreview ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("img", {
+      width: "100%",
+      src: _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_4__,
+      alt: ""
+    }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, timelineDesign == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(BlockControls, {
       group: "block"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(ToolbarDropdownMenu, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToolbarDropdownMenu, {
       icon: "layout",
       label: "Layout",
       controls: [{
@@ -9820,25 +9868,25 @@ class Edit extends Component {
           timelineDesign: "one-sided"
         })
       }]
-    })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-" + this.props.clientId + " cool-timeline-block"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-list"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(InnerBlocks, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InnerBlocks, {
       allowedBlocks: ALLOWED_BLOCKS,
       orientation: "vertical",
       template: getContentTimelineTemplate(timelineItem, tm_content)
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "timeline-block-add-story"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("button", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("button", {
       onClick: e => this.addBlock(e),
       type: "button",
       visible: "true",
       className: "components-button block-editor-button-block-appender is-primary",
       "aria-label": "Add Story"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("svg", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       viewBox: "0 0 24 24",
       width: "24",
@@ -9846,7 +9894,7 @@ class Edit extends Component {
       role: "img",
       "aria-hidden": "true",
       focusable: "false"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("path", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("path", {
       d: "M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"
     })), "Add Story")))));
   }
@@ -10009,14 +10057,23 @@ registerBlockType("cp-timeline/content-timeline-block", {
   },
   example: {
     attributes: {
-      backgroundColor: '#000000',
-      opacity: 0.8,
-      padding: 30,
-      textColor: '#FFFFFF',
+      backgroundColor: 'green',
+      opacity: 1,
+      padding: 10,
       radius: 10,
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('I am a slide title', 'wp-presenter-pro')
+      isPreview: true
     }
-  }
+  } // example: {
+  // 	attributes: {
+  // 		backgroundColor: '#000000',
+  // 		opacity: 0.8,
+  // 		padding: 30,
+  // 		textColor: '#FFFFFF',
+  // 		radius: 10,
+  // 		title: __( 'I am a slide title', 'wp-presenter-pro' ),
+  // 	},
+  // },
+
 });
 addFilter('editor.BlockEdit', 'cp-timeline/content-timeline-block', withcontentTimeline);
 
@@ -10074,7 +10131,7 @@ function Save(props) {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "list"
+    className: "cool-timeline-block-list"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
 }
 
@@ -10193,14 +10250,14 @@ function contentTimelineStyle(props) {
       "color": headingColor
     },
     " .cool-vertical-timeline-body .story-time p": {
-      "color": dateColor,
+      "color": `${dateColor != '' ? dateColor : '#333'}`,
       "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
       "font-family": dateFontFamily,
       "font-weight": dateFontWeight,
       "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
     },
     " .cool-horizontal-timeline-body .story-time p": {
-      "color": dateColor,
+      "color": `${dateColor != '' ? dateColor : '#333'}`,
       "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
       "font-family": dateFontFamily,
       "font-weight": dateFontWeight,
@@ -10241,9 +10298,7 @@ function contentTimelineStyle(props) {
       "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important"
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon": {
-      "background": `${iconBg != '' ? iconBg : "#D91B3E"}` + " !important"
-    },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon": {
+      "background": `${iconBg != '' ? iconBg : "#D91B3E"}` + " !important",
       "width": `${iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize / 10, iconBoxSizeType) + ")" : ''}`,
       "height": `${iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''}`,
       "font-size": `${iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''}`
@@ -21257,6 +21312,17 @@ g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<
 
 /***/ }),
 
+/***/ "./src/component/icon/timeline.png":
+/*!*****************************************!*\
+  !*** ./src/component/icon/timeline.png ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/timeline.27d3f3c7.png";
+
+/***/ }),
+
 /***/ "react":
 /*!************************!*\
   !*** external "React" ***!
@@ -22952,6 +23018,26 @@ function combine (array, callback) {
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl + "../";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

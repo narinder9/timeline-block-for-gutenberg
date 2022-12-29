@@ -247,7 +247,7 @@ const SpacingControl = ( props ) => {
 			<div className="timeline-block-size-type-field-tabs">
 				<div className="timeline-block-control__header">
 					<div className="timeline-block-control__actions">
-                    <h2 className='timeline-block-control__actions_label'>label</h2>
+                    <h2 className='timeline-block-control__actions_label'>{label}</h2>
 						<Button
                         type='button'
                         onClick={()=>{resetValues()}}

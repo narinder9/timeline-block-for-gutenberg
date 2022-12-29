@@ -102,14 +102,14 @@ function contentTimelineStyle( props ) {
         "color": headingColor,
     },
     " .cool-vertical-timeline-body .story-time p" : {
-        "color": dateColor,
+        "color": `${dateColor != '' ? dateColor : '#333'}`,
         "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
         "font-family": dateFontFamily,
         "font-weight": dateFontWeight,
         "line-height": generateCSSUnit( dateLineHeight, dateLineHeightType ),
     },
     " .cool-horizontal-timeline-body .story-time p" : {
-        "color": dateColor,
+        "color": `${dateColor != '' ? dateColor : '#333'}`,
         "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
         "font-family": dateFontFamily,
         "font-weight": dateFontWeight,
@@ -149,10 +149,8 @@ function contentTimelineStyle( props ) {
     " .cool-vertical-timeline-body.right .story-time::after" :{
         "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important"
     },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon":{
-        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`+" !important",
-    },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon" :{
+        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`+" !important",
         "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize / 10), iconBoxSizeType)+")" : ''}`,
         "height": `${iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : ''}`,
         "font-size": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,

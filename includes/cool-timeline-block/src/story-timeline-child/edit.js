@@ -45,14 +45,14 @@ class Edit extends Component {
 				imageSize,
 				imageOption,
 				timeLineImage,
-				imageAlt
+				imageAlt,
+				storyPositionHide
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
 				'cp-timeline/timelineLayout': timelineLayout,
 			}
 		} = this.props;
-
 			const getImage = (size,image_value) => {
 			let image_size_url= "";
 			if (timelineLayout == "vertical") {
@@ -98,7 +98,7 @@ class Edit extends Component {
 				    <Fragment>
 				      {timeLineImage !== "none" ?
 				       <Fragment>
-					 <div className={`story-image ${imageSize}`}>
+					 <div className="story-image">
 					   <img src={timeLineImage}  alt={imageAlt}/>
 					 </div>
 					 <Button isSecondary onClick={(value) => setAttributes({timeLineImage:'none'})}>
@@ -179,7 +179,7 @@ class Edit extends Component {
 					: null}	
 					
 				<hr className="timeline-block-editor__separator"></hr>
-			    <label>Story Image</label>
+			    <label className="timeline-block-settings-labels">Story Image</label>
 			    <br></br>
 			    <MediaUpload
 			      title="Story Image"
@@ -210,7 +210,7 @@ class Edit extends Component {
 			      ) }
 
                             />
-				{	timelineLayout == "vertical" && timelineDesign == "both-sided" ?
+				{	timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ?
 				<Fragment>
 				<hr className="timeline-block-editor__separator"></hr>
 				<RadioControl

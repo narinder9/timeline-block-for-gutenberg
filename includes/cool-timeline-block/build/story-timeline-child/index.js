@@ -435,6 +435,10 @@ const attributes = {
   imageAlt: {
     type: "string",
     default: ""
+  },
+  storyPositionHide: {
+    type: "bollean",
+    default: true
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -516,7 +520,8 @@ class Edit extends Component {
         imageSize,
         imageOption,
         timeLineImage,
-        imageAlt
+        imageAlt,
+        storyPositionHide
       },
       context: {
         'cp-timeline/timelineDesign': timelineDesign,
@@ -579,7 +584,7 @@ class Edit extends Component {
           open
         } = _ref;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, timeLineImage !== "none" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: `story-image ${imageSize}`
+          className: "story-image"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: timeLineImage,
           alt: imageAlt
@@ -659,7 +664,9 @@ class Edit extends Component {
       className: "timeline-block-iconpicker"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_fonticonpicker_react_fonticonpicker__WEBPACK_IMPORTED_MODULE_1___default()), icon_props), " ")) : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
       className: "timeline-block-editor__separator"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Story Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUpload, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      className: "timeline-block-settings-labels"
+    }, "Story Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(MediaUpload, {
       title: "Story Image",
       onSelect: value => {
         let image_sizes = Object.keys(value.sizes);
@@ -696,7 +703,7 @@ class Edit extends Component {
           onClick: open
         }, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload/Choose Image', 'timeline-block')));
       }
-    }), timelineLayout == "vertical" && timelineDesign == "both-sided" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
+    }), timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
       className: "timeline-block-editor__separator"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RadioControl, {
       label: "Story position",
@@ -853,15 +860,17 @@ function Save(props) {
     timelineDesign,
     timelineLayout,
     imageSize,
-    timeLineImage
+    timeLineImage,
+    imageAlt
   } = props.attributes;
 
   const StoryDetail = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "story-details"
   }, timeLineImage !== "none" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `story-image ${imageSize}`
+    className: `story-image`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: timeLineImage
+    src: timeLineImage,
+    alt: imageAlt
   })) : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "story-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RichText.Content, {

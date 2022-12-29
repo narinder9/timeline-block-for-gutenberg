@@ -129,6 +129,10 @@ const attributes = {
 	imageAlt:{
 		type:"string",
 		default:"",
+	},
+	storyPositionHide:{
+		type:"bollean",
+		default:true,
 	}
 }
 

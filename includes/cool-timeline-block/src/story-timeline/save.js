@@ -26,7 +26,7 @@ export default function Save( props ) {
 		<div className = {"cool-timeline-block-"+block_id+""}>
 			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }} scoped="true"/>
 			<div className={"cool-"+timelineLayout+"-timeline-body " +timelineDesign+" "+Orientation+""}>
-		 		<div className="list" >
+		 		<div className="cool-timeline-block-list" >
    				     <InnerBlocks.Content />
 		 		</div>
 		 	</div> 
