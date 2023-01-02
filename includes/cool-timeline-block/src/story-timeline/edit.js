@@ -40,14 +40,10 @@ const {
 	Spinner,
 	ColorPicker,
 	ColorPalette,
-    RadioControl,
-	ExternalLink,
 	Card,
 	CardBody,
-	CardFooter,
 	Button,
 	ButtonGroup,
-	__experimentalUnitControl,
 	ToggleControl
 } = wp.components
 
@@ -82,7 +78,6 @@ class Edit extends Component {
 	}
 	
 	onUpdateOrientation(newOrientation,position) {
-		console.log(position);
 		this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({BothsidedOrientation: newOrientation});
 		this.props.setAttributes({Orientation: newOrientation});
 		if (this.props.attributes.timelineLayout == "vertical" && this.props.attributes.timelineDesign == "both-sided") {
@@ -93,7 +88,7 @@ class Edit extends Component {
 		}
 	}
 	resetcolorpalate = (e) => {
-		this.props.setAttributes.setAttributes( e )
+		this.props.setAttributes( e )
 	};
 	OrientationCheck = (e) => {
 		const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks
@@ -302,7 +297,7 @@ class Edit extends Component {
 			lineHeightTablet= { { value: dateLineHeightTablet, label: 'dateLineHeightTablet' } }
 		/>
 		<div style ={{'margin-top':10 +'px'}}></div>
-		<CardBody className="cp-timeline-block-style-settings">
+		<div className="cp-timeline-block-style-settings">
 		<div>{__("Text Color","timeline-block")}</div>
 		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({dateColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 		{/* <div style ={{'margin-top':10 +'px'}}></div> */}
@@ -313,11 +308,11 @@ class Edit extends Component {
             onChange = {( colorValue ) => setAttributes( { dateColor: colorValue} )}
 
         />
-		</CardBody>
+		</div>
 	</CardBody>
 	const advanced_setting =
 				<CardBody>
-				<CardBody className="cp-timeline-block-style-settings">
+				<div className="cp-timeline-block-style-settings">
 				<h2>Line Color</h2>
 				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({LineColor : '#000'}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
@@ -326,8 +321,8 @@ class Edit extends Component {
 				value={LineColor}
 				onChange = {( colorValue ) => setAttributes( { LineColor: colorValue} )}
 				/>
-				</CardBody>
-				<CardBody className="cp-timeline-block-style-settings">
+				</div>
+				<div className="cp-timeline-block-style-settings">
 				<h2>Icon Color</h2>
 				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({iconColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
@@ -336,8 +331,8 @@ class Edit extends Component {
 				value={iconColor}
 				onChange = {( colorValue ) => setAttributes( { iconColor: colorValue } )}
 				/>
-				</CardBody>
-				<CardBody className="cp-timeline-block-style-settings">
+				</div>
+				<div className="cp-timeline-block-style-settings">
 				<h2>Icon Background</h2>
 				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({iconBg : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
@@ -346,8 +341,8 @@ class Edit extends Component {
 				value={iconBg}
 				onChange = {( colorValue ) => setAttributes( { iconBg: colorValue } )}
 				/>
-				</CardBody>
-				<CardBody className="cp-timeline-block-style-settings">
+				</div>
+				<div className="cp-timeline-block-style-settings">
 				<h2>Story Border Color</h2>
 				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
@@ -356,7 +351,7 @@ class Edit extends Component {
 				value={storyBorderColor}
 				onChange = {( colorValue ) => setAttributes( { storyBorderColor: colorValue } )}
 				/>
-				</CardBody>
+				</div>
 				<h2>{__("Item Spacing","timeline-block")}</h2>
 				<RangeControl
 				className="cp-timeline-block-range__control"
@@ -429,7 +424,7 @@ class Edit extends Component {
 				/>
 			</CardBody>
 		const rating_box = <PanelBody title={__("Please Share Your Valuable Feedback.","timeline-block")}>
-			<CardBody className={"cool-timeline-gt-block-review-tab"}>{__("We hope you liked our plugin created timelines. Please share your valuable feedback.","timeline-block")}<br></br><a href="https://wordpress.org/support/plugin/timeline-block/reviews/" target="_blank" >★★★★★</a>
+			<CardBody className={"cool-timeline-gt-block-review-tab"}>{__("We hope you liked our plugin created timelines. Please share your valuable feedback.","timeline-block")}<br></br><a href="https://wordpress.org/support/plugin/timeline-block/reviews/#new-post" target="_blank" >★★★★★</a>
 			{/* <CardFooter className={"cool-timeline-gt-block-review-tab-button"}>
 				<Button className={"button-primary"}>{__("Already Rated")}</Button>
 				<Button className={"button-primary"}>{__("Not Interesetd")}</Button>

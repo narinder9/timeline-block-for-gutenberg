@@ -31,6 +31,7 @@
   position: relative;
   padding: 25px 15px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
  .cool-vertical-timeline-body:before {
@@ -51,7 +52,7 @@
   opacity:0.4;
 }
 .cool-vertical-timeline-body.one-sided.right:before {
-  right: calc(30% - 1.5px);
+  right: calc(31% + 10px - 3px);
   left: auto;
 }
 
@@ -228,14 +229,12 @@
 
  .cool-vertical-timeline-body .timeline-content .story-details h3 {
   font-size: 18px;
-  line-height: 24px;
   margin: 2px 0px 5px 0px;
   font-weight: 500;
 }
 
  .cool-vertical-timeline-body .timeline-content .story-details p {
   font-size: 14px;
-  line-height: 24px;
   margin: 0;
   font-weight: 400;
 }
@@ -252,7 +251,7 @@
 
 /* ONE SIDED CSS - START */
 .cool-vertical-timeline-body.one-sided:before {
-  left: calc(30% - 1.5px);
+  left: calc(31% + 10px - 3px);
   right: auto
 }
 
@@ -378,7 +377,7 @@ left: 15px;
 right: 13px;
 }
 .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon {
-  width: 20px;
+  width: calc(20px + (20px * 0.20));
   height: 20px;
   background: #D91B3E;
   border: none;
@@ -458,6 +457,7 @@ right: 13px;
 
 .cool-vertical-timeline-body.one-sided.right .timeline-content  .timeline-block-time{
   width: 30%;
+  min-width: 30%;
 }
 
 .cool-vertical-timeline-body.one-sided.left .timeline-content  .timeline-block-detail{
@@ -481,6 +481,7 @@ right: 13px;
 
 .cool-vertical-timeline-body.one-sided.left .timeline-content  .timeline-block-time{
   width: 30%;
+  min-width: 30%;
 }
 .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true  .timeline-block-detail{
   padding-right: 10px ;

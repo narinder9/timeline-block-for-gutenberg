@@ -55,7 +55,7 @@ const enhance = compose(
  */
 const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
 	return enhance( ( { ...props } ) => {
-		return (
+		return (    
 			<Fragment>
 				<BlockEdit { ...props } />
 			</Fragment>

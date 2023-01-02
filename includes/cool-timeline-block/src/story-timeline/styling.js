@@ -74,6 +74,15 @@ function contentTimelineStyle( props ) {
        containerLeftPadding,
        desktopConatinerPaddingType
    } = props.attributes
+   let arrow_position=`${(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : ''}`;
+   let middleline_position = '';
+   if(arrow_position != ''){
+      middleline_position = "calc( 31% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
+   }else if(middleLineSize != ''){
+    middleline_position = "calc( 31% + "+generateCSSUnit(middleLineSize,middleLineSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
+   }else if(middleLineSize != '' && arrow_position != ''){
+       middleline_position = "calc( 31% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
+   };
    let border_color = addAlpha(`${LineColor != '' ? LineColor : "#D91B3E"}`,0)
    var resp_selectors = "left"
 
@@ -134,6 +143,14 @@ function contentTimelineStyle( props ) {
         "background":"linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 10%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 90%, rgba(230, 230, 230, 0) 100%)",
         "width": `${middleLineSize != '' ? generateCSSUnit(middleLineSize, middleLineSizeType) : ''}`,
     },
+    " .cool-vertical-timeline-body.one-sided.left::before":{        
+        "left": `${middleline_position != '' ? middleline_position : ''}`,
+        "transform": `${middleline_position != '' ? "translateX(-50%)" : ''}`
+    },
+    " .cool-vertical-timeline-body.one-sided.right::before":{        
+        "right": `${middleline_position != '' ? middleline_position : ''}`,
+        "transform": `${middleline_position != '' ? "translateX(50%)" : ''}`
+    },
     " .cool-horizontal-timeline-body .timeline-content::before" :{
         "background":`${LineColor != '' ? LineColor : "#D91B3E"}`
     },
@@ -151,9 +168,12 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon" :{
         "background":`${iconBg != '' ? iconBg : "#D91B3E"}`+" !important",
-        "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize / 10), iconBoxSizeType)+")" : ''}`,
+        "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+")" : ''}`,
         "height": `${iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : ''}`,
         "font-size": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon" :{
+        "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+" - 6px)" : ''}`,
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg":{
         "width": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,
@@ -164,15 +184,23 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before" :{
         "border-right-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
+        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before" :{
         "border-left-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
+        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before" :{
         "border-right-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
+        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before" :{
         "border-left-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
+        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body .timeline-content  .story-details" :{
         "border-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",

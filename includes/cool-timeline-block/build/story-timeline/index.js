@@ -8819,10 +8819,6 @@ const attributes = {
     type: "number",
     default: 0
   },
-  iconColor: {
-    type: "string",
-    default: "#333"
-  },
   iconFocus: {
     type: "string",
     default: "#fff"
@@ -9102,14 +9098,10 @@ const {
   Spinner,
   ColorPicker,
   ColorPalette,
-  RadioControl,
-  ExternalLink,
   Card,
   CardBody,
-  CardFooter,
   Button,
   ButtonGroup,
-  __experimentalUnitControl,
   ToggleControl
 } = wp.components;
 const {
@@ -9125,7 +9117,7 @@ class Edit extends Component {
     super();
 
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "resetcolorpalate", e => {
-      this.props.setAttributes.setAttributes(e);
+      this.props.setAttributes(e);
     });
 
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "OrientationCheck", e => {
@@ -9152,7 +9144,6 @@ class Edit extends Component {
   }
 
   onUpdateOrientation(newOrientation, position) {
-    console.log(position);
     this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
       BothsidedOrientation: newOrientation
     });
@@ -9518,7 +9509,7 @@ class Edit extends Component {
       style: {
         'margin-top': 10 + 'px'
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
@@ -9536,7 +9527,7 @@ class Edit extends Component {
         dateColor: colorValue
       })
     })));
-    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
@@ -9553,7 +9544,7 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         LineColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
@@ -9570,7 +9561,7 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         iconColor: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
@@ -9587,7 +9578,7 @@ class Edit extends Component {
       onChange: colorValue => setAttributes({
         iconBg: colorValue
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       class: "components-button timeline-block-colorpallete-reset is-small",
@@ -9678,7 +9669,7 @@ class Edit extends Component {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cool-timeline-gt-block-review-tab"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("We hope you liked our plugin created timelines. Please share your valuable feedback.", "timeline-block"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
-      href: "https://wordpress.org/support/plugin/timeline-block/reviews/",
+      href: "https://wordpress.org/support/plugin/timeline-block/reviews/#new-post",
       target: "_blank"
     }, "\u2605\u2605\u2605\u2605\u2605")));
     const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
@@ -10223,6 +10214,18 @@ function contentTimelineStyle(props) {
     containerLeftPadding,
     desktopConatinerPaddingType
   } = props.attributes;
+  let arrow_position = `${iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : ''}`;
+  let middleline_position = '';
+
+  if (arrow_position != '') {
+    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
+  } else if (middleLineSize != '') {
+    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
+  } else if (middleLineSize != '' && arrow_position != '') {
+    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
+  }
+
+  ;
   let border_color = addAlpha(`${LineColor != '' ? LineColor : "#D91B3E"}`, 0);
   var resp_selectors = "left";
   var selectors = {
@@ -10282,6 +10285,14 @@ function contentTimelineStyle(props) {
       "background": "linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 10%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 90%, rgba(230, 230, 230, 0) 100%)",
       "width": `${middleLineSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) : ''}`
     },
+    " .cool-vertical-timeline-body.one-sided.left::before": {
+      "left": `${middleline_position != '' ? middleline_position : ''}`,
+      "transform": `${middleline_position != '' ? "translateX(-50%)" : ''}`
+    },
+    " .cool-vertical-timeline-body.one-sided.right::before": {
+      "right": `${middleline_position != '' ? middleline_position : ''}`,
+      "transform": `${middleline_position != '' ? "translateX(50%)" : ''}`
+    },
     " .cool-horizontal-timeline-body .timeline-content::before": {
       "background": `${LineColor != '' ? LineColor : "#D91B3E"}`
     },
@@ -10299,9 +10310,12 @@ function contentTimelineStyle(props) {
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon": {
       "background": `${iconBg != '' ? iconBg : "#D91B3E"}` + " !important",
-      "width": `${iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize / 10, iconBoxSizeType) + ")" : ''}`,
+      "width": `${iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + ")" : ''}`,
       "height": `${iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''}`,
       "font-size": `${iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''}`
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon": {
+      "width": `${iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + " - 6px)" : ''}`
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg": {
       "width": `${iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''}`,
@@ -10311,16 +10325,24 @@ function contentTimelineStyle(props) {
       "background": `${iconBg != '' ? iconBg : "#D91B3E"}` + " !important"
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important"
+      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important",
+      "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+      "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important"
+      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important",
+      "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+      "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important"
+      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important",
+      "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+      "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important"
+      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important",
+      "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
+      "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
     },
     " .cool-vertical-timeline-body .timeline-content  .story-details": {
       "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}` + " !important",

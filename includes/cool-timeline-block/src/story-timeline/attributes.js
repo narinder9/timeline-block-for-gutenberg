@@ -281,10 +281,6 @@ const attributes = {
 		type : "number",
 		default : 0,
 	},
-	iconColor : {
-		type : "string",
-		default : "#333",
-	},
 	iconFocus : {
 		type : "string",
 		default : "#fff",
