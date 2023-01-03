@@ -55,7 +55,7 @@ const enhance = compose(
  */
 const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
 	return enhance( ( { ...props } ) => {
-		return (
+		return (    
 			<Fragment>
 				<BlockEdit { ...props } />
 			</Fragment>
@@ -95,20 +95,29 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 
 		</div> );
 	},
-        providesContext: {
-            'cp-timeline/timelineLayout': 'timelineLayout',
-            'cp-timeline/timelineDesign': 'timelineDesign',
-        },
+    providesContext: {
+        'cp-timeline/timelineLayout': 'timelineLayout',
+        'cp-timeline/timelineDesign': 'timelineDesign',
+    },
 	example: {
 		attributes: {
-			backgroundColor: '#000000',
-			opacity: 0.8,
-			padding: 30,
-			textColor: '#FFFFFF',
+			backgroundColor: 'green',
+			opacity: 1,
+			padding: 10,
 			radius: 10,
-			title: __( 'I am a slide title', 'wp-presenter-pro' ),
-		},
+			isPreview: true,
+		}
 	},
+	// example: {
+	// 	attributes: {
+	// 		backgroundColor: '#000000',
+	// 		opacity: 0.8,
+	// 		padding: 30,
+	// 		textColor: '#FFFFFF',
+	// 		radius: 10,
+	// 		title: __( 'I am a slide title', 'wp-presenter-pro' ),
+	// 	},
+	// },
 } )
 addFilter(
 	'editor.BlockEdit',

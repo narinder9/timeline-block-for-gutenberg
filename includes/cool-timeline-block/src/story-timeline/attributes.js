@@ -6,9 +6,40 @@ import { __ } from '@wordpress/i18n';
 
 const ITEM_COUNT = 5
 
-const item = []
-const date_arr = []
-
+const item = [];
+const date_arr = [];
+const example = {
+	'data1' : {
+		"time_heading": __( "Amazon is born",'timeline-block' ),
+		"time_desc": __( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat enim res aperta. Ne discipulum abducam, times. Primum quid tu dicis breve? An haec ab eo non dicuntur?",'timeline-block' ),
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon1-600x338.jpg",
+		"t_date": "5/6/2019",
+	},
+	'data2' : {
+		"time_heading": __( "Amazon Prime debuts",'timeline-block' ),
+		"time_desc": __( "Aliter homines, aliter philosophos loqui putas oportere? Sin aliud quid voles, postea. Mihi enim satis est, ipsis non satis. Negat enim summo bono afferre incrementum diem. Quod ea non occurrentia fingunt, vincunt Aristonem., you can change me anytime click here, ",'timeline-block' ),
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon2-600x338.jpg",
+		"t_date": "2/2/2020",
+	},
+	'data3' : {
+		"time_heading": __( "Amazon acquires Audible",'timeline-block' ),
+		"time_desc": __( "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",'timeline-block' ),
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
+		"t_date": "31/1/2021",
+	},
+	'data4' : {
+		"time_heading": __( "Amazon Kindle For Books",'timeline-block' ),
+		"time_desc": __( "Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.",'timeline-block' ),
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
+		"t_date": "5/7/2022",
+	},
+	'data5' : {
+		"time_heading": __( "Amazon App Store Launched",'timeline-block' ),
+		"time_desc": __( "Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere",'timeline-block' ),
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
+		"t_date": "22/3/2011",
+	},
+};
 for (var i = 1; i <= ITEM_COUNT; i++) {
 
 	if(i%2==0){
@@ -17,14 +48,17 @@ for (var i = 1; i <= ITEM_COUNT; i++) {
 	else{
 		var class_postion="right"
 	}
+	const data = example['data'+i];
 	item.push(
 		{
-			"time_heading": __( "Timeline Heading ",'timeline-block' ) + i ,
-			"time_desc": __( "This is Timeline description, you can change me anytime click here, ",'timeline-block' ),
+			"time_heading": data.time_heading,
+			"time_desc": data.time_desc,
+			"timeLineImage": data.timeLineImage,
+			"t_date": data.t_date,
+			"imageSize": "full",
 			"blockPosition":__(class_postion,"timeline-block"),
 		}
 	)
-
 	var j = i - 1
 	var today = new Date( "1/1/2019" )
 	var dd = today.getDate()
@@ -65,6 +99,34 @@ const attributes = {
 		type: "boolean",
 		default: false
 	},
+	itemSpacing:{
+		type: "number",
+		default: '',
+	},
+    itemSpacingType:{
+		type: "string",
+		default: "px",
+	},
+	contentAlignment:{
+		type: "string",
+		default: "",
+	},
+	titileBtSpacing: {
+		type: "number",
+		default: "",
+	},
+	titileBtSpacingType: {
+		type: "string",
+		default: "px",
+	},
+	descBtSpacing: {
+		type: "number",
+		default: "",
+	},
+	descBtSpacingType: {
+		type: "string",
+		default: "px",
+	},
 	dateFormat: {
 		type: "string",
 		default: "F j, Y"
@@ -102,6 +164,10 @@ const attributes = {
 	borderFocus : {
 		type : "string",
 		default : "#5cb85c",
+	},
+	isPreview: {
+		type: 'boolean',
+		default: false,
 	},
 	headingTag : {
 		type : "string",
@@ -215,10 +281,6 @@ const attributes = {
 		type : "number",
 		default : 0,
 	},
-	iconColor : {
-		type : "string",
-		default : "#333",
-	},
 	iconFocus : {
 		type : "string",
 		default : "#fff",
@@ -229,7 +291,7 @@ const attributes = {
 	},
 	dateColor : {
 		type : "string",
-		default : "#333",
+		default : "",
 	},
 	dateFontsizeType: {
 		type: "string",
@@ -305,7 +367,7 @@ const attributes = {
 	},
 	iconSize : {
 		type : "number",
-		default : 12,
+		default : "",
 	},
 	icon : {
 		type : "string",
@@ -327,21 +389,45 @@ const attributes = {
 		type:"string",
 		default:"vertical"
 	},
+	iconSizeType:{
+		type: "string",
+		default: "px"
+	},
+	iconBoxSize:{
+		type : "number",
+		default : "",
+	},
+	iconBoxSizeType:{
+		type: "string",
+		default: "px"
+	},
+	middleLineSize:{
+		type : "number",
+		default : "",
+	},
+	middleLineSizeType:{
+		type: "string",
+		default: "px"
+	},
 	Orientation:{
 		type:"string",
 		default:"left"
 	},
+	BothsidedOrientation:{
+		type:"string",
+		default:"right",
+	},
 	LineColor:{
 		type:"string",
-		default:"#D91B3E"
+		default:""
 	},
 	iconBg:{
 		type:"string",
-		default:"#D91B3E"
+		default:""
 	},
 	storyBorderColor:{
 		type:"string",
-		default:"#D91B3E"
+		default:""
 	},
 	iconToggle: {
 		type: "boolean",
@@ -370,8 +456,36 @@ const attributes = {
 	},
 	iconColor:{
 		type:"string",
-		default:"white"
+		default:""
 	},
+	containerTopPadding:{
+		type:"number",
+		default:''
+	},
+	containerRightPadding:{
+		type:"number",
+		default:''
+	},
+	containerBottomPadding:{
+		type:"number",
+		default:''
+	},
+	containerLeftPadding:{
+		type:"number",
+		default:''
+	},
+	desktopConatinerPaddingType:{
+		type:"string",
+		default: "px"
+	},
+	marginLink:{
+		type:"boolean",
+		default: false
+	},
+	OrientationCheckBox:{
+		type:"boolean",
+		default:false,
+	}
 }
 
 export default attributes

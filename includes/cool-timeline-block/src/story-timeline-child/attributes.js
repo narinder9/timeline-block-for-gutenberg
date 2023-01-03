@@ -126,6 +126,14 @@ const attributes = {
 		type:"array",
 		default:[{label:"Full",value:"full"}]
 	},
+	imageAlt:{
+		type:"string",
+		default:"",
+	},
+	storyPositionHide:{
+		type:"bollean",
+		default:true,
+	}
 }
 
 export default attributes
