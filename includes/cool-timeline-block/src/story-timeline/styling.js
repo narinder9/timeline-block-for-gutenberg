@@ -77,11 +77,11 @@ function contentTimelineStyle( props ) {
    let arrow_position=`${(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : ''}`;
    let middleline_position = '';
    if(arrow_position != ''){
-      middleline_position = "calc( 31% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
+      middleline_position = "calc( 30.6% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
    }else if(middleLineSize != ''){
-    middleline_position = "calc( 31% + "+generateCSSUnit(middleLineSize,middleLineSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
+    middleline_position = "calc( 30.6% + "+generateCSSUnit(middleLineSize,middleLineSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
    }else if(middleLineSize != '' && arrow_position != ''){
-       middleline_position = "calc( 31% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
+       middleline_position = "calc( 30.6% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
    };
    let border_color = addAlpha(`${LineColor != '' ? LineColor : "#D91B3E"}`,0)
    var resp_selectors = "left"
@@ -149,7 +149,7 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body.one-sided.right::before":{        
         "right": `${middleline_position != '' ? middleline_position : ''}`,
-        "transform": `${middleline_position != '' ? "translateX(50%)" : ''}`
+        "transform": `${middleline_position != '' ? "translateX(50%)" : ''}`,
     },
     " .cool-horizontal-timeline-body .timeline-content::before" :{
         "background":`${LineColor != '' ? LineColor : "#D91B3E"}`

@@ -628,7 +628,7 @@ class Edit extends Component {
     });
 
     const content_control = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Story Setting")
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Story Settings")
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
       label: "Story Heading",
       value: time_heading,

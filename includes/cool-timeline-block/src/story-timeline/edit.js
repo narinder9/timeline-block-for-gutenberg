@@ -195,7 +195,7 @@ class Edit extends Component {
 						</Fragment>:null;
 		
 		const general_setting=<CardBody>
-			<h2 style={{fontWeight: 600}}>Story Heading</h2>
+			<h2 className="timeline-block-settings-labels">Story Heading</h2>
 			<TypographyControl
 			label={ __( "Typography",'timeline-block' ) }
 			attributes = { this.props.attributes }
@@ -237,7 +237,7 @@ class Edit extends Component {
         max={ 200 }
 		/>
 		<hr className="timeline-block-editor__separator"></hr>
-		<h2 style={{fontWeight: 600}}>Story Description</h2>
+		<h2 className="timeline-block-settings-labels">Story Description</h2>
 			<TypographyControl
 			label={ __( "Typography",'timeline-block' ) }
 			attributes = { this.props.attributes }
@@ -278,7 +278,7 @@ class Edit extends Component {
         max={ 200 }
 		/>
 		<hr className="timeline-block-editor__separator"></hr>
-		<h2 style={{fontWeight: 600}}>Primary Label(Date/Steps)</h2>
+		<h2 className="timeline-block-settings-labels">Primary Label(Date/Steps)</h2>
 			<TypographyControl
 			label={ __( "Typography",'timeline-block' ) }
 			attributes = { this.props.attributes }
@@ -433,7 +433,7 @@ class Edit extends Component {
 		</PanelBody>
 		const timeline_setting =<CardBody>
 			<SelectControl
-						label={ __( "Timeline Layout","timeline-block" ) }
+						label={ __( "Timeline Layouts","timeline-block" ) }
 						value={ timelineLayout }
 						onChange={(value)=>{
 							if(value == "vertical"){
@@ -447,7 +447,7 @@ class Edit extends Component {
 					}
 						options={ [
 							{ value: "vertical", label: __( "Vertical","timeline-block") },
-							{ value: "horizontal", label: __( "Horizontal Pro","timeline-block"), disabled: true }
+							{ value: "horizontal", label: __( "Horizontal(Pro)","timeline-block"), disabled: true }
 
 						] }
 						/>
@@ -514,7 +514,7 @@ class Edit extends Component {
 						},
 						{
 							name: 'general_setting',
-							title: 'Styling',
+							title: 'Style',
 							className: 'tab-two',
 							content: general_setting
 						},

@@ -9264,9 +9264,7 @@ class Edit extends Component {
       }]
     })) : null;
     const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      style: {
-        fontWeight: 600
-      }
+      className: "timeline-block-settings-labels"
     }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
@@ -9357,9 +9355,7 @@ class Edit extends Component {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
       className: "timeline-block-editor__separator"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      style: {
-        fontWeight: 600
-      }
+      className: "timeline-block-settings-labels"
     }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
@@ -9450,9 +9446,7 @@ class Edit extends Component {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
       className: "timeline-block-editor__separator"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      style: {
-        fontWeight: 600
-      }
+      className: "timeline-block-settings-labels"
     }, "Primary Label(Date/Steps)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_8__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Typography", 'timeline-block'),
       attributes: this.props.attributes,
@@ -9673,7 +9667,7 @@ class Edit extends Component {
       target: "_blank"
     }, "\u2605\u2605\u2605\u2605\u2605")));
     const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Layout", "timeline-block"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Layouts", "timeline-block"),
       value: timelineLayout,
       onChange: value => {
         if (value == "vertical") {
@@ -9693,7 +9687,7 @@ class Edit extends Component {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Vertical", "timeline-block")
       }, {
         value: "horizontal",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal Pro", "timeline-block"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal(Pro)", "timeline-block"),
         disabled: true
       }]
     }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
@@ -9776,7 +9770,7 @@ class Edit extends Component {
         content: timeline_setting
       }, {
         name: 'general_setting',
-        title: 'Styling',
+        title: 'Style',
         className: 'tab-two',
         content: general_setting
       }, {
@@ -10218,11 +10212,11 @@ function contentTimelineStyle(props) {
   let middleline_position = '';
 
   if (arrow_position != '') {
-    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
+    middleline_position = "calc( 30.6% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
   } else if (middleLineSize != '') {
-    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
+    middleline_position = "calc( 30.6% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
   } else if (middleLineSize != '' && arrow_position != '') {
-    middleline_position = "calc( 31% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
+    middleline_position = "calc( 30.6% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + " - " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(middleLineSize / 2), middleLineSizeType) + ")";
   }
 
   ;

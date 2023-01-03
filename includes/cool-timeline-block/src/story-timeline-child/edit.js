@@ -145,7 +145,7 @@ class Edit extends Component {
 
 		const content_control = (
 			<InspectorControls>
-			  <PanelBody title={__("Story Setting")}>
+			  <PanelBody title={__("Story Settings")}>
 			    <TextControl
 			      label="Story Heading"
 			      value={ time_heading }
