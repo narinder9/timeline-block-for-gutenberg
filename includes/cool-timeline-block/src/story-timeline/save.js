@@ -17,7 +17,6 @@ export default function Save( props ) {
 		Orientation,
 		timelineDesign,
 		slidePerView
-
 	} = props.attributes
 	const InnerBlocksLength = () => {
 		return wp.data.select("core/block-editor").getBlockCount(block_id);
@@ -31,6 +30,5 @@ export default function Save( props ) {
 		 		</div>
 		 	</div> 
 		</div>
-		
 	)
 }

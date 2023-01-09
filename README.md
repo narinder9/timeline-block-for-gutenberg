@@ -44,44 +44,4 @@ We have tried our best to create an awesome **timeline plugin** but still if you
 
 ## Changelog
 
-<h4>Version 1.3 | 03 Jan 2023</h4>
-<ul>
-<li>Added: Alternating Sided in both side settings </li>
-<li>New: Content alignment setting </li>
-<li>New: Heading and description bottom spacing setting </li>
-<li>New: Item spacing setting </li>
-<li>New: Icon box size setting </li>
-<li>New: Icon size setting </li>
-<li>New: Line size setting </li>
-<li>New: Content box padding setting integration </li>
-<li>New: Share review option  </li>
-<li>Added: Content update </li>
-<li>Update: Swiper file removes </li>
-<li>Improved: tested Upto WP.6.1</li>
-</ul>
 
-<h4>Version 1.2.2 | 04 July 2022</h4>
-<ul>
-<li>Added: Added source code.</li>
-</ul>
-<h4>Version 1.2.1 | 09 June 2022</h4>
-<ul>
-<li>Improved: tested Upto WP.6.0</li>
-</ul>
-<h4>Version 1.2 | 06 JAN, 2022</h4>
-<ul>
-<li>Added: Integrated New Block with an advanced story ordering functionality.</li>
-<li>New: Added image size option, Font Awesome icons, color and typography settings for each element of Cool Timeline Gutenberg Timeline Block</li>
-<li>New: Added right-aligned one-sided timeline layout in  Gutenberg Timeline Block</li>
-<li>New: Story position(left/right) option or both-sided layout of Gutenberg Timeline Block</li>
-<li>Updated: tested upto 5.8.2</li>
-</ul>
-<h4>Version 1.1 | 30 June 2021</h4>
-<ul>
-<li>Added: integrated story ordering feature</li>
-<li>Fixed: minor bug fixes</li>
-</ul>
-<h4>Version 1.0 | 18 AUG, 2020</h4>
- <ul>
-<li>- Initial release</li>
-</ul>

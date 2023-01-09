@@ -109,8 +109,7 @@ class Edit extends Component {
 				      }
 				    </Fragment>
 			    ) }
-
-                          />
+					/>
 
 			  <div className="story-content">
 			    <RichText
@@ -119,16 +118,13 @@ class Edit extends Component {
 			      value={ time_heading }
 			      onChange={ ( value ) => setAttributes( { time_heading: value } ) }
 			      keepplaceholderonfocus="true"
-
 			    />
-
 			    <RichText
 			      tagName="p"
 			      placeholder={ __( 'Enter story description here.', 'timeline-block' ) }
 			      value={ time_desc }
 			      onChange={ ( value ) => setAttributes({time_desc:value})}
 			      keepplaceholderonfocus="true"
-
 			    />
 			  </div>
 			</div>
@@ -151,13 +147,11 @@ class Edit extends Component {
 			      value={ time_heading }
 			      onChange={ ( value ) => setAttributes({time_heading:value})}
 			    />
-
 			    <TextareaControl
 			      label="Story Description"
 			      value={ time_desc }
 			      onChange={ ( value ) => setAttributes({time_desc:value})}
 			    />
-
 			    <TextControl
 			      label="Primary Label(Date/Steps)"
 			      value={ t_date }
@@ -174,16 +168,14 @@ class Edit extends Component {
 					/>
 					{iconToggle == "true" ?
 					<Fragment> <div className="timeline-block-iconpicker" ><FontIconPicker {...icon_props} /> </div>
-
 				</Fragment>
 					: null}	
-					
 				<hr className="timeline-block-editor__separator"></hr>
 			    <label className="timeline-block-settings-labels">Story Image</label>
 			    <br></br>
 			    <MediaUpload
-			      title="Story Image"
-			      onSelect={ ( value ) => {
+			      	title="Story Image"
+			      	onSelect={ ( value ) => {
 				      let image_sizes = Object.keys(value.sizes)
 				      let image_size_option = []
 				      image_sizes.map(size=>{
@@ -191,11 +183,11 @@ class Edit extends Component {
 				      });
 				      let img=getImage(imageSize,value.sizes)
 				      setAttributes({timeLineImage:img,imageOption:image_size_option,time_image:value})
-			      }}
-			      value = {timeLineImage}
-                              allowedTypes={ [ 'image' ] }
-			      modalClass=""
-                              render={ ( { open } ) => (
+			      	}}
+			      	value = {timeLineImage}
+                    allowedTypes={ [ 'image' ] }
+			      	modalClass=""
+                	render={ ( { open } ) => (
 				      <Fragment>
 					{timeLineImage !== "none" ?
 					 <Fragment>
@@ -208,9 +200,8 @@ class Edit extends Component {
 					}
 				      </Fragment>
 			      ) }
-
-                            />
-				{	timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ?
+					/>
+				{	timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
 				<Fragment>
 				<hr className="timeline-block-editor__separator"></hr>
 				<RadioControl
@@ -241,7 +232,6 @@ class Edit extends Component {
 				</PanelBody>
 			</InspectorControls>
 		);
-
 		const icon_div =  <div className="timeline-block-icon">
 				    {icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" >{ renderSVG(icon) }</span>:null}
 			          </div> ;
@@ -259,7 +249,6 @@ class Edit extends Component {
 			  {content_control}
 			  <div className={"timeline-content icon-"+iconToggle+""}>
 			    <div className = {" timeline-block-vertical-timeline ctl-row position-" + blockPosition}>
-
 			      <div className="ctl-6 timeline-block-time">
 				<div className="story-time">
 				  {StoryTime()}
