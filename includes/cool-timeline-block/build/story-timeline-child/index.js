@@ -703,7 +703,8 @@ class Edit extends Component {
           onClick: open
         }, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Upload/Choose Image', 'timeline-block')));
       }
-    }), timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
+    }), timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("hr", {
       className: "timeline-block-editor__separator"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RadioControl, {
       label: "Story position",

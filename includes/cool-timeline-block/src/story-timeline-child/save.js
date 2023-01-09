@@ -33,8 +33,6 @@ export default function Save( props ) {
 			</div>
 			:
 			null}
-
-		
 			<div className="story-content">
 			<RichText.Content
 				tagName="h3"
@@ -45,7 +43,6 @@ export default function Save( props ) {
 				value={ time_desc }
 				/>
 		</div>
-		
 			</div>
 	 )
 	const StoryTime = () => (
@@ -54,15 +51,11 @@ export default function Save( props ) {
 				tagName="p"
 				value={t_date}								
 				/>
-	
-)
-
+	)
 		const icon_div =  <div className="timeline-block-icon">
 			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" style={{fill:iconColor}}>{ renderSVG(icon) }</span>:null}
 			</div> 
-
 	return (
-		
 		<div className={"timeline-content icon-"+iconToggle+" "}>
 			<div className = {" timeline-block-timeline ctl-row  position-" +blockPosition+""}>
 				<div className="ctl-6 timeline-block-time">
@@ -76,6 +69,5 @@ export default function Save( props ) {
 				</div>
 			</div>
 	</div>
-		
 	)
 }

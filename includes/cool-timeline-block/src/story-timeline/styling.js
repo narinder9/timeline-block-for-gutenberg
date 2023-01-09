@@ -25,7 +25,6 @@ function contentTimelineStyle( props ) {
        dateFontWeight,
        dateLineHeightType,
        dateLineHeight,
-      
        dateColor,
        iconSize,
        iconFocus,
@@ -50,7 +49,6 @@ function contentTimelineStyle( props ) {
        descBtSpacingType,
        subHeadFontSizeType,
        subHeadFontSize,
-      
        subHeadFontFamily,
        subHeadFontWeight,
        subHeadLineHeightType,
@@ -58,11 +56,9 @@ function contentTimelineStyle( props ) {
        subHeadLineHeightTablet,
        subHeadLineHeightMobile,
        subHeadingColor,
-  
        LineColor,
        iconBg,
        storyBorderColor,
-
        iconSizeType,
        iconBoxSize,
        iconBoxSizeType,
@@ -74,26 +70,22 @@ function contentTimelineStyle( props ) {
        containerLeftPadding,
        desktopConatinerPaddingType
    } = props.attributes
-   let arrow_position=`${(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : ''}`;
+   let arrow_position=(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : '';
    let middleline_position = '';
    if(arrow_position != ''){
       middleline_position = "calc( 30.6% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
-   }else if(middleLineSize != ''){
-    middleline_position = "calc( 30.6% + "+generateCSSUnit(middleLineSize,middleLineSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
-   }else if(middleLineSize != '' && arrow_position != ''){
-       middleline_position = "calc( 30.6% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+" - "+generateCSSUnit(Math.round(middleLineSize / 2),middleLineSizeType)+")";
    };
-   let border_color = addAlpha(`${LineColor != '' ? LineColor : "#D91B3E"}`,0)
+   let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E",0)
    var resp_selectors = "left"
 
    var selectors = {
     " .cool-vertical-timeline-body .timeline-block-vertical-timeline" : {
-        "margin-bottom" : `${itemSpacing != '' ? generateCSSUnit(itemSpacing, itemSpacingType) : ''}`,
-        "text-align" : `${contentAlignment != '' ? contentAlignment : ''}`,
+        "margin-bottom" : itemSpacing != '' ? generateCSSUnit(itemSpacing, itemSpacingType) : '',
+        "text-align" : contentAlignment != '' ? contentAlignment : '',
     },
     " .cool-vertical-timeline-body .timeline-block-timeline" : {
-        "margin-bottom" : `${itemSpacing != '' ? generateCSSUnit(itemSpacing, itemSpacingType) : ''}`,
-        "text-align" : `${contentAlignment != '' ? contentAlignment : ''}`,
+        "margin-bottom" : itemSpacing != '' ? generateCSSUnit(itemSpacing, itemSpacingType) : '',
+        "text-align" : contentAlignment != '' ? contentAlignment : '',
     },
     " .cool-vertical-timeline-body .story-details h3" : {
         "font-size" : generateCSSUnit( headFontSize, headFontSizeType ),
@@ -101,7 +93,7 @@ function contentTimelineStyle( props ) {
         "font-weight": headFontWeight,
         "line-height": generateCSSUnit( headLineHeight, headLineHeightType ),
         "color": headingColor,
-        "margin-bottom": `${titileBtSpacing != '' ? generateCSSUnit(titileBtSpacing , titileBtSpacingType) : ''}`,
+        "margin-bottom": titileBtSpacing != '' ? generateCSSUnit(titileBtSpacing , titileBtSpacingType) : '',
     },
     " .cool-horizontal-timeline-body .story-details h3" : {
         "font-size" : generateCSSUnit( headFontSize, headFontSizeType ),
@@ -111,14 +103,14 @@ function contentTimelineStyle( props ) {
         "color": headingColor,
     },
     " .cool-vertical-timeline-body .story-time p" : {
-        "color": `${dateColor != '' ? dateColor : '#333'}`,
+        "color": dateColor != '' ? dateColor : '#333',
         "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
         "font-family": dateFontFamily,
         "font-weight": dateFontWeight,
         "line-height": generateCSSUnit( dateLineHeight, dateLineHeightType ),
     },
     " .cool-horizontal-timeline-body .story-time p" : {
-        "color": `${dateColor != '' ? dateColor : '#333'}`,
+        "color": dateColor != '' ? dateColor : '#333',
         "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
         "font-family": dateFontFamily,
         "font-weight": dateFontWeight,
@@ -130,7 +122,7 @@ function contentTimelineStyle( props ) {
         "font-weight": subHeadFontWeight,
         "line-height": generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
         "color": subHeadingColor,
-        "margin-bottom": `${descBtSpacing != '' ? generateCSSUnit(descBtSpacing , descBtSpacingType) : ''}`,
+        "margin-bottom": descBtSpacing != '' ? generateCSSUnit(descBtSpacing , descBtSpacingType) : '',
     },
     " .cool-horizontal-timeline-body .story-details p" : {
         "font-size" : generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
@@ -141,106 +133,101 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body::before" :{
         "background":"linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 10%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 90%, rgba(230, 230, 230, 0) 100%)",
-        "width": `${middleLineSize != '' ? generateCSSUnit(middleLineSize, middleLineSizeType) : ''}`,
+        "width": middleLineSize != '' ? generateCSSUnit(middleLineSize, middleLineSizeType) : '',
     },
     " .cool-vertical-timeline-body.one-sided.left::before":{        
-        "left": `${middleline_position != '' ? middleline_position : ''}`,
-        "transform": `${middleline_position != '' ? "translateX(-50%)" : ''}`
+        "left": middleline_position != '' ? middleline_position : '',
+        "transform": middleline_position != '' ? "translateX(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right::before":{        
-        "right": `${middleline_position != '' ? middleline_position : ''}`,
-        "transform": `${middleline_position != '' ? "translateX(50%)" : ''}`,
+        "right": middleline_position != '' ? middleline_position : '',
+        "transform": middleline_position != '' ? "translateX(50%)" : '',
     },
     " .cool-horizontal-timeline-body .timeline-content::before" :{
-        "background":`${LineColor != '' ? LineColor : "#D91B3E"}`
+        "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-horizontal-timeline-body .timeline-content::after" :{
-        "background":`${LineColor != '' ? LineColor : "#D91B3E"}`
+        "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content::before" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important"
+        "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
     },
     " .cool-vertical-timeline-body.left .story-details::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important"
+        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
     },
     " .cool-vertical-timeline-body.right .story-time::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important"
+        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon" :{
-        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`+" !important",
-        "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+")" : ''}`,
-        "height": `${iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : ''}`,
-        "font-size": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,
+        "background":`${iconBg != '' ? iconBg : "#D91B3E"} !important`,
+        "width": iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+")" : '',
+        "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "font-size": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon" :{
-        "width": `${iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+" - 6px)" : ''}`,
+        "width": iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+" - 6px)" : '',
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg":{
-        "width": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,
-        "height": `${iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : ''}`,
+        "width": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
+        "height": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
     },
     " .cool-horizontal-timeline-body .timeline-content .timeline-block-icon":{
-        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`+" !important",
+        "background":iconBg != '' ? iconBg+" !important" : "#D91B3E"+" !important",
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before" :{
-        "border-right-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
-        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
+        "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "margin-top": arrow_position != '' ? arrow_position : '',
+        "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before" :{
-        "border-left-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
-        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
+        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "margin-top": arrow_position != '' ? arrow_position : '',
+        "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before" :{
-        "border-right-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
-        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
+        "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "margin-top": arrow_position != '' ? arrow_position : '',
+        "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before" :{
-        "border-left-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        "margin-top": `${arrow_position != '' ? arrow_position : ''}`,
-        "transform": `${arrow_position != '' ? "translateY(-50%)" : ''}`
+        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "margin-top": arrow_position != '' ? arrow_position : '',
+        "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body .timeline-content  .story-details" :{
-        "border-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        "padding-top": `${containerTopPadding != '' ? generateCSSUnit(containerTopPadding, desktopConatinerPaddingType) : ''}`,
-        "padding-right": `${containerRightPadding != '' ? generateCSSUnit(containerRightPadding, desktopConatinerPaddingType) : ''}`,
-        "padding-bottom": `${containerBottomPadding != '' ? generateCSSUnit(containerBottomPadding, desktopConatinerPaddingType) : ''}`,
-        "padding-left": `${containerLeftPadding != '' ? generateCSSUnit(containerLeftPadding, desktopConatinerPaddingType) : ''}`,
+        "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "padding-top": containerTopPadding != '' ? generateCSSUnit(containerTopPadding, desktopConatinerPaddingType) : '',
+        "padding-right": containerRightPadding != '' ? generateCSSUnit(containerRightPadding, desktopConatinerPaddingType) : '',
+        "padding-bottom": containerBottomPadding != '' ? generateCSSUnit(containerBottomPadding, desktopConatinerPaddingType) : '',
+        "padding-left": containerLeftPadding != '' ? generateCSSUnit(containerLeftPadding, desktopConatinerPaddingType) : '',
     },
-        " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before":{
-            "border-bottom-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        },
-        " .cool-horizontal-timeline-body .ctl-6.timeline-block-detail":{
-            "border-top-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`+" !important",
-        },
+    " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before":{
+        "border-bottom-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+    },
+    " .cool-horizontal-timeline-body .ctl-6.timeline-block-detail":{
+        "border-top-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+    },
     " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon" :{
         "border-color":border_color+" !important",
     },
     " .cool-horizontal-timeline-body .swiper-button-next" :{
-        "color":`${LineColor != '' ? LineColor : "#D91B3E"}`
+        "color":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-horizontal-timeline-body .swiper-button-prev" :{
-        "color":`${LineColor != '' ? LineColor : "#D91B3E"}`
+        "color":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-horizontal-timeline-body .swiper-pagination-bullet-active":{
-        "background":`${LineColor != '' ? LineColor : "#D91B3E"}`
+        "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .icon-true .timeline-block-icon span.timeline-block-render-icon svg" : {
-        "fill":`${iconColor != '' ? iconColor : 'white'}`
-    }
-    
-           
+        "fill":iconColor != '' ? iconColor : 'white'
+    }  
        }
 
    var styling_css = ""
    var id = `.cool-timeline-block-${ block_id }`
-
    styling_css = generateCSS( selectors, id )
-
    return styling_css
-
 }
 
 export default contentTimelineStyle

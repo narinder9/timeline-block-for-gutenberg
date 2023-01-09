@@ -26,7 +26,6 @@ const {
 	registerBlockType
 } = wp.blocks
 const { useBlockProps,InnerBlocks } = wp.blockEditor;
-
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { withSelect } = wp.data;
@@ -40,7 +39,6 @@ const { compose, createHigherOrderComponent } = wp.compose;
  */
 
 const enhance = compose(
-
 	withSelect( ( select ) => {
 		return {
 			selected: select( 'core/block-editor' ).getSelectedBlock(),
@@ -64,10 +62,10 @@ const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
 }, 'withcontentTimeline' );
 
 registerBlockType( "cp-timeline/content-timeline-block", {
-
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Cool Timeline Block', 'cool-timeline' ), // Block title.
 	apiVersion: 2,
+	description: __( "Responsive timeline block for Gutenberg editor.", 'cool-timeline' ),
 	keywords: [
 		__( "Content Timeline",'timeline-block' ),
 		__( "Timeline",'timeline-block' ),
@@ -84,7 +82,6 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 		return (
 		<div {...blockProps}>
 		<Edit { ...props } />
-
 		</div> );
 	},
 	save:props=>{
@@ -92,7 +89,6 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 		return(
 		<div {...blockProps}>
 		<Save { ...props } />
-
 		</div> );
 	},
     providesContext: {
@@ -108,16 +104,6 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 			isPreview: true,
 		}
 	},
-	// example: {
-	// 	attributes: {
-	// 		backgroundColor: '#000000',
-	// 		opacity: 0.8,
-	// 		padding: 30,
-	// 		textColor: '#FFFFFF',
-	// 		radius: 10,
-	// 		title: __( 'I am a slide title', 'wp-presenter-pro' ),
-	// 	},
-	// },
 } )
 addFilter(
 	'editor.BlockEdit',

@@ -5,7 +5,6 @@
 import { __ } from '@wordpress/i18n';
 
 const attributes = {
-
 	key:{
 		type:"number"
 	},

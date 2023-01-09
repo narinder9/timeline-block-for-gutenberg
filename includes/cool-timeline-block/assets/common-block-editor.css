@@ -627,13 +627,6 @@ i.fipicon-angle-left:before {
     padding: 0px !important;
 	margin: 0px !important;
 }
-.timeline-block-add-story button {
-    width: 110px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-	flex-direction: initial !important;
-}
 .timeline-block-add-story {
     margin: 10px 0px 20px 0px;
 }
@@ -739,10 +732,11 @@ i.fipicon-angle-left:before {
   }
   
   .timeline-block-add-story button {
-    width: 10%;
+    width: 110px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+	flex-direction: initial !important;
   }
   
   .timeline-block-add-story {
@@ -859,7 +853,7 @@ i.fipicon-angle-left:before {
     display: inline-flex;
     margin-bottom: 1em;
   }
-  
+
   .timeline-block-spacing-control .timeline-block-control__units,
   .timeline-block-Orientation_checkbox {
     margin-left: auto;

@@ -64,18 +64,14 @@ for (var i = 1; i <= ITEM_COUNT; i++) {
 	var dd = today.getDate()
 	var mm = today.getMonth()+1 //January is 0!
 	var yyyy = today.getFullYear()-j
-
 	if( dd < 10 ) {
 		dd = "0" + dd
 	}
-
 	if( mm < 10 ) {
 		mm = "0" + mm
 	}
-
 	today = mm + "/" + dd + "/" + yyyy
 	var p = { "title" : today }
-
 	date_arr.push(
 		{
 			"title": today,
