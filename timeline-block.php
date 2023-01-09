@@ -4,7 +4,7 @@
  * Plugin Name:Timeline Block
  * Plugin URI:https://cooltimeline.com
  * Description:Responsive timeline block for Gutenberg editor.
- * Version:1.2.2
+ * Version:1.3
  * Author:Cool Plugins
  * Author URI:https://coolplugins.net
  * License:GPLv2 or later
