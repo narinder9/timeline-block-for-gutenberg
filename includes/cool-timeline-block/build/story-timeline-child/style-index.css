@@ -672,7 +672,7 @@
     max-width: 30px;
     transform: translate(-50%, -50%);
   }
-  .cool-vertical-timeline-body.right .timeline-content .timeline-block-icon {
+  .cool-vertical-timeline-body.one-sided.right .timeline-content .timeline-block-icon {
     transform: translate(50%, -50%);
   }
   .cool-vertical-timeline-body .timeline-content .timeline-block-icon svg {
