@@ -2003,8 +2003,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const SpacingControl = props => {
   const responsive = true;
+  let [settingsapply, updateSettingsapply] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const {
     label,
     unit,
@@ -2036,6 +2038,7 @@ const SpacingControl = props => {
     setAttributes({
       [valueLeft.label]: newValue
     });
+    valueupdate(newValue);
   };
 
   const onChangeTopValue = function (event) {
@@ -2046,6 +2049,8 @@ const SpacingControl = props => {
     if ('' === value && '' !== event) {
       newValue = event.target.value === '' ? 0 : Number(event.target.value);
     }
+
+    valueupdate(newValue, valueRight.value, valueBottom.value, valueLeft.value);
 
     if (!resetLink) {
       if (link.value) {
@@ -2084,6 +2089,8 @@ const SpacingControl = props => {
       newValue = event.target.value === '' ? 0 : Number(event.target.value);
     }
 
+    valueupdate(valueTop.value, newValue, valueBottom.value, valueLeft.value);
+
     if (!resetLink) {
       if (link.value) {
         changeLinkedValues(newValue);
@@ -2106,6 +2113,8 @@ const SpacingControl = props => {
       newValue = event.target.value === '' ? 0 : Number(event.target.value);
     }
 
+    valueupdate(valueTop.value, valueRight.value, newValue, valueLeft.value);
+
     if (!resetLink) {
       if (link.value) {
         changeLinkedValues(newValue);
@@ -2127,6 +2136,8 @@ const SpacingControl = props => {
     if ('' === value && '' !== event) {
       newValue = event.target.value === '' ? 0 : Number(event.target.value);
     }
+
+    valueupdate(valueTop.value, valueRight.value, valueBottom.value, newValue);
 
     if (!resetLink) {
       if (link.value && !resetLink) {
@@ -2247,6 +2258,22 @@ const SpacingControl = props => {
     setAttributes({
       [link.label]: false
     });
+    valueupdate('');
+  };
+
+  const valueupdate = function () {
+    for (var _len = arguments.length, value = new Array(_len), _key = 0; _key < _len; _key++) {
+      value[_key] = arguments[_key];
+    }
+
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] > 0 || value[i] < 0) {
+        updateSettingsapply(' timeline-container_pd_apply');
+        break;
+      } else {
+        updateSettingsapply('');
+      }
+    }
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2264,7 +2291,7 @@ const SpacingControl = props => {
     onClick: () => {
       resetValues();
     },
-    className: "timeline-block-control__actions_reset",
+    className: `timeline-block-control__actions_reset${settingsapply}`,
     isSmall: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     class: "dashicons dashicons-image-rotate"
@@ -8180,6 +8207,22 @@ class TypographyControl extends Component {
     super(...arguments);
     this.onAdvancedControlClick = this.onAdvancedControlClick.bind(this);
     this.onAdvancedControlReset = this.onAdvancedControlReset.bind(this);
+    this.timeline_settings_apply;
+  }
+
+  valueupdate() {
+    let valueupdates = [this.props.fontSize.value, this.props.fontFamily.value == 'Default' ? undefined : this.props.fontFamily.value, this.props.fontWeight.value, this.props.lineHeight.value];
+
+    for (let i = 0; i < valueupdates.length; i++) {
+      if (valueupdates[i] != undefined) {
+        this.timeline_settings_apply = ' cp-timeline-typography_apply';
+        break;
+      }
+
+      this.timeline_settings_apply = '';
+    }
+
+    ;
   }
 
   onAdvancedControlClick() {
@@ -8204,10 +8247,10 @@ class TypographyControl extends Component {
     } = this.props; // Reset Font family to default.
 
     setAttributes({
-      [this.props.fontFamily.label]: ""
+      [this.props.fontFamily.label]: "Default"
     });
     setAttributes({
-      [this.props.fontWeight.label]: ""
+      [this.props.fontWeight.label]: undefined
     });
     setAttributes({
       [this.props.fontSubset.label]: ""
@@ -8245,6 +8288,7 @@ class TypographyControl extends Component {
   }
 
   render() {
+    this.valueupdate();
     let fontSize;
     let fontWeight;
     let fontFamily;
@@ -8276,7 +8320,8 @@ class TypographyControl extends Component {
         sizeMobileText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
         sizeTabletText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
         sizeText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
-        steps: 0.1
+        steps: this.props.lineHeightType.value == 'px' ? 1 : 0.1,
+        initialPosition: 0
       }, this.props));
     }
 
@@ -8293,7 +8338,8 @@ class TypographyControl extends Component {
         sizeMobileText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
         sizeTabletText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
         sizeText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
-        steps: 0.1
+        steps: this.props.fontSizeType.value == 'px' ? 1 : 0.1,
+        initialPosition: this.props.fontSize.label == 'subHeadFontSize' ? 14 : 18
       }, this.props));
     }
 
@@ -8335,7 +8381,7 @@ class TypographyControl extends Component {
     }
 
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "timeline-block-typography-options"
+      className: `timeline-block-typography-options${this.timeline_settings_apply}`
     }, !disableAdvancedOptions && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, fontTypoAdvancedControls, showAdvancedFontControls));
   }
 
@@ -8489,7 +8535,7 @@ function RangeTypographyControl(props) {
     step: props.steps,
     beforeIcon: "editor-textcolor",
     allowReset: true,
-    initialPosition: 30
+    initialPosition: props.initialPosition
   }));
   output.Tablet = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeTabletText),
@@ -8502,7 +8548,7 @@ function RangeTypographyControl(props) {
     step: props.steps,
     beforeIcon: "editor-textcolor",
     allowReset: true,
-    initialPosition: 30
+    initialPosition: 18
   }));
   output.Mobile = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeMobileText),
@@ -8674,10 +8720,12 @@ const attributes = {
     default: "center"
   },
   headingColor: {
-    type: "string"
+    type: "string",
+    default: ''
   },
   subHeadingColor: {
-    type: "string"
+    type: "string",
+    default: ''
   },
   separatorBg: {
     type: "string",
@@ -9326,7 +9374,7 @@ class Edit extends Component {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         headingColor: ''
       })
@@ -9416,7 +9464,7 @@ class Edit extends Component {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         subHeadingColor: ''
       })
@@ -9506,7 +9554,7 @@ class Edit extends Component {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         dateColor: ''
       })
@@ -9523,9 +9571,9 @@ class Edit extends Component {
     const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
-        LineColor: '#000'
+        LineColor: ''
       })
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
       class: "dashicon dashicons dashicons-image-rotate"
@@ -9539,7 +9587,7 @@ class Edit extends Component {
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         iconColor: ''
       })
@@ -9555,7 +9603,7 @@ class Edit extends Component {
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         iconBg: ''
       })
@@ -9571,7 +9619,7 @@ class Edit extends Component {
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cp-timeline-block-style-settings"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: "components-button timeline-block-colorpallete-reset is-small",
+      class: `components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`,
       onClick: e => this.resetcolorpalate({
         storyBorderColor: ''
       })
@@ -9661,31 +9709,7 @@ class Edit extends Component {
       href: "https://wordpress.org/support/plugin/timeline-block/reviews/#new-post",
       target: "_blank"
     }, "\u2605\u2605\u2605\u2605\u2605")));
-    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Layouts", "timeline-block"),
-      value: timelineLayout,
-      onChange: value => {
-        if (value == "vertical") {
-          setAttributes({
-            timelineLayout: value,
-            sliderActive: false
-          });
-        } else {
-          setAttributes({
-            timelineLayout: value
-          });
-          jQuery(".timeline-block-pre-loader").css('display', 'block');
-        }
-      },
-      options: [{
-        value: "vertical",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Vertical", "timeline-block")
-      }, {
-        value: "horizontal",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal(Pro)", "timeline-block"),
-        disabled: true
-      }]
-    }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Design", "timeline-block"),
       value: timelineDesign,
       onChange: value => {
@@ -10001,7 +10025,7 @@ const withcontentTimeline = createHigherOrderComponent(BlockEdit => {
 }, 'withcontentTimeline');
 registerBlockType("cp-timeline/content-timeline-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Cool Timeline Block', 'cool-timeline'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Timeline Block', 'cool-timeline'),
   // Block title.
   apiVersion: 2,
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),

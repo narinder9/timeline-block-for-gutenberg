@@ -26,13 +26,27 @@ export {
 }
 
 class TypographyControl extends Component {
-
 	constructor() {
 		super( ...arguments )
 		this.onAdvancedControlClick  = this.onAdvancedControlClick.bind( this )
 		this.onAdvancedControlReset  = this.onAdvancedControlReset.bind( this )
+		this.timeline_settings_apply;
 	}
-
+	valueupdate(){
+		let valueupdates=[
+			this.props.fontSize.value,
+			this.props.fontFamily.value == 'Default' ? undefined : this.props.fontFamily.value,
+			this.props.fontWeight.value,
+			this.props.lineHeight.value,
+		];
+		for(let i = 0; i<valueupdates.length; i++){
+			if(valueupdates[i] != undefined){
+				this.timeline_settings_apply=' cp-timeline-typography_apply';
+				break;
+			}
+			this.timeline_settings_apply = '';
+		};
+	}
 	onAdvancedControlClick() {
 
 		let control = true
@@ -50,14 +64,13 @@ class TypographyControl extends Component {
 			}
 		)
 	}
-
 	onAdvancedControlReset() {
 
 		const { setAttributes } = this.props
 
 		// Reset Font family to default.
-		setAttributes( { [ this.props.fontFamily.label ]: "" } )
-		setAttributes( { [ this.props.fontWeight.label ]: "" } )
+		setAttributes( { [ this.props.fontFamily.label ]: "Default" } )
+		setAttributes( { [ this.props.fontWeight.label ]: undefined } )
 		setAttributes( { [ this.props.fontSubset.label ]: "" } )
 
 		// Reset Font Size to default.
@@ -74,11 +87,10 @@ class TypographyControl extends Component {
 
 		// Reset Google Fonts to default.
 		setAttributes( { [ this.props.loadGoogleFonts.label ]: false } )
-
 	}
 
 	render() {
-
+		this.valueupdate();
 		let fontSize
 		let fontWeight
 		let fontFamily
@@ -116,7 +128,8 @@ class TypographyControl extends Component {
 					sizeMobileText = { __( "Line Height",'timeline-block' ) }
 					sizeTabletText = { __( "Line Height",'timeline-block' ) }
 					sizeText = { __( "Line Height",'timeline-block' ) }
-					steps = { 0.1 }
+					steps = { this.props.lineHeightType.value == 'px' ? 1 : 0.1 }
+					initialPosition={0}
 					{ ...this.props }
 				/>
 			)
@@ -136,11 +149,13 @@ class TypographyControl extends Component {
 					sizeMobileText = { ( ! this.props.fontSizeLabel ) ? __( "Font Size",'timeline-block' ) : this.props.fontSizeLabel }
 					sizeTabletText = { ( ! this.props.fontSizeLabel ) ? __( "Font Size",'timeline-block' ) : this.props.fontSizeLabel }
 					sizeText = { ( ! this.props.fontSizeLabel ) ? __( "Font Size",'timeline-block' ) : this.props.fontSizeLabel }
-					steps = { 0.1 }
+					steps = { this.props.fontSizeType.value == 'px' ? 1 : 0.1 }
+					initialPosition={this.props.fontSize.label == 'subHeadFontSize' ? 14 : 18}
 					{ ...this.props }
 				/>
 			)
 		}
+		
 
 		if( true !== disableFontFamily && true !== disableFontSize ) {
 			fontAdvancedControls =  (
@@ -195,9 +210,8 @@ class TypographyControl extends Component {
 				</div>
 			)
 		}
-
 		return (
-			<div className="timeline-block-typography-options">
+			<div className={`timeline-block-typography-options${this.timeline_settings_apply}`}>
 				{ !disableAdvancedOptions &&
 					<Fragment>
 						{ fontTypoAdvancedControls }

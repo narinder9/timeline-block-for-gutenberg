@@ -133,9 +133,11 @@ const attributes = {
 	},
 	headingColor : {
 		type : "string",
+		default : '',
 	},
 	subHeadingColor : {
 		type : "string",
+		default : '',
 	},
 	separatorBg : {
 		type : "string",

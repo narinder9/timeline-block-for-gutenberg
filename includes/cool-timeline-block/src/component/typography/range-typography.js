@@ -87,7 +87,7 @@ export default function RangeTypographyControl ( props ) {
 				step={ props.steps }
 				beforeIcon="editor-textcolor"
 				allowReset={true}
-				initialPosition={30}
+				initialPosition={props.initialPosition}
 			/>
 		</Fragment>
 	);
@@ -103,7 +103,7 @@ export default function RangeTypographyControl ( props ) {
 				step={ props.steps }
 				beforeIcon="editor-textcolor"
 				allowReset={true}
-				initialPosition={30}
+				initialPosition={18}
 			/>
 		</Fragment>
 	);

@@ -142,7 +142,7 @@ class Edit extends Component {
 		const content_control = (
 			<InspectorControls>
 			  <PanelBody title={__("Story Settings")}>
-			    <TextControl
+			    {/* <TextControl
 			      label="Story Heading"
 			      value={ time_heading }
 			      onChange={ ( value ) => setAttributes({time_heading:value})}
@@ -151,7 +151,7 @@ class Edit extends Component {
 			      label="Story Description"
 			      value={ time_desc }
 			      onChange={ ( value ) => setAttributes({time_desc:value})}
-			    />
+			    /> */}
 			    <TextControl
 			      label="Primary Label(Date/Steps)"
 			      value={ t_date }

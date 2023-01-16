@@ -211,7 +211,7 @@ class Edit extends Component {
 		<div style ={{'margin-top':15 +'px'}}></div>
 		<CardBody className="cp-timeline-block-style-settings">
 		<div>{__("Text Color","timeline-block")}</div>
-		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({headingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({headingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 			clearable={false}
 			value={headingColor}
@@ -250,7 +250,7 @@ class Edit extends Component {
 		<div style ={{'margin-top':10 +'px'}}></div>
 		<CardBody className="cp-timeline-block-style-settings">
 		<div>{__("Text Color","timeline-block")}</div>
-		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({subHeadingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`}  onClick={e => this.resetcolorpalate({subHeadingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 			clearable={false}
 			value={subHeadingColor}
@@ -289,7 +289,7 @@ class Edit extends Component {
 		<div style ={{'margin-top':10 +'px'}}></div>
 		<div className="cp-timeline-block-style-settings">
 		<div>{__("Text Color","timeline-block")}</div>
-		<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({dateColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div class={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({dateColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 			clearable={false}
             value={dateColor}
@@ -301,7 +301,7 @@ class Edit extends Component {
 				<CardBody>
 				<div className="cp-timeline-block-style-settings">
 				<h2>Line Color</h2>
-				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({LineColor : '#000'}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({LineColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 				clearable={false}
 				value={LineColor}
@@ -310,7 +310,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 				<h2>Icon Color</h2>
-				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({iconColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 				clearable={false}
 				value={iconColor}
@@ -319,7 +319,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 				<h2>Icon Background</h2>
-				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({iconBg : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconBg : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 				clearable={false}
 				value={iconBg}
@@ -328,7 +328,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 				<h2>Story Border Color</h2>
-				<div class="components-button timeline-block-colorpallete-reset is-small" onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 				clearable={false}
 				value={storyBorderColor}
@@ -417,7 +417,7 @@ class Edit extends Component {
 			</CardBody>
 		</PanelBody>
 		const timeline_setting =<CardBody>
-			<SelectControl
+			{/* <SelectControl
 						label={ __( "Timeline Layouts","timeline-block" ) }
 						value={ timelineLayout }
 						onChange={(value)=>{
@@ -435,7 +435,7 @@ class Edit extends Component {
 							{ value: "horizontal", label: __( "Horizontal(Pro)","timeline-block"), disabled: true }
 
 						] }
-						/>
+						/> */}
 					{timelineLayout == "vertical" ?
 			<SelectControl
 						label={ __( "Timeline Design","timeline-block" ) }
