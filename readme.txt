@@ -69,6 +69,20 @@ You may now contribute to the plugin on GitHub:
 3. Install in one 1-click
 == Upgrade Notice ==
 == Changelog ==
+<h4>Version 1.3.2 | 03 Jan 2023</h4>
+<ul>
+<li>Fixed: Timeline disappeared on frontend side</li>
+<li>Fixed: Icon position issue.</li>
+<li>Fixed: Minor CSS issue.</li>
+</ul>
+
+<h4>Version 1.3.1 | 03 Jan 2023</h4>
+<ul>
+<li>Added: responsive device CSS.</li>
+<li>Fixed: responsive device style issue.</li>
+<li>Fixed: the Attempt recovery option after clicking on Reset Typography.</li>
+</ul>
+
 <h4>Version 1.3 | 03 Jan 2023</h4>
 <ul>
 <li>Added: Alternating Sided in both side settings </li>
