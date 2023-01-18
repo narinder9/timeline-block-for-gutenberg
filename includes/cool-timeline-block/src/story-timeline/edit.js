@@ -69,7 +69,6 @@ class Edit extends Component {
 		}	);
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
-		
 	}
 	
 	onUpdateOrientation(newOrientation,position) {
@@ -168,11 +167,6 @@ class Edit extends Component {
 				OrientationCheckBox
 			},
 		} = this.props
-		const colors = [
-			{ name: 'red', color: '#f00' },
-			{ name: 'white', color: '#fff' },
-			{ name: 'blue', color: '#00f' },
-		];
 		var element = document.getElementById( "cool-vertical-timeline-style-" + this.props.clientId )
 		if( element ) {
 			element.innerHTML = contentTimelineStyle( this.props )
