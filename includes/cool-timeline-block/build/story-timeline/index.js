@@ -9285,16 +9285,6 @@ class Edit extends Component {
         OrientationCheckBox
       }
     } = this.props;
-    const colors = [{
-      name: 'red',
-      color: '#f00'
-    }, {
-      name: 'white',
-      color: '#fff'
-    }, {
-      name: 'blue',
-      color: '#00f'
-    }];
     var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId);
 
     if (element) {

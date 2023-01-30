@@ -630,6 +630,18 @@ class Edit extends Component {
     const content_control = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Story Settings")
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
+      label: "Story Heading",
+      value: time_heading,
+      onChange: value => setAttributes({
+        time_heading: value
+      })
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextareaControl, {
+      label: "Story Description",
+      value: time_desc,
+      onChange: value => setAttributes({
+        time_desc: value
+      })
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextControl, {
       label: "Primary Label(Date/Steps)",
       value: t_date,
       onChange: value => setAttributes({
