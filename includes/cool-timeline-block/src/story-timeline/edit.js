@@ -1,8 +1,7 @@
-import classnames from "classnames"
 import preview from "../component/icon/timeline.png"
 // import map from "lodash/map.js";
 import times from "lodash/times.js";
-import memoize from "memize"
+import memoize from "lodash/memoize.js";
 
 import contentTimelineStyle from "./styling.js";
 

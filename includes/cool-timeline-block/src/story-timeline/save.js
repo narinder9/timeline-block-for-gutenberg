@@ -2,7 +2,6 @@
  * BLOCK: Timeline - Save Block
  */
 
-import classnames from "classnames"
 import contentTimelineStyle from "./styling.js";
 
 const {
