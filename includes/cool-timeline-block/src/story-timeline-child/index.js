@@ -5,6 +5,7 @@ import "../style.scss"
 import "./style.scss"
 import Save from "./save"
 import attributes from "./attributes"
+import deprecated from "./deprecated"
 import Edit from "./edit"
 import { CoolStoryIcon } from '../component/icon/insertorIcon';
 const { useBlockProps } = wp.blockEditor;
@@ -25,6 +26,7 @@ registerBlockType( "cp-timeline/content-timeline-block-child", {
 		inserter: false,
 	},
 	attributes,
+	deprecated,
         usesContext: ['cp-timeline/timelineDesign', 'cp-timeline/timelineLayout'],
 	edit: props =>{
 	        const chilblockProps = useBlockProps( {
