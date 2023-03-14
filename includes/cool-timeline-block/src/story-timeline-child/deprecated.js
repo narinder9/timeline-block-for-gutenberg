@@ -9,7 +9,6 @@ export default [
 		attributes,
 		save: props => {
 			const Save = (props) => {
-				console.log("test");
 				const {
 					icon,
 					t_date,
