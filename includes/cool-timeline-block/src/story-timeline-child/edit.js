@@ -99,7 +99,7 @@ class Edit extends Component {
 				      {timeLineImage !== "none" ?
 				       <Fragment>
 					 <div className="story-image">
-					   <img src={timeLineImage}  alt={imageAlt}/>
+					   <img src={timeLineImage}  alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 					 </div>
 					 <Button isSecondary onClick={(value) => setAttributes({timeLineImage:'none'})}>
 					   {__('Remove Image')}</Button>

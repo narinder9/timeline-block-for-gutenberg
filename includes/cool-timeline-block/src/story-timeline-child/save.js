@@ -29,7 +29,7 @@ export default function Save( props ) {
 		<div className="story-details">
 			{timeLineImage !== "none" ?
 			<div className={`story-image`}>
-			<img  src={timeLineImage}  alt={imageAlt}/>
+			<img  src={timeLineImage}  alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 			</div>
 			:
 			null}
