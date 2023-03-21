@@ -13,11 +13,11 @@
 // //  Import CSS.
 // import ".././style.scss"
 import "./style.scss"
-// import deprecated from "./deprecated.js";
-import Save from "./save.js";
-import attributes from "./attributes.js";
-import Edit from "./edit.js";
-import { CoolTMIcon } from '../component/icon/insertorIcon.js';
+// import deprecated from "./deprecated"
+import Save from "./save"
+import attributes from "./attributes"
+import Edit from "./edit"
+import { CoolTMIcon } from '../component/icon/insertorIcon';
 // Components
 import { __ } from '@wordpress/i18n';
 

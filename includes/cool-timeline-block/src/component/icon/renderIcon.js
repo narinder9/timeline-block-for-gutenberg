@@ -4,8 +4,8 @@
  * @return {array} The inline CSS class.
  */
 
-import CTB_SVG_Icon from "./CTBIcon.json";
-import parseSVG from "./parseIcon.js";
+import CTB_SVG_Icon from "./CTBIcon"
+import parseSVG from "./parseIcon"
 
 function renderSVG ( svg ) {
 

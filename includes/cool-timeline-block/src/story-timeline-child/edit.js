@@ -1,6 +1,6 @@
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 import CTBIcon from "../component/icon/CTBIcon.json";
-import renderSVG from "../component/icon/renderIcon.js";
+import renderSVG from "../component/icon/renderIcon";
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
 
