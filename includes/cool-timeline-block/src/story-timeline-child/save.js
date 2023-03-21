@@ -2,7 +2,7 @@
  * BLOCK: Content timeline child - Save Block
  */
 
-import renderSVG from "../component/icon/renderIcon"
+import renderSVG from "../component/icon/renderIcon.js";
 
 const {
 	RichText

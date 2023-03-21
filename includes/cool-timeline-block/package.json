@@ -5,6 +5,7 @@
   "author": "Cool Timeline",
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
+  "type": "module",
   "scripts": {
     "build": "wp-scripts build",
     "format": "wp-scripts format",

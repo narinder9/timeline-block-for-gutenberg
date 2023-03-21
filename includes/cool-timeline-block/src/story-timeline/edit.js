@@ -1,25 +1,25 @@
 import classnames from "classnames"
 import preview from "../component/icon/timeline.png"
-// import map from "lodash/map"
-import times from "lodash/times"
+// import map from "lodash/map.js";
+import times from "lodash/times.js";
 import memoize from "memize"
 
-import contentTimelineStyle from "./styling"
+import contentTimelineStyle from "./styling.js";
 
 // Import all of our Text Options requirements.
-import TypographyControl from "../component/typography"
+import TypographyControl from "../component/typography/index.js";
 // Import different sides unts controler
-import SpacingControl from "../component/customComponents/MultipleUnits"
+import SpacingControl from "../component/customComponents/MultipleUnits.js";
 
 // // Import Web font loader for google fonts.y
-import WebfontLoader from "../component/typography/fontloader"
+import WebfontLoader from "../component/typography/fontloader.js";
 
 const { dateI18n } = wp.date
 const { Component, Fragment } = wp.element
 
 import { __ } from '@wordpress/i18n';
 import { sentenceCaseTransform } from "sentence-case"
-import attributes from "./attributes"
+import attributes from "./attributes.js";
 const {
 	BlockControls,
 	InspectorControls,
@@ -51,7 +51,6 @@ const {
 	withSelect,
 } = wp.data
 const ALLOWED_BLOCKS = [ "cp-timeline/content-timeline-block-child" ]
-const $ = jQuery;
 
 class Edit extends Component {
 	constructor() {
@@ -426,7 +425,8 @@ class Edit extends Component {
 							}
 							else{
 								setAttributes({timelineLayout:value})
-								jQuery(".timeline-block-pre-loader").css('display','block')
+								let x = document.querySelector(".timeline-block-pre-loader");
+								if (x) x.style.display = 'block';
 							}
 						}
 					}
