@@ -3,7 +3,8 @@
  */
 
 import classnames from "classnames"
-import contentTimelineStyle from "./styling.js";
+import { Fragment } from "react"
+import contentTimelineStyle from "./styling"
 
 const {
 	InnerBlocks,

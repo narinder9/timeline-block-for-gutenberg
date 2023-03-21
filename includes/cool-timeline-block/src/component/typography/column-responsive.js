@@ -12,7 +12,7 @@ const {
 // Extend component
 const { Fragment } = wp.element
 const { useSelect, useDispatch } = wp.data;
-import map from 'lodash/map.js';
+import map from 'lodash/map';
 
 /**
  * Build the Measure controls
