@@ -3,10 +3,10 @@
  */
 import "../style.scss"
 import "./style.scss"
-import Save from "./save"
-import attributes from "./attributes"
-import Edit from "./edit"
-import { CoolStoryIcon } from '../component/icon/insertorIcon';
+import Save from "./save.js";
+import attributes from "./attributes.js";
+import Edit from "./edit.js";
+import { CoolStoryIcon } from '../component/icon/insertorIcon.js';
 const { useBlockProps } = wp.blockEditor;
 import { __ } from '@wordpress/i18n';
 const {
