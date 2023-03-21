@@ -13,9 +13,8 @@ const { Component, Fragment } = wp.element
 /**
  * Internal dependencies
  */
-import map from "lodash/map"
-import googleFonts from "./fonts"
-import Select from "react-select"
+import map from "lodash/map.js";
+import googleFonts from "./fonts.js";
 
 function FontFamilyControl( props ) {
 
@@ -127,7 +126,7 @@ function FontFamilyControl( props ) {
 	return (
 		<div className="timeline-block-typography-font-family-options">
 			<label className="timeline-block-typography-font-family-label">{ __( "Font Family",'timeline-block' ) }</label>
-			<Select
+			<SelectControl
 				options={ fonts }
 				value={ { value: props.fontFamily.value, label: props.fontFamily.value, weight: fontWeightObj } }
 				isMulti={ false }
