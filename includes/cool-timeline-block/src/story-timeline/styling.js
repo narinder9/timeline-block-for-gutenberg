@@ -73,7 +73,7 @@ function contentTimelineStyle( props ) {
    let arrow_position=(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : '';
    let middleline_position = '';
    if(arrow_position != ''){
-      middleline_position = "calc( 30.6% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
+      middleline_position = "calc( 30.7% + "+generateCSSUnit(Math.round(iconBoxSize / 2),iconBoxSizeType)+")";
    };
    let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E",0)
    var resp_selectors = "left"
@@ -87,7 +87,7 @@ function contentTimelineStyle( props ) {
         "margin-bottom" : itemSpacing != '' ? generateCSSUnit(itemSpacing, itemSpacingType) : '',
         "text-align" : contentAlignment != '' ? contentAlignment : '',
     },
-    " .cool-vertical-timeline-body .story-details h3" : {
+    " .cool-vertical-timeline-body .story-details .timeline-block_title" : {
         "font-size" : generateCSSUnit( headFontSize, headFontSizeType ),
         "font-family": headFontFamily,
         "font-weight": headFontWeight,
@@ -95,7 +95,7 @@ function contentTimelineStyle( props ) {
         "color": headingColor,
         "margin-bottom": titileBtSpacing != '' ? generateCSSUnit(titileBtSpacing , titileBtSpacingType) : '',
     },
-    " .cool-horizontal-timeline-body .story-details h3" : {
+    " .cool-horizontal-timeline-body .story-details .timeline-block_title" : {
         "font-size" : generateCSSUnit( headFontSize, headFontSizeType ),
         "font-family": headFontFamily,
         "font-weight": headFontWeight,
@@ -116,7 +116,7 @@ function contentTimelineStyle( props ) {
         "font-weight": dateFontWeight,
         "line-height": generateCSSUnit( dateLineHeight, dateLineHeightType ),
     },
-    " .cool-vertical-timeline-body .story-details p" : {
+    " .cool-vertical-timeline-body .story-details .timeline-block_desc p" : {
         "font-size" : generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
         "font-family": subHeadFontFamily,
         "font-weight": subHeadFontWeight,
@@ -124,7 +124,7 @@ function contentTimelineStyle( props ) {
         "color": subHeadingColor,
         "margin-bottom": descBtSpacing != '' ? generateCSSUnit(descBtSpacing , descBtSpacingType) : '',
     },
-    " .cool-horizontal-timeline-body .story-details p" : {
+    " .cool-horizontal-timeline-body .story-details .timeline-block_desc p" : {
         "font-size" : generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
         "font-family": subHeadFontFamily,
         "font-weight": subHeadFontWeight,
@@ -160,12 +160,14 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon" :{
         "background":`${iconBg != '' ? iconBg : "#D91B3E"} !important`,
-        "width": iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+")" : '',
+        "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "font-size": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon" :{
-        "width": iconBoxSize != '' ? "calc("+generateCSSUnit(iconBoxSize, iconBoxSizeType) +" + "+ generateCSSUnit((iconBoxSize * 0.20), iconBoxSizeType)+" - 6px)" : '',
+        "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg":{
         "width": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',

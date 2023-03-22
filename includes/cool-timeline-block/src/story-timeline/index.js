@@ -13,7 +13,7 @@
 // //  Import CSS.
 // import ".././style.scss"
 import "./style.scss"
-// import deprecated from "./deprecated"
+import deprecated from "./deprecated"
 import Save from "./save"
 import attributes from "./attributes"
 import Edit from "./edit"
@@ -75,6 +75,7 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 		anchor: true,
 	},
 	attributes,
+	deprecated,
 	edit:props=>{
 		const blockProps = useBlockProps( {
 			className: 'Cool-Content-Timeline-'+props.attributes.timelineDesign,

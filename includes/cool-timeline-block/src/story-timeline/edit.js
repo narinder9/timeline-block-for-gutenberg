@@ -1,4 +1,3 @@
-import classnames from "classnames"
 import preview from "../component/icon/timeline.png"
 // import map from "lodash/map"
 import times from "lodash/times"
@@ -65,7 +64,10 @@ class Edit extends Component {
 		let name = 'cp-timeline/content-timeline-block-child';
 		const oddPosition = position,
 		evenPosition = position == 'right' ? 'left' : 'right';
-		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,blockPosition:index % 2 ? evenPosition:oddPosition,
+		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,
+			blockPosition:index % 2 ? evenPosition:oddPosition,
+			storyPositionHide:!this.props.attributes.OrientationCheck,
+			headingTag: this.props.attributes.headingTag
 		}	);
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
@@ -92,6 +94,12 @@ class Edit extends Component {
 		const position = blocks[0]['attributes']['blockPosition'];
 		this.onUpdateOrientation(position,e);
 	}
+
+	onUpdateHeadingTag = (e) => {
+		this.props.setAttributes({headingTag: e});
+		const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks
+		blocks.forEach((block, index) => {block.attributes.headingTag=e});
+	};
 
         render() {
 		// Setup the attributes.
@@ -164,7 +172,8 @@ class Edit extends Component {
 				desktopConatinerPaddingType,
 				marginLink,
 				isPreview,
-				OrientationCheckBox
+				OrientationCheckBox,
+				headingTag
 			},
 		} = this.props
 		var element = document.getElementById( "cool-vertical-timeline-style-" + this.props.clientId )
@@ -212,6 +221,19 @@ class Edit extends Component {
             onChange = {( colorValue ) => setAttributes( { headingColor: colorValue } )}
         />
 		</CardBody>
+		<SelectControl
+			label={ __("Select Heading Tag") }
+			value={ headingTag }
+			onChange={ (e) => this.onUpdateHeadingTag(e) }
+			options={ [
+				{ value: "h1", label: __( "H1","timeline-block") },
+				{ value: "h2", label: __( "H2","timeline-block") },
+				{ value: "h3", label: __( "H3","timeline-block") },
+				{ value: "h4", label: __( "H4","timeline-block") },
+				{ value: "h5", label: __( "H5","timeline-block") },
+				{ value: "h6", label: __( "H6","timeline-block") },
+			] }
+		/>
 		<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 		<RangeControl
 		className="cp-timeline-block-range__control"
@@ -411,25 +433,6 @@ class Edit extends Component {
 			</CardBody>
 		</PanelBody>
 		const timeline_setting =<CardBody>
-			{/* <SelectControl
-						label={ __( "Timeline Layouts","timeline-block" ) }
-						value={ timelineLayout }
-						onChange={(value)=>{
-							if(value == "vertical"){
-							setAttributes({timelineLayout:value,sliderActive:false})
-							}
-							else{
-								setAttributes({timelineLayout:value})
-								jQuery(".timeline-block-pre-loader").css('display','block')
-							}
-						}
-					}
-						options={ [
-							{ value: "vertical", label: __( "Vertical","timeline-block") },
-							{ value: "horizontal", label: __( "Horizontal(Pro)","timeline-block"), disabled: true }
-
-						] }
-						/> */}
 					{timelineLayout == "vertical" ?
 			<SelectControl
 						label={ __( "Timeline Design","timeline-block" ) }

@@ -169,7 +169,7 @@ const attributes = {
 	},
 	headingTag : {
 		type : "string",
-		default : "h4",
+		default : "h3",
 	},
 	horizontalSpace : {
 		type : "number",

@@ -1,8 +1,6 @@
 /**
  * BLOCK: Timeline - Save Block
  */
-
-import classnames from "classnames"
 import { Fragment } from "react"
 import contentTimelineStyle from "./styling"
 
@@ -23,7 +21,7 @@ export default function Save( props ) {
 	}
 	return (
 		<div className = {"cool-timeline-block-"+block_id+""}>
-			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }} scoped="true"/>
+			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }}/>
 			<div className={"cool-"+timelineLayout+"-timeline-body " +timelineDesign+" "+Orientation+""}>
 		 		<div className="cool-timeline-block-list" >
    				     <InnerBlocks.Content />

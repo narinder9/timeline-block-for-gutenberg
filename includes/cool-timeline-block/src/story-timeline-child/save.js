@@ -2,7 +2,7 @@
  * BLOCK: Content timeline child - Save Block
  */
 
-import renderSVG from "../component/icon/renderIcon"
+import { IconPickerItem } from 'react-fa-icon-picker-alen';
 
 const {
 	RichText
@@ -17,12 +17,13 @@ export default function Save( props ) {
 		iconToggle,
 		iconColor,
 		time_image,
-		blockPosition,
+		blockPosition,	
 		timelineDesign,
 		timelineLayout,
 		imageSize,
 		timeLineImage,
-		imageAlt
+		imageAlt,
+		headingTag
 	} = props.attributes
 
 	const StoryDetail = () => (
@@ -35,13 +36,16 @@ export default function Save( props ) {
 			null}
 			<div className="story-content">
 			<RichText.Content
-				tagName="h3"
+				className="timeline-block_title"
+				tagName={headingTag}
 				value={ time_heading }
 			/>
+			<div className='timeline-block_desc'>
 			<RichText.Content
 				tagName="p"
 				value={ time_desc }
-				/>
+			/>
+			</div>
 		</div>
 			</div>
 	 )
@@ -53,7 +57,7 @@ export default function Save( props ) {
 				/>
 	)
 		const icon_div =  <div className="timeline-block-icon">
-			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" style={{fill:iconColor}}>{ renderSVG(icon) }</span>:null}
+			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" style={{fill:iconColor}}><IconPickerItem icon={icon} size={24} color={iconColor} /></span>:null}
 			</div> 
 	return (
 		<div className={"timeline-content icon-"+iconToggle+" "}>

@@ -1,6 +1,4 @@
-import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-import CTBIcon from "../component/icon/CTBIcon.json";
-import renderSVG from "../component/icon/renderIcon";
+import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
 
@@ -20,8 +18,6 @@ const {
     RadioControl,
     SelectControl
 } = wp.components;
-
-let svg_icons = Object.keys( CTBIcon );
 
 class Edit extends Component {
 	componentDidMount() {
@@ -46,7 +42,8 @@ class Edit extends Component {
 				imageOption,
 				timeLineImage,
 				imageAlt,
-				storyPositionHide
+				storyPositionHide,
+				headingTag
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
@@ -71,15 +68,6 @@ class Edit extends Component {
 			);
 		};
 
-		// Parameters for FontIconPicker
-		const icon_props = {
-			icons: svg_icons,
-			value: icon,
-			onChange: (value)=>(setAttributes({icon:value})),
-			isMulti: false,
-			renderFunc: renderSVG,
-			noSelectedPlaceholder: __( "Select Icon" )
-		};
 		const StoryDetail = () => (
 			<div className="story-details">
 			  <MediaUpload
@@ -113,12 +101,14 @@ class Edit extends Component {
 
 			  <div className="story-content">
 			    <RichText
-			      tagName="h3"
+				  className="timeline-block_title"
+			      tagName={headingTag}
 			      placeholder={ __( 'Enter Story Title', 'timeline-block' ) }
 			      value={ time_heading }
 			      onChange={ ( value ) => setAttributes( { time_heading: value } ) }
 			      keepplaceholderonfocus="true"
 			    />
+				<div className='timeline-block_desc'>
 			    <RichText
 			      tagName="p"
 			      placeholder={ __( 'Enter story description here.', 'timeline-block' ) }
@@ -126,6 +116,7 @@ class Edit extends Component {
 			      onChange={ ( value ) => setAttributes({time_desc:value})}
 			      keepplaceholderonfocus="true"
 			    />
+				</div>
 			  </div>
 			</div>
 		);
@@ -167,7 +158,7 @@ class Edit extends Component {
 						onChange={( value )=>setAttributes({iconToggle:value})}
 					/>
 					{iconToggle == "true" ?
-					<Fragment> <div className="timeline-block-iconpicker" ><FontIconPicker {...icon_props} /> </div>
+					<Fragment> <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({icon: v})} /> </div>
 				</Fragment>
 					: null}	
 				<hr className="timeline-block-editor__separator"></hr>
@@ -233,7 +224,7 @@ class Edit extends Component {
 			</InspectorControls>
 		);
 		const icon_div =  <div className="timeline-block-icon">
-				    {icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" >{ renderSVG(icon) }</span>:null}
+				    {icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span>:null}
 			          </div> ;
 		return (
 			<Fragment>

@@ -1,7 +1,6 @@
 /**
  * BLOCK: Content Timeline Child
  */
-import "../style.scss"
 import "./style.scss"
 import Save from "./save"
 import attributes from "./attributes"
