@@ -221,8 +221,9 @@ class Edit extends Component {
             onChange = {( colorValue ) => setAttributes( { headingColor: colorValue } )}
         />
 		</CardBody>
+		<div style ={{'margin-top':15 +'px','margin-bottom' : 10+'px'}}>{__("Select Heading Tag","timeline-block")}</div>
 		<SelectControl
-			label={ __("Select Heading Tag") }
+			// label={ __("Select Heading Tag") }
 			value={ headingTag }
 			onChange={ (e) => this.onUpdateHeadingTag(e) }
 			options={ [
@@ -429,7 +430,7 @@ class Edit extends Component {
 				/>
 			</CardBody>
 		const rating_box = <PanelBody title={__("Please Share Your Valuable Feedback.","timeline-block")}>
-			<CardBody className={"cool-timeline-gt-block-review-tab"}>{__("We hope you liked our plugin created timelines. Please share your valuable feedback.","timeline-block")}<br></br><a href="https://wordpress.org/support/plugin/timeline-block/reviews/#new-post" target="_blank" >★★★★★</a>
+			<CardBody className={"cool-timeline-gt-block-review-tab"}>{__("We hope you liked our plugin created timelines. Please share your valuable feedback.","timeline-block")}<br></br><a href="https://wordpress.org/support/plugin/timeline-block/reviews/#new-post" className="components-button is-primary is-small" target="_blank" >Rate Us<span> ★★★★★</span></a>
 			</CardBody>
 		</PanelBody>
 		const timeline_setting =<CardBody>

@@ -150,24 +150,47 @@ function contentTimelineStyle( props ) {
         "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content::before" :{
-        "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+        "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
     },
     " .cool-vertical-timeline-body.left .story-details::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
     },
     " .cool-vertical-timeline-body.right .story-time::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
     },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon" :{
-        "background":`${iconBg != '' ? iconBg : "#D91B3E"} !important`,
+    " .cool-vertical-timeline-body .timeline-content.icon-true .timeline-block-icon" :{
+        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`,
         "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "margin-top": iconBoxSize != '' ? '15px' : '',
         "font-size": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
+    },
+    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon" :{
+        "background": 'transparent',
+        "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+    },
+    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon svg" :{
+        "fill":`${iconBg != '' ? iconBg : "#D91B3E"}`,
+        "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+        "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+    },
+    " .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true .timeline-block-icon" :{
+        "left" : iconBoxSize != '' ? '0px' : '',
+        "margin-left" : iconBoxSize != '' ? '12px' : '',
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-icon" :{
+        "right" : iconBoxSize != '' ? '0px' : '',
+        "margin-right" : iconBoxSize != '' ? '9px' : '',
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon" :{
         "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon.position-left" :{
+        "left": iconBoxSize != '' && iconBoxSize > 29 ? '-2px' : ''
     },
     " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg":{
         "width": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
@@ -182,17 +205,17 @@ function contentTimelineStyle( props ) {
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before" :{
-        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before" :{
-        "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before" :{
-        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
@@ -202,6 +225,9 @@ function contentTimelineStyle( props ) {
         "padding-right": containerRightPadding != '' ? generateCSSUnit(containerRightPadding, desktopConatinerPaddingType) : '',
         "padding-bottom": containerBottomPadding != '' ? generateCSSUnit(containerBottomPadding, desktopConatinerPaddingType) : '',
         "padding-left": containerLeftPadding != '' ? generateCSSUnit(containerLeftPadding, desktopConatinerPaddingType) : '',
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-detail" :{
+        "padding-left": iconBoxSize != '' ? '20px' : '',
     },
     " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before":{
         "border-bottom-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,

@@ -744,11 +744,14 @@ i.fipicon-angle-left:before {
   }
   
   .cool-timeline-gt-block-review-tab a {
+	margin-top: 10px;
     text-decoration: none;
-    color: #ffb900;
     font-size: 20px;
+}
+.cool-timeline-gt-block-review-tab a span{
+	color: #ffb900;
+	margin-left: 5px;
   }
-  
   .cp-timeline-block-demo-button {
     display: flex;
     justify-content: space-between;

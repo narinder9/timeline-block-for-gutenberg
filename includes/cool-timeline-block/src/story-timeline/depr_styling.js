@@ -11,7 +11,7 @@ const addAlpha = (color, opacity) => {
     return color + _opacity.toString(16).toUpperCase();
 }; // returns 'FF0000FF'
 
-function contentTimelineStyle( props ) {
+function deprContentTimelineStyle( props ) {
    const {
         itemSpacing,
         itemSpacingType,
@@ -230,4 +230,4 @@ function contentTimelineStyle( props ) {
    return styling_css
 }
 
-export default contentTimelineStyle
+export default deprContentTimelineStyle
