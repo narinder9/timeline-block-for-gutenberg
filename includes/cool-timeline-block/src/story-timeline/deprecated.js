@@ -2,7 +2,6 @@ import "./style.scss"
 import attributes from "./attributes"
 import { __ } from '@wordpress/i18n';
 
-import { Fragment } from "react"
 import deprContentTimelineStyle from "./depr_styling"
 const { useBlockProps,InnerBlocks } = wp.blockEditor;
 

@@ -9563,10 +9563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes */ "./src/story-timeline/attributes.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _depr_styling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./depr_styling */ "./src/story-timeline/depr_styling.js");
-
+/* harmony import */ var _depr_styling__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./depr_styling */ "./src/story-timeline/depr_styling.js");
 
 
 
@@ -9594,7 +9591,7 @@ const {
         className: "cool-timeline-block-" + block_id + ""
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
         dangerouslySetInnerHTML: {
-          __html: (0,_depr_styling__WEBPACK_IMPORTED_MODULE_5__["default"])(props)
+          __html: (0,_depr_styling__WEBPACK_IMPORTED_MODULE_4__["default"])(props)
         },
         scoped: "true"
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -10822,7 +10819,7 @@ function contentTimelineStyle(props) {
     },
     " .cool-vertical-timeline-body.one-sided.left::before": {
       "left": middleline_position != '' ? middleline_position : '',
-      "transform": middleline_position != '' ? "translateX(-50%)" : ''
+      "transform": iconBoxSize != '' || middleLineSize != '' ? "translateX(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right::before": {
       "right": middleline_position != '' ? middleline_position : '',
@@ -10835,16 +10832,16 @@ function contentTimelineStyle(props) {
       "background": LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content::before": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body.left .story-details::after": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body.right .story-time::after": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content.icon-true .timeline-block-icon": {
-      "background": `${iconBg != '' ? iconBg : "#D91B3E"}`,
+      "background": iconBg != '' ? iconBg : "#D91B3E",
       "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
       "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
       "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
@@ -10858,12 +10855,12 @@ function contentTimelineStyle(props) {
       "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
     },
     " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon svg": {
-      "fill": `${iconBg != '' ? iconBg : "#D91B3E"}`,
+      "fill": iconBg != '' ? iconBg : "#D91B3E",
       "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
       "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true .timeline-block-icon": {
-      "left": iconBoxSize != '' ? '0px' : '',
+      "left": iconBoxSize != '' ? '-2px' : '',
       "margin-left": iconBoxSize != '' ? '12px' : ''
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-icon": {
@@ -10890,17 +10887,17 @@ function contentTimelineStyle(props) {
       "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
       "margin-top": arrow_position != '' ? arrow_position : '',
       "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+      "border-right-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
       "margin-top": arrow_position != '' ? arrow_position : '',
       "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
       "margin-top": arrow_position != '' ? arrow_position : '',
       "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },

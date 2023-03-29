@@ -137,7 +137,7 @@ function contentTimelineStyle( props ) {
     },
     " .cool-vertical-timeline-body.one-sided.left::before":{        
         "left": middleline_position != '' ? middleline_position : '',
-        "transform": middleline_position != '' ? "translateX(-50%)" : ''
+        "transform": iconBoxSize != '' || middleLineSize != '' ? "translateX(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right::before":{        
         "right": middleline_position != '' ? middleline_position : '',
@@ -150,16 +150,16 @@ function contentTimelineStyle( props ) {
         "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content::before" :{
-        "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+        "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body.left .story-details::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+        "background":storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body.right .story-time::after" :{
-        "background":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`
+        "background":storyBorderColor != '' ? storyBorderColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content.icon-true .timeline-block-icon" :{
-        "background":`${iconBg != '' ? iconBg : "#D91B3E"}`,
+        "background":iconBg != '' ? iconBg : "#D91B3E",
         "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
@@ -173,12 +173,12 @@ function contentTimelineStyle( props ) {
         "min-width":iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
     },
     " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon svg" :{
-        "fill":`${iconBg != '' ? iconBg : "#D91B3E"}`,
+        "fill":iconBg != '' ? iconBg : "#D91B3E",
         "width": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
         "height": iconBoxSize != '' ? generateCSSUnit(iconBoxSize, iconBoxSizeType) : '',
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true .timeline-block-icon" :{
-        "left" : iconBoxSize != '' ? '0px' : '',
+        "left" : iconBoxSize != '' ? '-2px' : '',
         "margin-left" : iconBoxSize != '' ? '12px' : '',
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-icon" :{
@@ -205,17 +205,17 @@ function contentTimelineStyle( props ) {
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before" :{
-        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+        "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before" :{
-        "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+        "border-right-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
     " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before" :{
-        "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"}`,
+        "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
         "margin-top": arrow_position != '' ? arrow_position : '',
         "transform": arrow_position != '' ? "translateY(-50%)" : ''
     },
