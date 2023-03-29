@@ -95,21 +95,7 @@ function contentTimelineStyle( props ) {
         "color": headingColor,
         "margin-bottom": titileBtSpacing != '' ? generateCSSUnit(titileBtSpacing , titileBtSpacingType) : '',
     },
-    " .cool-horizontal-timeline-body .story-details .timeline-block_title" : {
-        "font-size" : generateCSSUnit( headFontSize, headFontSizeType ),
-        "font-family": headFontFamily,
-        "font-weight": headFontWeight,
-        "line-height": generateCSSUnit( headLineHeight, headLineHeightType ),
-        "color": headingColor,
-    },
     " .cool-vertical-timeline-body .story-time p" : {
-        "color": dateColor != '' ? dateColor : '#333',
-        "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
-        "font-family": dateFontFamily,
-        "font-weight": dateFontWeight,
-        "line-height": generateCSSUnit( dateLineHeight, dateLineHeightType ),
-    },
-    " .cool-horizontal-timeline-body .story-time p" : {
         "color": dateColor != '' ? dateColor : '#333',
         "font-size" : generateCSSUnit( dateFontsize, dateFontsizeType ),
         "font-family": dateFontFamily,
@@ -124,13 +110,6 @@ function contentTimelineStyle( props ) {
         "color": subHeadingColor,
         "margin-bottom": descBtSpacing != '' ? generateCSSUnit(descBtSpacing , descBtSpacingType) : '',
     },
-    " .cool-horizontal-timeline-body .story-details .timeline-block_desc p" : {
-        "font-size" : generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
-        "font-family": subHeadFontFamily,
-        "font-weight": subHeadFontWeight,
-        "line-height": generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-        "color": subHeadingColor,
-    },
     " .cool-vertical-timeline-body::before" :{
         "background":"linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 10%, "+`${LineColor != '' ? LineColor : "#D91B3E"}`+" 90%, rgba(230, 230, 230, 0) 100%)",
         "width": middleLineSize != '' ? generateCSSUnit(middleLineSize, middleLineSizeType) : '',
@@ -142,12 +121,6 @@ function contentTimelineStyle( props ) {
     " .cool-vertical-timeline-body.one-sided.right::before":{        
         "right": middleline_position != '' ? middleline_position : '',
         "transform": middleline_position != '' ? "translateX(50%)" : '',
-    },
-    " .cool-horizontal-timeline-body .timeline-content::before" :{
-        "background":LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .timeline-content::after" :{
-        "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .cool-vertical-timeline-body .timeline-content::before" :{
         "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
@@ -196,9 +169,6 @@ function contentTimelineStyle( props ) {
         "width": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
         "height": iconSize != '' ? generateCSSUnit(iconSize, iconSizeType) : '',
     },
-    " .cool-horizontal-timeline-body .timeline-content .timeline-block-icon":{
-        "background":iconBg != '' ? iconBg+" !important" : "#D91B3E"+" !important",
-    },
     " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before" :{
         "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
         "margin-top": arrow_position != '' ? arrow_position : '',
@@ -229,23 +199,8 @@ function contentTimelineStyle( props ) {
     " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-detail" :{
         "padding-left": iconBoxSize != '' ? '20px' : '',
     },
-    " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before":{
-        "border-bottom-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-    },
-    " .cool-horizontal-timeline-body .ctl-6.timeline-block-detail":{
-        "border-top-color":`${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-    },
     " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon" :{
         "border-color":border_color+" !important",
-    },
-    " .cool-horizontal-timeline-body .swiper-button-next" :{
-        "color":LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .swiper-button-prev" :{
-        "color":LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .swiper-pagination-bullet-active":{
-        "background":LineColor != '' ? LineColor : "#D91B3E"
     },
     " .icon-true .timeline-block-icon span.timeline-block-render-icon svg" : {
         "fill":iconColor != '' ? iconColor : 'white'
