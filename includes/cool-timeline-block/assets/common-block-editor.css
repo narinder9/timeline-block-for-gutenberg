@@ -1,6 +1,19 @@
 .timeline-block-iconpicker .iconpicker-pickercontainer{
 	position: absolute;
-	left: 0px;
+    left: -2px;
+    width: 258px;
+    margin-top: 3px;
+	row-gap: 12px;
+    column-gap: 20px;
+}
+.timeline-block-iconpicker .iconpicker-pickercontainer .iconpicker-item{
+    font-size: 23px !important;
+    border: 1px solid black !important;
+    height: 39px;
+    width: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timeline-block-typography-advanced{

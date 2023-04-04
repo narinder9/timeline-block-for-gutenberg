@@ -67,7 +67,6 @@ class Edit extends Component {
 				image_size_url
 			);
 		};
-
 		const StoryDetail = () => (
 			<div className="story-details">
 			  <MediaUpload
@@ -78,7 +77,7 @@ class Edit extends Component {
 					    image_size_option.push({label:size.charAt(0).toUpperCase() + size.slice(1),value:size});
 				    });
 				    let img = getImage(imageSize,value.sizes);
-				    setAttributes({timeLineImage:img,imageOption:image_size_option,time_image:value});
+				    setAttributes({timeLineImage:img,imageOption:image_size_option,time_image:value,imageAlt:value.alt});
 			    }}
 			    value = {timeLineImage}
                             allowedTypes={ [ 'image' ] }
@@ -98,7 +97,6 @@ class Edit extends Component {
 				    </Fragment>
 			    ) }
 					/>
-
 			  <div className="story-content">
 			    <RichText
 				  className="timeline-block_title"
@@ -129,7 +127,6 @@ class Edit extends Component {
 			  onChange={ ( value ) => setAttributes({t_date:value})}
 			/>
 		);
-
 		const content_control = (
 			<InspectorControls>
 			  <PanelBody title={__("Story Settings")}>
@@ -158,7 +155,8 @@ class Edit extends Component {
 						onChange={( value )=>setAttributes({iconToggle:value})}
 					/>
 					{iconToggle == "true" ?
-					<Fragment> <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({icon: v})} /> </div>
+					<Fragment>  <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({icon: v})} /> </div>
+					
 				</Fragment>
 					: null}	
 				<hr className="timeline-block-editor__separator"></hr>
@@ -239,12 +237,14 @@ class Edit extends Component {
 			  </BlockControls>
 			  {content_control}
 			  <div className={"timeline-content icon-"+iconToggle+""}>
-			    <div className = {" timeline-block-vertical-timeline ctl-row position-" + blockPosition}>
-			      <div className="ctl-6 timeline-block-time">
-				<div className="story-time">
-				  {StoryTime()}
-				</div>
-			      </div>
+			    <div className = {`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
+					<div className="ctl-6 timeline-block-time">
+						{t_date != '' && 	
+							<div className="story-time">
+								{StoryTime()}
+							</div>
+						}
+					</div>
 			      {icon_div}
 			      <div className="ctl-6 timeline-block-detail">
 				{StoryDetail()}
