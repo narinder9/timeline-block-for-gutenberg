@@ -132,6 +132,10 @@ const attributes = {
 	storyPositionHide:{
 		type:"bollean",
 		default:true,
+	},
+	headingTag:{
+		type:"string",
+		default:'h3',
 	}
 }
 

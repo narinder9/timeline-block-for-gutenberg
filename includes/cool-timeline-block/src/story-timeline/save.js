@@ -1,15 +1,14 @@
 /**
  * BLOCK: Timeline - Save Block
  */
-
-import classnames from "classnames"
-import contentTimelineStyle from "./styling.js";
+import { Fragment } from "react"
+import contentTimelineStyle from "./styling"
 
 const {
 	InnerBlocks,
 } = wp.blockEditor
 
-export default function Save( props ) {
+export default function Save(props) {
 	const {
 		block_id,
 		timelineLayout,
@@ -21,13 +20,13 @@ export default function Save( props ) {
 		return wp.data.select("core/block-editor").getBlockCount(block_id);
 	}
 	return (
-		<div className = {"cool-timeline-block-"+block_id+""}>
-			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }} scoped="true"/>
-			<div className={"cool-"+timelineLayout+"-timeline-body " +timelineDesign+" "+Orientation+""}>
-		 		<div className="cool-timeline-block-list" >
-   				     <InnerBlocks.Content />
-		 		</div>
-		 	</div> 
+		<div className={"cool-timeline-block-" + block_id + ""}>
+			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle(props) }} />
+			<div className={"cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""}>
+				<div className="cool-timeline-block-list" >
+					<InnerBlocks.Content />
+				</div>
+			</div>
 		</div>
 	)
 }

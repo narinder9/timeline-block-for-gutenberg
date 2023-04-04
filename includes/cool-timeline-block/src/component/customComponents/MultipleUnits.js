@@ -4,10 +4,11 @@
 import './styling.scss';
 import { __, sprintf } from '@wordpress/i18n';
 import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 const SpacingControl = ( props ) => {
 	const responsive = true;
-
+	let [settingsapply,updateSettingsapply]=useState('');
 	const {
 		label,
 		unit,
@@ -28,17 +29,18 @@ const SpacingControl = ( props ) => {
 				setAttributes( { [ valueRight.label ]: newValue } );
 				setAttributes( { [ valueBottom.label ]: newValue } );
 				setAttributes( { [ valueLeft.label ]: newValue } );
+				valueupdate(newValue);
             };
             const onChangeTopValue = ( event, value = '', resetLink = false ) => {
-                let newValue = value;
-		if ( '' === value && '' !== event ) {
-
-			newValue =
-				event.target.value === ''
+				let newValue = value;
+				if ( '' === value && '' !== event ) {
+					
+					newValue =
+					event.target.value === ''
 					? 0
 					: Number( event.target.value );
-		}
-
+				}
+				valueupdate(newValue,valueRight.value,valueBottom.value,valueLeft.value);
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue );
@@ -47,7 +49,6 @@ const SpacingControl = ( props ) => {
 			}
 		}
 		setAttributes( { [ valueTop.label ]: newValue } );
-        
     };
     const changedUnLinkedValues = (  ) => {
                 setAttributes( { [ valueTop.label ]: ( '' === valueTop.value || undefined === valueTop.value ) ? 0 : valueTop.value  } );
@@ -57,13 +58,14 @@ const SpacingControl = ( props ) => {
     };
 	const onChangeRightValue = ( event, value = '', resetLink = false ) => {
 		let newValue = value;
-
+		
 		if ( '' === value && '' !== event ) {
 			newValue =
-				event.target.value === ''
-					? 0
+			event.target.value === ''
+			? 0
 					: Number( event.target.value );
 		}
+		valueupdate(valueTop.value,newValue,valueBottom.value,valueLeft.value);
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue );
@@ -77,13 +79,14 @@ const SpacingControl = ( props ) => {
 
 	const onChangeBottomValue = ( event, value = '', resetLink = false ) => {
 		let newValue = value;
-
+		
 		if ( '' === value && '' !== event ) {
 			newValue =
 				event.target.value === ''
-					? 0
+				? 0
 					: Number( event.target.value );
 		}
+		valueupdate(valueTop.value,valueRight.value,newValue,valueLeft.value);
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue );
@@ -96,13 +99,14 @@ const SpacingControl = ( props ) => {
 
 	const onChangeLeftValue = ( event, value = '', resetLink = false ) => {
 		let newValue = value;
-
+		
 		if ( '' === value && '' !== event ) {
 			newValue =
-				event.target.value === ''
-					? 0
-					: Number( event.target.value );
+			event.target.value === ''
+			? 0
+			: Number( event.target.value );
 		}
+		valueupdate(valueTop.value,valueRight.value,valueBottom.value,newValue);
 		if ( ! resetLink ) {
 		if ( link.value && ! resetLink ) {
 				changeLinkedValues( newValue );
@@ -210,7 +214,7 @@ const SpacingControl = ( props ) => {
 					type="number"
 					onChange={ ( e ) => onChangeTopValue( e ) }
 					value={ ( '' !== valueTop.value ) ? valueTop.value : '0' }
-				/>
+					/>
 				<input
 					className="cp-block-timeline-number_control right"
 					type="number"
@@ -222,24 +226,35 @@ const SpacingControl = ( props ) => {
 					type="number"
 					onChange={ ( e ) => onChangeBottomValue( e ) }
 					value={ ( '' !== valueBottom.value ) ? valueBottom.value : '0' }
-				/>
+					/>
 				<input
 					className="cp-block-timeline-number_control left"
 					type="number"
 					onChange={ ( e ) => onChangeLeftValue( e ) }
 					value={ ( '' !== valueLeft.value ) ? valueLeft.value : '0' }
-				/>
+					/>
 				{ linkHtml }
 			</div>
 		</>
 	);
 	const resetValues = (  ) => {
-				onChangeTopValue( '', '', true );
-				onChangeRightValue( '', '', true );
+		onChangeTopValue( '', '', true );
+		onChangeRightValue( '', '', true );
 				onChangeBottomValue( '', '', true );
 				onChangeLeftValue( '', '', true );
 				setAttributes( { [ unit?.label ]: 'px' } );
 				setAttributes( { [ link.label ]: false } );
+				valueupdate('');
+	};
+	const valueupdate=(...value)=>{
+		for(let i=0; i<value.length; i++){
+			if(value[i] > 0 || value[i] < 0){
+				updateSettingsapply(' timeline-container_pd_apply');
+				break;
+			}else{
+				updateSettingsapply('');
+			}
+		}
 	};
 	return (
 		<div className="components-base-control timeline-block-spacing-control">
@@ -250,7 +265,7 @@ const SpacingControl = ( props ) => {
 						<Button
                         type='button'
                         onClick={()=>{resetValues()}}
-                        className="timeline-block-control__actions_reset"
+                        className={`timeline-block-control__actions_reset${settingsapply}`}
                         isSmall
                         ><span class="dashicons dashicons-image-rotate"></span></Button>
 						<ButtonGroup
@@ -258,8 +273,8 @@ const SpacingControl = ( props ) => {
 							aria-label={ __(
 								'Select Units',
 								'timeline-block'
-							) }
-						>
+								) }
+								>
 							{ !disableUnits && onUnitSizeClick( unitSizes ) }
 						</ButtonGroup>
 					</div>
@@ -283,7 +298,7 @@ const SpacingControl = ( props ) => {
 			</div>
 			{ props.help && (
 				<p className="uag-control-help-notice">{ props.help }</p>
-			) }
+				) }
 		</div>
 	);
 
