@@ -25,7 +25,7 @@ import { __ } from '@wordpress/i18n';
 const {
 	registerBlockType
 } = wp.blocks
-const { useBlockProps,InnerBlocks } = wp.blockEditor;
+const { useBlockProps, InnerBlocks } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { withSelect } = wp.data;
@@ -39,11 +39,11 @@ const { compose, createHigherOrderComponent } = wp.compose;
  */
 
 const enhance = compose(
-	withSelect( ( select ) => {
+	withSelect((select) => {
 		return {
-			selected: select( 'core/block-editor' ).getSelectedBlock(),
+			selected: select('core/block-editor').getSelectedBlock(),
 		};
-	} )
+	})
 );
 /**
  * Add custom attributes to selected blocks
@@ -51,24 +51,24 @@ const enhance = compose(
  * @param {Function} BlockEdit Original component.
  * @return {string} Wrapped component.
  */
-const withcontentTimeline = createHigherOrderComponent( ( BlockEdit ) => {
-	return enhance( ( { ...props } ) => {
-		return (    
+const withcontentTimeline = createHigherOrderComponent((BlockEdit) => {
+	return enhance(({ ...props }) => {
+		return (
 			<Fragment>
-				<BlockEdit { ...props } />
+				<BlockEdit {...props} />
 			</Fragment>
 		);
-	} );
-}, 'withcontentTimeline' );
+	});
+}, 'withcontentTimeline');
 
-registerBlockType( "cp-timeline/content-timeline-block", {
+registerBlockType("cp-timeline/content-timeline-block", {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Timeline Block', 'cool-timeline' ), // Block title.
+	title: __('Timeline Block', 'cool-timeline'), // Block title.
 	apiVersion: 2,
-	description: __( "Responsive timeline block for Gutenberg editor.", 'cool-timeline' ),
+	description: __("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
 	keywords: [
-		__( "Content Timeline",'timeline-block' ),
-		__( "Timeline",'timeline-block' ),
+		__("Content Timeline", 'timeline-block'),
+		__("Timeline", 'timeline-block'),
 	],
 	icon: CoolTMIcon,
 	supports: {
@@ -76,26 +76,26 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 	},
 	attributes,
 	deprecated,
-	edit:props=>{
-		const blockProps = useBlockProps( {
-			className: 'Cool-Content-Timeline-'+props.attributes.timelineDesign,
-		  } );
+	edit: props => {
+		const blockProps = useBlockProps({
+			className: 'Cool-Content-Timeline-' + props.attributes.timelineDesign,
+		});
 		return (
-		<div {...blockProps}>
-		<Edit { ...props } />
-		</div> );
+			<div {...blockProps}>
+				<Edit {...props} />
+			</div>);
 	},
-	save:props=>{
-		const blockProps = useBlockProps.save({className: 'Cool-Content-Timeline'});
-		return(
-		<div {...blockProps}>
-		<Save { ...props } />
-		</div> );
+	save: props => {
+		const blockProps = useBlockProps.save({ className: 'Cool-Content-Timeline' });
+		return (
+			<div {...blockProps}>
+				<Save {...props} />
+			</div>);
 	},
-    providesContext: {
-        'cp-timeline/timelineLayout': 'timelineLayout',
-        'cp-timeline/timelineDesign': 'timelineDesign',
-    },
+	providesContext: {
+		'cp-timeline/timelineLayout': 'timelineLayout',
+		'cp-timeline/timelineDesign': 'timelineDesign',
+	},
 	example: {
 		attributes: {
 			backgroundColor: 'green',
@@ -105,7 +105,7 @@ registerBlockType( "cp-timeline/content-timeline-block", {
 			isPreview: true,
 		}
 	},
-} )
+})
 addFilter(
 	'editor.BlockEdit',
 	'cp-timeline/content-timeline-block',

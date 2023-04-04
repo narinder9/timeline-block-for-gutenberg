@@ -6,9 +6,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import FontFamilyControl from "./font-typography"
-import RangeTypographyControl from "./range-typography"
-import TypographyStyles from "./inline-styles"
+import FontFamilyControl from "./font-typography.js";
+import RangeTypographyControl from "./range-typography.js";
+import TypographyStyles from "./inline-styles.js";
 import "./editor.scss"
 
 const {

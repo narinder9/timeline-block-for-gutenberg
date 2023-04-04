@@ -2,7 +2,6 @@
  * External dependencies
  */
 import './styling.scss';
-import React, { useLayoutEffect } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
 import { useState } from '@wordpress/element';
