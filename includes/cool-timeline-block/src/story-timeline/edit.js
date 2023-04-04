@@ -502,7 +502,7 @@ class Edit extends Component {
 				{/* demo video link button */}
 				<PanelBody title={__("View Timeline Demos","timeline-block")} initialOpen={false}>
 					<CardBody className="cp-timeline-block-demo-button">
-						<a target="_blank" class="button button-primary" href="https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos">View Demos</a>
+						<a target="_blank" class="button button-primary" href="https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=demo&utm_content=block_settings">View Demos</a>
 						<a target="_blank" class="button button-primary" href="https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/">Watch Videos</a>
 					</CardBody>
 				</PanelBody>

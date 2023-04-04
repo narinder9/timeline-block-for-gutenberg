@@ -10351,7 +10351,7 @@ class Edit extends Component {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
       target: "_blank",
       class: "button button-primary",
-      href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos"
+      href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=demo&utm_content=block_settings"
     }, "View Demos"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
       target: "_blank",
       class: "button button-primary",

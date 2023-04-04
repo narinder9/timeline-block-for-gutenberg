@@ -23,12 +23,12 @@ You can show history/future stories, events, appointments, and many other cool t
 * Job stories/achievements timeline.
 * Personal **story timeline**.
 * Product **roadmap**.
-[🔗 Check Demo Here](https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_readme)
+[🔗 Check Demo Here](https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=top_view_demo)
 ### 😎 Who's Behind
-This timeline block plugin is created by [🔗 Cool Timeline](https://wordpress.org/plugins/cool-timeline/) plugin developers. **Cool Plugins** is the company behind this block plugin development. Check [🔗 Cool Timeline Pro Demo](https://cooltimeline.com/demo/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_readme)
+This timeline block plugin is created by [🔗 Cool Timeline](https://wordpress.org/plugins/cool-timeline/) plugin developers. **Cool Plugins** is the company behind this block plugin development. Check [🔗 Cool Timeline Pro Demo](https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=top_view_demo)
 Also, we created an Elementor Timeline widget addon for Elementor lovers, you can check it here:-  [🔗 Timeline Widget For Elementor](https://wordpress.org/plugins/timeline-widget-addon-for-elementor/#description) 
 We have tried our best to create an awesome **timeline plugin** but still, if you face any installation, coding, or design error, you can [contact us](mailto:contact@coolplugins.net) anytime. Also, remember to try our Cool Timeline Pro version for extra cool features and design options.
-> [🔗 Buy Cool Timeline Pro](https://1.envato.market/c/1258464/275988/4415?u=https%3A%2F%2Fcodecanyon.net%2Fitem%2Fcool-timeline-pro-wordpress-timeline-plugin%2F17046256)
+> [🔗 Buy Cool Timeline Pro](https://cooltimeline.com/buy-cool-timeline-pro/)
 ### CREDITS
 <ol>
 <li>React FontIconPicker, Copyright (c) 2018 Swashata Ghosh, MIT license.</li>
