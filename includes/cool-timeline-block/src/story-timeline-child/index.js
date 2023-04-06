@@ -2,11 +2,11 @@
  * BLOCK: Content Timeline Child
  */
 import "./style.scss"
-import Save from "./save.js"
-import attributes from "./attributes.js"
-import deprecated from "./deprecated.js"
-import Edit from "./edit.js"
-import { CoolStoryIcon } from '../component/icon/insertorIcon.js';
+import Save from "./save"
+import attributes from "./attributes"
+import deprecated from "./deprecated"
+import Edit from "./edit"
+import { CoolStoryIcon } from '../component/icon/insertorIcon';
 const { useBlockProps } = wp.blockEditor;
 import { __ } from '@wordpress/i18n';
 const {

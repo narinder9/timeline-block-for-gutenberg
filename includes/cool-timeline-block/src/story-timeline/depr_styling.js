@@ -2,8 +2,8 @@
  * Returns Dynamic Generated CSS
  */
 
-import generateCSS from "../component/css/generateCSS.js"
-import generateCSSUnit from "../component/css/generateCSSUnit.js"
+import generateCSS from "../component/css/generateCSS"
+import generateCSSUnit from "../component/css/generateCSSUnit"
 
 const addAlpha = (color, opacity) => {
     // coerce values so ti is between 0 and 1.
