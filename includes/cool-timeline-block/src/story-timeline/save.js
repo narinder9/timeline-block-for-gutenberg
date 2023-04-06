@@ -2,7 +2,7 @@
  * BLOCK: Timeline - Save Block
  */
 import { Fragment } from "react"
-import contentTimelineStyle from "./styling"
+import contentTimelineStyle from "./styling.js"
 
 const {
 	InnerBlocks,
