@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
  import { __ } from '@wordpress/i18n';
-
+ import Select from "react-select"
 const {
 	SelectControl
 } = wp.components
@@ -126,7 +126,7 @@ function FontFamilyControl( props ) {
 	return (
 		<div className="timeline-block-typography-font-family-options">
 			<label className="timeline-block-typography-font-family-label">{ __( "Font Family",'timeline-block' ) }</label>
-			<SelectControl
+			<Select
 				options={ fonts }
 				value={ { value: props.fontFamily.value, label: props.fontFamily.value, weight: fontWeightObj } }
 				isMulti={ false }
