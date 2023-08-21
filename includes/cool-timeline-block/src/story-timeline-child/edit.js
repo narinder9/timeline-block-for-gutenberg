@@ -24,6 +24,41 @@ class Edit extends Component {
 		// Store client id.
 		this.props.setAttributes({ block_id: this.props.clientId });
 	}
+	
+
+	addBlock(e) {
+		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+		const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+		
+		let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
+		let index = select('core/block-editor').getBlockIndex(this.props.clientId);
+		let name = 'cp-timeline/content-timeline-block-child';
+		let insertedBlock = wp.blocks.createBlock(name, {
+			block_position_active: false,
+			blockPosition: position,
+			storyPositionHide: !parentAttribute.OrientationCheck,
+			headingTag: parentAttribute.headingTag
+		});
+		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, parentBlockId);
+		this.updateOrientation();
+	}
+
+	updateOrientation() {
+		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+			const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+		if (parentAttribute.timelineLayout == "vertical" && parentAttribute.timelineDesign == "both-sided") {
+			const currentIndex = select('core/block-editor').getBlockIndex(this.props.clientId);
+			const currentBlockPostion ='left' === this.props.attributes.blockPosition ? 'right' : 'left';
+			const blocks = select("core/block-editor").getBlock(parentBlockId).innerBlocks;
+			const currentPostion=currentIndex % 2;
+			blocks.forEach((block, index) => {
+				if(index > (currentIndex + 1)){
+					const blockpostion=index % 2 !== currentPostion ? currentBlockPostion : this.props.attributes.blockPosition;
+					block.attributes.blockPosition = blockpostion, block.attributes.storyPositionHide=!parentAttribute.OrientationCheckBox;
+				}
+			});
+		}
+	}
 
 	render() {
 		// Setup the attributes.
@@ -232,6 +267,15 @@ class Edit extends Component {
 							label="Delete Block"
 							icon="trash"
 							onClick={() => dispatch('core/block-editor').removeBlock(this.props.clientId, true)}
+						/>
+					</Toolbar>
+					<Toolbar >
+						<Button
+							label="Add Block"
+							icon="plus"
+							onClick={() => 	
+								this.addBlock()
+							}
 						/>
 					</Toolbar>
 				</BlockControls>
