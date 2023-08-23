@@ -248,8 +248,8 @@ const SpacingControl = ( props ) => {
 	};
 	const valueupdate=(...value)=>{
 		for(let i=0; i<value.length; i++){
-			if(value[i] > 0 || value[i] < 0){
-				updateSettingsapply(' timeline-container_pd_apply');
+			if(value[i] !== 0){
+				updateSettingsapply('timeline-container_pd_apply');
 				break;
 			}else{
 				updateSettingsapply('');
@@ -265,7 +265,7 @@ const SpacingControl = ( props ) => {
 						<Button
                         type='button'
                         onClick={()=>{resetValues()}}
-                        className={`timeline-block-control__actions_reset${settingsapply}`}
+                        className={`timeline-block-control__actions_reset${settingsapply != '' ? ' '+settingsapply : ' '}`}
                         isSmall
                         ><span class="dashicons dashicons-image-rotate"></span></Button>
 						<ButtonGroup

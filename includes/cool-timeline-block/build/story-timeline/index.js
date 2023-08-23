@@ -2123,8780 +2123,6 @@ var weakMemoize = function weakMemoize(func) {
 
 /***/ }),
 
-/***/ "./src/component/css/generateCSS.js":
-/*!******************************************!*\
-  !*** ./src/component/css/generateCSS.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function generateCSS(selectors, id) {
-  let isResponsive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  let responsiveType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-  var gen_styling_css = "";
-
-  for (var i in selectors) {
-    var sel = selectors[i];
-    var css = "";
-
-    for (var j in sel) {
-      var checkString = true;
-
-      if (typeof sel[j] === "string" && sel[j].length === 0) {
-        checkString = false;
-      }
-
-      if ('font-family' === j && typeof sel[j] != "undefined" && 'Default' === sel[j]) {
-        continue;
-      }
-
-      if (typeof sel[j] != "undefined" && checkString) {
-        if ('font-family' === j) {
-          css += j + ": " + "'" + sel[j] + "'" + ";";
-        } else {
-          css += j + ": " + sel[j] + ";";
-        }
-      }
-    }
-
-    if (css.length !== 0) {
-      gen_styling_css += id;
-      gen_styling_css += i + "{";
-      gen_styling_css += css;
-      gen_styling_css += "}";
-    }
-  }
-
-  return gen_styling_css;
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSS);
-
-/***/ }),
-
-/***/ "./src/component/css/generateCSSUnit.js":
-/*!**********************************************!*\
-  !*** ./src/component/css/generateCSSUnit.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function generateCSSUnit(value, unit) {
-  var css = "";
-
-  if (typeof value != "undefined") {
-    css += value + unit;
-  }
-
-  return css;
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSSUnit);
-
-/***/ }),
-
-/***/ "./src/component/customComponents/MultipleUnits.js":
-/*!*********************************************************!*\
-  !*** ./src/component/customComponents/MultipleUnits.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styling_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styling.scss */ "./src/component/customComponents/styling.scss");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-
-
-/**
- * External dependencies
- */
-
-
-
-
-
-
-const SpacingControl = props => {
-  const responsive = true;
-  let [settingsapply, updateSettingsapply] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const {
-    label,
-    unit,
-    disableUnits,
-    valueBottom,
-    valueLeft,
-    valueRight,
-    valueTop,
-    link,
-    setAttributes
-  } = props;
-
-  const onChangeUnits = value => {
-    setAttributes({
-      [unit.label]: value.unitValue
-    });
-  };
-
-  const changeLinkedValues = newValue => {
-    setAttributes({
-      [valueTop.label]: newValue
-    });
-    setAttributes({
-      [valueRight.label]: newValue
-    });
-    setAttributes({
-      [valueBottom.label]: newValue
-    });
-    setAttributes({
-      [valueLeft.label]: newValue
-    });
-    valueupdate(newValue);
-  };
-
-  const onChangeTopValue = function (event) {
-    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    let newValue = value;
-
-    if ('' === value && '' !== event) {
-      newValue = event.target.value === '' ? 0 : Number(event.target.value);
-    }
-
-    valueupdate(newValue, valueRight.value, valueBottom.value, valueLeft.value);
-
-    if (!resetLink) {
-      if (link.value) {
-        changeLinkedValues(newValue);
-      } else {
-        changedUnLinkedValues();
-      }
-    }
-
-    setAttributes({
-      [valueTop.label]: newValue
-    });
-  };
-
-  const changedUnLinkedValues = () => {
-    setAttributes({
-      [valueTop.label]: '' === valueTop.value || undefined === valueTop.value ? 0 : valueTop.value
-    });
-    setAttributes({
-      [valueRight.label]: '' === valueRight.value || undefined === valueRight.value ? 0 : valueRight.value
-    });
-    setAttributes({
-      [valueBottom.label]: '' === valueBottom.value || undefined === valueBottom.value ? 0 : valueBottom.value
-    });
-    setAttributes({
-      [valueLeft.label]: '' === valueLeft.value || undefined === valueLeft.value ? 0 : valueLeft.value
-    });
-  };
-
-  const onChangeRightValue = function (event) {
-    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    let newValue = value;
-
-    if ('' === value && '' !== event) {
-      newValue = event.target.value === '' ? 0 : Number(event.target.value);
-    }
-
-    valueupdate(valueTop.value, newValue, valueBottom.value, valueLeft.value);
-
-    if (!resetLink) {
-      if (link.value) {
-        changeLinkedValues(newValue);
-      } else {
-        changedUnLinkedValues();
-      }
-    }
-
-    setAttributes({
-      [valueRight.label]: newValue
-    });
-  };
-
-  const onChangeBottomValue = function (event) {
-    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    let newValue = value;
-
-    if ('' === value && '' !== event) {
-      newValue = event.target.value === '' ? 0 : Number(event.target.value);
-    }
-
-    valueupdate(valueTop.value, valueRight.value, newValue, valueLeft.value);
-
-    if (!resetLink) {
-      if (link.value) {
-        changeLinkedValues(newValue);
-      } else {
-        changedUnLinkedValues();
-      }
-    }
-
-    setAttributes({
-      [valueBottom.label]: newValue
-    });
-  };
-
-  const onChangeLeftValue = function (event) {
-    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    let newValue = value;
-
-    if ('' === value && '' !== event) {
-      newValue = event.target.value === '' ? 0 : Number(event.target.value);
-    }
-
-    valueupdate(valueTop.value, valueRight.value, valueBottom.value, newValue);
-
-    if (!resetLink) {
-      if (link.value && !resetLink) {
-        changeLinkedValues(newValue);
-      } else {
-        changedUnLinkedValues();
-      }
-    }
-
-    setAttributes({
-      [valueLeft.label]: newValue
-    });
-  };
-
-  let unitSizes = [{
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Pixel', 'timeline-block'),
-    unitValue: 'px'
-  }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Em', 'timeline-block'),
-    unitValue: 'em'
-  }, {
-    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('%', 'timeline-block'),
-    unitValue: '%'
-  }];
-
-  if (props.units) {
-    unitSizes = props.units;
-  }
-
-  const onUnitSizeClick = uSizes => {
-    const items = [];
-    uSizes.map(key => items.push((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-      text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)(
-      /* translators: abbreviation for units */
-      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('%s units', 'timeline-block'), key.name)
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-      key: key.unitValue,
-      className: 'timeline-block-range-control__units--' + key.name,
-      isSmall: true,
-      isPrimary: unit.value === key.unitValue,
-      isSecondary: unit.value !== key.unitValue,
-      "aria-pressed": unit.value === key.unitValue,
-      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)(
-      /* translators: abbreviation for units */
-      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('%s units', 'timeline-block'), key.name),
-      onClick: () => onChangeUnits(key)
-    }, key.unitValue))));
-    return items;
-  };
-
-  let linkHtml = '';
-
-  if (link) {
-    linkHtml = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-      className: "cp-timeline-block_control__link timeline-block-spacing-control-connected dashicons dashicons-admin-links ",
-      onClick: () => {
-        changedUnLinkedValues();
-        setAttributes({
-          [link.label]: false
-        });
-      }
-    });
-
-    if (!link.value) {
-      linkHtml = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-        className: "cp-timeline-block_control__link timeline-block-spacing-control-disconnected dashicons dashicons-editor-unlink",
-        onClick: () => {
-          onLinkClickHandler();
-          setAttributes({
-            [link.label]: true
-          });
-        }
-      });
-    }
-  }
-
-  const onLinkClickHandler = () => {
-    let linkValue;
-    linkValue = valueTop.value;
-    changeLinkedValues(linkValue);
-  };
-
-  const output = {};
-  output.Desktop = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-spacing-control__inputs"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "cp-block-timeline-number_control top",
-    type: "number",
-    onChange: e => onChangeTopValue(e),
-    value: '' !== valueTop.value ? valueTop.value : '0'
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "cp-block-timeline-number_control right",
-    type: "number",
-    onChange: e => onChangeRightValue(e),
-    value: '' !== valueRight.value ? valueRight.value : '0'
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "cp-block-timeline-number_control bottom",
-    type: "number",
-    onChange: e => onChangeBottomValue(e),
-    value: '' !== valueBottom.value ? valueBottom.value : '0'
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "cp-block-timeline-number_control left",
-    type: "number",
-    onChange: e => onChangeLeftValue(e),
-    value: '' !== valueLeft.value ? valueLeft.value : '0'
-  }), linkHtml));
-
-  const resetValues = () => {
-    onChangeTopValue('', '', true);
-    onChangeRightValue('', '', true);
-    onChangeBottomValue('', '', true);
-    onChangeLeftValue('', '', true);
-    setAttributes({
-      [unit === null || unit === void 0 ? void 0 : unit.label]: 'px'
-    });
-    setAttributes({
-      [link.label]: false
-    });
-    valueupdate('');
-  };
-
-  const valueupdate = function () {
-    for (var _len = arguments.length, value = new Array(_len), _key = 0; _key < _len; _key++) {
-      value[_key] = arguments[_key];
-    }
-
-    for (let i = 0; i < value.length; i++) {
-      if (value[i] > 0 || value[i] < 0) {
-        updateSettingsapply(' timeline-container_pd_apply');
-        break;
-      } else {
-        updateSettingsapply('');
-      }
-    }
-  };
-
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "components-base-control timeline-block-spacing-control"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-size-type-field-tabs"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-control__header"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-control__actions"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "timeline-block-control__actions_label"
-  }, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-    type: "button",
-    onClick: () => {
-      resetValues();
-    },
-    className: `timeline-block-control__actions_reset${settingsapply}`,
-    isSmall: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    class: "dashicons dashicons-image-rotate"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, {
-    className: "timeline-block-control__units",
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Units', 'timeline-block')
-  }, !disableUnits && onUnitSizeClick(unitSizes)))), output.Desktop, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-spacing-control__input-labels"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cp-block-timeline-number_control-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Top', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cp-block-timeline-number_control-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Right', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cp-block-timeline-number_control-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Bottom', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cp-block-timeline-number_control-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Left', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cp-block-timeline-number_control-label cp-timeline-block_control__link-label"
-  }))), props.help && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "uag-control-help-notice"
-  }, props.help));
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SpacingControl);
-
-/***/ }),
-
-/***/ "./src/component/icon/insertorIcon.js":
-/*!********************************************!*\
-  !*** ./src/component/icon/insertorIcon.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CoolStoryIcon": () => (/* binding */ CoolStoryIcon),
-/* harmony export */   "CoolTMIcon": () => (/* binding */ CoolTMIcon)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-const CoolTMIcon = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-  width: "100%",
-  height: "100%",
-  viewBox: "0 0 62 62",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg",
-  xmlnsXlink: "http://www.w3.org/1999/xlink",
-  xmlSpace: "preserve",
-  xmlnsserif: "http://www.serif.com/",
-  style: {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: 1.5
-  }
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon-only",
-  serifid: "icon only"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon-only1",
-  serifid: "icon-only"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
-  x: "29.146",
-  y: "-0.042",
-  width: "3.149",
-  height: "61.44"
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-  d: "M18.433,21.461l-0.007,-4.311l5.77,-4.905l-5.766,-4.923l0.003,-4.293l-18.433,-0l-0,18.432l18.433,0",
-  style: {
-    fill: "#f12945"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "30.72",
-  cy: "12.245",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-  d: "M43.007,21.461l0.007,4.312l-5.77,4.905l5.766,4.922l-0.003,4.294l18.433,-0l0,-18.433l-18.433,0",
-  style: {
-    fill: "#01c5bd"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "30.72",
-  cy: "30.678",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-  d: "M18.433,58.326l-0.007,-4.311l5.77,-4.905l-5.766,-4.923l0.003,-4.293l-18.433,-0l-0,18.432l18.433,0",
-  style: {
-    fill: "#f12945"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "30.72",
-  cy: "49.11",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-})))));
-const CoolStoryIcon = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-  width: "100%",
-  height: "100%",
-  viewBox: "0 0 62 62",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg",
-  xmlnsXlink: "http://www.w3.org/1999/xlink",
-  xmlSpace: "preserve",
-  xmlnsserif: "http://www.serif.com/",
-  style: {
-    fillrule: "evenodd",
-    clipRule: "evenodd",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeMiterlimit: 1.5 + "px"
-  }
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon-only",
-  serifid: "icon only"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon-only1",
-  serifid: "icon-only"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "icon"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
-  x: "2.746",
-  y: "-0.042",
-  width: "3.149",
-  height: "61.44"
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "4.32",
-  cy: "12.245",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-  d: "M23.835,11.875l0.012,8.797l-11.77,10.006l11.763,10.043l-0.005,8.759l37.605,0l-0,-37.605l-37.605,0",
-  style: {
-    fill: "#01c5bd"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "4.32",
-  cy: "30.678",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
-  cx: "4.32",
-  cy: "49.11",
-  r: "3.046",
-  style: {
-    fill: "#fff",
-    stroke: "#000",
-    strokeWidth: 2.18 + "px"
-  }
-})))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
-  id: "New"
-}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-  d: "M30.72,21.971l17.428,0l-1.162,1.165l-15.104,-0l-0,19.8l19.752,0l0,-15.141l1.162,-1.165l-0,17.471l-22.076,0l0,-22.13Zm22.308,-1.514l-11.27,11.356l1.22,1.223l11.27,-11.356l0.872,0.815l-11.503,11.531l-3.834,0.932l0.929,-3.785l11.503,-11.531l0.813,0.815Zm4.299,-0.99l-2.033,-2.038c-0.232,-0.233 -0.581,-0.233 -0.813,-0l-1.337,1.339l2.847,2.854l1.336,-1.34c0.175,-0.233 0.175,-0.582 0,-0.815Z"
-}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
-  x: "19.56",
-  y: "6.098",
-  width: "49.04",
-  height: "49.16",
-  style: {
-    fill: "none"
-  }
-})));
-
-/***/ }),
-
-/***/ "./src/component/typography/font-typography.js":
-/*!*****************************************************!*\
-  !*** ./src/component/typography/font-typography.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/map */ "./node_modules/lodash/map.js");
-/* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_map__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _fonts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fonts */ "./src/component/typography/fonts.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
-
-
-/**
- * WordPress dependencies
- */
-
-const {
-  SelectControl
-} = wp.components; // Extend component
-
-const {
-  Component,
-  Fragment
-} = wp.element;
-/**
- * Internal dependencies
- */
-
-
-
-
-
-function FontFamilyControl(props) {
-  const fonts = [{
-    value: "",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", 'timeline-block'),
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    google: false
-  }, {
-    value: "Arial",
-    label: "Arial",
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    google: false
-  }, {
-    value: "Helvetica",
-    label: "Helvetica",
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    google: false
-  }, {
-    value: "Times New Roman",
-    label: "Times New Roman",
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    google: false
-  }, {
-    value: "Georgia",
-    label: "Georgia",
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    google: false
-  }];
-  let fontWeight = "";
-  let fontSubset = ""; //Push Google Fonts into stytem fonts object
-
-  Object.keys(_fonts__WEBPACK_IMPORTED_MODULE_3__["default"]).map((k, v) => {
-    fonts.push({
-      value: k,
-      label: k,
-      weight: _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][k].weight
-    });
-
-    if (k === props.fontFamily.value) {
-      fontWeight = _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][k].weight;
-      fontSubset = _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][k].subset;
-    }
-  }); // check if the font is a system font and then apply the font weight accordingly.
-
-  if (fontWeight === "") {
-    fontWeight = fonts[0].weight;
-  }
-
-  const fontWeightObj = [];
-  fontWeight.forEach(function (item) {
-    fontWeightObj.push({
-      value: item,
-      label: item
-    });
-  });
-  const fontSubsetObj = [];
-
-  if (typeof fontSubset == "object") {
-    fontSubset.forEach(function (item) {
-      fontSubsetObj.push({
-        value: item,
-        label: item
-      });
-    });
-  }
-
-  const onFontfamilyChange = value => {
-    const {
-      loadGoogleFonts,
-      fontFamily,
-      fontWeight,
-      fontSubset
-    } = props;
-    props.setAttributes({
-      [fontFamily.label]: value.label
-    });
-    onLoadGoogleFonts(loadGoogleFonts, value.label);
-    onFontChange(fontWeight, fontSubset, value.label);
-  };
-
-  const onFontChange = (fontWeight, fontSubset, fontFamily) => {
-    let font_flag;
-    let new_value;
-
-    if (typeof _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily] == "object") {
-      const gfontsObj = _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily].weight;
-      const gfontSubsetObj = _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily].subset;
-
-      if (typeof gfontsObj == "object") {
-        gfontsObj.forEach(function (item) {
-          if (fontWeight.value == item) {
-            font_flag = false;
-          } else {
-            new_value = item;
-            font_flag = true;
-            props.setAttributes({
-              [props.fontWeight.label]: new_value
-            });
-            return;
-          }
-        });
-        gfontSubsetObj.forEach(function (item) {
-          if (fontSubset.value == item) {
-            font_flag = false;
-          } else {
-            new_value = item;
-            font_flag = true;
-            props.setAttributes({
-              [props.fontSubset.label]: new_value
-            });
-            return;
-          }
-        });
-      }
-    }
-  };
-
-  const onLoadGoogleFonts = (loadGoogleFonts, fontFamily) => {
-    let value;
-
-    if (fontFamily != "" && typeof _fonts__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily] != "object") {
-      value = false;
-    } else {
-      value = true;
-    }
-
-    props.setAttributes({
-      [loadGoogleFonts.label]: value
-    });
-  };
-
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-typography-font-family-options"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "timeline-block-typography-font-family-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Family", 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    options: fonts,
-    value: {
-      value: props.fontFamily.value,
-      label: props.fontFamily.value,
-      weight: fontWeightObj
-    },
-    isMulti: false,
-    maxMenuHeight: 300,
-    onChange: onFontfamilyChange,
-    className: "react-select-container",
-    classNamePrefix: "react-select"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", 'timeline-block'),
-    value: props.fontWeight.value,
-    onChange: value => props.setAttributes({
-      [props.fontWeight.label]: value
-    }),
-    options: fontWeightObj
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Subset", 'timeline-block'),
-    value: props.fontSubset.value,
-    onChange: value => props.setAttributes({
-      [props.fontSubset.label]: value
-    }),
-    options: fontSubsetObj
-  }));
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FontFamilyControl);
-
-/***/ }),
-
-/***/ "./src/component/typography/fontloader.js":
-/*!************************************************!*\
-  !*** ./src/component/typography/fontloader.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webfontloader */ "./node_modules/webfontloader/webfontloader.js");
-/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webfontloader__WEBPACK_IMPORTED_MODULE_0__);
-if (googlefonts === undefined) {
-  var googlefonts = [];
-}
-
-const {
-  Component
-} = wp.element;
-
-
-const statuses = {
-  inactive: "inactive",
-  active: "active",
-  loading: "loading"
-};
-
-const noop = () => {};
-
-class WebfontLoader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: undefined
-    };
-
-    this.handleLoading = () => {
-      this.setState({
-        status: statuses.loading
-      });
-    };
-
-    this.addFont = font => {
-      if (!googlefonts.includes(font)) {
-        googlefonts.push(font);
-      }
-    };
-
-    this.handleActive = () => {
-      this.setState({
-        status: statuses.active
-      });
-    };
-
-    this.handleInactive = () => {
-      this.setState({
-        status: statuses.inactive
-      });
-    };
-
-    this.loadFonts = () => {
-      //if ( ! this.state.fonts.includes( this.props.config.google.families[ 0 ] ) ) {
-      if (!googlefonts.includes(this.props.config.google.families[0])) {
-        webfontloader__WEBPACK_IMPORTED_MODULE_0___default().load({ ...this.props.config,
-          loading: this.handleLoading,
-          active: this.handleActive,
-          inactive: this.handleInactive
-        });
-        this.addFont(this.props.config.google.families[0]);
-      }
-    };
-  }
-
-  componentDidMount() {
-    this.loadFonts();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      onStatus,
-      config
-    } = this.props;
-
-    if (prevState.status !== this.state.status) {
-      onStatus(this.state.status);
-    }
-
-    if (prevProps.config !== config) {
-      this.loadFonts();
-    }
-  }
-
-  render() {
-    const {
-      children
-    } = this.props;
-    return children || null;
-  }
-
-}
-
-WebfontLoader.propTypes = {
-  config: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object.isRequired),
-  children: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().element),
-  onStatus: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func.isRequired)
-};
-WebfontLoader.defaultProps = {
-  onStatus: noop
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebfontLoader);
-
-/***/ }),
-
-/***/ "./src/component/typography/fonts.js":
-/*!*******************************************!*\
-  !*** ./src/component/typography/fonts.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/**
- * Google Fonts for the FontFamily component.
- */
-const fonts = {};
-fonts["ABeeZee"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Abel"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Abhaya Libre"] = {
-  "v": ["regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "sinhala", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Abril Fatface"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Aclonica"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Acme"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Actor"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Adamina"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Advent Pro"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "greek", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Aguafina Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Akronim"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Aladin"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Aldrich"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Alef"] = {
-  "v": ["regular", "700"],
-  "subset": ["hebrew", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Alegreya"] = {
-  "v": ["regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "500", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Alegreya SC"] = {
-  "v": ["regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "500", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Alegreya Sans"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Alegreya Sans SC"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Alex Brush"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Alfa Slab One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Alice"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Alike"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Alike Angular"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Allan"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Allerta"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Allerta Stencil"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Allura"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Almendra"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Almendra Display"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Almendra SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Amarante"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Amaranth"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Amatic SC"] = {
-  "v": ["regular", "700"],
-  "subset": ["cyrillic", "latin-ext", "hebrew", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Amethysta"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Amiko"] = {
-  "v": ["regular", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Amiri"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Amita"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Anaheim"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Andada"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Andika"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Angkor"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Annie Use Your Telescope"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Anonymous Pro"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "latin-ext", "greek", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Antic"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Antic Didone"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Antic Slab"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Anton"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Arapey"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Arbutus"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Arbutus Slab"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Architects Daughter"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Archivo"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Archivo Black"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Archivo Narrow"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Aref Ruqaa"] = {
-  "v": ["regular", "700"],
-  "subset": ["arabic", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Arima Madurai"] = {
-  "v": ["100", "200", "300", "regular", "500", "700", "800", "900"],
-  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Arimo"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Arizonia"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Armata"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Arsenal"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Artifika"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Arvo"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Arya"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Asap"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Asap Condensed"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Asar"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Asset"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Assistant"] = {
-  "v": ["200", "300", "regular", "600", "700", "800"],
-  "subset": ["hebrew", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Astloch"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Asul"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Athiti"] = {
-  "v": ["200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Atma"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "bengali", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Atomic Age"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Aubrey"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Audiowide"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Autour One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Average"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Average Sans"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Averia Gruesa Libre"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Averia Libre"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Averia Sans Libre"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Averia Serif Libre"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Bad Script"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bahiana"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Bhai"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Bhaijaan"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Bhaina"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "oriya", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Chettan"] = {
-  "v": ["regular"],
-  "subset": ["malayalam", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Da"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "bengali", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Paaji"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gurmukhi", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Tamma"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin", "kannada"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Tammudu"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "telugu", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Baloo Thambi"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Balthazar"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bangers"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Barlow"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Barlow Condensed"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Barlow Semi Condensed"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Barrio"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Basic"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Battambang"] = {
-  "v": ["regular", "700"],
-  "subset": ["khmer"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Baumans"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bayon"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Belgrano"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bellefair"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "hebrew", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Belleza"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["BenchNine"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Bentham"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Berkshire Swash"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bevan"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bigelow Rules"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bigshot One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bilbo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bilbo Swash Caps"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["BioRhyme"] = {
-  "v": ["200", "300", "regular", "700", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "700", "800"],
-  "i": ["normal"]
-};
-fonts["BioRhyme Expanded"] = {
-  "v": ["200", "300", "regular", "700", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Biryani"] = {
-  "v": ["200", "300", "regular", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Bitter"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Black And White Picture"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Black Han Sans"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Black Ops One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bokor"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bonbon"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Boogaloo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bowlby One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bowlby One SC"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Brawler"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bree Serif"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bubblegum Sans"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bubbler One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Buda"] = {
-  "v": ["300"],
-  "subset": ["latin"],
-  "weight": ["300"],
-  "i": []
-};
-fonts["Buenard"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Bungee"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bungee Hairline"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bungee Inline"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bungee Outline"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Bungee Shade"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Butcherman"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Butterfly Kids"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cabin"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cabin Condensed"] = {
-  "v": ["regular", "500", "600", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Cabin Sketch"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Caesar Dressing"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cagliostro"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cairo"] = {
-  "v": ["200", "300", "regular", "600", "700", "900"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Calligraffitti"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cambay"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cambo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Candal"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cantarell"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cantata One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cantora One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Capriola"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cardo"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Carme"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Carrois Gothic"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Carrois Gothic SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Carter One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Catamaran"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "tamil", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Caudex"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Caveat"] = {
-  "v": ["regular", "700"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Caveat Brush"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cedarville Cursive"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ceviche One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Changa"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Changa One"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Chango"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Chathura"] = {
-  "v": ["100", "300", "regular", "700", "800"],
-  "subset": ["telugu", "latin"],
-  "weight": ["100", "300", "400", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Chau Philomene One"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Chela One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Chelsea Market"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Chenla"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cherry Cream Soda"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cherry Swash"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Chewy"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Chicle"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Chivo"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Chonburi"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cinzel"] = {
-  "v": ["regular", "700", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Cinzel Decorative"] = {
-  "v": ["regular", "700", "900"],
-  "subset": ["latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Clicker Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Coda"] = {
-  "v": ["regular", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "800"],
-  "i": ["normal"]
-};
-fonts["Coda Caption"] = {
-  "v": ["800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["800"],
-  "i": []
-};
-fonts["Codystar"] = {
-  "v": ["300", "regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400"],
-  "i": ["normal"]
-};
-fonts["Coiny"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Combo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Comfortaa"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Coming Soon"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Concert One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Condiment"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Content"] = {
-  "v": ["regular", "700"],
-  "subset": ["khmer"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Contrail One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Convergence"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cookie"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Copse"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Corben"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Cormorant"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cormorant Garamond"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cormorant Infant"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cormorant SC"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Cormorant Unicase"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Cormorant Upright"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Courgette"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cousine"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Coustard"] = {
-  "v": ["regular", "900"],
-  "subset": ["latin"],
-  "weight": ["400", "900"],
-  "i": ["normal"]
-};
-fonts["Covered By Your Grace"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Crafty Girls"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Creepster"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Crete Round"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Crimson Text"] = {
-  "v": ["regular", "italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Croissant One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Crushed"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cuprum"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Cute Font"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cutive"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Cutive Mono"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Damion"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dancing Script"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Dangrek"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["David Libre"] = {
-  "v": ["regular", "500", "700"],
-  "subset": ["latin-ext", "hebrew", "vietnamese", "latin"],
-  "weight": ["400", "500", "700"],
-  "i": ["normal"]
-};
-fonts["Dawning of a New Day"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Days One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dekko"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Delius"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Delius Swash Caps"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Delius Unicase"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Della Respira"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Denk One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Devonshire"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dhurjati"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Didact Gothic"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Diplomata"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Diplomata SC"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Do Hyeon"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dokdo"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Domine"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Donegal One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Doppio One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dorsa"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dosis"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Dr Sugiyama"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Duru Sans"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Dynalight"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["EB Garamond"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Eagle Lake"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["East Sea Dokdo"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Eater"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Economica"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Eczar"] = {
-  "v": ["regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["El Messiri"] = {
-  "v": ["regular", "500", "600", "700"],
-  "subset": ["cyrillic", "arabic", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Electrolize"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Elsie"] = {
-  "v": ["regular", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "900"],
-  "i": ["normal"]
-};
-fonts["Elsie Swash Caps"] = {
-  "v": ["regular", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "900"],
-  "i": ["normal"]
-};
-fonts["Emblema One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Emilys Candy"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Encode Sans"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Encode Sans Condensed"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Encode Sans Expanded"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Encode Sans Semi Condensed"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Encode Sans Semi Expanded"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Engagement"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Englebert"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Enriqueta"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Erica One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Esteban"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Euphoria Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ewert"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Exo"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Exo 2"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Expletus Sans"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Fanwood Text"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Farsan"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fascinate"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fascinate Inline"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Faster One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fasthand"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fauna One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Faustina"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Federant"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Federo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Felipa"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fenix"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Finger Paint"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fira Mono"] = {
-  "v": ["regular", "500", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400", "500", "700"],
-  "i": ["normal"]
-};
-fonts["Fira Sans"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Fira Sans Condensed"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Fira Sans Extra Condensed"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Fjalla One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fjord One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Flamenco"] = {
-  "v": ["300", "regular"],
-  "subset": ["latin"],
-  "weight": ["300", "400"],
-  "i": ["normal"]
-};
-fonts["Flavors"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fondamento"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Fontdiner Swanky"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Forum"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Francois One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Frank Ruhl Libre"] = {
-  "v": ["300", "regular", "500", "700", "900"],
-  "subset": ["latin-ext", "hebrew", "latin"],
-  "weight": ["300", "400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Freckle Face"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fredericka the Great"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fredoka One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Freehand"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fresca"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Frijole"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fruktur"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Fugaz One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["GFS Didot"] = {
-  "v": ["regular"],
-  "subset": ["greek"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["GFS Neohellenic"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["greek"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Gabriela"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gaegu"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["korean", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Gafata"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Galada"] = {
-  "v": ["regular"],
-  "subset": ["bengali", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Galdeano"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Galindo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gamja Flower"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gentium Basic"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Gentium Book Basic"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Geo"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Geostar"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Geostar Fill"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Germania One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gidugu"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gilda Display"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Give You Glory"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Glass Antiqua"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Glegoo"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Gloria Hallelujah"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Goblin One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gochi Hand"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gorditas"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Gothic A1"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["korean", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Goudy Bookletter 1911"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Graduate"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Grand Hotel"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gravitas One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Great Vibes"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Griffy"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gruppo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gudea"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Gugi"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Gurajada"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Habibi"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Halant"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Hammersmith One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Hanalei"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Hanalei Fill"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Handlee"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Hanuman"] = {
-  "v": ["regular", "700"],
-  "subset": ["khmer"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Happy Monkey"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Harmattan"] = {
-  "v": ["regular"],
-  "subset": ["arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Headland One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Heebo"] = {
-  "v": ["100", "300", "regular", "500", "700", "800", "900"],
-  "subset": ["hebrew", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Henny Penny"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Herr Von Muellerhoff"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Hi Melody"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Hind"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Hind Guntur"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "telugu", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Hind Madurai"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "tamil", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Hind Siliguri"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "bengali", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Hind Vadodara"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Holtwood One SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Homemade Apple"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Homenaje"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["IBM Plex Mono"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["IBM Plex Sans"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["IBM Plex Sans Condensed"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["IBM Plex Serif"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell DW Pica"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell DW Pica SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["IM Fell Double Pica"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell Double Pica SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["IM Fell English"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell English SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["IM Fell French Canon"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell French Canon SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["IM Fell Great Primer"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["IM Fell Great Primer SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Iceberg"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Iceland"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Imprima"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Inconsolata"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Inder"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Indie Flower"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Inika"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Inknut Antiqua"] = {
-  "v": ["300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Irish Grover"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Istok Web"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Italiana"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Italianno"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Itim"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jacques Francois"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jacques Francois Shadow"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jaldi"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Jim Nightshade"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jockey One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jolly Lodger"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jomhuria"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Josefin Sans"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Josefin Slab"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["100", "300", "400", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Joti One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jua"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Judson"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Julee"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Julius Sans One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Junge"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Jura"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Just Another Hand"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Just Me Again Down Here"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kadwa"] = {
-  "v": ["regular", "700"],
-  "subset": ["devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Kalam"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Kameron"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Kanit"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Kantumruy"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["khmer"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Karla"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Karma"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Katibeh"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kaushan Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kavivanar"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "tamil", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kavoon"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kdam Thmor"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Keania One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kelly Slab"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kenia"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Khand"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Khmer"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Khula"] = {
-  "v": ["300", "regular", "600", "700", "800"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Kirang Haerang"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kite One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Knewave"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kosugi"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "japanese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kosugi Maru"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "japanese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kotta One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Koulen"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kranky"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kreon"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Kristi"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Krona One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kumar One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kumar One Outline"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Kurale"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["La Belle Aurore"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Laila"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Lakki Reddy"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lalezar"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lancelot"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lateef"] = {
-  "v": ["regular"],
-  "subset": ["arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lato"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "300", "400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["League Script"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Leckerli One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ledger"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lekton"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Lemon"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lemonada"] = {
-  "v": ["300", "regular", "600", "700"],
-  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
-  "weight": ["300", "400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 128"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 128 Text"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 39"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 39 Extended"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 39 Extended Text"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Barcode 39 Text"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Libre Baskerville"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Libre Franklin"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Life Savers"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Lilita One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lily Script One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Limelight"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Linden Hill"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Lobster"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lobster Two"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Londrina Outline"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Londrina Shadow"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Londrina Sketch"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Londrina Solid"] = {
-  "v": ["100", "300", "regular", "900"],
-  "subset": ["latin"],
-  "weight": ["100", "300", "400", "900"],
-  "i": ["normal"]
-};
-fonts["Lora"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Love Ya Like A Sister"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Loved by the King"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lovers Quarrel"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Luckiest Guy"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Lusitana"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Lustria"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["M PLUS 1p"] = {
-  "v": ["100", "300", "regular", "500", "700", "800", "900"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "japanese", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["M PLUS Rounded 1c"] = {
-  "v": ["100", "300", "regular", "500", "700", "800", "900"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "japanese", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Macondo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Macondo Swash Caps"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mada"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "900"],
-  "subset": ["arabic", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Magra"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Maiden Orange"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Maitree"] = {
-  "v": ["200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Mako"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mallanna"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mandali"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Manuale"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Marcellus"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Marcellus SC"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Marck Script"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Margarine"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Markazi Text"] = {
-  "v": ["regular", "500", "600", "700"],
-  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Marko One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Marmelad"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Martel"] = {
-  "v": ["200", "300", "regular", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Martel Sans"] = {
-  "v": ["200", "300", "regular", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Marvel"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Mate"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Mate SC"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Maven Pro"] = {
-  "v": ["regular", "500", "700", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["McLaren"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Meddon"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["MedievalSharp"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Medula One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Meera Inimai"] = {
-  "v": ["regular"],
-  "subset": ["tamil", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Megrim"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Meie Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Merienda"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Merienda One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Merriweather"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Merriweather Sans"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "800", "800italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Metal"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Metal Mania"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Metamorphous"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Metrophobic"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Michroma"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Milonga"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Miltonian"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Miltonian Tattoo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mina"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "bengali", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Miniver"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Miriam Libre"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "hebrew", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Mirza"] = {
-  "v": ["regular", "500", "600", "700"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Miss Fajardose"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mitr"] = {
-  "v": ["200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Modak"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Modern Antiqua"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mogra"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Molengo"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Molle"] = {
-  "v": ["italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": [],
-  "i": ["italic"]
-};
-fonts["Monda"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Monofett"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Monoton"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Monsieur La Doulaise"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Montaga"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Montez"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Montserrat"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Montserrat Alternates"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Montserrat Subrayada"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Moul"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Moulpali"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mountains of Christmas"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Mouse Memoirs"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mr Bedfort"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mr Dafoe"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mr De Haviland"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mrs Saint Delafield"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mrs Sheppards"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Mukta"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Mukta Mahee"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "gurmukhi", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Mukta Malar"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "tamil", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Mukta Vaani"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Muli"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Mystery Quest"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["NTR"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nanum Brush Script"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nanum Gothic"] = {
-  "v": ["regular", "700", "800"],
-  "subset": ["korean", "latin"],
-  "weight": ["400", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Nanum Gothic Coding"] = {
-  "v": ["regular", "700"],
-  "subset": ["korean", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Nanum Myeongjo"] = {
-  "v": ["regular", "700", "800"],
-  "subset": ["korean", "latin"],
-  "weight": ["400", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Nanum Pen Script"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Neucha"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Neuton"] = {
-  "v": ["200", "300", "regular", "italic", "700", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["New Rocker"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["News Cycle"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Niconne"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nixie One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nobile"] = {
-  "v": ["regular", "italic", "500", "500italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "500", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Nokora"] = {
-  "v": ["regular", "700"],
-  "subset": ["khmer"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Norican"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nosifer"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nothing You Could Do"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Noticia Text"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Noto Sans"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "devanagari", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Noto Sans JP"] = {
-  "v": ["100", "300", "regular", "500", "700", "900"],
-  "subset": ["japanese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Noto Sans KR"] = {
-  "v": ["100", "300", "regular", "500", "700", "900"],
-  "subset": ["korean", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Noto Serif"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Noto Serif JP"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "900"],
-  "subset": ["japanese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Noto Serif KR"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "900"],
-  "subset": ["korean", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Nova Cut"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Flat"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Mono"] = {
-  "v": ["regular"],
-  "subset": ["greek", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Oval"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Round"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Script"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Slim"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nova Square"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Numans"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Nunito"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Nunito Sans"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Odor Mean Chey"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Offside"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Old Standard TT"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Oldenburg"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Oleo Script"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Oleo Script Swash Caps"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Open Sans"] = {
-  "v": ["300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["300", "400", "600", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Open Sans Condensed"] = {
-  "v": ["300", "300italic", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["300", "700"],
-  "i": []
-};
-fonts["Oranienbaum"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Orbitron"] = {
-  "v": ["regular", "500", "700", "900"],
-  "subset": ["latin"],
-  "weight": ["400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Oregano"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Orienta"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Original Surfer"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Oswald"] = {
-  "v": ["200", "300", "regular", "500", "600", "700"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Over the Rainbow"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Overlock"] = {
-  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Overlock SC"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Overpass"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Overpass Mono"] = {
-  "v": ["300", "regular", "600", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Ovo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Oxygen"] = {
-  "v": ["300", "regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Oxygen Mono"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["PT Mono"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["PT Sans"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["PT Sans Caption"] = {
-  "v": ["regular", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["PT Sans Narrow"] = {
-  "v": ["regular", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["PT Serif"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["PT Serif Caption"] = {
-  "v": ["regular", "italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Pacifico"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Padauk"] = {
-  "v": ["regular", "700"],
-  "subset": ["myanmar", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Palanquin"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Palanquin Dark"] = {
-  "v": ["regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Pangolin"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Paprika"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Parisienne"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Passero One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Passion One"] = {
-  "v": ["regular", "700", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Pathway Gothic One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Patrick Hand"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Patrick Hand SC"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pattaya"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Patua One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pavanam"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "tamil", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Paytone One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Peddana"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Peralta"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Permanent Marker"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Petit Formal Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Petrona"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Philosopher"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Piedra"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pinyon Script"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pirata One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Plaster"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Play"] = {
-  "v": ["regular", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Playball"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Playfair Display"] = {
-  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Playfair Display SC"] = {
-  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Podkova"] = {
-  "v": ["regular", "500", "600", "700", "800"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Poiret One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Poller One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Poly"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Pompiere"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pontano Sans"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Poor Story"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Poppins"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Port Lligat Sans"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Port Lligat Slab"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pragati Narrow"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Prata"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Preahvihear"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Press Start 2P"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Pridi"] = {
-  "v": ["200", "300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Princess Sofia"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Prociono"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Prompt"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Prosto One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Proza Libre"] = {
-  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Puritan"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Purple Purse"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Quando"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Quantico"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Quattrocento"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Quattrocento Sans"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Questrial"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Quicksand"] = {
-  "v": ["300", "regular", "500", "700"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["300", "400", "500", "700"],
-  "i": ["normal"]
-};
-fonts["Quintessential"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Qwigley"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Racing Sans One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Radley"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Rajdhani"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Rakkas"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Raleway"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Raleway Dots"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ramabhadra"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ramaraja"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rambla"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Rammetto One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ranchers"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rancho"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ranga"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Rasa"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Rationale"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ravi Prakash"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Redressed"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Reem Kufi"] = {
-  "v": ["regular"],
-  "subset": ["arabic", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Reenie Beanie"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Revalia"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rhodium Libre"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ribeye"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ribeye Marrow"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Righteous"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Risque"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Roboto"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Roboto Condensed"] = {
-  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["300", "400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Roboto Mono"] = {
-  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "500", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Roboto Slab"] = {
-  "v": ["100", "300", "regular", "700"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["100", "300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Rochester"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rock Salt"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rokkitt"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Romanesco"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ropa Sans"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Rosario"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Rosarivo"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Rouge Script"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rozha One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rubik"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "latin-ext", "hebrew", "latin"],
-  "weight": ["300", "400", "500", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Rubik Mono One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ruda"] = {
-  "v": ["regular", "700", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Rufina"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Ruge Boogie"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ruluko"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rum Raisin"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ruslan Display"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Russo One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ruthie"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Rye"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sacramento"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sahitya"] = {
-  "v": ["regular", "700"],
-  "subset": ["devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Sail"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Saira"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Saira Condensed"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Saira Extra Condensed"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Saira Semi Condensed"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Salsa"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sanchez"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Sancreek"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sansita"] = {
-  "v": ["regular", "italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Sarala"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Sarina"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sarpanch"] = {
-  "v": ["regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Satisfy"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sawarabi Gothic"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "japanese", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sawarabi Mincho"] = {
-  "v": ["regular"],
-  "subset": ["japanese", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Scada"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Scheherazade"] = {
-  "v": ["regular", "700"],
-  "subset": ["arabic", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Schoolbell"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Scope One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Seaweed Script"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Secular One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "hebrew", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sedgwick Ave"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sedgwick Ave Display"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sevillana"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Seymour One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Shadows Into Light"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Shadows Into Light Two"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Shanti"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Share"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Share Tech"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Share Tech Mono"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Shojumaru"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Short Stack"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Shrikhand"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "gujarati", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Siemreap"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sigmar One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Signika"] = {
-  "v": ["300", "regular", "600", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Signika Negative"] = {
-  "v": ["300", "regular", "600", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Simonetta"] = {
-  "v": ["regular", "italic", "900", "900italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Sintony"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Sirin Stencil"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Six Caps"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Skranji"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Slabo 13px"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Slabo 27px"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Slackey"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Smokum"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Smythe"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sniglet"] = {
-  "v": ["regular", "800"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "800"],
-  "i": ["normal"]
-};
-fonts["Snippet"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Snowburst One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sofadi One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sofia"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Song Myung"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sonsie One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sorts Mill Goudy"] = {
-  "v": ["regular", "italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal", "italic"]
-};
-fonts["Source Code Pro"] = {
-  "v": ["200", "300", "regular", "500", "600", "700", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Source Sans Pro"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Source Serif Pro"] = {
-  "v": ["regular", "600", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Space Mono"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Special Elite"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Spectral"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Spectral SC"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "500", "600", "700", "800"],
-  "i": ["normal", "italic"]
-};
-fonts["Spicy Rice"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Spinnaker"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Spirax"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Squada One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sree Krushnadevaraya"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sriracha"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stalemate"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stalinist One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stardos Stencil"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Stint Ultra Condensed"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stint Ultra Expanded"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stoke"] = {
-  "v": ["300", "regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400"],
-  "i": ["normal"]
-};
-fonts["Strait"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Stylish"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sue Ellen Francisco"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Suez One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "hebrew", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sumana"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Sunflower"] = {
-  "v": ["300", "500", "700"],
-  "subset": ["korean", "latin"],
-  "weight": ["300", "500", "700"],
-  "i": []
-};
-fonts["Sunshiney"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Supermercado One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Sura"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Suranna"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Suravaram"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Suwannaphum"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Swanky and Moo Moo"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Syncopate"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Tajawal"] = {
-  "v": ["200", "300", "regular", "500", "700", "800", "900"],
-  "subset": ["arabic", "latin"],
-  "weight": ["200", "300", "400", "500", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Tangerine"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Taprom"] = {
-  "v": ["regular"],
-  "subset": ["khmer"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tauri"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Taviraj"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Teko"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Telex"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tenali Ramakrishna"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tenor Sans"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Text Me One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["The Girl Next Door"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tienne"] = {
-  "v": ["regular", "700", "900"],
-  "subset": ["latin"],
-  "weight": ["400", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Tillana"] = {
-  "v": ["regular", "500", "600", "700", "800"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "500", "600", "700", "800"],
-  "i": ["normal"]
-};
-fonts["Timmana"] = {
-  "v": ["regular"],
-  "subset": ["telugu", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tinos"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Titan One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Titillium Web"] = {
-  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["200", "300", "400", "600", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Trade Winds"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Trirong"] = {
-  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
-  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Trocchi"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Trochut"] = {
-  "v": ["regular", "italic", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Trykker"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Tulpen One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ubuntu"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["300", "400", "500", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Ubuntu Condensed"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Ubuntu Mono"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Ultra"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Uncial Antiqua"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Underdog"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Unica One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["UnifrakturCook"] = {
-  "v": ["700"],
-  "subset": ["latin"],
-  "weight": ["700"],
-  "i": []
-};
-fonts["UnifrakturMaguntia"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Unkempt"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-fonts["Unlock"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Unna"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["VT323"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Vampiro One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Varela"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Varela Round"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "hebrew", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Vast Shadow"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Vesper Libre"] = {
-  "v": ["regular", "500", "700", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Vibur"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Vidaloka"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Viga"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Voces"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Volkhov"] = {
-  "v": ["regular", "italic", "700", "700italic"],
-  "subset": ["latin"],
-  "weight": ["400", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Vollkorn"] = {
-  "v": ["regular", "italic", "600", "600italic", "700", "700italic", "900", "900italic"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
-  "weight": ["400", "600", "700", "900"],
-  "i": ["normal", "italic"]
-};
-fonts["Vollkorn SC"] = {
-  "v": ["regular", "600", "700", "900"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400", "600", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Voltaire"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Waiting for the Sunrise"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Wallpoet"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Walter Turncoat"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Warnes"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Wellfleet"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Wendy One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Wire One"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Work Sans"] = {
-  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  "i": ["normal"]
-};
-fonts["Yanone Kaffeesatz"] = {
-  "v": ["200", "300", "regular", "700"],
-  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
-  "weight": ["200", "300", "400", "700"],
-  "i": ["normal"]
-};
-fonts["Yantramanav"] = {
-  "v": ["100", "300", "regular", "500", "700", "900"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["100", "300", "400", "500", "700", "900"],
-  "i": ["normal"]
-};
-fonts["Yatra One"] = {
-  "v": ["regular"],
-  "subset": ["latin-ext", "devanagari", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Yellowtail"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Yeon Sung"] = {
-  "v": ["regular"],
-  "subset": ["korean", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Yeseva One"] = {
-  "v": ["regular"],
-  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Yesteryear"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Yrsa"] = {
-  "v": ["300", "regular", "500", "600", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal"]
-};
-fonts["Zeyada"] = {
-  "v": ["regular"],
-  "subset": ["latin"],
-  "weight": ["400"],
-  "i": ["normal"]
-};
-fonts["Zilla Slab"] = {
-  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["300", "400", "500", "600", "700"],
-  "i": ["normal", "italic"]
-};
-fonts["Zilla Slab Highlight"] = {
-  "v": ["regular", "700"],
-  "subset": ["latin-ext", "latin"],
-  "weight": ["400", "700"],
-  "i": ["normal"]
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fonts);
-
-/***/ }),
-
-/***/ "./src/component/typography/index.js":
-/*!*******************************************!*\
-  !*** ./src/component/typography/index.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TypographyStyles": () => (/* reexport safe */ _inline_styles__WEBPACK_IMPORTED_MODULE_5__["default"]),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _font_typography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./font-typography */ "./src/component/typography/font-typography.js");
-/* harmony import */ var _range_typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./range-typography */ "./src/component/typography/range-typography.js");
-/* harmony import */ var _inline_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inline-styles */ "./src/component/typography/inline-styles.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/component/typography/editor.scss");
-
-
-
-/**
- * WordPress dependencies
- */
-
-/**
- * Internal dependencies
- */
-
-
-
-
-
-const {
-  Button,
-  Dashicon
-} = wp.components; // Extend component
-
-const {
-  Component,
-  Fragment
-} = wp.element; // Export for ease of importing in individual blocks.
-
-
-
-class TypographyControl extends Component {
-  constructor() {
-    super(...arguments);
-    this.onAdvancedControlClick = this.onAdvancedControlClick.bind(this);
-    this.onAdvancedControlReset = this.onAdvancedControlReset.bind(this);
-    this.timeline_settings_apply;
-  }
-
-  valueupdate() {
-    let valueupdates = [this.props.fontSize.value, this.props.fontFamily.value == 'Default' ? undefined : this.props.fontFamily.value, this.props.fontWeight.value, this.props.lineHeight.value];
-
-    for (let i = 0; i < valueupdates.length; i++) {
-      if (valueupdates[i] != undefined) {
-        this.timeline_settings_apply = ' cp-timeline-typography_apply';
-        break;
-      }
-
-      this.timeline_settings_apply = '';
-    }
-
-    ;
-  }
-
-  onAdvancedControlClick() {
-    let control = true;
-
-    let label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Hide Advanced", 'timeline-block');
-
-    if (this.state !== null && this.state.showAdvancedControls === true) {
-      control = false;
-      label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Advanced", 'timeline-block');
-    }
-
-    this.setState({
-      showAdvancedControls: control,
-      showAdvancedControlsLabel: label
-    });
-  }
-
-  onAdvancedControlReset() {
-    const {
-      setAttributes
-    } = this.props; // Reset Font family to default.
-
-    setAttributes({
-      [this.props.fontFamily.label]: "Default"
-    });
-    setAttributes({
-      [this.props.fontWeight.label]: undefined
-    });
-    setAttributes({
-      [this.props.fontSubset.label]: ""
-    }); // Reset Font Size to default.
-
-    setAttributes({
-      [this.props.fontSize.label]: undefined
-    });
-    setAttributes({
-      [this.props.fontSizeType.label]: "px"
-    });
-    setAttributes({
-      [this.props.fontSizeMobile.label]: ""
-    });
-    setAttributes({
-      [this.props.fontSizeTablet.label]: ""
-    }); // Reset Line Height to default.
-
-    setAttributes({
-      [this.props.lineHeight.label]: undefined
-    });
-    setAttributes({
-      [this.props.lineHeightType.label]: "px"
-    });
-    setAttributes({
-      [this.props.lineHeightMobile.label]: ""
-    });
-    setAttributes({
-      [this.props.lineHeightTablet.label]: ""
-    }); // Reset Google Fonts to default.
-
-    setAttributes({
-      [this.props.loadGoogleFonts.label]: false
-    });
-  }
-
-  render() {
-    this.valueupdate();
-    let fontSize;
-    let fontWeight;
-    let fontFamily;
-    let fontAdvancedControls;
-    let fontTypoAdvancedControls;
-    let showAdvancedFontControls;
-    let resetFontAdvancedControls;
-    const {
-      disableFontFamily,
-      disableFontSize,
-      disableLineHeight,
-      disableAdvancedOptions = false
-    } = this.props;
-
-    if (true !== disableFontFamily) {
-      fontFamily = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_font_typography__WEBPACK_IMPORTED_MODULE_3__["default"], this.props);
-    }
-
-    if (true !== disableLineHeight) {
-      fontWeight = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_range_typography__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-        type: this.props.lineHeightType,
-        typeLabel: this.props.lineHeightType.label,
-        sizeMobile: this.props.lineHeightMobile,
-        sizeMobileLabel: this.props.lineHeightMobile.label,
-        sizeTablet: this.props.lineHeightTablet,
-        sizeTabletLabel: this.props.lineHeightTablet.label,
-        size: this.props.lineHeight,
-        sizeLabel: this.props.lineHeight.label,
-        sizeMobileText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
-        sizeTabletText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
-        sizeText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
-        steps: this.props.lineHeightType.value == 'px' ? 1 : 0.1,
-        initialPosition: 0
-      }, this.props));
-    }
-
-    if (true !== disableFontSize) {
-      fontSize = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_range_typography__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-        type: this.props.fontSizeType,
-        typeLabel: this.props.fontSizeType.label,
-        sizeMobile: this.props.fontSizeMobile,
-        sizeMobileLabel: this.props.fontSizeMobile.label,
-        sizeTablet: this.props.fontSizeTablet,
-        sizeTabletLabel: this.props.fontSizeTablet.label,
-        size: this.props.fontSize,
-        sizeLabel: this.props.fontSize.label,
-        sizeMobileText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
-        sizeTabletText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
-        sizeText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
-        steps: this.props.fontSizeType.value == 'px' ? 1 : 0.1,
-        initialPosition: this.props.fontSize.label == 'subHeadFontSize' ? 14 : 18
-      }, this.props));
-    }
-
-    if (true !== disableFontFamily && true !== disableFontSize) {
-      fontAdvancedControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
-        className: "timeline-block-size-btn timeline-block-typography-control-btn",
-        isSmall: true,
-        "aria-pressed": this.state !== null,
-        onClick: this.onAdvancedControlClick
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Dashicon, {
-        icon: "admin-tools"
-      }));
-      resetFontAdvancedControls = // <Button
-      // 	className="timeline-block-size-btn timeline-block-typography-reset-btn"
-      // 	isSmall
-      // 	aria-pressed={ ( this.state !== null ) }
-      // 	onClick={ this.onAdvancedControlReset }
-      // ><Dashicon icon="image-rotate" /></Button>
-      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "components-button timeline-block-size-btn timeline-block-typography-reset-btn is-small",
-        onClick: this.onAdvancedControlReset
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Dashicon, {
-        icon: "image-rotate"
-      }));
-    } else {
-      showAdvancedFontControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, fontSize, fontFamily, fontWeight);
-    }
-
-    if (this.state !== null && this.state.showAdvancedControls === true) {
-      showAdvancedFontControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "timeline-block-typography-advanced"
-      }, fontSize, fontFamily, fontWeight);
-    }
-
-    if (true !== disableFontFamily && true !== disableFontSize) {
-      fontTypoAdvancedControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "timeline-block-typography-option-actions"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, this.props.label), resetFontAdvancedControls, fontAdvancedControls);
-    }
-
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: `timeline-block-typography-options${this.timeline_settings_apply}`
-    }, !disableAdvancedOptions && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, fontTypoAdvancedControls, showAdvancedFontControls));
-  }
-
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyControl);
-
-/***/ }),
-
-/***/ "./src/component/typography/inline-styles.js":
-/*!***************************************************!*\
-  !*** ./src/component/typography/inline-styles.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/**
- * Set inline styles.
- * @param {object} props - The block object.
- * @return {object} The inline text color CSS.
- */
-function TypographyStyles(props) {
-  return {};
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyStyles);
-
-/***/ }),
-
-/***/ "./src/component/typography/range-typography.js":
-/*!******************************************************!*\
-  !*** ./src/component/typography/range-typography.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ RangeTypographyControl)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/map */ "./node_modules/lodash/map.js");
-/* harmony import */ var lodash_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_map__WEBPACK_IMPORTED_MODULE_2__);
-
-
-/**
- * WordPress dependencies
- */
-
-const {
-  RangeControl,
-  ButtonGroup,
-  Button,
-  Dashicon
-} = wp.components; // Extend component
-
-const {
-  Fragment
-} = wp.element;
-const {
-  useSelect,
-  useDispatch
-} = wp.data;
-
-/**
- * Build the Measure controls
- * @returns {object} Measure settings.
- */
-
-function RangeTypographyControl(props) {
-  const deviceType = useSelect(select => {
-    return select('core/edit-post').__experimentalGetPreviewDeviceType();
-  }, []);
-  const {
-    __experimentalSetPreviewDeviceType: setPreviewDeviceType
-  } = useDispatch('core/edit-post');
-
-  const customSetPreviewDeviceType = device => {
-    setPreviewDeviceType(device);
-  };
-
-  const devices = [{
-    name: 'Desktop',
-    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-      icon: "desktop"
-    }),
-    itemClass: 'timeline-block-desktop-tab timeline-block-responsive-tabs'
-  }, {
-    name: 'Tablet',
-    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-      icon: "tablet"
-    }),
-    itemClass: 'timeline-block-tablet-tab timeline-block-responsive-tabs'
-  }, {
-    name: 'Mobile',
-    key: 'mobile',
-    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
-      icon: "smartphone"
-    }),
-    itemClass: 'timeline-block-mobile-tab timeline-block-responsive-tabs'
-  }];
-  let sizeTypes;
-
-  if ("sizeTypes" in props) {
-    sizeTypes = props.sizeTypes;
-  } else {
-    sizeTypes = [{
-      key: "px",
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("px", 'timeline-block')
-    }, {
-      key: "em",
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("em", 'timeline-block')
-    }];
-  }
-
-  const sizeTypesControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ButtonGroup, {
-    className: "timeline-block-size-type-field",
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size Type", 'timeline-block')
-  }, lodash_map__WEBPACK_IMPORTED_MODULE_2___default()(sizeTypes, _ref => {
-    let {
-      name,
-      key
-    } = _ref;
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
-      key: key,
-      className: "timeline-block-size-btn",
-      isSmall: true,
-      isPrimary: props.type.value === key,
-      "aria-pressed": props.type.value === key,
-      onClick: () => props.setAttributes({
-        [props.typeLabel]: key
-      })
-    }, name);
-  }));
-  const output = {};
-  output.Desktop = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeText),
-    value: props.size.value || "",
-    onChange: value => props.setAttributes({
-      [props.sizeLabel]: value
-    }),
-    min: 0,
-    max: 100,
-    step: props.steps,
-    beforeIcon: "editor-textcolor",
-    allowReset: true,
-    initialPosition: props.initialPosition
-  }));
-  output.Tablet = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeTabletText),
-    value: props.sizeTablet.value,
-    onChange: value => props.setAttributes({
-      [props.sizeTabletLabel]: value
-    }),
-    min: 0,
-    max: 100,
-    step: props.steps,
-    beforeIcon: "editor-textcolor",
-    allowReset: true,
-    initialPosition: 18
-  }));
-  output.Mobile = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeMobileText),
-    value: props.sizeMobile.value,
-    onChange: value => props.setAttributes({
-      [props.sizeMobileLabel]: value
-    }),
-    min: 0,
-    max: 100,
-    step: props.steps,
-    beforeIcon: "editor-textcolor",
-    allowReset: true,
-    initialPosition: 30
-  }));
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: 'timeline-block-typography-range-options'
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-size-type-field-tabs"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "timeline-block-responsive-control-inner"
-  }, output[deviceType] ? output[deviceType] : output.Desktop)));
-}
-
-/***/ }),
-
-/***/ "./src/story-timeline/attributes.js":
-/*!******************************************!*\
-  !*** ./src/story-timeline/attributes.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * BLOCK: Cool Timeline Attributes
- */
-
-
-const ITEM_COUNT = 5;
-const item = [];
-const date_arr = [];
-const example = {
-  'data1': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon is born", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat enim res aperta. Ne discipulum abducam, times. Primum quid tu dicis breve? An haec ab eo non dicuntur?", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon1-600x338.jpg",
-    "t_date": "5/6/2019"
-  },
-  'data2': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Prime debuts", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aliter homines, aliter philosophos loqui putas oportere? Sin aliud quid voles, postea. Mihi enim satis est, ipsis non satis. Negat enim summo bono afferre incrementum diem. Quod ea non occurrentia fingunt, vincunt Aristonem., you can change me anytime click here, ", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon2-600x338.jpg",
-    "t_date": "2/2/2020"
-  },
-  'data3': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon acquires Audible", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
-    "t_date": "31/1/2021"
-  },
-  'data4': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Kindle For Books", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
-    "t_date": "5/7/2022"
-  },
-  'data5': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon App Store Launched", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
-    "t_date": "22/3/2011"
-  }
-};
-for (var i = 1; i <= ITEM_COUNT; i++) {
-  if (i % 2 == 0) {
-    var class_postion = "left";
-  } else {
-    var class_postion = "right";
-  }
-  const data = example['data' + i];
-  item.push({
-    "time_heading": data.time_heading,
-    "time_desc": data.time_desc,
-    "timeLineImage": data.timeLineImage,
-    "t_date": data.t_date,
-    "imageSize": "full",
-    "blockPosition": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(class_postion, "timeline-block")
-  });
-  var j = i - 1;
-  var today = new Date("1/1/2019");
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear() - j;
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-  today = mm + "/" + dd + "/" + yyyy;
-  var p = {
-    "title": today
-  };
-  date_arr.push({
-    "title": today
-  });
-}
-const attributes = {
-  content_class: {
-    type: "string"
-  },
-  tm_content: {
-    type: "array",
-    default: item
-  },
-  classMigrate: {
-    type: "boolean",
-    default: false
-  },
-  childMigrate: {
-    type: "boolean",
-    default: false
-  },
-  itemSpacing: {
-    type: "number",
-    default: ''
-  },
-  itemSpacingType: {
-    type: "string",
-    default: "px"
-  },
-  contentAlignment: {
-    type: "string",
-    default: ""
-  },
-  titileBtSpacing: {
-    type: "number",
-    default: ""
-  },
-  titileBtSpacingType: {
-    type: "string",
-    default: "px"
-  },
-  descBtSpacing: {
-    type: "number",
-    default: ""
-  },
-  descBtSpacingType: {
-    type: "string",
-    default: "px"
-  },
-  dateFormat: {
-    type: "string",
-    default: "F j, Y"
-  },
-  align: {
-    type: "string",
-    default: "center"
-  },
-  headingColor: {
-    type: "string",
-    default: ''
-  },
-  subHeadingColor: {
-    type: "string",
-    default: ''
-  },
-  separatorBg: {
-    type: "string",
-    default: "#eee"
-  },
-  backgroundColor: {
-    type: "string",
-    default: "#eee"
-  },
-  separatorColor: {
-    type: "string",
-    default: "#eee"
-  },
-  separatorFillColor: {
-    type: "string",
-    default: "#61ce70"
-  },
-  separatorBorder: {
-    type: "string",
-    default: "#eee"
-  },
-  borderFocus: {
-    type: "string",
-    default: "#5cb85c"
-  },
-  isPreview: {
-    type: 'boolean',
-    default: false
-  },
-  headingTag: {
-    type: "string",
-    default: "h3"
-  },
-  horizontalSpace: {
-    type: "number",
-    default: 10
-  },
-  verticalSpace: {
-    type: "number",
-    default: 15
-  },
-  headFontSize: {
-    type: "number"
-  },
-  headFontSizeType: {
-    type: "string",
-    default: "px"
-  },
-  headFontSizeTablet: {
-    type: "number"
-  },
-  headFontSizeMobile: {
-    type: "number"
-  },
-  headFontFamily: {
-    type: "string",
-    default: "Default"
-  },
-  headFontWeight: {
-    type: "string"
-  },
-  headFontSubset: {
-    type: "string"
-  },
-  headLineHeightType: {
-    type: "string",
-    default: "px"
-  },
-  headLineHeight: {
-    type: "number"
-  },
-  headLineHeightTablet: {
-    type: "number"
-  },
-  headLineHeightMobile: {
-    type: "number"
-  },
-  headLoadGoogleFonts: {
-    type: "boolean",
-    default: false
-  },
-  timelinAlignment: {
-    type: "string",
-    default: "center"
-  },
-  arrowlinAlignment: {
-    type: "string",
-    default: "center"
-  },
-  subHeadFontSizeType: {
-    type: "string",
-    default: "px"
-  },
-  subHeadFontSize: {
-    type: "number"
-  },
-  subHeadFontSizeTablet: {
-    type: "number"
-  },
-  subHeadFontSizeMobile: {
-    type: "number"
-  },
-  subHeadFontFamily: {
-    type: "string",
-    default: "Default"
-  },
-  subHeadFontWeight: {
-    type: "string"
-  },
-  subHeadFontSubset: {
-    type: "string"
-  },
-  subHeadLineHeightType: {
-    type: "string",
-    default: "em"
-  },
-  subHeadLineHeight: {
-    type: "number"
-  },
-  subHeadLineHeightTablet: {
-    type: "number"
-  },
-  subHeadLineHeightMobile: {
-    type: "number"
-  },
-  subHeadLoadGoogleFonts: {
-    type: "boolean",
-    default: false
-  },
-  headSpace: {
-    type: "number",
-    default: 5
-  },
-  separatorwidth: {
-    type: "number",
-    default: 3
-  },
-  borderwidth: {
-    type: "number",
-    default: 0
-  },
-  iconFocus: {
-    type: "string",
-    default: "#fff"
-  },
-  iconBgFocus: {
-    type: "string",
-    default: "#61ce70"
-  },
-  dateColor: {
-    type: "string",
-    default: ""
-  },
-  dateFontsizeType: {
-    type: "string",
-    default: "px"
-  },
-  dateFontsize: {
-    type: "number"
-  },
-  dateFontsizeTablet: {
-    type: "number"
-  },
-  dateFontsizeMobile: {
-    type: "number"
-  },
-  dateFontFamily: {
-    type: "string",
-    default: "Default"
-  },
-  dateFontWeight: {
-    type: "string"
-  },
-  dateFontSubset: {
-    type: "string"
-  },
-  dateLineHeightType: {
-    type: "string",
-    default: "px"
-  },
-  dateLineHeight: {
-    type: "number"
-  },
-  dateLineHeightTablet: {
-    type: "number"
-  },
-  dateLineHeightMobile: {
-    type: "number"
-  },
-  dateLoadGoogleFonts: {
-    type: "boolean",
-    default: false
-  },
-  connectorBgsize: {
-    type: "number",
-    default: 35
-  },
-  subHeadSpace: {
-    type: "number",
-    default: 5
-  },
-  dateBottomspace: {
-    type: "number",
-    default: 5
-  },
-  block_id: {
-    type: "string",
-    default: "0"
-  },
-  timelineItem: {
-    type: "number",
-    default: ITEM_COUNT
-  },
-  tm_client_id: {
-    type: "string",
-    default: "not_set"
-  },
-  borderRadius: {
-    type: "number",
-    default: 2
-  },
-  bgPadding: {
-    type: "number",
-    default: 20
-  },
-  iconSize: {
-    type: "number",
-    default: ""
-  },
-  icon: {
-    type: "string",
-    default: "fab fa fa-calendar-alt"
-  },
-  t_date: {
-    type: "array",
-    default: date_arr
-  },
-  displayPostDate: {
-    type: "boolean",
-    default: true
-  },
-  stack: {
-    type: "string",
-    default: "tablet"
-  },
-  timelineLayout: {
-    type: "string",
-    default: "vertical"
-  },
-  iconSizeType: {
-    type: "string",
-    default: "px"
-  },
-  iconBoxSize: {
-    type: "number",
-    default: ""
-  },
-  iconBoxSizeType: {
-    type: "string",
-    default: "px"
-  },
-  middleLineSize: {
-    type: "number",
-    default: ""
-  },
-  middleLineSizeType: {
-    type: "string",
-    default: "px"
-  },
-  Orientation: {
-    type: "string",
-    default: "left"
-  },
-  BothsidedOrientation: {
-    type: "string",
-    default: "right"
-  },
-  LineColor: {
-    type: "string",
-    default: ""
-  },
-  iconBg: {
-    type: "string",
-    default: ""
-  },
-  storyBorderColor: {
-    type: "string",
-    default: ""
-  },
-  iconToggle: {
-    type: "boolean",
-    default: false
-  },
-  timelineDesign: {
-    type: "string",
-    default: "both-sided"
-  },
-  sliderActive: {
-    type: "boolean",
-    default: false
-  },
-  innerBlockCount: {
-    type: "number",
-    default: 0
-  },
-  spinnerActive: {
-    type: "boolean",
-    default: false
-  },
-  slidePerView: {
-    type: "number",
-    default: 3
-  },
-  iconColor: {
-    type: "string",
-    default: ""
-  },
-  containerTopPadding: {
-    type: "number",
-    default: ''
-  },
-  containerRightPadding: {
-    type: "number",
-    default: ''
-  },
-  containerBottomPadding: {
-    type: "number",
-    default: ''
-  },
-  containerLeftPadding: {
-    type: "number",
-    default: ''
-  },
-  desktopConatinerPaddingType: {
-    type: "string",
-    default: "px"
-  },
-  marginLink: {
-    type: "boolean",
-    default: false
-  },
-  OrientationCheckBox: {
-    type: "boolean",
-    default: false
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
-
-/***/ }),
-
-/***/ "./src/story-timeline/depr_styling.js":
-/*!********************************************!*\
-  !*** ./src/story-timeline/depr_styling.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _component_css_generateCSS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/css/generateCSS */ "./src/component/css/generateCSS.js");
-/* harmony import */ var _component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/css/generateCSSUnit */ "./src/component/css/generateCSSUnit.js");
-/**
- * Returns Dynamic Generated CSS
- */
-
-
-
-const addAlpha = (color, opacity) => {
-  // coerce values so ti is between 0 and 1.
-  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
-  return color + _opacity.toString(16).toUpperCase();
-}; // returns 'FF0000FF'
-
-function deprContentTimelineStyle(props) {
-  const {
-    itemSpacing,
-    itemSpacingType,
-    contentAlignment,
-    iconColor,
-    dateFontsizeType,
-    dateFontsize,
-    dateFontsizeTablet,
-    dateFontsizeMobile,
-    dateFontFamily,
-    dateFontWeight,
-    dateLineHeightType,
-    dateLineHeight,
-    dateColor,
-    iconSize,
-    iconFocus,
-    iconBgFocus,
-    block_id,
-    headFontSizeType,
-    headFontSize,
-    headFontSizeTablet,
-    headFontSizeMobile,
-    headFontFamily,
-    headFontWeight,
-    headLineHeightType,
-    headLineHeight,
-    headLineHeightTablet,
-    headLineHeightMobile,
-    align,
-    headingColor,
-    headSpace,
-    titileBtSpacing,
-    titileBtSpacingType,
-    descBtSpacing,
-    descBtSpacingType,
-    subHeadFontSizeType,
-    subHeadFontSize,
-    subHeadFontFamily,
-    subHeadFontWeight,
-    subHeadLineHeightType,
-    subHeadLineHeight,
-    subHeadLineHeightTablet,
-    subHeadLineHeightMobile,
-    subHeadingColor,
-    LineColor,
-    iconBg,
-    storyBorderColor,
-    iconSizeType,
-    iconBoxSize,
-    iconBoxSizeType,
-    middleLineSize,
-    middleLineSizeType,
-    containerTopPadding,
-    containerRightPadding,
-    containerBottomPadding,
-    containerLeftPadding,
-    desktopConatinerPaddingType
-  } = props.attributes;
-  let arrow_position = iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : '';
-  let middleline_position = '';
-  if (arrow_position != '') {
-    middleline_position = "calc( 30.6% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
-  }
-  ;
-  let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E", 0);
-  var resp_selectors = "left";
-  var selectors = {
-    " .cool-vertical-timeline-body .timeline-block-vertical-timeline": {
-      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
-      "text-align": contentAlignment != '' ? contentAlignment : ''
-    },
-    " .cool-vertical-timeline-body .timeline-block-timeline": {
-      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
-      "text-align": contentAlignment != '' ? contentAlignment : ''
-    },
-    " .cool-vertical-timeline-body .story-details h3": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
-      "font-family": headFontFamily,
-      "font-weight": headFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
-      "color": headingColor,
-      "margin-bottom": titileBtSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(titileBtSpacing, titileBtSpacingType) : ''
-    },
-    " .cool-horizontal-timeline-body .story-details h3": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
-      "font-family": headFontFamily,
-      "font-weight": headFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
-      "color": headingColor
-    },
-    " .cool-vertical-timeline-body .story-time p": {
-      "color": dateColor != '' ? dateColor : '#333',
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
-      "font-family": dateFontFamily,
-      "font-weight": dateFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
-    },
-    " .cool-horizontal-timeline-body .story-time p": {
-      "color": dateColor != '' ? dateColor : '#333',
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
-      "font-family": dateFontFamily,
-      "font-weight": dateFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
-    },
-    " .cool-vertical-timeline-body .story-details p": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
-      "font-family": subHeadFontFamily,
-      "font-weight": subHeadFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
-      "color": subHeadingColor,
-      "margin-bottom": descBtSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(descBtSpacing, descBtSpacingType) : ''
-    },
-    " .cool-horizontal-timeline-body .story-details p": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
-      "font-family": subHeadFontFamily,
-      "font-weight": subHeadFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
-      "color": subHeadingColor
-    },
-    " .cool-vertical-timeline-body::before": {
-      "background": "linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 10%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 90%, rgba(230, 230, 230, 0) 100%)",
-      "width": middleLineSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left::before": {
-      "left": middleline_position != '' ? middleline_position : '',
-      "transform": middleline_position != '' ? "translateX(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.right::before": {
-      "right": middleline_position != '' ? middleline_position : '',
-      "transform": middleline_position != '' ? "translateX(50%)" : ''
-    },
-    " .cool-horizontal-timeline-body .timeline-content::before": {
-      "background": LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .timeline-content::after": {
-      "background": LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-vertical-timeline-body .timeline-content::before": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
-    },
-    " .cool-vertical-timeline-body.left .story-details::after": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
-    },
-    " .cool-vertical-timeline-body.right .story-time::after": {
-      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
-    },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon": {
-      "background": `${iconBg != '' ? iconBg : "#D91B3E"} !important`,
-      "width": iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + ")" : '',
-      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "font-size": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon": {
-      "width": iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + " - 6px)" : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg": {
-      "width": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : '',
-      "height": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
-    },
-    " .cool-horizontal-timeline-body .timeline-content .timeline-block-icon": {
-      "background": iconBg != '' ? iconBg + " !important" : "#D91B3E" + " !important"
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
-      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content  .story-details": {
-      "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "padding-top": containerTopPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerTopPadding, desktopConatinerPaddingType) : '',
-      "padding-right": containerRightPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerRightPadding, desktopConatinerPaddingType) : '',
-      "padding-bottom": containerBottomPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerBottomPadding, desktopConatinerPaddingType) : '',
-      "padding-left": containerLeftPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerLeftPadding, desktopConatinerPaddingType) : ''
-    },
-    " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before": {
-      "border-bottom-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
-    },
-    " .cool-horizontal-timeline-body .ctl-6.timeline-block-detail": {
-      "border-top-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
-    },
-    " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon": {
-      "border-color": border_color + " !important"
-    },
-    " .cool-horizontal-timeline-body .swiper-button-next": {
-      "color": LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .swiper-button-prev": {
-      "color": LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .cool-horizontal-timeline-body .swiper-pagination-bullet-active": {
-      "background": LineColor != '' ? LineColor : "#D91B3E"
-    },
-    " .icon-true .timeline-block-icon span.timeline-block-render-icon svg": {
-      "fill": iconColor != '' ? iconColor : 'white'
-    }
-  };
-  var styling_css = "";
-  var id = `.cool-timeline-block-${block_id}`;
-  styling_css = (0,_component_css_generateCSS__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
-  return styling_css;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deprContentTimelineStyle);
-
-/***/ }),
-
-/***/ "./src/story-timeline/deprecated.js":
-/*!******************************************!*\
-  !*** ./src/story-timeline/deprecated.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/story-timeline/style.scss");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes */ "./src/story-timeline/attributes.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _depr_styling__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./depr_styling */ "./src/story-timeline/depr_styling.js");
-
-
-
-
-
-const {
-  useBlockProps,
-  InnerBlocks
-} = wp.blockEditor;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: props => {
-    const Save = props => {
-      const {
-        block_id,
-        timelineLayout,
-        Orientation,
-        timelineDesign,
-        slidePerView
-      } = props.attributes;
-      const InnerBlocksLength = () => {
-        return wp.data.select("core/block-editor").getBlockCount(block_id);
-      };
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "cool-timeline-block-" + block_id + ""
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
-        dangerouslySetInnerHTML: {
-          __html: (0,_depr_styling__WEBPACK_IMPORTED_MODULE_4__["default"])(props)
-        },
-        scoped: "true"
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "cool-timeline-block-list"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
-    };
-    const blockProps = useBlockProps.save({
-      className: 'Cool-Content-Timeline'
-    });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Save, props));
-  }
-}]);
-
-/***/ }),
-
-/***/ "./src/story-timeline/edit.js":
-/*!************************************!*\
-  !*** ./src/story-timeline/edit.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/icon/timeline.png */ "./src/component/icon/timeline.png");
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/times */ "./node_modules/lodash/times.js");
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_times__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _styling__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styling */ "./src/story-timeline/styling.js");
-/* harmony import */ var _component_typography__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/typography */ "./src/component/typography/index.js");
-/* harmony import */ var _component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/customComponents/MultipleUnits */ "./src/component/customComponents/MultipleUnits.js");
-/* harmony import */ var _component_typography_fontloader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/typography/fontloader */ "./src/component/typography/fontloader.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./attributes */ "./src/story-timeline/attributes.js");
-
-
-
-
-// import map from "lodash/map"
-
-
-
-
-// Import all of our Text Options requirements.
-
-// Import different sides unts controler
-
-
-// // Import Web font loader for google fonts.y
-
-const {
-  dateI18n
-} = wp.date;
-const {
-  Component,
-  Fragment
-} = wp.element;
-
-
-
-const {
-  BlockControls,
-  InspectorControls,
-  BlockAlignmentToolbar,
-  PanelColorSettings,
-  InnerBlocks
-} = wp.blockEditor;
-const {
-  PanelBody,
-  SelectControl,
-  RangeControl,
-  TabPanel,
-  Toolbar,
-  ToolbarDropdownMenu,
-  Spinner,
-  ColorPicker,
-  ColorPalette,
-  Card,
-  CardBody,
-  Button,
-  ButtonGroup,
-  ToggleControl
-} = wp.components;
-const {
-  dispatch,
-  select,
-  withSelect
-} = wp.data;
-const ALLOWED_BLOCKS = ["cp-timeline/content-timeline-block-child"];
-const $ = jQuery;
-class Edit extends Component {
-  constructor() {
-    super();
-    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "resetcolorpalate", e => {
-      this.props.setAttributes(e);
-    });
-    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "OrientationCheck", e => {
-      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
-      const position = blocks[0]['attributes']['blockPosition'];
-      this.onUpdateOrientation(position, e);
-    });
-    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "onUpdateHeadingTag", e => {
-      this.props.setAttributes({
-        headingTag: e
-      });
-      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
-      blocks.forEach((block, index) => {
-        block.attributes.headingTag = e;
-      });
-    });
-    this.onUpdateOrientation = this.onUpdateOrientation.bind(this);
-  }
-  addBlock(e) {
-    let position = this.props.attributes.BothsidedOrientation;
-    let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
-    let name = 'cp-timeline/content-timeline-block-child';
-    const oddPosition = position,
-      evenPosition = position == 'right' ? 'left' : 'right';
-    let insertedBlock = wp.blocks.createBlock(name, {
-      block_position_active: false,
-      blockPosition: index % 2 ? evenPosition : oddPosition,
-      storyPositionHide: !this.props.attributes.OrientationCheck,
-      headingTag: this.props.attributes.headingTag
-    });
-    wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
-    let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
-  }
-  onUpdateOrientation(newOrientation, position) {
-    this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
-      BothsidedOrientation: newOrientation
-    });
-    this.props.setAttributes({
-      Orientation: newOrientation
-    });
-    if (this.props.attributes.timelineLayout == "vertical" && this.props.attributes.timelineDesign == "both-sided") {
-      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks,
-        evenPosition = newOrientation,
-        oddPosition = newOrientation === 'left' ? 'right' : 'left';
-      blocks.forEach((block, index) => {
-        block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition, block.attributes.storyPositionHide = !position;
-      });
-    }
-  }
-
-  // custom color reset option
-
-  render() {
-    // Setup the attributes.
-    const {
-      setAttributes,
-      attributes: {
-        itemSpacing,
-        contentAlignment,
-        LineColor,
-        timelineLayout,
-        tm_content,
-        headingColor,
-        subHeadingColor,
-        titileBtSpacing,
-        headFontSizeType,
-        headFontSize,
-        headFontSizeTablet,
-        headFontSizeMobile,
-        headFontFamily,
-        headFontWeight,
-        headFontSubset,
-        headLineHeightType,
-        headLineHeight,
-        headLineHeightTablet,
-        headLineHeightMobile,
-        headLoadGoogleFonts,
-        timelineItem,
-        descBtSpacing,
-        subHeadFontSizeType,
-        subHeadFontSize,
-        subHeadFontSizeTablet,
-        subHeadFontSizeMobile,
-        subHeadFontFamily,
-        subHeadFontWeight,
-        subHeadFontSubset,
-        subHeadLineHeightType,
-        subHeadLineHeight,
-        subHeadLineHeightTablet,
-        subHeadLineHeightMobile,
-        subHeadLoadGoogleFonts,
-        dateColor,
-        storyBorderColor,
-        dateFontsizeType,
-        dateFontsize,
-        dateFontsizeTablet,
-        dateFontsizeMobile,
-        dateFontFamily,
-        dateFontWeight,
-        dateFontSubset,
-        dateLineHeightType,
-        dateLineHeight,
-        dateLineHeightTablet,
-        dateLineHeightMobile,
-        dateLoadGoogleFonts,
-        iconBg,
-        Orientation,
-        timelineDesign,
-        slidePerView,
-        iconColor,
-        iconSize,
-        iconSizeType,
-        iconBoxSize,
-        iconBoxSizeType,
-        middleLineSize,
-        middleLineSizeType,
-        containerTopPadding,
-        containerRightPadding,
-        containerBottomPadding,
-        containerLeftPadding,
-        desktopConatinerPaddingType,
-        marginLink,
-        isPreview,
-        OrientationCheckBox,
-        headingTag
-      }
-    } = this.props;
-    var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId);
-    if (element) {
-      element.innerHTML = (0,_styling__WEBPACK_IMPORTED_MODULE_6__["default"])(this.props);
-    }
-    const orientation_setting = timelineLayout == "vertical" && timelineDesign == 'one-sided' || timelineLayout == "vertical" && timelineDesign == 'both-sided' && OrientationCheckBox ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
-      label: timelineDesign == "both-sided" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("first story Based") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Alignment"),
-      value: Orientation,
-      onChange: this.onUpdateOrientation,
-      options: [{
-        value: "right",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Right Sided", "timeline-block")
-      }, {
-        value: "left",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Left Sided", "timeline-block")
-      }]
-    })) : null;
-    const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      className: "timeline-block-settings-labels"
-    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
-      attributes: this.props.attributes,
-      setAttributes: setAttributes,
-      loadGoogleFonts: {
-        value: headLoadGoogleFonts,
-        label: 'headLoadGoogleFonts'
-      },
-      fontFamily: {
-        value: headFontFamily,
-        label: 'headFontFamily'
-      },
-      fontWeight: {
-        value: headFontWeight,
-        label: 'headFontWeight'
-      },
-      fontSubset: {
-        value: headFontSubset,
-        label: 'headFontSubset'
-      },
-      fontSizeType: {
-        value: headFontSizeType,
-        label: 'headFontSizeType'
-      },
-      fontSize: {
-        value: headFontSize,
-        label: 'headFontSize'
-      },
-      fontSizeMobile: {
-        value: headFontSizeMobile,
-        label: 'headFontSizeMobile'
-      },
-      fontSizeTablet: {
-        value: headFontSizeTablet,
-        label: 'headFontSizeTablet'
-      },
-      lineHeightType: {
-        value: headLineHeightType,
-        label: 'headLineHeightType'
-      },
-      lineHeight: {
-        value: headLineHeight,
-        label: 'headLineHeight'
-      },
-      lineHeightMobile: {
-        value: headLineHeightMobile,
-        label: 'headLineHeightMobile'
-      },
-      lineHeightTablet: {
-        value: headLineHeightTablet,
-        label: 'headLineHeightTablet'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 15 + 'px'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        headingColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: headingColor,
-      onChange: colorValue => setAttributes({
-        headingColor: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 15 + 'px',
-        'margin-bottom': 10 + 'px'
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Select Heading Tag", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl
-    // label={ __("Select Heading Tag") }
-    , {
-      value: headingTag,
-      onChange: e => this.onUpdateHeadingTag(e),
-      options: [{
-        value: "h1",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H1", "timeline-block")
-      }, {
-        value: "h2",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H2", "timeline-block")
-      }, {
-        value: "h3",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H3", "timeline-block")
-      }, {
-        value: "h4",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H4", "timeline-block")
-      }, {
-        value: "h5",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H5", "timeline-block")
-      }, {
-        value: "h6",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H6", "timeline-block")
-      }]
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 15 + 'px'
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: titileBtSpacing != '' ? titileBtSpacing : 0,
-      onChange: value => setAttributes({
-        titileBtSpacing: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 0,
-      max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
-      className: "timeline-block-editor__separator"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      className: "timeline-block-settings-labels"
-    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
-      attributes: this.props.attributes,
-      setAttributes: setAttributes,
-      loadGoogleFonts: {
-        value: subHeadLoadGoogleFonts,
-        label: 'subHeadLoadGoogleFonts'
-      },
-      fontFamily: {
-        value: subHeadFontFamily,
-        label: 'subHeadFontFamily'
-      },
-      fontWeight: {
-        value: subHeadFontWeight,
-        label: 'subHeadFontWeight'
-      },
-      fontSubset: {
-        value: subHeadFontSubset,
-        label: 'subHeadFontSubset'
-      },
-      fontSizeType: {
-        value: subHeadFontSizeType,
-        label: 'subHeadFontSizeType'
-      },
-      fontSize: {
-        value: subHeadFontSize,
-        label: 'subHeadFontSize'
-      },
-      fontSizeMobile: {
-        value: subHeadFontSizeMobile,
-        label: 'subHeadFontSizeMobile'
-      },
-      fontSizeTablet: {
-        value: subHeadFontSizeTablet,
-        label: 'subHeadFontSizeTablet'
-      },
-      lineHeightType: {
-        value: subHeadLineHeightType,
-        label: 'subHeadLineHeightType'
-      },
-      lineHeight: {
-        value: subHeadLineHeight,
-        label: 'subHeadLineHeight'
-      },
-      lineHeightMobile: {
-        value: subHeadLineHeightMobile,
-        label: 'subHeadLineHeightMobile'
-      },
-      lineHeightTablet: {
-        value: subHeadLineHeightTablet,
-        label: 'subHeadLineHeightTablet'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 10 + 'px'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        subHeadingColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: subHeadingColor,
-      onChange: colorValue => setAttributes({
-        subHeadingColor: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 15 + 'px'
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: descBtSpacing != '' ? descBtSpacing : 0,
-      onChange: value => setAttributes({
-        descBtSpacing: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 0,
-      max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
-      className: "timeline-block-editor__separator"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
-      className: "timeline-block-settings-labels"
-    }, "Primary Label(Date/Steps)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
-      attributes: this.props.attributes,
-      setAttributes: setAttributes,
-      loadGoogleFonts: {
-        value: dateLoadGoogleFonts,
-        label: 'dateLoadGoogleFonts'
-      },
-      fontFamily: {
-        value: dateFontFamily,
-        label: 'dateFontFamily'
-      },
-      fontWeight: {
-        value: dateFontWeight,
-        label: 'dateFontWeight'
-      },
-      fontSubset: {
-        value: dateFontSubset,
-        label: 'dateFontSubset'
-      },
-      fontSizeType: {
-        value: dateFontsizeType,
-        label: 'dateFontsizeType'
-      },
-      fontSize: {
-        value: dateFontsize,
-        label: 'dateFontsize'
-      },
-      fontSizeMobile: {
-        value: dateFontsizeMobile,
-        label: 'dateFontsizeMobile'
-      },
-      fontSizeTablet: {
-        value: dateFontsizeTablet,
-        label: 'dateFontsizeTablet'
-      },
-      lineHeightType: {
-        value: dateLineHeightType,
-        label: 'dateLineHeightType'
-      },
-      lineHeight: {
-        value: dateLineHeight,
-        label: 'dateLineHeight'
-      },
-      lineHeightMobile: {
-        value: dateLineHeightMobile,
-        label: 'dateLineHeightMobile'
-      },
-      lineHeightTablet: {
-        value: dateLineHeightTablet,
-        label: 'dateLineHeightTablet'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      style: {
-        'margin-top': 10 + 'px'
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        dateColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: dateColor,
-      onChange: colorValue => setAttributes({
-        dateColor: colorValue
-      })
-    })));
-    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        LineColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: LineColor,
-      onChange: colorValue => setAttributes({
-        LineColor: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        iconColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: iconColor,
-      onChange: colorValue => setAttributes({
-        iconColor: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        iconBg: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: iconBg,
-      onChange: colorValue => setAttributes({
-        iconBg: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "cp-timeline-block-style-settings"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      class: `components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`,
-      onClick: e => this.resetcolorpalate({
-        storyBorderColor: ''
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      class: "dashicon dashicons dashicons-image-rotate"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
-      className: "cp-timeline-block-color-palates",
-      clearable: false,
-      value: storyBorderColor,
-      onChange: colorValue => setAttributes({
-        storyBorderColor: colorValue
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Item Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: itemSpacing != '' ? itemSpacing : 0,
-      onChange: value => setAttributes({
-        itemSpacing: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 0,
-      max: 200
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Icon Box Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: iconBoxSize != '' ? iconBoxSize : 0,
-      onChange: value => setAttributes({
-        iconBoxSize: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 20,
-      max: 100
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Icon Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: iconSize != '' ? iconSize : 0,
-      onChange: value => setAttributes({
-        iconSize: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 0,
-      max: 100
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Line Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      className: "cp-timeline-block-range__control",
-      value: middleLineSize != '' ? middleLineSize : 0,
-      onChange: value => setAttributes({
-        middleLineSize: value
-      }),
-      resetFallbackValue: 0,
-      allowReset: true,
-      min: 0,
-      max: 10
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_customComponents_MultipleUnits__WEBPACK_IMPORTED_MODULE_8__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)('Container Padding', 'timeline-block'),
-      valueTop: {
-        value: containerTopPadding,
-        label: 'containerTopPadding'
-      },
-      valueRight: {
-        value: containerRightPadding,
-        label: 'containerRightPadding'
-      },
-      valueBottom: {
-        value: containerBottomPadding,
-        label: 'containerBottomPadding'
-      },
-      valueLeft: {
-        value: containerLeftPadding,
-        label: 'containerLeftPadding'
-      },
-      unit: {
-        value: desktopConatinerPaddingType,
-        label: 'desktopConatinerPaddingType'
-      },
-      attributes: this.props.attributes,
-      setAttributes: setAttributes,
-      link: {
-        value: marginLink,
-        label: 'marginLink'
-      }
-    })));
-    const rating_box = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Please Share Your Valuable Feedback.", "timeline-block")
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
-      className: "cool-timeline-gt-block-review-tab"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("We hope you liked our plugin created timelines. Please share your valuable feedback.", "timeline-block"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
-      href: "https://wordpress.org/support/plugin/timeline-block/reviews/#new-post",
-      className: "components-button is-primary is-small",
-      target: "_blank"
-    }, "Rate Us", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " \u2605\u2605\u2605\u2605\u2605"))));
-    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Timeline Design", "timeline-block"),
-      value: timelineDesign,
-      onChange: value => {
-        setAttributes({
-          timelineDesign: value
-        });
-      },
-      options: [{
-        value: "both-sided",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Both Sided", "timeline-block")
-      }, {
-        value: "one-sided",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("One Sided", "timeline-block")
-      }]
-    }) : null, timelineLayout == "vertical" && timelineDesign == 'both-sided' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "components-base-control"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
-      className: "timeline-block-settings-labels"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Alternating Sided", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToggleControl, {
-      className: "timeline-block-Orientation_checkbox",
-      checked: OrientationCheckBox,
-      onChange: state => {
-        setAttributes({
-          OrientationCheckBox: state
-        }), this.OrientationCheck(state);
-      }
-    })) : null, ["one-sided", 'both-sided'].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: "timeline-block-settings-labels"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Content Alignment", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ButtonGroup, {
-      className: "cool-timeline-content-alignment-buttons"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
-      onClick: e => {
-        setAttributes({
-          contentAlignment: 'left'
-        });
-      },
-      className: contentAlignment == 'left' ? 'active' : ''
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      className: "dashicons dashicons-editor-alignleft"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
-      onClick: e => {
-        setAttributes({
-          contentAlignment: 'center'
-        });
-      },
-      className: contentAlignment == 'center' ? 'active' : ''
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      className: "dashicons dashicons-editor-aligncenter"
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
-      onClick: e => {
-        setAttributes({
-          contentAlignment: 'right'
-        });
-      },
-      className: contentAlignment == 'right' ? 'active' : ''
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
-      className: "dashicons dashicons-editor-alignright"
-    }))));
-    let settingTabs = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(TabPanel, {
-      className: "cooltimeline-tab-settings",
-      activeClass: "active-tab",
-      tabs: [{
-        name: 'timeline_setting',
-        title: 'General',
-        className: 'tab-one',
-        content: timeline_setting
-      }, {
-        name: 'general_setting',
-        title: 'Style',
-        className: 'tab-two',
-        content: general_setting
-      }, {
-        name: 'advanced_setting',
-        title: 'Advanced',
-        className: 'tab-three',
-        content: advanced_setting
-      }]
-    }, tab => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Card, null, tab.content)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("View Timeline Demos", "timeline-block"),
-      initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
-      className: "cp-timeline-block-demo-button"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
-      target: "_blank",
-      class: "button button-primary",
-      href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=demo&utm_content=block_settings"
-    }, "View Demos"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
-      target: "_blank",
-      class: "button button-primary",
-      href: "https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/"
-    }, "Watch Videos"))), rating_box);
-    const getContentTimelineTemplate = memize__WEBPACK_IMPORTED_MODULE_5___default()((icon_block, tm_content) => {
-      return lodash_times__WEBPACK_IMPORTED_MODULE_4___default()(icon_block, n => ['cp-timeline/content-timeline-block-child', tm_content[n]]);
-    });
-    let loadHeadGoogleFonts;
-    let loadSubHeadGoogleFonts;
-    let loadDateGoogleFonts;
-    if (headLoadGoogleFonts == true) {
-      const headconfig = {
-        google: {
-          families: [headFontFamily + (headFontWeight ? ":" + headFontWeight : "")]
-        }
-      };
-      loadHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        config: headconfig
-      });
-    }
-    if (subHeadLoadGoogleFonts == true) {
-      const subHeadconfig = {
-        google: {
-          families: [subHeadFontFamily + (subHeadFontWeight ? ":" + subHeadFontWeight : "")]
-        }
-      };
-      loadSubHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        config: subHeadconfig
-      });
-    }
-    if (dateLoadGoogleFonts == true) {
-      const dateconfig = {
-        google: {
-          families: [dateFontFamily + (dateFontWeight ? ":" + dateFontWeight : "")]
-        }
-      };
-      loadDateGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        config: dateconfig
-      });
-    }
-    return (
-      // on hover preview image add for editor side
-      isPreview ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("img", {
-        width: "100%",
-        src: _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__,
-        alt: ""
-      }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, timelineDesign == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(BlockControls, {
-        group: "block"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToolbarDropdownMenu, {
-        icon: "layout",
-        label: "Layout",
-        controls: [{
-          title: 'Both Sided',
-          onClick: () => setAttributes({
-            timelineDesign: "both-sided"
-          })
-        }, {
-          title: 'One Sided',
-          onClick: () => setAttributes({
-            timelineDesign: "one-sided"
-          })
-        }]
-      })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-        className: "cool-timeline-block-" + this.props.clientId + " cool-timeline-block"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-        className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-        className: "cool-timeline-block-list"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InnerBlocks, {
-        allowedBlocks: ALLOWED_BLOCKS,
-        orientation: "vertical",
-        template: getContentTimelineTemplate(timelineItem, tm_content)
-      }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-        className: "timeline-block-add-story"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("button", {
-        onClick: e => this.addBlock(e),
-        type: "button",
-        visible: "true",
-        className: "components-button block-editor-button-block-appender is-primary",
-        "aria-label": "Add Story"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 24 24",
-        width: "24",
-        height: "24",
-        role: "img",
-        "aria-hidden": "true",
-        focusable: "false"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("path", {
-        d: "M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"
-      })), "Add Story")))))
-    );
-  }
-  componentDidMount() {
-    // //Store client id.
-    this.props.setAttributes({
-      block_id: this.props.clientId
-    });
-
-    // Pushing Style tag for this block css.
-    const $style = document.createElement("style");
-    $style.setAttribute("id", "cool-vertical-timeline-style-" + this.props.clientId);
-    document.head.appendChild($style);
-    let timelineLayout = this.props.attributes.timelineLayout;
-    let timelineDesign = this.props.attributes.timelineDesign;
-
-    // Recalculate alternating sides if new child block was added or removed
-    // this.childCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
-    wp.data.subscribe(() => {
-      const childBlocks = select("core/block-editor").getBlock(this.props.clientId);
-      if (!childBlocks || !childBlocks.innerBlocks) {
-        return;
-      }
-      const currentChildCount = childBlocks.innerBlocks.length;
-      const childWasAddedOrRemoved = this.childCount !== currentChildCount;
-      this.childCount = currentChildCount;
-      if (!childWasAddedOrRemoved) {
-        return;
-      }
-      // this.onUpdateOrientation(this.props.attributes.Orientation);
-    });
-  }
-
-  componentDidUpdate() {
-    let clientId = this.props.clientId;
-  }
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
-
-/***/ }),
-
-/***/ "./src/story-timeline/index.js":
-/*!*************************************!*\
-  !*** ./src/story-timeline/index.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/story-timeline/style.scss");
-/* harmony import */ var _deprecated__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./deprecated */ "./src/story-timeline/deprecated.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/story-timeline/save.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./attributes */ "./src/story-timeline/attributes.js");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/story-timeline/edit.js");
-/* harmony import */ var _component_icon_insertorIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/icon/insertorIcon */ "./src/component/icon/insertorIcon.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-
-/**
- * Register: as Gutenberg Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior.
- *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
-// //  Import CSS.
-// import ".././style.scss"
-
-
-
-
-
-
-// Components
-
-
-// Register block controls
-const {
-  registerBlockType
-} = wp.blocks;
-const {
-  useBlockProps,
-  InnerBlocks
-} = wp.blockEditor;
-const {
-  addFilter
-} = wp.hooks;
-const {
-  Fragment
-} = wp.element;
-const {
-  withSelect
-} = wp.data;
-const {
-  compose,
-  createHigherOrderComponent
-} = wp.compose;
-
-/**
- * Override the default block element to add	wrapper props.
- *
- * @param  {Function} BlockListBlock Original component
- * @return {Function} Wrapped component
- */
-
-const enhance = compose(withSelect(select => {
-  return {
-    selected: select('core/block-editor').getSelectedBlock()
-  };
-}));
-/**
- * Add custom attributes to selected blocks
- *
- * @param {Function} BlockEdit Original component.
- * @return {string} Wrapped component.
- */
-const withcontentTimeline = createHigherOrderComponent(BlockEdit => {
-  return enhance(_ref => {
-    let {
-      ...props
-    } = _ref;
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props));
-  });
-}, 'withcontentTimeline');
-registerBlockType("cp-timeline/content-timeline-block", {
-  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)('Timeline Block', 'cool-timeline'),
-  // Block title.
-  apiVersion: 2,
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Timeline", 'timeline-block')],
-  icon: _component_icon_insertorIcon__WEBPACK_IMPORTED_MODULE_6__.CoolTMIcon,
-  supports: {
-    anchor: true
-  },
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_4__["default"],
-  deprecated: _deprecated__WEBPACK_IMPORTED_MODULE_2__["default"],
-  edit: props => {
-    const blockProps = useBlockProps({
-      className: 'Cool-Content-Timeline-' + props.attributes.timelineDesign
-    });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_edit__WEBPACK_IMPORTED_MODULE_5__["default"], props));
-  },
-  save: props => {
-    const blockProps = useBlockProps.save({
-      className: 'Cool-Content-Timeline'
-    });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_save__WEBPACK_IMPORTED_MODULE_3__["default"], props));
-  },
-  providesContext: {
-    'cp-timeline/timelineLayout': 'timelineLayout',
-    'cp-timeline/timelineDesign': 'timelineDesign'
-  },
-  example: {
-    attributes: {
-      backgroundColor: 'green',
-      opacity: 1,
-      padding: 10,
-      radius: 10,
-      isPreview: true
-    }
-  }
-});
-addFilter('editor.BlockEdit', 'cp-timeline/content-timeline-block', withcontentTimeline);
-
-/***/ }),
-
-/***/ "./src/story-timeline/save.js":
-/*!************************************!*\
-  !*** ./src/story-timeline/save.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Save)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _styling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styling */ "./src/story-timeline/styling.js");
-
-/**
- * BLOCK: Timeline - Save Block
- */
-
-
-const {
-  InnerBlocks
-} = wp.blockEditor;
-function Save(props) {
-  const {
-    block_id,
-    timelineLayout,
-    Orientation,
-    timelineDesign,
-    slidePerView
-  } = props.attributes;
-  const InnerBlocksLength = () => {
-    return wp.data.select("core/block-editor").getBlockCount(block_id);
-  };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "cool-timeline-block-" + block_id + ""
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
-    dangerouslySetInnerHTML: {
-      __html: (0,_styling__WEBPACK_IMPORTED_MODULE_2__["default"])(props)
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "cool-timeline-block-list"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
-}
-
-/***/ }),
-
-/***/ "./src/story-timeline/styling.js":
-/*!***************************************!*\
-  !*** ./src/story-timeline/styling.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _component_css_generateCSS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/css/generateCSS */ "./src/component/css/generateCSS.js");
-/* harmony import */ var _component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/css/generateCSSUnit */ "./src/component/css/generateCSSUnit.js");
-/**
- * Returns Dynamic Generated CSS
- */
-
-
-
-const addAlpha = (color, opacity) => {
-  // coerce values so ti is between 0 and 1.
-  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
-  return color + _opacity.toString(16).toUpperCase();
-}; // returns 'FF0000FF'
-
-function contentTimelineStyle(props) {
-  const {
-    itemSpacing,
-    itemSpacingType,
-    contentAlignment,
-    iconColor,
-    dateFontsizeType,
-    dateFontsize,
-    dateFontsizeTablet,
-    dateFontsizeMobile,
-    dateFontFamily,
-    dateFontWeight,
-    dateLineHeightType,
-    dateLineHeight,
-    dateColor,
-    iconSize,
-    iconFocus,
-    iconBgFocus,
-    block_id,
-    headFontSizeType,
-    headFontSize,
-    headFontSizeTablet,
-    headFontSizeMobile,
-    headFontFamily,
-    headFontWeight,
-    headLineHeightType,
-    headLineHeight,
-    headLineHeightTablet,
-    headLineHeightMobile,
-    align,
-    headingColor,
-    headSpace,
-    titileBtSpacing,
-    titileBtSpacingType,
-    descBtSpacing,
-    descBtSpacingType,
-    subHeadFontSizeType,
-    subHeadFontSize,
-    subHeadFontFamily,
-    subHeadFontWeight,
-    subHeadLineHeightType,
-    subHeadLineHeight,
-    subHeadLineHeightTablet,
-    subHeadLineHeightMobile,
-    subHeadingColor,
-    LineColor,
-    iconBg,
-    storyBorderColor,
-    iconSizeType,
-    iconBoxSize,
-    iconBoxSizeType,
-    middleLineSize,
-    middleLineSizeType,
-    containerTopPadding,
-    containerRightPadding,
-    containerBottomPadding,
-    containerLeftPadding,
-    desktopConatinerPaddingType
-  } = props.attributes;
-  let arrow_position = iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : '';
-  let middleline_position = '';
-  if (arrow_position != '') {
-    middleline_position = "calc( 30.7% + " + (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
-  }
-  ;
-  let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E", 0);
-  var resp_selectors = "left";
-  var selectors = {
-    " .cool-vertical-timeline-body .timeline-block-vertical-timeline": {
-      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
-      "text-align": contentAlignment != '' ? contentAlignment : ''
-    },
-    " .cool-vertical-timeline-body .timeline-block-timeline": {
-      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
-      "text-align": contentAlignment != '' ? contentAlignment : ''
-    },
-    " .cool-vertical-timeline-body .story-details .timeline-block_title": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
-      "font-family": headFontFamily,
-      "font-weight": headFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
-      "color": headingColor,
-      "margin-bottom": titileBtSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(titileBtSpacing, titileBtSpacingType) : ''
-    },
-    " .cool-vertical-timeline-body .story-time p": {
-      "color": dateColor != '' ? dateColor : '#333',
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
-      "font-family": dateFontFamily,
-      "font-weight": dateFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
-    },
-    " .cool-vertical-timeline-body .story-details .timeline-block_desc p": {
-      "font-size": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
-      "font-family": subHeadFontFamily,
-      "font-weight": subHeadFontWeight,
-      "line-height": (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
-      "color": subHeadingColor,
-      "margin-bottom": descBtSpacing != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(descBtSpacing, descBtSpacingType) : ''
-    },
-    " .cool-vertical-timeline-body::before": {
-      "background": "linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 10%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 90%, rgba(230, 230, 230, 0) 100%)",
-      "width": middleLineSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left::before": {
-      "left": middleline_position != '' ? middleline_position : '',
-      "transform": iconBoxSize != '' || middleLineSize != '' ? "translateX(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.right::before": {
-      "right": middleline_position != '' ? middleline_position : '',
-      "transform": middleline_position != '' ? "translateX(50%)" : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content::before": {
-      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
-    },
-    " .cool-vertical-timeline-body.left .story-details::after": {
-      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
-    },
-    " .cool-vertical-timeline-body.right .story-time::after": {
-      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
-    },
-    " .cool-vertical-timeline-body .timeline-content.icon-true .timeline-block-icon": {
-      "background": iconBg != '' ? iconBg : "#D91B3E",
-      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "margin-top": iconBoxSize != '' ? '15px' : '',
-      "font-size": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon": {
-      "background": 'transparent',
-      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon svg": {
-      "fill": iconBg != '' ? iconBg : "#D91B3E",
-      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true .timeline-block-icon": {
-      "left": iconBoxSize != '' ? '-2px' : '',
-      "margin-left": iconBoxSize != '' ? '12px' : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-icon": {
-      "right": iconBoxSize != '' ? '0px' : '',
-      "margin-right": iconBoxSize != '' ? '9px' : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon": {
-      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
-      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon.position-left": {
-      "left": iconBoxSize != '' && iconBoxSize > 29 ? '-2px' : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg": {
-      "width": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : '',
-      "height": iconSize != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before": {
-      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
-      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
-      "border-right-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
-      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
-      "margin-top": arrow_position != '' ? arrow_position : '',
-      "transform": arrow_position != '' ? "translateY(-50%)" : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content  .story-details": {
-      "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
-      "padding-top": containerTopPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerTopPadding, desktopConatinerPaddingType) : '',
-      "padding-right": containerRightPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerRightPadding, desktopConatinerPaddingType) : '',
-      "padding-bottom": containerBottomPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerBottomPadding, desktopConatinerPaddingType) : '',
-      "padding-left": containerLeftPadding != '' ? (0,_component_css_generateCSSUnit__WEBPACK_IMPORTED_MODULE_1__["default"])(containerLeftPadding, desktopConatinerPaddingType) : ''
-    },
-    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-detail": {
-      "padding-left": iconBoxSize != '' ? '20px' : ''
-    },
-    " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon": {
-      "border-color": border_color + " !important"
-    },
-    " .icon-true .timeline-block-icon span.timeline-block-render-icon svg": {
-      "fill": iconColor != '' ? iconColor : 'white'
-    }
-  };
-  var styling_css = "";
-  var id = `.cool-timeline-block-${block_id}`;
-  styling_css = (0,_component_css_generateCSS__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
-  return styling_css;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (contentTimelineStyle);
-
-/***/ }),
-
 /***/ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
 /*!**********************************************************************************!*\
   !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
@@ -23969,6 +15195,8654 @@ const computePosition = (reference, floating, options) => {
 
 
 
+
+/***/ }),
+
+/***/ "./src/component/css/generateCSS.js":
+/*!******************************************!*\
+  !*** ./src/component/css/generateCSS.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function generateCSS(selectors, id) {
+  let isResponsive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  let responsiveType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+  var gen_styling_css = "";
+  for (var i in selectors) {
+    var sel = selectors[i];
+    var css = "";
+    for (var j in sel) {
+      var checkString = true;
+      if (typeof sel[j] === "string" && sel[j].length === 0) {
+        checkString = false;
+      }
+      if ('font-family' === j && typeof sel[j] != "undefined" && 'Default' === sel[j]) {
+        continue;
+      }
+      if (typeof sel[j] != "undefined" && checkString) {
+        if ('font-family' === j) {
+          css += j + ": " + "'" + sel[j] + "'" + ";";
+        } else {
+          css += j + ": " + sel[j] + ";";
+        }
+      }
+    }
+    if (css.length !== 0) {
+      gen_styling_css += id;
+      gen_styling_css += i + "{";
+      gen_styling_css += css;
+      gen_styling_css += "}";
+    }
+  }
+  return gen_styling_css;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSS);
+
+/***/ }),
+
+/***/ "./src/component/css/generateCSSUnit.js":
+/*!**********************************************!*\
+  !*** ./src/component/css/generateCSSUnit.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function generateCSSUnit(value, unit) {
+  var css = "";
+  if (typeof value != "undefined") {
+    css += value + unit;
+  }
+  return css;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSSUnit);
+
+/***/ }),
+
+/***/ "./src/component/customComponents/MultipleUnits.js":
+/*!*********************************************************!*\
+  !*** ./src/component/customComponents/MultipleUnits.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _styling_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styling.scss */ "./src/component/customComponents/styling.scss");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+
+/**
+ * External dependencies
+ */
+
+
+
+
+const SpacingControl = props => {
+  const responsive = true;
+  let [settingsapply, updateSettingsapply] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const {
+    label,
+    unit,
+    disableUnits,
+    valueBottom,
+    valueLeft,
+    valueRight,
+    valueTop,
+    link,
+    setAttributes
+  } = props;
+  const onChangeUnits = value => {
+    setAttributes({
+      [unit.label]: value.unitValue
+    });
+  };
+  const changeLinkedValues = newValue => {
+    setAttributes({
+      [valueTop.label]: newValue
+    });
+    setAttributes({
+      [valueRight.label]: newValue
+    });
+    setAttributes({
+      [valueBottom.label]: newValue
+    });
+    setAttributes({
+      [valueLeft.label]: newValue
+    });
+    valueupdate(newValue);
+  };
+  const onChangeTopValue = function (event) {
+    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    let newValue = value;
+    if ('' === value && '' !== event) {
+      newValue = event.target.value === '' ? 0 : Number(event.target.value);
+    }
+    valueupdate(newValue, valueRight.value, valueBottom.value, valueLeft.value);
+    if (!resetLink) {
+      if (link.value) {
+        changeLinkedValues(newValue);
+      } else {
+        changedUnLinkedValues();
+      }
+    }
+    setAttributes({
+      [valueTop.label]: newValue
+    });
+  };
+  const changedUnLinkedValues = () => {
+    setAttributes({
+      [valueTop.label]: '' === valueTop.value || undefined === valueTop.value ? 0 : valueTop.value
+    });
+    setAttributes({
+      [valueRight.label]: '' === valueRight.value || undefined === valueRight.value ? 0 : valueRight.value
+    });
+    setAttributes({
+      [valueBottom.label]: '' === valueBottom.value || undefined === valueBottom.value ? 0 : valueBottom.value
+    });
+    setAttributes({
+      [valueLeft.label]: '' === valueLeft.value || undefined === valueLeft.value ? 0 : valueLeft.value
+    });
+  };
+  const onChangeRightValue = function (event) {
+    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    let newValue = value;
+    if ('' === value && '' !== event) {
+      newValue = event.target.value === '' ? 0 : Number(event.target.value);
+    }
+    valueupdate(valueTop.value, newValue, valueBottom.value, valueLeft.value);
+    if (!resetLink) {
+      if (link.value) {
+        changeLinkedValues(newValue);
+      } else {
+        changedUnLinkedValues();
+      }
+    }
+    setAttributes({
+      [valueRight.label]: newValue
+    });
+  };
+  const onChangeBottomValue = function (event) {
+    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    let newValue = value;
+    if ('' === value && '' !== event) {
+      newValue = event.target.value === '' ? 0 : Number(event.target.value);
+    }
+    valueupdate(valueTop.value, valueRight.value, newValue, valueLeft.value);
+    if (!resetLink) {
+      if (link.value) {
+        changeLinkedValues(newValue);
+      } else {
+        changedUnLinkedValues();
+      }
+    }
+    setAttributes({
+      [valueBottom.label]: newValue
+    });
+  };
+  const onChangeLeftValue = function (event) {
+    let value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    let resetLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    let newValue = value;
+    if ('' === value && '' !== event) {
+      newValue = event.target.value === '' ? 0 : Number(event.target.value);
+    }
+    valueupdate(valueTop.value, valueRight.value, valueBottom.value, newValue);
+    if (!resetLink) {
+      if (link.value && !resetLink) {
+        changeLinkedValues(newValue);
+      } else {
+        changedUnLinkedValues();
+      }
+    }
+    setAttributes({
+      [valueLeft.label]: newValue
+    });
+  };
+  let unitSizes = [{
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Pixel', 'timeline-block'),
+    unitValue: 'px'
+  }, {
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Em', 'timeline-block'),
+    unitValue: 'em'
+  }, {
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%', 'timeline-block'),
+    unitValue: '%'
+  }];
+  if (props.units) {
+    unitSizes = props.units;
+  }
+  const onUnitSizeClick = uSizes => {
+    const items = [];
+    uSizes.map(key => items.push((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+      text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)( /* translators: abbreviation for units */
+      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s units', 'timeline-block'), key.name)
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+      key: key.unitValue,
+      className: 'timeline-block-range-control__units--' + key.name,
+      isSmall: true,
+      isPrimary: unit.value === key.unitValue,
+      isSecondary: unit.value !== key.unitValue,
+      "aria-pressed": unit.value === key.unitValue,
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)( /* translators: abbreviation for units */
+      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s units', 'timeline-block'), key.name),
+      onClick: () => onChangeUnits(key)
+    }, key.unitValue))));
+    return items;
+  };
+  let linkHtml = '';
+  if (link) {
+    linkHtml = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      className: "cp-timeline-block_control__link timeline-block-spacing-control-connected dashicons dashicons-admin-links ",
+      onClick: () => {
+        changedUnLinkedValues();
+        setAttributes({
+          [link.label]: false
+        });
+      }
+    });
+    if (!link.value) {
+      linkHtml = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+        // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        className: "cp-timeline-block_control__link timeline-block-spacing-control-disconnected dashicons dashicons-editor-unlink",
+        onClick: () => {
+          onLinkClickHandler();
+          setAttributes({
+            [link.label]: true
+          });
+        }
+      });
+    }
+  }
+  const onLinkClickHandler = () => {
+    let linkValue;
+    linkValue = valueTop.value;
+    changeLinkedValues(linkValue);
+  };
+  const output = {};
+  output.Desktop = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-spacing-control__inputs"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "cp-block-timeline-number_control top",
+    type: "number",
+    onChange: e => onChangeTopValue(e),
+    value: '' !== valueTop.value ? valueTop.value : '0'
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "cp-block-timeline-number_control right",
+    type: "number",
+    onChange: e => onChangeRightValue(e),
+    value: '' !== valueRight.value ? valueRight.value : '0'
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "cp-block-timeline-number_control bottom",
+    type: "number",
+    onChange: e => onChangeBottomValue(e),
+    value: '' !== valueBottom.value ? valueBottom.value : '0'
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "cp-block-timeline-number_control left",
+    type: "number",
+    onChange: e => onChangeLeftValue(e),
+    value: '' !== valueLeft.value ? valueLeft.value : '0'
+  }), linkHtml));
+  const resetValues = () => {
+    onChangeTopValue('', '', true);
+    onChangeRightValue('', '', true);
+    onChangeBottomValue('', '', true);
+    onChangeLeftValue('', '', true);
+    setAttributes({
+      [unit === null || unit === void 0 ? void 0 : unit.label]: 'px'
+    });
+    setAttributes({
+      [link.label]: false
+    });
+    valueupdate('');
+  };
+  const valueupdate = function () {
+    for (let i = 0; i < arguments.length; i++) {
+      if ((i < 0 || arguments.length <= i ? undefined : arguments[i]) !== 0) {
+        updateSettingsapply('timeline-container_pd_apply');
+        break;
+      } else {
+        updateSettingsapply('');
+      }
+    }
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "components-base-control timeline-block-spacing-control"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-size-type-field-tabs"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-control__header"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-control__actions"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "timeline-block-control__actions_label"
+  }, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    type: "button",
+    onClick: () => {
+      resetValues();
+    },
+    className: `timeline-block-control__actions_reset${settingsapply != '' ? ' ' + settingsapply : ' '}`,
+    isSmall: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: "dashicons dashicons-image-rotate"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ButtonGroup, {
+    className: "timeline-block-control__units",
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Units', 'timeline-block')
+  }, !disableUnits && onUnitSizeClick(unitSizes)))), output.Desktop, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-spacing-control__input-labels"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cp-block-timeline-number_control-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cp-block-timeline-number_control-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cp-block-timeline-number_control-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cp-block-timeline-number_control-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cp-block-timeline-number_control-label cp-timeline-block_control__link-label"
+  }))), props.help && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "uag-control-help-notice"
+  }, props.help));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SpacingControl);
+
+/***/ }),
+
+/***/ "./src/component/icon/insertorIcon.js":
+/*!********************************************!*\
+  !*** ./src/component/icon/insertorIcon.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CoolStoryIcon": () => (/* binding */ CoolStoryIcon),
+/* harmony export */   "CoolTMIcon": () => (/* binding */ CoolTMIcon)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+
+const CoolTMIcon = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "100%",
+  height: "100%",
+  viewBox: "0 0 62 62",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg",
+  xmlnsXlink: "http://www.w3.org/1999/xlink",
+  xmlSpace: "preserve",
+  xmlnsserif: "http://www.serif.com/",
+  style: {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeMiterlimit: 1.5
+  }
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon-only",
+  serifid: "icon only"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon-only1",
+  serifid: "icon-only"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
+  x: "29.146",
+  y: "-0.042",
+  width: "3.149",
+  height: "61.44"
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M18.433,21.461l-0.007,-4.311l5.77,-4.905l-5.766,-4.923l0.003,-4.293l-18.433,-0l-0,18.432l18.433,0",
+  style: {
+    fill: "#f12945"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "30.72",
+  cy: "12.245",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M43.007,21.461l0.007,4.312l-5.77,4.905l5.766,4.922l-0.003,4.294l18.433,-0l0,-18.433l-18.433,0",
+  style: {
+    fill: "#01c5bd"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "30.72",
+  cy: "30.678",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M18.433,58.326l-0.007,-4.311l5.77,-4.905l-5.766,-4.923l0.003,-4.293l-18.433,-0l-0,18.432l18.433,0",
+  style: {
+    fill: "#f12945"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "30.72",
+  cy: "49.11",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+})))));
+const CoolStoryIcon = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  width: "100%",
+  height: "100%",
+  viewBox: "0 0 62 62",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg",
+  xmlnsXlink: "http://www.w3.org/1999/xlink",
+  xmlSpace: "preserve",
+  xmlnsserif: "http://www.serif.com/",
+  style: {
+    fillrule: "evenodd",
+    clipRule: "evenodd",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeMiterlimit: 1.5 + "px"
+  }
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon-only",
+  serifid: "icon only"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon-only1",
+  serifid: "icon-only"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "icon"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
+  x: "2.746",
+  y: "-0.042",
+  width: "3.149",
+  height: "61.44"
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "4.32",
+  cy: "12.245",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M23.835,11.875l0.012,8.797l-11.77,10.006l11.763,10.043l-0.005,8.759l37.605,0l-0,-37.605l-37.605,0",
+  style: {
+    fill: "#01c5bd"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "4.32",
+  cy: "30.678",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+  cx: "4.32",
+  cy: "49.11",
+  r: "3.046",
+  style: {
+    fill: "#fff",
+    stroke: "#000",
+    strokeWidth: 2.18 + "px"
+  }
+})))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+  id: "New"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+  d: "M30.72,21.971l17.428,0l-1.162,1.165l-15.104,-0l-0,19.8l19.752,0l0,-15.141l1.162,-1.165l-0,17.471l-22.076,0l0,-22.13Zm22.308,-1.514l-11.27,11.356l1.22,1.223l11.27,-11.356l0.872,0.815l-11.503,11.531l-3.834,0.932l0.929,-3.785l11.503,-11.531l0.813,0.815Zm4.299,-0.99l-2.033,-2.038c-0.232,-0.233 -0.581,-0.233 -0.813,-0l-1.337,1.339l2.847,2.854l1.336,-1.34c0.175,-0.233 0.175,-0.582 0,-0.815Z"
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
+  x: "19.56",
+  y: "6.098",
+  width: "49.04",
+  height: "49.16",
+  style: {
+    fill: "none"
+  }
+})));
+
+/***/ }),
+
+/***/ "./src/component/typography/font-typography.js":
+/*!*****************************************************!*\
+  !*** ./src/component/typography/font-typography.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var lodash_map_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/map.js */ "./node_modules/lodash/map.js");
+/* harmony import */ var _fonts_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fonts.js */ "./src/component/typography/fonts.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+const {
+  SelectControl
+} = wp.components;
+
+// Extend component
+const {
+  Component,
+  Fragment
+} = wp.element;
+
+/**
+ * Internal dependencies
+ */
+
+
+function FontFamilyControl(props) {
+  const fonts = [{
+    value: "",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", 'timeline-block'),
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    google: false
+  }, {
+    value: "Arial",
+    label: "Arial",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    google: false
+  }, {
+    value: "Helvetica",
+    label: "Helvetica",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    google: false
+  }, {
+    value: "Times New Roman",
+    label: "Times New Roman",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    google: false
+  }, {
+    value: "Georgia",
+    label: "Georgia",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    google: false
+  }];
+  let fontWeight = "";
+  let fontSubset = "";
+
+  //Push Google Fonts into stytem fonts object
+  Object.keys(_fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"]).map((k, v) => {
+    fonts.push({
+      value: k,
+      label: k,
+      weight: _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][k].weight
+    });
+    if (k === props.fontFamily.value) {
+      fontWeight = _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][k].weight;
+      fontSubset = _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][k].subset;
+    }
+  });
+
+  // check if the font is a system font and then apply the font weight accordingly.
+  if (fontWeight === "") {
+    fontWeight = fonts[0].weight;
+  }
+  const fontWeightObj = [];
+  fontWeight.forEach(function (item) {
+    fontWeightObj.push({
+      value: item,
+      label: item
+    });
+  });
+  const fontSubsetObj = [];
+  if (typeof fontSubset == "object") {
+    fontSubset.forEach(function (item) {
+      fontSubsetObj.push({
+        value: item,
+        label: item
+      });
+    });
+  }
+  const onFontfamilyChange = value => {
+    const {
+      loadGoogleFonts,
+      fontFamily,
+      fontWeight,
+      fontSubset
+    } = props;
+    props.setAttributes({
+      [fontFamily.label]: value.label
+    });
+    onLoadGoogleFonts(loadGoogleFonts, value.label);
+    onFontChange(fontWeight, fontSubset, value.label);
+  };
+  const onFontChange = (fontWeight, fontSubset, fontFamily) => {
+    let font_flag;
+    let new_value;
+    if (typeof _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily] == "object") {
+      const gfontsObj = _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily].weight;
+      const gfontSubsetObj = _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily].subset;
+      if (typeof gfontsObj == "object") {
+        gfontsObj.forEach(function (item) {
+          if (fontWeight.value == item) {
+            font_flag = false;
+          } else {
+            new_value = item;
+            font_flag = true;
+            props.setAttributes({
+              [props.fontWeight.label]: new_value
+            });
+            return;
+          }
+        });
+        gfontSubsetObj.forEach(function (item) {
+          if (fontSubset.value == item) {
+            font_flag = false;
+          } else {
+            new_value = item;
+            font_flag = true;
+            props.setAttributes({
+              [props.fontSubset.label]: new_value
+            });
+            return;
+          }
+        });
+      }
+    }
+  };
+  const onLoadGoogleFonts = (loadGoogleFonts, fontFamily) => {
+    let value;
+    if (fontFamily != "" && typeof _fonts_js__WEBPACK_IMPORTED_MODULE_3__["default"][fontFamily] != "object") {
+      value = false;
+    } else {
+      value = true;
+    }
+    props.setAttributes({
+      [loadGoogleFonts.label]: value
+    });
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-typography-font-family-options"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "timeline-block-typography-font-family-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Family", 'timeline-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    options: fonts,
+    value: {
+      value: props.fontFamily.value,
+      label: props.fontFamily.value,
+      weight: fontWeightObj
+    },
+    isMulti: false,
+    maxMenuHeight: 300,
+    onChange: onFontfamilyChange,
+    className: "react-select-container",
+    classNamePrefix: "react-select"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", 'timeline-block'),
+    value: props.fontWeight.value,
+    onChange: value => props.setAttributes({
+      [props.fontWeight.label]: value
+    }),
+    options: fontWeightObj
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Subset", 'timeline-block'),
+    value: props.fontSubset.value,
+    onChange: value => props.setAttributes({
+      [props.fontSubset.label]: value
+    }),
+    options: fontSubsetObj
+  }));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FontFamilyControl);
+
+/***/ }),
+
+/***/ "./src/component/typography/fontloader.js":
+/*!************************************************!*\
+  !*** ./src/component/typography/fontloader.js ***!
+  \************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webfontloader */ "./node_modules/webfontloader/webfontloader.js");
+if (googlefonts === undefined) {
+  var googlefonts = [];
+}
+const {
+  Component
+} = wp.element;
+
+
+const statuses = {
+  inactive: "inactive",
+  active: "active",
+  loading: "loading"
+};
+const noop = () => {};
+class WebfontLoader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      status: undefined
+    };
+    this.handleLoading = () => {
+      this.setState({
+        status: statuses.loading
+      });
+    };
+    this.addFont = font => {
+      if (!googlefonts.includes(font)) {
+        googlefonts.push(font);
+      }
+    };
+    this.handleActive = () => {
+      this.setState({
+        status: statuses.active
+      });
+    };
+    this.handleInactive = () => {
+      this.setState({
+        status: statuses.inactive
+      });
+    };
+    this.loadFonts = () => {
+      //if ( ! this.state.fonts.includes( this.props.config.google.families[ 0 ] ) ) {
+      if (!googlefonts.includes(this.props.config.google.families[0])) {
+        webfontloader__WEBPACK_IMPORTED_MODULE_0__.load({
+          ...this.props.config,
+          loading: this.handleLoading,
+          active: this.handleActive,
+          inactive: this.handleInactive
+        });
+        this.addFont(this.props.config.google.families[0]);
+      }
+    };
+  }
+  componentDidMount() {
+    this.loadFonts();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      onStatus,
+      config
+    } = this.props;
+    if (prevState.status !== this.state.status) {
+      onStatus(this.state.status);
+    }
+    if (prevProps.config !== config) {
+      this.loadFonts();
+    }
+  }
+  render() {
+    const {
+      children
+    } = this.props;
+    return children || null;
+  }
+}
+WebfontLoader.propTypes = {
+  config: prop_types__WEBPACK_IMPORTED_MODULE_1__.object.isRequired,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1__.element,
+  onStatus: prop_types__WEBPACK_IMPORTED_MODULE_1__.func.isRequired
+};
+WebfontLoader.defaultProps = {
+  onStatus: noop
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebfontLoader);
+
+/***/ }),
+
+/***/ "./src/component/typography/fonts.js":
+/*!*******************************************!*\
+  !*** ./src/component/typography/fonts.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Google Fonts for the FontFamily component.
+ */
+
+const fonts = {};
+fonts["ABeeZee"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Abel"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Abhaya Libre"] = {
+  "v": ["regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "sinhala", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Abril Fatface"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Aclonica"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Acme"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Actor"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Adamina"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Advent Pro"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "greek", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Aguafina Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Akronim"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Aladin"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Aldrich"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Alef"] = {
+  "v": ["regular", "700"],
+  "subset": ["hebrew", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Alegreya"] = {
+  "v": ["regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "500", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Alegreya SC"] = {
+  "v": ["regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "500", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Alegreya Sans"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Alegreya Sans SC"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Alex Brush"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Alfa Slab One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Alice"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Alike"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Alike Angular"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Allan"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Allerta"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Allerta Stencil"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Allura"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Almendra"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Almendra Display"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Almendra SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Amarante"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Amaranth"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Amatic SC"] = {
+  "v": ["regular", "700"],
+  "subset": ["cyrillic", "latin-ext", "hebrew", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Amethysta"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Amiko"] = {
+  "v": ["regular", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Amiri"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Amita"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Anaheim"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Andada"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Andika"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Angkor"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Annie Use Your Telescope"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Anonymous Pro"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "latin-ext", "greek", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Antic"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Antic Didone"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Antic Slab"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Anton"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Arapey"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Arbutus"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Arbutus Slab"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Architects Daughter"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Archivo"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Archivo Black"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Archivo Narrow"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Aref Ruqaa"] = {
+  "v": ["regular", "700"],
+  "subset": ["arabic", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Arima Madurai"] = {
+  "v": ["100", "200", "300", "regular", "500", "700", "800", "900"],
+  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Arimo"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Arizonia"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Armata"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Arsenal"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Artifika"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Arvo"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Arya"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Asap"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Asap Condensed"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Asar"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Asset"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Assistant"] = {
+  "v": ["200", "300", "regular", "600", "700", "800"],
+  "subset": ["hebrew", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Astloch"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Asul"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Athiti"] = {
+  "v": ["200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Atma"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "bengali", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Atomic Age"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Aubrey"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Audiowide"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Autour One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Average"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Average Sans"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Averia Gruesa Libre"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Averia Libre"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Averia Sans Libre"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Averia Serif Libre"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Bad Script"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bahiana"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Bhai"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Bhaijaan"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Bhaina"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "oriya", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Chettan"] = {
+  "v": ["regular"],
+  "subset": ["malayalam", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Da"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "bengali", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Paaji"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gurmukhi", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Tamma"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin", "kannada"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Tammudu"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "telugu", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Baloo Thambi"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Balthazar"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bangers"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Barlow"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Barlow Condensed"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Barlow Semi Condensed"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Barrio"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Basic"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Battambang"] = {
+  "v": ["regular", "700"],
+  "subset": ["khmer"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Baumans"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bayon"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Belgrano"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bellefair"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "hebrew", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Belleza"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["BenchNine"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Bentham"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Berkshire Swash"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bevan"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bigelow Rules"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bigshot One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bilbo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bilbo Swash Caps"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["BioRhyme"] = {
+  "v": ["200", "300", "regular", "700", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "700", "800"],
+  "i": ["normal"]
+};
+fonts["BioRhyme Expanded"] = {
+  "v": ["200", "300", "regular", "700", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Biryani"] = {
+  "v": ["200", "300", "regular", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Bitter"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Black And White Picture"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Black Han Sans"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Black Ops One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bokor"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bonbon"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Boogaloo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bowlby One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bowlby One SC"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Brawler"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bree Serif"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bubblegum Sans"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bubbler One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Buda"] = {
+  "v": ["300"],
+  "subset": ["latin"],
+  "weight": ["300"],
+  "i": []
+};
+fonts["Buenard"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Bungee"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bungee Hairline"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bungee Inline"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bungee Outline"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Bungee Shade"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Butcherman"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Butterfly Kids"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cabin"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cabin Condensed"] = {
+  "v": ["regular", "500", "600", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Cabin Sketch"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Caesar Dressing"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cagliostro"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cairo"] = {
+  "v": ["200", "300", "regular", "600", "700", "900"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Calligraffitti"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cambay"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cambo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Candal"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cantarell"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cantata One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cantora One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Capriola"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cardo"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Carme"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Carrois Gothic"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Carrois Gothic SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Carter One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Catamaran"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "tamil", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Caudex"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Caveat"] = {
+  "v": ["regular", "700"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Caveat Brush"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cedarville Cursive"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ceviche One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Changa"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Changa One"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Chango"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Chathura"] = {
+  "v": ["100", "300", "regular", "700", "800"],
+  "subset": ["telugu", "latin"],
+  "weight": ["100", "300", "400", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Chau Philomene One"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Chela One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Chelsea Market"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Chenla"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cherry Cream Soda"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cherry Swash"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Chewy"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Chicle"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Chivo"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Chonburi"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cinzel"] = {
+  "v": ["regular", "700", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Cinzel Decorative"] = {
+  "v": ["regular", "700", "900"],
+  "subset": ["latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Clicker Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Coda"] = {
+  "v": ["regular", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "800"],
+  "i": ["normal"]
+};
+fonts["Coda Caption"] = {
+  "v": ["800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["800"],
+  "i": []
+};
+fonts["Codystar"] = {
+  "v": ["300", "regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400"],
+  "i": ["normal"]
+};
+fonts["Coiny"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "tamil", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Combo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Comfortaa"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Coming Soon"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Concert One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Condiment"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Content"] = {
+  "v": ["regular", "700"],
+  "subset": ["khmer"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Contrail One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Convergence"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cookie"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Copse"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Corben"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Cormorant"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cormorant Garamond"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cormorant Infant"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cormorant SC"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Cormorant Unicase"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Cormorant Upright"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Courgette"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cousine"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Coustard"] = {
+  "v": ["regular", "900"],
+  "subset": ["latin"],
+  "weight": ["400", "900"],
+  "i": ["normal"]
+};
+fonts["Covered By Your Grace"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Crafty Girls"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Creepster"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Crete Round"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Crimson Text"] = {
+  "v": ["regular", "italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Croissant One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Crushed"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cuprum"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Cute Font"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cutive"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Cutive Mono"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Damion"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dancing Script"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Dangrek"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["David Libre"] = {
+  "v": ["regular", "500", "700"],
+  "subset": ["latin-ext", "hebrew", "vietnamese", "latin"],
+  "weight": ["400", "500", "700"],
+  "i": ["normal"]
+};
+fonts["Dawning of a New Day"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Days One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dekko"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Delius"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Delius Swash Caps"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Delius Unicase"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Della Respira"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Denk One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Devonshire"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dhurjati"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Didact Gothic"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Diplomata"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Diplomata SC"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Do Hyeon"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dokdo"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Domine"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Donegal One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Doppio One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dorsa"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dosis"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Dr Sugiyama"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Duru Sans"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Dynalight"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["EB Garamond"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Eagle Lake"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["East Sea Dokdo"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Eater"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Economica"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Eczar"] = {
+  "v": ["regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["El Messiri"] = {
+  "v": ["regular", "500", "600", "700"],
+  "subset": ["cyrillic", "arabic", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Electrolize"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Elsie"] = {
+  "v": ["regular", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "900"],
+  "i": ["normal"]
+};
+fonts["Elsie Swash Caps"] = {
+  "v": ["regular", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "900"],
+  "i": ["normal"]
+};
+fonts["Emblema One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Emilys Candy"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Encode Sans"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Encode Sans Condensed"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Encode Sans Expanded"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Encode Sans Semi Condensed"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Encode Sans Semi Expanded"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Engagement"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Englebert"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Enriqueta"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Erica One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Esteban"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Euphoria Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ewert"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Exo"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Exo 2"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Expletus Sans"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Fanwood Text"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Farsan"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fascinate"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fascinate Inline"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Faster One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fasthand"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fauna One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Faustina"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Federant"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Federo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Felipa"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fenix"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Finger Paint"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fira Mono"] = {
+  "v": ["regular", "500", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400", "500", "700"],
+  "i": ["normal"]
+};
+fonts["Fira Sans"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Fira Sans Condensed"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Fira Sans Extra Condensed"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Fjalla One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fjord One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Flamenco"] = {
+  "v": ["300", "regular"],
+  "subset": ["latin"],
+  "weight": ["300", "400"],
+  "i": ["normal"]
+};
+fonts["Flavors"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fondamento"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Fontdiner Swanky"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Forum"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Francois One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Frank Ruhl Libre"] = {
+  "v": ["300", "regular", "500", "700", "900"],
+  "subset": ["latin-ext", "hebrew", "latin"],
+  "weight": ["300", "400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Freckle Face"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fredericka the Great"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fredoka One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Freehand"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fresca"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Frijole"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fruktur"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Fugaz One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["GFS Didot"] = {
+  "v": ["regular"],
+  "subset": ["greek"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["GFS Neohellenic"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["greek"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Gabriela"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gaegu"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["korean", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Gafata"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Galada"] = {
+  "v": ["regular"],
+  "subset": ["bengali", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Galdeano"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Galindo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gamja Flower"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gentium Basic"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Gentium Book Basic"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Geo"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Geostar"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Geostar Fill"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Germania One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gidugu"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gilda Display"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Give You Glory"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Glass Antiqua"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Glegoo"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Gloria Hallelujah"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Goblin One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gochi Hand"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gorditas"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Gothic A1"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["korean", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Goudy Bookletter 1911"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Graduate"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Grand Hotel"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gravitas One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Great Vibes"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Griffy"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gruppo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gudea"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Gugi"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Gurajada"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Habibi"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Halant"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Hammersmith One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Hanalei"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Hanalei Fill"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Handlee"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Hanuman"] = {
+  "v": ["regular", "700"],
+  "subset": ["khmer"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Happy Monkey"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Harmattan"] = {
+  "v": ["regular"],
+  "subset": ["arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Headland One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Heebo"] = {
+  "v": ["100", "300", "regular", "500", "700", "800", "900"],
+  "subset": ["hebrew", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Henny Penny"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Herr Von Muellerhoff"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Hi Melody"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Hind"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Hind Guntur"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "telugu", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Hind Madurai"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "tamil", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Hind Siliguri"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "bengali", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Hind Vadodara"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Holtwood One SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Homemade Apple"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Homenaje"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["IBM Plex Mono"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["IBM Plex Sans"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["IBM Plex Sans Condensed"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["IBM Plex Serif"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell DW Pica"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell DW Pica SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["IM Fell Double Pica"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell Double Pica SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["IM Fell English"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell English SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["IM Fell French Canon"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell French Canon SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["IM Fell Great Primer"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["IM Fell Great Primer SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Iceberg"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Iceland"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Imprima"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Inconsolata"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Inder"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Indie Flower"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Inika"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Inknut Antiqua"] = {
+  "v": ["300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Irish Grover"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Istok Web"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Italiana"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Italianno"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Itim"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jacques Francois"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jacques Francois Shadow"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jaldi"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Jim Nightshade"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jockey One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jolly Lodger"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jomhuria"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Josefin Sans"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Josefin Slab"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["100", "300", "400", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Joti One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jua"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Judson"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Julee"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Julius Sans One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Junge"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Jura"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Just Another Hand"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Just Me Again Down Here"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kadwa"] = {
+  "v": ["regular", "700"],
+  "subset": ["devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Kalam"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Kameron"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Kanit"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Kantumruy"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["khmer"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Karla"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Karma"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Katibeh"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kaushan Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kavivanar"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "tamil", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kavoon"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kdam Thmor"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Keania One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kelly Slab"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kenia"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Khand"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Khmer"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Khula"] = {
+  "v": ["300", "regular", "600", "700", "800"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Kirang Haerang"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kite One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Knewave"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kosugi"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "japanese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kosugi Maru"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "japanese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kotta One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Koulen"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kranky"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kreon"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Kristi"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Krona One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kumar One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kumar One Outline"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Kurale"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["La Belle Aurore"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Laila"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Lakki Reddy"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lalezar"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lancelot"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lateef"] = {
+  "v": ["regular"],
+  "subset": ["arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lato"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "300", "400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["League Script"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Leckerli One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ledger"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lekton"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Lemon"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lemonada"] = {
+  "v": ["300", "regular", "600", "700"],
+  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
+  "weight": ["300", "400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 128"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 128 Text"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 39"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 39 Extended"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 39 Extended Text"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Barcode 39 Text"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Libre Baskerville"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Libre Franklin"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Life Savers"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Lilita One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lily Script One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Limelight"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Linden Hill"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Lobster"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lobster Two"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Londrina Outline"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Londrina Shadow"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Londrina Sketch"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Londrina Solid"] = {
+  "v": ["100", "300", "regular", "900"],
+  "subset": ["latin"],
+  "weight": ["100", "300", "400", "900"],
+  "i": ["normal"]
+};
+fonts["Lora"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Love Ya Like A Sister"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Loved by the King"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lovers Quarrel"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Luckiest Guy"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Lusitana"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Lustria"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["M PLUS 1p"] = {
+  "v": ["100", "300", "regular", "500", "700", "800", "900"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "japanese", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["M PLUS Rounded 1c"] = {
+  "v": ["100", "300", "regular", "500", "700", "800", "900"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "japanese", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Macondo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Macondo Swash Caps"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mada"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "900"],
+  "subset": ["arabic", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Magra"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Maiden Orange"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Maitree"] = {
+  "v": ["200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Mako"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mallanna"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mandali"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Manuale"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Marcellus"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Marcellus SC"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Marck Script"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Margarine"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Markazi Text"] = {
+  "v": ["regular", "500", "600", "700"],
+  "subset": ["latin-ext", "arabic", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Marko One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Marmelad"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Martel"] = {
+  "v": ["200", "300", "regular", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Martel Sans"] = {
+  "v": ["200", "300", "regular", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Marvel"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Mate"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Mate SC"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Maven Pro"] = {
+  "v": ["regular", "500", "700", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["McLaren"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Meddon"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["MedievalSharp"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Medula One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Meera Inimai"] = {
+  "v": ["regular"],
+  "subset": ["tamil", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Megrim"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Meie Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Merienda"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Merienda One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Merriweather"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Merriweather Sans"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic", "800", "800italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Metal"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Metal Mania"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Metamorphous"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Metrophobic"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Michroma"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Milonga"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Miltonian"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Miltonian Tattoo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mina"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "bengali", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Miniver"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Miriam Libre"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "hebrew", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Mirza"] = {
+  "v": ["regular", "500", "600", "700"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Miss Fajardose"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mitr"] = {
+  "v": ["200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Modak"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Modern Antiqua"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mogra"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Molengo"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Molle"] = {
+  "v": ["italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": [],
+  "i": ["italic"]
+};
+fonts["Monda"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Monofett"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Monoton"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Monsieur La Doulaise"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Montaga"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Montez"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Montserrat"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Montserrat Alternates"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Montserrat Subrayada"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Moul"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Moulpali"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mountains of Christmas"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Mouse Memoirs"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mr Bedfort"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mr Dafoe"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mr De Haviland"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mrs Saint Delafield"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mrs Sheppards"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Mukta"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Mukta Mahee"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "gurmukhi", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Mukta Malar"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "tamil", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Mukta Vaani"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Muli"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Mystery Quest"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["NTR"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nanum Brush Script"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nanum Gothic"] = {
+  "v": ["regular", "700", "800"],
+  "subset": ["korean", "latin"],
+  "weight": ["400", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Nanum Gothic Coding"] = {
+  "v": ["regular", "700"],
+  "subset": ["korean", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Nanum Myeongjo"] = {
+  "v": ["regular", "700", "800"],
+  "subset": ["korean", "latin"],
+  "weight": ["400", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Nanum Pen Script"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Neucha"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Neuton"] = {
+  "v": ["200", "300", "regular", "italic", "700", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["New Rocker"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["News Cycle"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Niconne"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nixie One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nobile"] = {
+  "v": ["regular", "italic", "500", "500italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "500", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Nokora"] = {
+  "v": ["regular", "700"],
+  "subset": ["khmer"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Norican"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nosifer"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nothing You Could Do"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Noticia Text"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Noto Sans"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "devanagari", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Noto Sans JP"] = {
+  "v": ["100", "300", "regular", "500", "700", "900"],
+  "subset": ["japanese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Noto Sans KR"] = {
+  "v": ["100", "300", "regular", "500", "700", "900"],
+  "subset": ["korean", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Noto Serif"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Noto Serif JP"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "900"],
+  "subset": ["japanese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Noto Serif KR"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "900"],
+  "subset": ["korean", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Nova Cut"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Flat"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Mono"] = {
+  "v": ["regular"],
+  "subset": ["greek", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Oval"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Round"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Script"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Slim"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nova Square"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Numans"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Nunito"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Nunito Sans"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Odor Mean Chey"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Offside"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Old Standard TT"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Oldenburg"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Oleo Script"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Oleo Script Swash Caps"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Open Sans"] = {
+  "v": ["300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["300", "400", "600", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Open Sans Condensed"] = {
+  "v": ["300", "300italic", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["300", "700"],
+  "i": []
+};
+fonts["Oranienbaum"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Orbitron"] = {
+  "v": ["regular", "500", "700", "900"],
+  "subset": ["latin"],
+  "weight": ["400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Oregano"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Orienta"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Original Surfer"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Oswald"] = {
+  "v": ["200", "300", "regular", "500", "600", "700"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Over the Rainbow"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Overlock"] = {
+  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Overlock SC"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Overpass"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Overpass Mono"] = {
+  "v": ["300", "regular", "600", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Ovo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Oxygen"] = {
+  "v": ["300", "regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Oxygen Mono"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["PT Mono"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["PT Sans"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["PT Sans Caption"] = {
+  "v": ["regular", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["PT Sans Narrow"] = {
+  "v": ["regular", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["PT Serif"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["PT Serif Caption"] = {
+  "v": ["regular", "italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Pacifico"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Padauk"] = {
+  "v": ["regular", "700"],
+  "subset": ["myanmar", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Palanquin"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Palanquin Dark"] = {
+  "v": ["regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Pangolin"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Paprika"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Parisienne"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Passero One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Passion One"] = {
+  "v": ["regular", "700", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Pathway Gothic One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Patrick Hand"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Patrick Hand SC"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pattaya"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Patua One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pavanam"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "tamil", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Paytone One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Peddana"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Peralta"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Permanent Marker"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Petit Formal Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Petrona"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Philosopher"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Piedra"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pinyon Script"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pirata One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Plaster"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Play"] = {
+  "v": ["regular", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Playball"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Playfair Display"] = {
+  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Playfair Display SC"] = {
+  "v": ["regular", "italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Podkova"] = {
+  "v": ["regular", "500", "600", "700", "800"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Poiret One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Poller One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Poly"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Pompiere"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pontano Sans"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Poor Story"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Poppins"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Port Lligat Sans"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Port Lligat Slab"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pragati Narrow"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Prata"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Preahvihear"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Press Start 2P"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Pridi"] = {
+  "v": ["200", "300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Princess Sofia"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Prociono"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Prompt"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Prosto One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Proza Libre"] = {
+  "v": ["regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Puritan"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Purple Purse"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Quando"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Quantico"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Quattrocento"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Quattrocento Sans"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Questrial"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Quicksand"] = {
+  "v": ["300", "regular", "500", "700"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["300", "400", "500", "700"],
+  "i": ["normal"]
+};
+fonts["Quintessential"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Qwigley"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Racing Sans One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Radley"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Rajdhani"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Rakkas"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Raleway"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Raleway Dots"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ramabhadra"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ramaraja"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rambla"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Rammetto One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ranchers"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rancho"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ranga"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Rasa"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Rationale"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ravi Prakash"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Redressed"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Reem Kufi"] = {
+  "v": ["regular"],
+  "subset": ["arabic", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Reenie Beanie"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Revalia"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rhodium Libre"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ribeye"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ribeye Marrow"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Righteous"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Risque"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Roboto"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Roboto Condensed"] = {
+  "v": ["300", "300italic", "regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["300", "400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Roboto Mono"] = {
+  "v": ["100", "100italic", "300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "500", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Roboto Slab"] = {
+  "v": ["100", "300", "regular", "700"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["100", "300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Rochester"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rock Salt"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rokkitt"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Romanesco"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ropa Sans"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Rosario"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Rosarivo"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Rouge Script"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rozha One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rubik"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "latin-ext", "hebrew", "latin"],
+  "weight": ["300", "400", "500", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Rubik Mono One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ruda"] = {
+  "v": ["regular", "700", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Rufina"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Ruge Boogie"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ruluko"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rum Raisin"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ruslan Display"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Russo One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ruthie"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Rye"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sacramento"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sahitya"] = {
+  "v": ["regular", "700"],
+  "subset": ["devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Sail"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Saira"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Saira Condensed"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Saira Extra Condensed"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Saira Semi Condensed"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Salsa"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sanchez"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Sancreek"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sansita"] = {
+  "v": ["regular", "italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Sarala"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Sarina"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sarpanch"] = {
+  "v": ["regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Satisfy"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sawarabi Gothic"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "japanese", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sawarabi Mincho"] = {
+  "v": ["regular"],
+  "subset": ["japanese", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Scada"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Scheherazade"] = {
+  "v": ["regular", "700"],
+  "subset": ["arabic", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Schoolbell"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Scope One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Seaweed Script"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Secular One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "hebrew", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sedgwick Ave"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sedgwick Ave Display"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sevillana"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Seymour One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Shadows Into Light"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Shadows Into Light Two"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Shanti"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Share"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Share Tech"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Share Tech Mono"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Shojumaru"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Short Stack"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Shrikhand"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "gujarati", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Siemreap"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sigmar One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Signika"] = {
+  "v": ["300", "regular", "600", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Signika Negative"] = {
+  "v": ["300", "regular", "600", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Simonetta"] = {
+  "v": ["regular", "italic", "900", "900italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Sintony"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Sirin Stencil"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Six Caps"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Skranji"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Slabo 13px"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Slabo 27px"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Slackey"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Smokum"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Smythe"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sniglet"] = {
+  "v": ["regular", "800"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "800"],
+  "i": ["normal"]
+};
+fonts["Snippet"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Snowburst One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sofadi One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sofia"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Song Myung"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sonsie One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sorts Mill Goudy"] = {
+  "v": ["regular", "italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal", "italic"]
+};
+fonts["Source Code Pro"] = {
+  "v": ["200", "300", "regular", "500", "600", "700", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Source Sans Pro"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Source Serif Pro"] = {
+  "v": ["regular", "600", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Space Mono"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Special Elite"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Spectral"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Spectral SC"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "500", "600", "700", "800"],
+  "i": ["normal", "italic"]
+};
+fonts["Spicy Rice"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Spinnaker"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Spirax"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Squada One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sree Krushnadevaraya"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sriracha"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stalemate"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stalinist One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stardos Stencil"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Stint Ultra Condensed"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stint Ultra Expanded"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stoke"] = {
+  "v": ["300", "regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400"],
+  "i": ["normal"]
+};
+fonts["Strait"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Stylish"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sue Ellen Francisco"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Suez One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "hebrew", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sumana"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Sunflower"] = {
+  "v": ["300", "500", "700"],
+  "subset": ["korean", "latin"],
+  "weight": ["300", "500", "700"],
+  "i": []
+};
+fonts["Sunshiney"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Supermercado One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Sura"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Suranna"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Suravaram"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Suwannaphum"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Swanky and Moo Moo"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Syncopate"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Tajawal"] = {
+  "v": ["200", "300", "regular", "500", "700", "800", "900"],
+  "subset": ["arabic", "latin"],
+  "weight": ["200", "300", "400", "500", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Tangerine"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Taprom"] = {
+  "v": ["regular"],
+  "subset": ["khmer"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tauri"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Taviraj"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Teko"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Telex"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tenali Ramakrishna"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tenor Sans"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Text Me One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["The Girl Next Door"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tienne"] = {
+  "v": ["regular", "700", "900"],
+  "subset": ["latin"],
+  "weight": ["400", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Tillana"] = {
+  "v": ["regular", "500", "600", "700", "800"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "500", "600", "700", "800"],
+  "i": ["normal"]
+};
+fonts["Timmana"] = {
+  "v": ["regular"],
+  "subset": ["telugu", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tinos"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "hebrew", "greek", "vietnamese", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Titan One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Titillium Web"] = {
+  "v": ["200", "200italic", "300", "300italic", "regular", "italic", "600", "600italic", "700", "700italic", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["200", "300", "400", "600", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Trade Winds"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Trirong"] = {
+  "v": ["100", "100italic", "200", "200italic", "300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic", "800", "800italic", "900", "900italic"],
+  "subset": ["latin-ext", "thai", "vietnamese", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Trocchi"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Trochut"] = {
+  "v": ["regular", "italic", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Trykker"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Tulpen One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ubuntu"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["300", "400", "500", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Ubuntu Condensed"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Ubuntu Mono"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "greek-ext", "latin-ext", "greek", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Ultra"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Uncial Antiqua"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Underdog"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Unica One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["UnifrakturCook"] = {
+  "v": ["700"],
+  "subset": ["latin"],
+  "weight": ["700"],
+  "i": []
+};
+fonts["UnifrakturMaguntia"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Unkempt"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+fonts["Unlock"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Unna"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["VT323"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Vampiro One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Varela"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Varela Round"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "hebrew", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Vast Shadow"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Vesper Libre"] = {
+  "v": ["regular", "500", "700", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Vibur"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Vidaloka"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Viga"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Voces"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Volkhov"] = {
+  "v": ["regular", "italic", "700", "700italic"],
+  "subset": ["latin"],
+  "weight": ["400", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Vollkorn"] = {
+  "v": ["regular", "italic", "600", "600italic", "700", "700italic", "900", "900italic"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "greek", "vietnamese", "latin"],
+  "weight": ["400", "600", "700", "900"],
+  "i": ["normal", "italic"]
+};
+fonts["Vollkorn SC"] = {
+  "v": ["regular", "600", "700", "900"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400", "600", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Voltaire"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Waiting for the Sunrise"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Wallpoet"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Walter Turncoat"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Warnes"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Wellfleet"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Wendy One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Wire One"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Work Sans"] = {
+  "v": ["100", "200", "300", "regular", "500", "600", "700", "800", "900"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  "i": ["normal"]
+};
+fonts["Yanone Kaffeesatz"] = {
+  "v": ["200", "300", "regular", "700"],
+  "subset": ["cyrillic", "latin-ext", "vietnamese", "latin"],
+  "weight": ["200", "300", "400", "700"],
+  "i": ["normal"]
+};
+fonts["Yantramanav"] = {
+  "v": ["100", "300", "regular", "500", "700", "900"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["100", "300", "400", "500", "700", "900"],
+  "i": ["normal"]
+};
+fonts["Yatra One"] = {
+  "v": ["regular"],
+  "subset": ["latin-ext", "devanagari", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Yellowtail"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Yeon Sung"] = {
+  "v": ["regular"],
+  "subset": ["korean", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Yeseva One"] = {
+  "v": ["regular"],
+  "subset": ["cyrillic", "cyrillic-ext", "latin-ext", "vietnamese", "latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Yesteryear"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Yrsa"] = {
+  "v": ["300", "regular", "500", "600", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal"]
+};
+fonts["Zeyada"] = {
+  "v": ["regular"],
+  "subset": ["latin"],
+  "weight": ["400"],
+  "i": ["normal"]
+};
+fonts["Zilla Slab"] = {
+  "v": ["300", "300italic", "regular", "italic", "500", "500italic", "600", "600italic", "700", "700italic"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["300", "400", "500", "600", "700"],
+  "i": ["normal", "italic"]
+};
+fonts["Zilla Slab Highlight"] = {
+  "v": ["regular", "700"],
+  "subset": ["latin-ext", "latin"],
+  "weight": ["400", "700"],
+  "i": ["normal"]
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fonts);
+
+/***/ }),
+
+/***/ "./src/component/typography/index.js":
+/*!*******************************************!*\
+  !*** ./src/component/typography/index.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TypographyStyles": () => (/* reexport safe */ _inline_styles_js__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _font_typography_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./font-typography.js */ "./src/component/typography/font-typography.js");
+/* harmony import */ var _range_typography_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./range-typography.js */ "./src/component/typography/range-typography.js");
+/* harmony import */ var _inline_styles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inline-styles.js */ "./src/component/typography/inline-styles.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/component/typography/editor.scss");
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+const {
+  Button,
+  Dashicon
+} = wp.components;
+
+// Extend component
+const {
+  Component,
+  Fragment
+} = wp.element;
+
+// Export for ease of importing in individual blocks.
+
+class TypographyControl extends Component {
+  constructor() {
+    super(...arguments);
+    this.onAdvancedControlClick = this.onAdvancedControlClick.bind(this);
+    this.onAdvancedControlReset = this.onAdvancedControlReset.bind(this);
+    this.timeline_settings_apply;
+  }
+  valueupdate() {
+    let valueupdates = [this.props.fontSize.value, this.props.fontFamily.value == 'Default' ? undefined : this.props.fontFamily.value, this.props.fontWeight.value, this.props.lineHeight.value];
+    for (let i = 0; i < valueupdates.length; i++) {
+      if (valueupdates[i] != undefined) {
+        this.timeline_settings_apply = ' cp-timeline-typography_apply';
+        break;
+      }
+      this.timeline_settings_apply = '';
+    }
+    ;
+  }
+  onAdvancedControlClick() {
+    let control = true;
+    let label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Hide Advanced", 'timeline-block');
+    if (this.state !== null && this.state.showAdvancedControls === true) {
+      control = false;
+      label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Advanced", 'timeline-block');
+    }
+    this.setState({
+      showAdvancedControls: control,
+      showAdvancedControlsLabel: label
+    });
+  }
+  onAdvancedControlReset() {
+    const {
+      setAttributes
+    } = this.props;
+
+    // Reset Font family to default.
+    setAttributes({
+      [this.props.fontFamily.label]: "Default"
+    });
+    setAttributes({
+      [this.props.fontWeight.label]: undefined
+    });
+    setAttributes({
+      [this.props.fontSubset.label]: ""
+    });
+
+    // Reset Font Size to default.
+    setAttributes({
+      [this.props.fontSize.label]: undefined
+    });
+    setAttributes({
+      [this.props.fontSizeType.label]: "px"
+    });
+    setAttributes({
+      [this.props.fontSizeMobile.label]: ""
+    });
+    setAttributes({
+      [this.props.fontSizeTablet.label]: ""
+    });
+
+    // Reset Line Height to default.
+    setAttributes({
+      [this.props.lineHeight.label]: undefined
+    });
+    setAttributes({
+      [this.props.lineHeightType.label]: "px"
+    });
+    setAttributes({
+      [this.props.lineHeightMobile.label]: ""
+    });
+    setAttributes({
+      [this.props.lineHeightTablet.label]: ""
+    });
+
+    // Reset Google Fonts to default.
+    setAttributes({
+      [this.props.loadGoogleFonts.label]: false
+    });
+  }
+  render() {
+    this.valueupdate();
+    let fontSize;
+    let fontWeight;
+    let fontFamily;
+    let fontAdvancedControls;
+    let fontTypoAdvancedControls;
+    let showAdvancedFontControls;
+    let resetFontAdvancedControls;
+    const {
+      disableFontFamily,
+      disableFontSize,
+      disableLineHeight,
+      disableAdvancedOptions = false
+    } = this.props;
+    if (true !== disableFontFamily) {
+      fontFamily = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_font_typography_js__WEBPACK_IMPORTED_MODULE_3__["default"], this.props);
+    }
+    if (true !== disableLineHeight) {
+      fontWeight = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_range_typography_js__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+        type: this.props.lineHeightType,
+        typeLabel: this.props.lineHeightType.label,
+        sizeMobile: this.props.lineHeightMobile,
+        sizeMobileLabel: this.props.lineHeightMobile.label,
+        sizeTablet: this.props.lineHeightTablet,
+        sizeTabletLabel: this.props.lineHeightTablet.label,
+        size: this.props.lineHeight,
+        sizeLabel: this.props.lineHeight.label,
+        sizeMobileText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
+        sizeTabletText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
+        sizeText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Line Height", 'timeline-block'),
+        steps: this.props.lineHeightType.value == 'px' ? 1 : 0.1,
+        initialPosition: 0
+      }, this.props));
+    }
+    if (true !== disableFontSize) {
+      fontSize = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_range_typography_js__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+        type: this.props.fontSizeType,
+        typeLabel: this.props.fontSizeType.label,
+        sizeMobile: this.props.fontSizeMobile,
+        sizeMobileLabel: this.props.fontSizeMobile.label,
+        sizeTablet: this.props.fontSizeTablet,
+        sizeTabletLabel: this.props.fontSizeTablet.label,
+        size: this.props.fontSize,
+        sizeLabel: this.props.fontSize.label,
+        sizeMobileText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
+        sizeTabletText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
+        sizeText: !this.props.fontSizeLabel ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Font Size", 'timeline-block') : this.props.fontSizeLabel,
+        steps: this.props.fontSizeType.value == 'px' ? 1 : 0.1,
+        initialPosition: this.props.fontSize.label == 'subHeadFontSize' ? 14 : 18
+      }, this.props));
+    }
+    if (true !== disableFontFamily && true !== disableFontSize) {
+      fontAdvancedControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Button, {
+        className: "timeline-block-size-btn timeline-block-typography-control-btn",
+        isSmall: true,
+        "aria-pressed": this.state !== null,
+        onClick: this.onAdvancedControlClick
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Dashicon, {
+        icon: "admin-tools"
+      }));
+      resetFontAdvancedControls =
+      // <Button
+      // 	className="timeline-block-size-btn timeline-block-typography-reset-btn"
+      // 	isSmall
+      // 	aria-pressed={ ( this.state !== null ) }
+      // 	onClick={ this.onAdvancedControlReset }
+      // ><Dashicon icon="image-rotate" /></Button>
+      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "components-button timeline-block-size-btn timeline-block-typography-reset-btn is-small",
+        onClick: this.onAdvancedControlReset
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Dashicon, {
+        icon: "image-rotate"
+      }));
+    } else {
+      showAdvancedFontControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, fontSize, fontFamily, fontWeight);
+    }
+    if (this.state !== null && this.state.showAdvancedControls === true) {
+      showAdvancedFontControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "timeline-block-typography-advanced"
+      }, fontSize, fontFamily, fontWeight);
+    }
+    if (true !== disableFontFamily && true !== disableFontSize) {
+      fontTypoAdvancedControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "timeline-block-typography-option-actions"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, this.props.label), resetFontAdvancedControls, fontAdvancedControls);
+    }
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: `timeline-block-typography-options${this.timeline_settings_apply}`
+    }, !disableAdvancedOptions && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, fontTypoAdvancedControls, showAdvancedFontControls));
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyControl);
+
+/***/ }),
+
+/***/ "./src/component/typography/inline-styles.js":
+/*!***************************************************!*\
+  !*** ./src/component/typography/inline-styles.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Set inline styles.
+ * @param {object} props - The block object.
+ * @return {object} The inline text color CSS.
+ */
+function TypographyStyles(props) {
+  return {};
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyStyles);
+
+/***/ }),
+
+/***/ "./src/component/typography/range-typography.js":
+/*!******************************************************!*\
+  !*** ./src/component/typography/range-typography.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RangeTypographyControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var lodash_map_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/map.js */ "./node_modules/lodash/map.js");
+
+/**
+ * WordPress dependencies
+ */
+
+const {
+  RangeControl,
+  ButtonGroup,
+  Button,
+  Dashicon
+} = wp.components;
+
+// Extend component
+const {
+  Fragment
+} = wp.element;
+const {
+  useSelect,
+  useDispatch
+} = wp.data;
+
+
+/**
+ * Build the Measure controls
+ * @returns {object} Measure settings.
+ */
+function RangeTypographyControl(props) {
+  const deviceType = useSelect(select => {
+    return select('core/edit-post').__experimentalGetPreviewDeviceType();
+  }, []);
+  const {
+    __experimentalSetPreviewDeviceType: setPreviewDeviceType
+  } = useDispatch('core/edit-post');
+  const customSetPreviewDeviceType = device => {
+    setPreviewDeviceType(device);
+  };
+  const devices = [{
+    name: 'Desktop',
+    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
+      icon: "desktop"
+    }),
+    itemClass: 'timeline-block-desktop-tab timeline-block-responsive-tabs'
+  }, {
+    name: 'Tablet',
+    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
+      icon: "tablet"
+    }),
+    itemClass: 'timeline-block-tablet-tab timeline-block-responsive-tabs'
+  }, {
+    name: 'Mobile',
+    key: 'mobile',
+    title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Dashicon, {
+      icon: "smartphone"
+    }),
+    itemClass: 'timeline-block-mobile-tab timeline-block-responsive-tabs'
+  }];
+  let sizeTypes;
+  if ("sizeTypes" in props) {
+    sizeTypes = props.sizeTypes;
+  } else {
+    sizeTypes = [{
+      key: "px",
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("px", 'timeline-block')
+    }, {
+      key: "em",
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("em", 'timeline-block')
+    }];
+  }
+  const sizeTypesControls = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(ButtonGroup, {
+    className: "timeline-block-size-type-field",
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size Type", 'timeline-block')
+  }, lodash_map_js__WEBPACK_IMPORTED_MODULE_2__(sizeTypes, _ref => {
+    let {
+      name,
+      key
+    } = _ref;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Button, {
+      key: key,
+      className: "timeline-block-size-btn",
+      isSmall: true,
+      isPrimary: props.type.value === key,
+      "aria-pressed": props.type.value === key,
+      onClick: () => props.setAttributes({
+        [props.typeLabel]: key
+      })
+    }, name);
+  }));
+  const output = {};
+  output.Desktop = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeText),
+    value: props.size.value || "",
+    onChange: value => props.setAttributes({
+      [props.sizeLabel]: value
+    }),
+    min: 0,
+    max: 100,
+    step: props.steps,
+    beforeIcon: "editor-textcolor",
+    allowReset: true,
+    initialPosition: props.initialPosition
+  }));
+  output.Tablet = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeTabletText),
+    value: props.sizeTablet.value,
+    onChange: value => props.setAttributes({
+      [props.sizeTabletLabel]: value
+    }),
+    min: 0,
+    max: 100,
+    step: props.steps,
+    beforeIcon: "editor-textcolor",
+    allowReset: true,
+    initialPosition: 18
+  }));
+  output.Mobile = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, sizeTypesControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(props.sizeMobileText),
+    value: props.sizeMobile.value,
+    onChange: value => props.setAttributes({
+      [props.sizeMobileLabel]: value
+    }),
+    min: 0,
+    max: 100,
+    step: props.steps,
+    beforeIcon: "editor-textcolor",
+    allowReset: true,
+    initialPosition: 30
+  }));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: 'timeline-block-typography-range-options'
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-size-type-field-tabs"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "timeline-block-responsive-control-inner"
+  }, output[deviceType] ? output[deviceType] : output.Desktop)));
+}
+
+/***/ }),
+
+/***/ "./src/story-timeline/attributes.js":
+/*!******************************************!*\
+  !*** ./src/story-timeline/attributes.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/**
+ * BLOCK: Cool Timeline Attributes
+ */
+
+
+const ITEM_COUNT = 5;
+const item = [];
+const date_arr = [];
+const example = {
+  'data1': {
+    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon is born", 'timeline-block'),
+    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat enim res aperta. Ne discipulum abducam, times. Primum quid tu dicis breve? An haec ab eo non dicuntur?", 'timeline-block'),
+    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon1-600x338.jpg",
+    "t_date": "July 5, 1994"
+  },
+  'data2': {
+    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Prime debuts", 'timeline-block'),
+    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aliter homines, aliter philosophos loqui putas oportere? Sin aliud quid voles, postea. Mihi enim satis est, ipsis non satis. Negat enim summo bono afferre incrementum diem. Quod ea non occurrentia fingunt, vincunt Aristonem., you can change me anytime click here, ", 'timeline-block'),
+    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon2-600x338.jpg",
+    "t_date": "Feb 2, 2020"
+  },
+  'data3': {
+    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon acquires Audible", 'timeline-block'),
+    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'timeline-block'),
+    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
+    "t_date": "Jan 31, 2021"
+  },
+  'data4': {
+    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Kindle For Books", 'timeline-block'),
+    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.", 'timeline-block'),
+    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
+    "t_date": "Jul 5, 2022"
+  },
+  'data5': {
+    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon App Store Launched", 'timeline-block'),
+    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere", 'timeline-block'),
+    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
+    "t_date": "Mar 22, 2011"
+  }
+};
+for (var i = 1; i <= ITEM_COUNT; i++) {
+  if (i % 2 == 0) {
+    var class_postion = "left";
+  } else {
+    var class_postion = "right";
+  }
+  const data = example['data' + i];
+  item.push({
+    "time_heading": data.time_heading,
+    "time_desc": data.time_desc,
+    "timeLineImage": data.timeLineImage,
+    "t_date": data.t_date,
+    "imageSize": "full",
+    "blockPosition": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(class_postion, "timeline-block")
+  });
+  var j = i - 1;
+  var today = new Date("1/1/2019");
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear() - j;
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  today = mm + "/" + dd + "/" + yyyy;
+  var p = {
+    "title": today
+  };
+  date_arr.push({
+    "title": today
+  });
+}
+const attributes = {
+  content_class: {
+    type: "string"
+  },
+  tm_content: {
+    type: "array",
+    default: item
+  },
+  classMigrate: {
+    type: "boolean",
+    default: false
+  },
+  childMigrate: {
+    type: "boolean",
+    default: false
+  },
+  itemSpacing: {
+    type: "number",
+    default: ''
+  },
+  itemSpacingType: {
+    type: "string",
+    default: "px"
+  },
+  contentAlignment: {
+    type: "string",
+    default: ""
+  },
+  titileBtSpacing: {
+    type: "number",
+    default: ""
+  },
+  titileBtSpacingType: {
+    type: "string",
+    default: "px"
+  },
+  descBtSpacing: {
+    type: "number",
+    default: ""
+  },
+  descBtSpacingType: {
+    type: "string",
+    default: "px"
+  },
+  dateFormat: {
+    type: "string",
+    default: "F j, Y"
+  },
+  align: {
+    type: "string",
+    default: "center"
+  },
+  headingColor: {
+    type: "string",
+    default: ''
+  },
+  subHeadingColor: {
+    type: "string",
+    default: ''
+  },
+  separatorBg: {
+    type: "string",
+    default: "#eee"
+  },
+  backgroundColor: {
+    type: "string",
+    default: "#eee"
+  },
+  separatorColor: {
+    type: "string",
+    default: "#eee"
+  },
+  separatorFillColor: {
+    type: "string",
+    default: "#61ce70"
+  },
+  separatorBorder: {
+    type: "string",
+    default: "#eee"
+  },
+  borderFocus: {
+    type: "string",
+    default: "#5cb85c"
+  },
+  isPreview: {
+    type: 'boolean',
+    default: false
+  },
+  headingTag: {
+    type: "string",
+    default: "h3"
+  },
+  horizontalSpace: {
+    type: "number",
+    default: 10
+  },
+  verticalSpace: {
+    type: "number",
+    default: 15
+  },
+  headFontSize: {
+    type: "number"
+  },
+  headFontSizeType: {
+    type: "string",
+    default: "px"
+  },
+  headFontSizeTablet: {
+    type: "number"
+  },
+  headFontSizeMobile: {
+    type: "number"
+  },
+  headFontFamily: {
+    type: "string",
+    default: "Default"
+  },
+  headFontWeight: {
+    type: "string"
+  },
+  headFontSubset: {
+    type: "string"
+  },
+  headLineHeightType: {
+    type: "string",
+    default: "px"
+  },
+  headLineHeight: {
+    type: "number"
+  },
+  headLineHeightTablet: {
+    type: "number"
+  },
+  headLineHeightMobile: {
+    type: "number"
+  },
+  headLoadGoogleFonts: {
+    type: "boolean",
+    default: false
+  },
+  timelinAlignment: {
+    type: "string",
+    default: "center"
+  },
+  arrowlinAlignment: {
+    type: "string",
+    default: "center"
+  },
+  subHeadFontSizeType: {
+    type: "string",
+    default: "px"
+  },
+  subHeadFontSize: {
+    type: "number"
+  },
+  subHeadFontSizeTablet: {
+    type: "number"
+  },
+  subHeadFontSizeMobile: {
+    type: "number"
+  },
+  subHeadFontFamily: {
+    type: "string",
+    default: "Default"
+  },
+  subHeadFontWeight: {
+    type: "string"
+  },
+  subHeadFontSubset: {
+    type: "string"
+  },
+  subHeadLineHeightType: {
+    type: "string",
+    default: "em"
+  },
+  subHeadLineHeight: {
+    type: "number"
+  },
+  subHeadLineHeightTablet: {
+    type: "number"
+  },
+  subHeadLineHeightMobile: {
+    type: "number"
+  },
+  subHeadLoadGoogleFonts: {
+    type: "boolean",
+    default: false
+  },
+  headSpace: {
+    type: "number",
+    default: 5
+  },
+  separatorwidth: {
+    type: "number",
+    default: 3
+  },
+  borderwidth: {
+    type: "number",
+    default: 0
+  },
+  iconFocus: {
+    type: "string",
+    default: "#fff"
+  },
+  iconBgFocus: {
+    type: "string",
+    default: "#61ce70"
+  },
+  dateColor: {
+    type: "string",
+    default: ""
+  },
+  dateFontsizeType: {
+    type: "string",
+    default: "px"
+  },
+  dateFontsize: {
+    type: "number"
+  },
+  dateFontsizeTablet: {
+    type: "number"
+  },
+  dateFontsizeMobile: {
+    type: "number"
+  },
+  dateFontFamily: {
+    type: "string",
+    default: "Default"
+  },
+  dateFontWeight: {
+    type: "string"
+  },
+  dateFontSubset: {
+    type: "string"
+  },
+  dateLineHeightType: {
+    type: "string",
+    default: "px"
+  },
+  dateLineHeight: {
+    type: "number"
+  },
+  dateLineHeightTablet: {
+    type: "number"
+  },
+  dateLineHeightMobile: {
+    type: "number"
+  },
+  dateLoadGoogleFonts: {
+    type: "boolean",
+    default: false
+  },
+  connectorBgsize: {
+    type: "number",
+    default: 35
+  },
+  subHeadSpace: {
+    type: "number",
+    default: 5
+  },
+  dateBottomspace: {
+    type: "number",
+    default: 5
+  },
+  block_id: {
+    type: "string",
+    default: "0"
+  },
+  timelineItem: {
+    type: "number",
+    default: ITEM_COUNT
+  },
+  tm_client_id: {
+    type: "string",
+    default: "not_set"
+  },
+  borderRadius: {
+    type: "number",
+    default: 2
+  },
+  bgPadding: {
+    type: "number",
+    default: 20
+  },
+  iconSize: {
+    type: "number",
+    default: ""
+  },
+  icon: {
+    type: "string",
+    default: "fab fa fa-calendar-alt"
+  },
+  t_date: {
+    type: "array",
+    default: date_arr
+  },
+  displayPostDate: {
+    type: "boolean",
+    default: true
+  },
+  stack: {
+    type: "string",
+    default: "tablet"
+  },
+  timelineLayout: {
+    type: "string",
+    default: "vertical"
+  },
+  iconSizeType: {
+    type: "string",
+    default: "px"
+  },
+  iconBoxSize: {
+    type: "number",
+    default: ""
+  },
+  iconBoxSizeType: {
+    type: "string",
+    default: "px"
+  },
+  middleLineSize: {
+    type: "number",
+    default: ""
+  },
+  middleLineSizeType: {
+    type: "string",
+    default: "px"
+  },
+  Orientation: {
+    type: "string",
+    default: "left"
+  },
+  BothsidedOrientation: {
+    type: "string",
+    default: "right"
+  },
+  LineColor: {
+    type: "string",
+    default: ""
+  },
+  iconBg: {
+    type: "string",
+    default: ""
+  },
+  storyBorderColor: {
+    type: "string",
+    default: ""
+  },
+  iconToggle: {
+    type: "boolean",
+    default: false
+  },
+  timelineDesign: {
+    type: "string",
+    default: "both-sided"
+  },
+  sliderActive: {
+    type: "boolean",
+    default: false
+  },
+  innerBlockCount: {
+    type: "number",
+    default: 0
+  },
+  spinnerActive: {
+    type: "boolean",
+    default: false
+  },
+  slidePerView: {
+    type: "number",
+    default: 3
+  },
+  iconColor: {
+    type: "string",
+    default: ""
+  },
+  containerTopPadding: {
+    type: "number",
+    default: ''
+  },
+  containerRightPadding: {
+    type: "number",
+    default: ''
+  },
+  containerBottomPadding: {
+    type: "number",
+    default: ''
+  },
+  containerLeftPadding: {
+    type: "number",
+    default: ''
+  },
+  desktopConatinerPaddingType: {
+    type: "string",
+    default: "px"
+  },
+  marginLink: {
+    type: "boolean",
+    default: false
+  },
+  OrientationCheckBox: {
+    type: "boolean",
+    default: false
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
+
+/***/ }),
+
+/***/ "./src/story-timeline/depr_styling.js":
+/*!********************************************!*\
+  !*** ./src/story-timeline/depr_styling.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/css/generateCSS.js */ "./src/component/css/generateCSS.js");
+/* harmony import */ var _component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/css/generateCSSUnit.js */ "./src/component/css/generateCSSUnit.js");
+/**
+ * Returns Dynamic Generated CSS
+ */
+
+
+
+const addAlpha = (color, opacity) => {
+  // coerce values so ti is between 0 and 1.
+  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
+  return color + _opacity.toString(16).toUpperCase();
+}; // returns 'FF0000FF'
+
+function deprContentTimelineStyle(props) {
+  const {
+    itemSpacing,
+    itemSpacingType,
+    contentAlignment,
+    iconColor,
+    dateFontsizeType,
+    dateFontsize,
+    dateFontsizeTablet,
+    dateFontsizeMobile,
+    dateFontFamily,
+    dateFontWeight,
+    dateLineHeightType,
+    dateLineHeight,
+    dateColor,
+    iconSize,
+    iconFocus,
+    iconBgFocus,
+    block_id,
+    headFontSizeType,
+    headFontSize,
+    headFontSizeTablet,
+    headFontSizeMobile,
+    headFontFamily,
+    headFontWeight,
+    headLineHeightType,
+    headLineHeight,
+    headLineHeightTablet,
+    headLineHeightMobile,
+    align,
+    headingColor,
+    headSpace,
+    titileBtSpacing,
+    titileBtSpacingType,
+    descBtSpacing,
+    descBtSpacingType,
+    subHeadFontSizeType,
+    subHeadFontSize,
+    subHeadFontFamily,
+    subHeadFontWeight,
+    subHeadLineHeightType,
+    subHeadLineHeight,
+    subHeadLineHeightTablet,
+    subHeadLineHeightMobile,
+    subHeadingColor,
+    LineColor,
+    iconBg,
+    storyBorderColor,
+    iconSizeType,
+    iconBoxSize,
+    iconBoxSizeType,
+    middleLineSize,
+    middleLineSizeType,
+    containerTopPadding,
+    containerRightPadding,
+    containerBottomPadding,
+    containerLeftPadding,
+    desktopConatinerPaddingType
+  } = props.attributes;
+  let arrow_position = iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : '';
+  let middleline_position = '';
+  if (arrow_position != '') {
+    middleline_position = "calc( 30.6% + " + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
+  }
+  ;
+  let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E", 0);
+  var resp_selectors = "left";
+  var selectors = {
+    " .cool-vertical-timeline-body .timeline-block-vertical-timeline": {
+      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
+      "text-align": contentAlignment != '' ? contentAlignment : ''
+    },
+    " .cool-vertical-timeline-body .timeline-block-timeline": {
+      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
+      "text-align": contentAlignment != '' ? contentAlignment : ''
+    },
+    " .cool-vertical-timeline-body .story-details h3": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
+      "font-family": headFontFamily,
+      "font-weight": headFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
+      "color": headingColor,
+      "margin-bottom": titileBtSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(titileBtSpacing, titileBtSpacingType) : ''
+    },
+    " .cool-horizontal-timeline-body .story-details h3": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
+      "font-family": headFontFamily,
+      "font-weight": headFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
+      "color": headingColor
+    },
+    " .cool-vertical-timeline-body .story-time p": {
+      "color": dateColor != '' ? dateColor : '#333',
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
+      "font-family": dateFontFamily,
+      "font-weight": dateFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
+    },
+    " .cool-horizontal-timeline-body .story-time p": {
+      "color": dateColor != '' ? dateColor : '#333',
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
+      "font-family": dateFontFamily,
+      "font-weight": dateFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
+    },
+    " .cool-vertical-timeline-body .story-details p": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
+      "font-family": subHeadFontFamily,
+      "font-weight": subHeadFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
+      "color": subHeadingColor,
+      "margin-bottom": descBtSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(descBtSpacing, descBtSpacingType) : ''
+    },
+    " .cool-horizontal-timeline-body .story-details p": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
+      "font-family": subHeadFontFamily,
+      "font-weight": subHeadFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
+      "color": subHeadingColor
+    },
+    " .cool-vertical-timeline-body::before": {
+      "background": "linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 10%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 90%, rgba(230, 230, 230, 0) 100%)",
+      "width": middleLineSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left::before": {
+      "left": middleline_position != '' ? middleline_position : '',
+      "transform": middleline_position != '' ? "translateX(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.right::before": {
+      "right": middleline_position != '' ? middleline_position : '',
+      "transform": middleline_position != '' ? "translateX(50%)" : ''
+    },
+    " .cool-horizontal-timeline-body .timeline-content::before": {
+      "background": LineColor != '' ? LineColor : "#D91B3E"
+    },
+    " .cool-horizontal-timeline-body .timeline-content::after": {
+      "background": LineColor != '' ? LineColor : "#D91B3E"
+    },
+    " .cool-vertical-timeline-body .timeline-content::before": {
+      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+    },
+    " .cool-vertical-timeline-body.left .story-details::after": {
+      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+    },
+    " .cool-vertical-timeline-body.right .story-time::after": {
+      "background": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+    },
+    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon": {
+      "background": `${iconBg != '' ? iconBg : "#D91B3E"} !important`,
+      "width": iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + ")" : '',
+      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "font-size": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon": {
+      "width": iconBoxSize != '' ? "calc(" + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) + " + " + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize * 0.20, iconBoxSizeType) + " - 6px)" : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg": {
+      "width": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : '',
+      "height": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
+    },
+    " .cool-horizontal-timeline-body .timeline-content .timeline-block-icon": {
+      "background": iconBg != '' ? iconBg + " !important" : "#D91B3E" + " !important"
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before": {
+      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
+      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
+      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
+      "border-left-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content  .story-details": {
+      "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "padding-top": containerTopPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerTopPadding, desktopConatinerPaddingType) : '',
+      "padding-right": containerRightPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerRightPadding, desktopConatinerPaddingType) : '',
+      "padding-bottom": containerBottomPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerBottomPadding, desktopConatinerPaddingType) : '',
+      "padding-left": containerLeftPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerLeftPadding, desktopConatinerPaddingType) : ''
+    },
+    " .cool-horizontal-timeline-body .timeline-content .ctl-row .ctl-6.timeline-block-detail::before": {
+      "border-bottom-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+    },
+    " .cool-horizontal-timeline-body .ctl-6.timeline-block-detail": {
+      "border-top-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`
+    },
+    " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon": {
+      "border-color": border_color + " !important"
+    },
+    " .cool-horizontal-timeline-body .swiper-button-next": {
+      "color": LineColor != '' ? LineColor : "#D91B3E"
+    },
+    " .cool-horizontal-timeline-body .swiper-button-prev": {
+      "color": LineColor != '' ? LineColor : "#D91B3E"
+    },
+    " .cool-horizontal-timeline-body .swiper-pagination-bullet-active": {
+      "background": LineColor != '' ? LineColor : "#D91B3E"
+    },
+    " .icon-true .timeline-block-icon span.timeline-block-render-icon svg": {
+      "fill": iconColor != '' ? iconColor : 'white'
+    }
+  };
+  var styling_css = "";
+  var id = `.cool-timeline-block-${block_id}`;
+  styling_css = (0,_component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
+  return styling_css;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deprContentTimelineStyle);
+
+/***/ }),
+
+/***/ "./src/story-timeline/deprecated.js":
+/*!******************************************!*\
+  !*** ./src/story-timeline/deprecated.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/story-timeline/style.scss");
+/* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes.js */ "./src/story-timeline/attributes.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _depr_styling_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./depr_styling.js */ "./src/story-timeline/depr_styling.js");
+
+
+
+
+
+const {
+  useBlockProps,
+  InnerBlocks
+} = wp.blockEditor;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  attributes: _attributes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: props => {
+    const Save = props => {
+      const {
+        block_id,
+        timelineLayout,
+        Orientation,
+        timelineDesign,
+        slidePerView
+      } = props.attributes;
+      const InnerBlocksLength = () => {
+        return wp.data.select("core/block-editor").getBlockCount(block_id);
+      };
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "cool-timeline-block-" + block_id + ""
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
+        dangerouslySetInnerHTML: {
+          __html: (0,_depr_styling_js__WEBPACK_IMPORTED_MODULE_4__["default"])(props)
+        },
+        scoped: "true"
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "cool-timeline-block-list"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
+    };
+    const blockProps = useBlockProps.save({
+      className: 'Cool-Content-Timeline'
+    });
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Save, props));
+  }
+}]);
+
+/***/ }),
+
+/***/ "./src/story-timeline/edit.js":
+/*!************************************!*\
+  !*** ./src/story-timeline/edit.js ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/icon/timeline.png */ "./src/component/icon/timeline.png");
+/* harmony import */ var lodash_times_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/times.js */ "./node_modules/lodash/times.js");
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
+/* harmony import */ var _styling_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styling.js */ "./src/story-timeline/styling.js");
+/* harmony import */ var _component_typography_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/typography/index.js */ "./src/component/typography/index.js");
+/* harmony import */ var _component_customComponents_MultipleUnits_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/customComponents/MultipleUnits.js */ "./src/component/customComponents/MultipleUnits.js");
+/* harmony import */ var _component_typography_fontloader_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/typography/fontloader.js */ "./src/component/typography/fontloader.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./attributes.js */ "./src/story-timeline/attributes.js");
+
+
+
+
+// import map from "lodash/map.js";
+
+
+
+
+// Import all of our Text Options requirements.
+
+// Import different sides unts controler
+
+
+// // Import Web font loader for google fonts.y
+
+const {
+  dateI18n
+} = wp.date;
+const {
+  Component,
+  Fragment
+} = wp.element;
+
+
+
+const {
+  BlockControls,
+  InspectorControls,
+  BlockAlignmentToolbar,
+  PanelColorSettings,
+  InnerBlocks
+} = wp.blockEditor;
+const {
+  PanelBody,
+  SelectControl,
+  RangeControl,
+  TabPanel,
+  Toolbar,
+  ToolbarDropdownMenu,
+  Spinner,
+  ColorPicker,
+  ColorPalette,
+  Card,
+  CardBody,
+  Button,
+  ButtonGroup,
+  ToggleControl
+} = wp.components;
+const {
+  dispatch,
+  select,
+  withSelect
+} = wp.data;
+const ALLOWED_BLOCKS = ["cp-timeline/content-timeline-block-child"];
+class Edit extends Component {
+  constructor() {
+    super();
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "resetcolorpalate", e => {
+      this.props.setAttributes(e);
+    });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "OrientationCheck", e => {
+      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
+      const position = blocks[0]['attributes']['blockPosition'];
+      this.onUpdateOrientation(position, e);
+    });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "onUpdateHeadingTag", e => {
+      this.props.setAttributes({
+        headingTag: e
+      });
+      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
+      blocks.forEach((block, index) => {
+        block.attributes.headingTag = e;
+      });
+    });
+    this.onUpdateOrientation = this.onUpdateOrientation.bind(this);
+  }
+  addBlock(e) {
+    let position = this.props.attributes.BothsidedOrientation;
+    let index = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+    let name = 'cp-timeline/content-timeline-block-child';
+    const oddPosition = position,
+      evenPosition = position == 'right' ? 'left' : 'right';
+    let insertedBlock = wp.blocks.createBlock(name, {
+      block_position_active: false,
+      blockPosition: index % 2 ? evenPosition : oddPosition,
+      storyPositionHide: !this.props.attributes.OrientationCheck,
+      headingTag: this.props.attributes.headingTag
+    });
+    wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
+    let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+  }
+  onUpdateOrientation(newOrientation, position) {
+    this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
+      BothsidedOrientation: newOrientation
+    });
+    this.props.setAttributes({
+      Orientation: newOrientation
+    });
+    if (this.props.attributes.timelineLayout == "vertical" && this.props.attributes.timelineDesign == "both-sided") {
+      const blocks = select("core/block-editor").getBlock(this.props.clientId).innerBlocks,
+        evenPosition = newOrientation,
+        oddPosition = newOrientation === 'left' ? 'right' : 'left';
+      blocks.forEach((block, index) => {
+        block.attributes.blockPosition = index % 2 ? oddPosition : evenPosition, block.attributes.storyPositionHide = !position;
+      });
+    }
+  }
+
+  // custom color reset option
+
+  render() {
+    // Setup the attributes.
+    const {
+      setAttributes,
+      attributes: {
+        itemSpacing,
+        contentAlignment,
+        LineColor,
+        timelineLayout,
+        tm_content,
+        headingColor,
+        subHeadingColor,
+        titileBtSpacing,
+        headFontSizeType,
+        headFontSize,
+        headFontSizeTablet,
+        headFontSizeMobile,
+        headFontFamily,
+        headFontWeight,
+        headFontSubset,
+        headLineHeightType,
+        headLineHeight,
+        headLineHeightTablet,
+        headLineHeightMobile,
+        headLoadGoogleFonts,
+        timelineItem,
+        descBtSpacing,
+        subHeadFontSizeType,
+        subHeadFontSize,
+        subHeadFontSizeTablet,
+        subHeadFontSizeMobile,
+        subHeadFontFamily,
+        subHeadFontWeight,
+        subHeadFontSubset,
+        subHeadLineHeightType,
+        subHeadLineHeight,
+        subHeadLineHeightTablet,
+        subHeadLineHeightMobile,
+        subHeadLoadGoogleFonts,
+        dateColor,
+        storyBorderColor,
+        dateFontsizeType,
+        dateFontsize,
+        dateFontsizeTablet,
+        dateFontsizeMobile,
+        dateFontFamily,
+        dateFontWeight,
+        dateFontSubset,
+        dateLineHeightType,
+        dateLineHeight,
+        dateLineHeightTablet,
+        dateLineHeightMobile,
+        dateLoadGoogleFonts,
+        iconBg,
+        Orientation,
+        timelineDesign,
+        slidePerView,
+        iconColor,
+        iconSize,
+        iconSizeType,
+        iconBoxSize,
+        iconBoxSizeType,
+        middleLineSize,
+        middleLineSizeType,
+        containerTopPadding,
+        containerRightPadding,
+        containerBottomPadding,
+        containerLeftPadding,
+        desktopConatinerPaddingType,
+        marginLink,
+        isPreview,
+        OrientationCheckBox,
+        headingTag
+      }
+    } = this.props;
+    var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId);
+    if (element) {
+      element.innerHTML = (0,_styling_js__WEBPACK_IMPORTED_MODULE_6__["default"])(this.props);
+    }
+    const orientation_setting = timelineLayout == "vertical" && timelineDesign == 'one-sided' || timelineLayout == "vertical" && timelineDesign == 'both-sided' && OrientationCheckBox ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+      label: timelineDesign == "both-sided" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("first story Based") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Alignment"),
+      value: Orientation,
+      onChange: this.onUpdateOrientation,
+      options: [{
+        value: "right",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Right Sided", "timeline-block")
+      }, {
+        value: "left",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Left Sided", "timeline-block")
+      }]
+    })) : null;
+    const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
+      className: "timeline-block-settings-labels"
+    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_index_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
+      attributes: this.props.attributes,
+      setAttributes: setAttributes,
+      loadGoogleFonts: {
+        value: headLoadGoogleFonts,
+        label: 'headLoadGoogleFonts'
+      },
+      fontFamily: {
+        value: headFontFamily,
+        label: 'headFontFamily'
+      },
+      fontWeight: {
+        value: headFontWeight,
+        label: 'headFontWeight'
+      },
+      fontSubset: {
+        value: headFontSubset,
+        label: 'headFontSubset'
+      },
+      fontSizeType: {
+        value: headFontSizeType,
+        label: 'headFontSizeType'
+      },
+      fontSize: {
+        value: headFontSize,
+        label: 'headFontSize'
+      },
+      fontSizeMobile: {
+        value: headFontSizeMobile,
+        label: 'headFontSizeMobile'
+      },
+      fontSizeTablet: {
+        value: headFontSizeTablet,
+        label: 'headFontSizeTablet'
+      },
+      lineHeightType: {
+        value: headLineHeightType,
+        label: 'headLineHeightType'
+      },
+      lineHeight: {
+        value: headLineHeight,
+        label: 'headLineHeight'
+      },
+      lineHeightMobile: {
+        value: headLineHeightMobile,
+        label: 'headLineHeightMobile'
+      },
+      lineHeightTablet: {
+        value: headLineHeightTablet,
+        label: 'headLineHeightTablet'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 15 + 'px'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${headingColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        headingColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: headingColor,
+      onChange: colorValue => setAttributes({
+        headingColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 15 + 'px',
+        'margin-bottom': 10 + 'px'
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Select Heading Tag", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl
+    // label={ __("Select Heading Tag") }
+    , {
+      value: headingTag,
+      onChange: e => this.onUpdateHeadingTag(e),
+      options: [{
+        value: "h1",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H1", "timeline-block")
+      }, {
+        value: "h2",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H2", "timeline-block")
+      }, {
+        value: "h3",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H3", "timeline-block")
+      }, {
+        value: "h4",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H4", "timeline-block")
+      }, {
+        value: "h5",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H5", "timeline-block")
+      }, {
+        value: "h6",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("H6", "timeline-block")
+      }]
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 15 + 'px'
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: titileBtSpacing != '' ? titileBtSpacing : 0,
+      onChange: value => setAttributes({
+        titileBtSpacing: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 0,
+      max: 200
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
+      className: "timeline-block-editor__separator"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
+      className: "timeline-block-settings-labels"
+    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_index_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
+      attributes: this.props.attributes,
+      setAttributes: setAttributes,
+      loadGoogleFonts: {
+        value: subHeadLoadGoogleFonts,
+        label: 'subHeadLoadGoogleFonts'
+      },
+      fontFamily: {
+        value: subHeadFontFamily,
+        label: 'subHeadFontFamily'
+      },
+      fontWeight: {
+        value: subHeadFontWeight,
+        label: 'subHeadFontWeight'
+      },
+      fontSubset: {
+        value: subHeadFontSubset,
+        label: 'subHeadFontSubset'
+      },
+      fontSizeType: {
+        value: subHeadFontSizeType,
+        label: 'subHeadFontSizeType'
+      },
+      fontSize: {
+        value: subHeadFontSize,
+        label: 'subHeadFontSize'
+      },
+      fontSizeMobile: {
+        value: subHeadFontSizeMobile,
+        label: 'subHeadFontSizeMobile'
+      },
+      fontSizeTablet: {
+        value: subHeadFontSizeTablet,
+        label: 'subHeadFontSizeTablet'
+      },
+      lineHeightType: {
+        value: subHeadLineHeightType,
+        label: 'subHeadLineHeightType'
+      },
+      lineHeight: {
+        value: subHeadLineHeight,
+        label: 'subHeadLineHeight'
+      },
+      lineHeightMobile: {
+        value: subHeadLineHeightMobile,
+        label: 'subHeadLineHeightMobile'
+      },
+      lineHeightTablet: {
+        value: subHeadLineHeightTablet,
+        label: 'subHeadLineHeightTablet'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 10 + 'px'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        subHeadingColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: subHeadingColor,
+      onChange: colorValue => setAttributes({
+        subHeadingColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 15 + 'px'
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Bottom Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: descBtSpacing != '' ? descBtSpacing : 0,
+      onChange: value => setAttributes({
+        descBtSpacing: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 0,
+      max: 200
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("hr", {
+      className: "timeline-block-editor__separator"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
+      className: "timeline-block-settings-labels"
+    }, "Primary Label(Date/Steps)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_index_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Typography", 'timeline-block'),
+      attributes: this.props.attributes,
+      setAttributes: setAttributes,
+      loadGoogleFonts: {
+        value: dateLoadGoogleFonts,
+        label: 'dateLoadGoogleFonts'
+      },
+      fontFamily: {
+        value: dateFontFamily,
+        label: 'dateFontFamily'
+      },
+      fontWeight: {
+        value: dateFontWeight,
+        label: 'dateFontWeight'
+      },
+      fontSubset: {
+        value: dateFontSubset,
+        label: 'dateFontSubset'
+      },
+      fontSizeType: {
+        value: dateFontsizeType,
+        label: 'dateFontsizeType'
+      },
+      fontSize: {
+        value: dateFontsize,
+        label: 'dateFontsize'
+      },
+      fontSizeMobile: {
+        value: dateFontsizeMobile,
+        label: 'dateFontsizeMobile'
+      },
+      fontSizeTablet: {
+        value: dateFontsizeTablet,
+        label: 'dateFontsizeTablet'
+      },
+      lineHeightType: {
+        value: dateLineHeightType,
+        label: 'dateLineHeightType'
+      },
+      lineHeight: {
+        value: dateLineHeight,
+        label: 'dateLineHeight'
+      },
+      lineHeightMobile: {
+        value: dateLineHeightMobile,
+        label: 'dateLineHeightMobile'
+      },
+      lineHeightTablet: {
+        value: dateLineHeightTablet,
+        label: 'dateLineHeightTablet'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 10 + 'px'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${dateColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        dateColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: dateColor,
+      onChange: colorValue => setAttributes({
+        dateColor: colorValue
+      })
+    })));
+    const advanced_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Line Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${LineColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        LineColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: LineColor,
+      onChange: colorValue => setAttributes({
+        LineColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${iconColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        iconColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: iconColor,
+      onChange: colorValue => setAttributes({
+        iconColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Icon Background"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${iconBg != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        iconBg: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: iconBg,
+      onChange: colorValue => setAttributes({
+        iconBg: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, "Story Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' ? 'timeline-color-setting_apply' : ''}`,
+      onClick: e => this.resetcolorpalate({
+        storyBorderColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: storyBorderColor,
+      onChange: colorValue => setAttributes({
+        storyBorderColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Item Spacing", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: itemSpacing != '' ? itemSpacing : 0,
+      onChange: value => setAttributes({
+        itemSpacing: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 0,
+      max: 200
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Icon Box Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: iconBoxSize != '' ? iconBoxSize : 0,
+      onChange: value => setAttributes({
+        iconBoxSize: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 20,
+      max: 100
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Icon Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: iconSize != '' ? iconSize : 0,
+      onChange: value => setAttributes({
+        iconSize: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 0,
+      max: 100
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Line Size", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
+      className: "cp-timeline-block-range__control",
+      value: middleLineSize != '' ? middleLineSize : 0,
+      onChange: value => setAttributes({
+        middleLineSize: value
+      }),
+      resetFallbackValue: 0,
+      allowReset: true,
+      min: 0,
+      max: 10
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_customComponents_MultipleUnits_js__WEBPACK_IMPORTED_MODULE_8__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)('Container Padding', 'timeline-block'),
+      valueTop: {
+        value: containerTopPadding,
+        label: 'containerTopPadding'
+      },
+      valueRight: {
+        value: containerRightPadding,
+        label: 'containerRightPadding'
+      },
+      valueBottom: {
+        value: containerBottomPadding,
+        label: 'containerBottomPadding'
+      },
+      valueLeft: {
+        value: containerLeftPadding,
+        label: 'containerLeftPadding'
+      },
+      unit: {
+        value: desktopConatinerPaddingType,
+        label: 'desktopConatinerPaddingType'
+      },
+      attributes: this.props.attributes,
+      setAttributes: setAttributes,
+      link: {
+        value: marginLink,
+        label: 'marginLink'
+      }
+    })));
+    const rating_box = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Please Share Your Valuable Feedback.", "timeline-block")
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cool-timeline-gt-block-review-tab"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("We hope you liked our plugin created timelines. Please share your valuable feedback.", "timeline-block"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
+      href: "https://wordpress.org/support/plugin/timeline-block/reviews/#new-post",
+      className: "components-button is-primary is-small",
+      target: "_blank"
+    }, "Rate Us", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " \u2605\u2605\u2605\u2605\u2605"))));
+    const timeline_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Timeline Design", "timeline-block"),
+      value: timelineDesign,
+      onChange: value => {
+        setAttributes({
+          timelineDesign: value
+        });
+      },
+      options: [{
+        value: "both-sided",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Both Sided", "timeline-block")
+      }, {
+        value: "one-sided",
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("One Sided", "timeline-block")
+      }]
+    }) : null, timelineLayout == "vertical" && timelineDesign == 'both-sided' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "components-base-control"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
+      className: "timeline-block-settings-labels"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Alternating Sided", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToggleControl, {
+      className: "timeline-block-Orientation_checkbox",
+      checked: OrientationCheckBox,
+      onChange: state => {
+        setAttributes({
+          OrientationCheckBox: state
+        }), this.OrientationCheck(state);
+      }
+    })) : null, ["one-sided", 'both-sided'].includes(timelineDesign) && timelineLayout == "vertical" ? orientation_setting : null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      className: "timeline-block-settings-labels"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("Content Alignment", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ButtonGroup, {
+      className: "cool-timeline-content-alignment-buttons"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
+      onClick: e => {
+        setAttributes({
+          contentAlignment: 'left'
+        });
+      },
+      className: contentAlignment == 'left' ? 'active' : ''
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      className: "dashicons dashicons-editor-alignleft"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
+      onClick: e => {
+        setAttributes({
+          contentAlignment: 'center'
+        });
+      },
+      className: contentAlignment == 'center' ? 'active' : ''
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      className: "dashicons dashicons-editor-aligncenter"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Button, {
+      onClick: e => {
+        setAttributes({
+          contentAlignment: 'right'
+        });
+      },
+      className: contentAlignment == 'right' ? 'active' : ''
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      className: "dashicons dashicons-editor-alignright"
+    }))));
+    let settingTabs = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(TabPanel, {
+      className: "cooltimeline-tab-settings",
+      activeClass: "active-tab",
+      tabs: [{
+        name: 'timeline_setting',
+        title: 'General',
+        className: 'tab-one',
+        content: timeline_setting
+      }, {
+        name: 'general_setting',
+        title: 'Style',
+        className: 'tab-two',
+        content: general_setting
+      }, {
+        name: 'advanced_setting',
+        title: 'Advanced',
+        className: 'tab-three',
+        content: advanced_setting
+      }]
+    }, tab => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Card, null, tab.content)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__.__)("View Timeline Demos", "timeline-block"),
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cp-timeline-block-demo-button"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
+      target: "_blank",
+      class: "button button-primary",
+      href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=demo&utm_content=block_settings"
+    }, "View Demos"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("a", {
+      target: "_blank",
+      class: "button button-primary",
+      href: "https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/"
+    }, "Watch Videos"))), rating_box);
+    const getContentTimelineTemplate = memize__WEBPACK_IMPORTED_MODULE_5__((icon_block, tm_content) => {
+      return lodash_times_js__WEBPACK_IMPORTED_MODULE_4__(icon_block, n => ['cp-timeline/content-timeline-block-child', tm_content[n]]);
+    });
+    let loadHeadGoogleFonts;
+    let loadSubHeadGoogleFonts;
+    let loadDateGoogleFonts;
+    if (headLoadGoogleFonts == true) {
+      const headconfig = {
+        google: {
+          families: [headFontFamily + (headFontWeight ? ":" + headFontWeight : "")]
+        }
+      };
+      loadHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        config: headconfig
+      });
+    }
+    if (subHeadLoadGoogleFonts == true) {
+      const subHeadconfig = {
+        google: {
+          families: [subHeadFontFamily + (subHeadFontWeight ? ":" + subHeadFontWeight : "")]
+        }
+      };
+      loadSubHeadGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        config: subHeadconfig
+      });
+    }
+    if (dateLoadGoogleFonts == true) {
+      const dateconfig = {
+        google: {
+          families: [dateFontFamily + (dateFontWeight ? ":" + dateFontWeight : "")]
+        }
+      };
+      loadDateGoogleFonts = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_fontloader_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        config: dateconfig
+      });
+    }
+    return (
+      // on hover preview image add for editor side
+      isPreview ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("img", {
+        width: "100%",
+        src: _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__,
+        alt: ""
+      }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, timelineDesign == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(BlockControls, {
+        group: "block"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ToolbarDropdownMenu, {
+        icon: "layout",
+        label: "Layout",
+        controls: [{
+          title: 'Both Sided',
+          onClick: () => setAttributes({
+            timelineDesign: "both-sided"
+          })
+        }, {
+          title: 'One Sided',
+          onClick: () => setAttributes({
+            timelineDesign: "one-sided"
+          })
+        }]
+      })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+        className: "cool-timeline-block-" + this.props.clientId + " cool-timeline-block"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+        className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+        className: "cool-timeline-block-list"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InnerBlocks, {
+        allowedBlocks: ALLOWED_BLOCKS,
+        orientation: "vertical",
+        template: getContentTimelineTemplate(timelineItem, tm_content)
+      }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+        className: "timeline-block-add-story"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("button", {
+        onClick: e => this.addBlock(e),
+        type: "button",
+        visible: "true",
+        className: "components-button is-primary",
+        "aria-label": "Add Story"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        width: "24",
+        height: "24",
+        role: "img",
+        "aria-hidden": "true",
+        focusable: "false"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("path", {
+        d: "M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"
+      })), "Add Story")))))
+    );
+  }
+  componentDidMount() {
+    // //Store client id.
+    this.props.setAttributes({
+      block_id: this.props.clientId
+    });
+
+    // Pushing Style tag for this block css.
+    const $style = document.createElement("style");
+    $style.setAttribute("id", "cool-vertical-timeline-style-" + this.props.clientId);
+    document.head.appendChild($style);
+    let timelineLayout = this.props.attributes.timelineLayout;
+    let timelineDesign = this.props.attributes.timelineDesign;
+
+    // Recalculate alternating sides if new child block was added or removed
+    // this.childCount = select("core/block-editor").getBlock(this.props.clientId).innerBlocks.length;
+    wp.data.subscribe(() => {
+      const childBlocks = select("core/block-editor").getBlock(this.props.clientId);
+      if (!childBlocks || !childBlocks.innerBlocks) {
+        return;
+      }
+      const currentChildCount = childBlocks.innerBlocks.length;
+      const childWasAddedOrRemoved = this.childCount !== currentChildCount;
+      this.childCount = currentChildCount;
+      if (!childWasAddedOrRemoved) {
+        return;
+      }
+      // this.onUpdateOrientation(this.props.attributes.Orientation);
+    });
+  }
+
+  componentDidUpdate() {
+    let clientId = this.props.clientId;
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ }),
+
+/***/ "./src/story-timeline/index.js":
+/*!*************************************!*\
+  !*** ./src/story-timeline/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/story-timeline/style.scss");
+/* harmony import */ var _deprecated_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./deprecated.js */ "./src/story-timeline/deprecated.js");
+/* harmony import */ var _save_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save.js */ "./src/story-timeline/save.js");
+/* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./attributes.js */ "./src/story-timeline/attributes.js");
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit.js */ "./src/story-timeline/edit.js");
+/* harmony import */ var _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/icon/insertorIcon.js */ "./src/component/icon/insertorIcon.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+
+/**
+ * Register: as Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+// //  Import CSS.
+// import ".././style.scss"
+
+
+
+
+
+
+// Components
+
+
+// Register block controls
+const {
+  registerBlockType
+} = wp.blocks;
+const {
+  useBlockProps,
+  InnerBlocks
+} = wp.blockEditor;
+const {
+  addFilter
+} = wp.hooks;
+const {
+  Fragment
+} = wp.element;
+const {
+  withSelect
+} = wp.data;
+const {
+  compose,
+  createHigherOrderComponent
+} = wp.compose;
+
+/**
+ * Override the default block element to add	wrapper props.
+ *
+ * @param  {Function} BlockListBlock Original component
+ * @return {Function} Wrapped component
+ */
+
+const enhance = compose(withSelect(select => {
+  return {
+    selected: select('core/block-editor').getSelectedBlock()
+  };
+}));
+/**
+ * Add custom attributes to selected blocks
+ *
+ * @param {Function} BlockEdit Original component.
+ * @return {string} Wrapped component.
+ */
+const withcontentTimeline = createHigherOrderComponent(BlockEdit => {
+  return enhance(_ref => {
+    let {
+      ...props
+    } = _ref;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props));
+  });
+}, 'withcontentTimeline');
+registerBlockType("cp-timeline/content-timeline-block", {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)('Timeline Block', 'cool-timeline'),
+  // Block title.
+  apiVersion: 2,
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Roadmap Timeline", 'timeline-block')],
+  icon: _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_6__.CoolTMIcon,
+  supports: {
+    anchor: true
+  },
+  attributes: _attributes_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+  deprecated: _deprecated_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  edit: props => {
+    const blockProps = useBlockProps({
+      className: 'Cool-Content-Timeline-' + props.attributes.timelineDesign
+    });
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_edit_js__WEBPACK_IMPORTED_MODULE_5__["default"], props));
+  },
+  save: props => {
+    const blockProps = useBlockProps.save({
+      className: 'Cool-Content-Timeline'
+    });
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_save_js__WEBPACK_IMPORTED_MODULE_3__["default"], props));
+  },
+  providesContext: {
+    'cp-timeline/timelineLayout': 'timelineLayout',
+    'cp-timeline/timelineDesign': 'timelineDesign'
+  },
+  example: {
+    attributes: {
+      backgroundColor: 'green',
+      opacity: 1,
+      padding: 10,
+      radius: 10,
+      isPreview: true
+    }
+  }
+});
+addFilter('editor.BlockEdit', 'cp-timeline/content-timeline-block', withcontentTimeline);
+
+/***/ }),
+
+/***/ "./src/story-timeline/save.js":
+/*!************************************!*\
+  !*** ./src/story-timeline/save.js ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _styling_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styling.js */ "./src/story-timeline/styling.js");
+
+/**
+ * BLOCK: Timeline - Save Block
+ */
+
+
+const {
+  InnerBlocks
+} = wp.blockEditor;
+function Save(props) {
+  const {
+    block_id,
+    timelineLayout,
+    Orientation,
+    timelineDesign,
+    slidePerView
+  } = props.attributes;
+  const InnerBlocksLength = () => {
+    return wp.data.select("core/block-editor").getBlockCount(block_id);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cool-timeline-block-" + block_id + ""
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
+    dangerouslySetInnerHTML: {
+      __html: (0,_styling_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props)
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "cool-timeline-block-list"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
+}
+
+/***/ }),
+
+/***/ "./src/story-timeline/styling.js":
+/*!***************************************!*\
+  !*** ./src/story-timeline/styling.js ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/css/generateCSS.js */ "./src/component/css/generateCSS.js");
+/* harmony import */ var _component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/css/generateCSSUnit.js */ "./src/component/css/generateCSSUnit.js");
+/**
+ * Returns Dynamic Generated CSS
+ */
+
+
+
+const addAlpha = (color, opacity) => {
+  // coerce values so ti is between 0 and 1.
+  var _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
+  return color + _opacity.toString(16).toUpperCase();
+}; // returns 'FF0000FF'
+
+function contentTimelineStyle(props) {
+  const {
+    itemSpacing,
+    itemSpacingType,
+    contentAlignment,
+    iconColor,
+    dateFontsizeType,
+    dateFontsize,
+    dateFontsizeTablet,
+    dateFontsizeMobile,
+    dateFontFamily,
+    dateFontWeight,
+    dateLineHeightType,
+    dateLineHeight,
+    dateColor,
+    iconSize,
+    iconFocus,
+    iconBgFocus,
+    block_id,
+    headFontSizeType,
+    headFontSize,
+    headFontSizeTablet,
+    headFontSizeMobile,
+    headFontFamily,
+    headFontWeight,
+    headLineHeightType,
+    headLineHeight,
+    headLineHeightTablet,
+    headLineHeightMobile,
+    align,
+    headingColor,
+    headSpace,
+    titileBtSpacing,
+    titileBtSpacingType,
+    descBtSpacing,
+    descBtSpacingType,
+    subHeadFontSizeType,
+    subHeadFontSize,
+    subHeadFontFamily,
+    subHeadFontWeight,
+    subHeadLineHeightType,
+    subHeadLineHeight,
+    subHeadLineHeightTablet,
+    subHeadLineHeightMobile,
+    subHeadingColor,
+    LineColor,
+    iconBg,
+    storyBorderColor,
+    iconSizeType,
+    iconBoxSize,
+    iconBoxSizeType,
+    middleLineSize,
+    middleLineSizeType,
+    containerTopPadding,
+    containerRightPadding,
+    containerBottomPadding,
+    containerLeftPadding,
+    desktopConatinerPaddingType
+  } = props.attributes;
+  let arrow_position = iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : '';
+  let middleline_position = '';
+  if (arrow_position != '') {
+    middleline_position = "calc( 30.7% + " + (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(Math.round(iconBoxSize / 2), iconBoxSizeType) + ")";
+  }
+  ;
+  let border_color = addAlpha(LineColor != '' ? LineColor : "#D91B3E", 0);
+  var resp_selectors = "left";
+  var selectors = {
+    " .cool-vertical-timeline-body .timeline-block-vertical-timeline": {
+      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
+      "text-align": contentAlignment != '' ? contentAlignment : ''
+    },
+    " .cool-vertical-timeline-body .timeline-block-timeline": {
+      "margin-bottom": itemSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(itemSpacing, itemSpacingType) : '',
+      "text-align": contentAlignment != '' ? contentAlignment : ''
+    },
+    " .cool-vertical-timeline-body .story-details .timeline-block_title": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headFontSize, headFontSizeType),
+      "font-family": headFontFamily,
+      "font-weight": headFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(headLineHeight, headLineHeightType),
+      "color": headingColor,
+      "margin-bottom": titileBtSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(titileBtSpacing, titileBtSpacingType) : ''
+    },
+    " .cool-vertical-timeline-body .story-time p": {
+      "color": dateColor != '' ? dateColor : '#333',
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateFontsize, dateFontsizeType),
+      "font-family": dateFontFamily,
+      "font-weight": dateFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dateLineHeight, dateLineHeightType)
+    },
+    " .cool-vertical-timeline-body .story-details .timeline-block_desc p": {
+      "font-size": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadFontSize, subHeadFontSizeType),
+      "font-family": subHeadFontFamily,
+      "font-weight": subHeadFontWeight,
+      "line-height": (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(subHeadLineHeight, subHeadLineHeightType),
+      "color": subHeadingColor,
+      "margin-bottom": descBtSpacing != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(descBtSpacing, descBtSpacingType) : ''
+    },
+    " .cool-vertical-timeline-body::before": {
+      "background": "linear-gradient(to bottom, rgba(230, 230, 230, 0) 0%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 10%, " + `${LineColor != '' ? LineColor : "#D91B3E"}` + " 90%, rgba(230, 230, 230, 0) 100%)",
+      "width": middleLineSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(middleLineSize, middleLineSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left::before": {
+      "left": middleline_position != '' ? middleline_position : '',
+      "transform": iconBoxSize != '' || middleLineSize != '' ? "translateX(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.right::before": {
+      "right": middleline_position != '' ? middleline_position : '',
+      "transform": middleline_position != '' ? "translateX(50%)" : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content::before": {
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
+    },
+    " .cool-vertical-timeline-body.left .story-details::after": {
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
+    },
+    " .cool-vertical-timeline-body.right .story-time::after": {
+      "background": storyBorderColor != '' ? storyBorderColor : "#D91B3E"
+    },
+    " .cool-vertical-timeline-body .timeline-content.icon-true .timeline-block-icon": {
+      "background": iconBg != '' ? iconBg : "#D91B3E",
+      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "margin-top": iconBoxSize != '' ? '15px' : '',
+      "font-size": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon": {
+      "background": 'transparent',
+      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content.icon-false .timeline-block-icon svg": {
+      "fill": iconBg != '' ? iconBg : "#D91B3E",
+      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "height": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.right .timeline-content.icon-true .timeline-block-icon": {
+      "left": iconBoxSize != '' ? '-2px' : '',
+      "margin-left": iconBoxSize != '' ? '12px' : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-icon": {
+      "right": iconBoxSize != '' ? '0px' : '',
+      "margin-right": iconBoxSize != '' ? '9px' : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon": {
+      "width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : '',
+      "min-width": iconBoxSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconBoxSize, iconBoxSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .timeline-block-icon.position-left": {
+      "left": iconBoxSize != '' && iconBoxSize > 29 ? '-2px' : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content .timeline-block-icon span.timeline-block-render-icon svg": {
+      "width": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : '',
+      "height": iconSize != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(iconSize, iconSizeType) : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .position-right .story-details::before": {
+      "border-right-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.both-sided .timeline-content .position-left  .story-details::before": {
+      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content  .story-details::before": {
+      "border-right-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.right .timeline-content  .story-details::before": {
+      "border-left-color": storyBorderColor != '' ? storyBorderColor : "#D91B3E",
+      "margin-top": arrow_position != '' ? arrow_position : '',
+      "transform": arrow_position != '' ? "translateY(-50%)" : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content  .story-details": {
+      "border-color": `${storyBorderColor != '' ? storyBorderColor : "#D91B3E"} !important`,
+      "padding-top": containerTopPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerTopPadding, desktopConatinerPaddingType) : '',
+      "padding-right": containerRightPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerRightPadding, desktopConatinerPaddingType) : '',
+      "padding-bottom": containerBottomPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerBottomPadding, desktopConatinerPaddingType) : '',
+      "padding-left": containerLeftPadding != '' ? (0,_component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__["default"])(containerLeftPadding, desktopConatinerPaddingType) : ''
+    },
+    " .cool-vertical-timeline-body.one-sided.left .timeline-content.icon-true .timeline-block-detail": {
+      "padding-left": iconBoxSize != '' ? '20px' : ''
+    },
+    " .cool-vertical-timeline-body .timeline-content  .timeline-block-icon": {
+      "border-color": border_color + " !important"
+    },
+    " .icon-true .timeline-block-icon span.timeline-block-render-icon svg": {
+      "fill": iconColor != '' ? iconColor : 'white'
+    }
+  };
+  var styling_css = "";
+  var id = `.cool-timeline-block-${block_id}`;
+  styling_css = (0,_component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
+  return styling_css;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (contentTimelineStyle);
 
 /***/ }),
 

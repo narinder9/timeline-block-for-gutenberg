@@ -1,8 +1,8 @@
 import "./style.scss"
-import attributes from "./attributes"
+import attributes from "./attributes.js"
 import { __ } from '@wordpress/i18n';
 
-import deprContentTimelineStyle from "./depr_styling"
+import deprContentTimelineStyle from "./depr_styling.js"
 const { useBlockProps,InnerBlocks } = wp.blockEditor;
 
 export default [

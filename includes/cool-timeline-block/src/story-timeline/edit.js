@@ -214,7 +214,7 @@ class Edit extends Component {
 			<div style={{ 'margin-top': 15 + 'px' }}></div>
 			<CardBody className="cp-timeline-block-style-settings">
 				<div>{__("Text Color", "timeline-block")}</div>
-				<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
 					value={headingColor}
@@ -267,7 +267,7 @@ class Edit extends Component {
 			<div style={{ 'margin-top': 10 + 'px' }}></div>
 			<CardBody className="cp-timeline-block-style-settings">
 				<div>{__("Text Color", "timeline-block")}</div>
-				<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
 					value={subHeadingColor}
@@ -306,7 +306,7 @@ class Edit extends Component {
 			<div style={{ 'margin-top': 10 + 'px' }}></div>
 			<div className="cp-timeline-block-style-settings">
 				<div>{__("Text Color", "timeline-block")}</div>
-				<div class={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ dateColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ dateColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
 					value={dateColor}
@@ -318,7 +318,7 @@ class Edit extends Component {
 			<CardBody>
 				<div className="cp-timeline-block-style-settings">
 					<h2>Line Color</h2>
-					<div class={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ LineColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+					<div class={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ LineColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 					<ColorPalette className="cp-timeline-block-color-palates"
 						clearable={false}
 						value={LineColor}
@@ -327,7 +327,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 					<h2>Icon Color</h2>
-					<div class={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ iconColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+					<div class={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ iconColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 					<ColorPalette className="cp-timeline-block-color-palates"
 						clearable={false}
 						value={iconColor}
@@ -336,7 +336,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 					<h2>Icon Background</h2>
-					<div class={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ iconBg: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+					<div class={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ iconBg: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 					<ColorPalette className="cp-timeline-block-color-palates"
 						clearable={false}
 						value={iconBg}
@@ -345,7 +345,7 @@ class Edit extends Component {
 				</div>
 				<div className="cp-timeline-block-style-settings">
 					<h2>Story Border Color</h2>
-					<div class={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ storyBorderColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+					<div class={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' ? 'timeline-color-setting_apply' : ''}`} onClick={e => this.resetcolorpalate({ storyBorderColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
 					<ColorPalette className="cp-timeline-block-color-palates"
 						clearable={false}
 						value={storyBorderColor}
@@ -588,7 +588,7 @@ class Edit extends Component {
 									/>
 								</div>
 							</div><div className="timeline-block-add-story">
-								<button onClick={e => this.addBlock(e)} type="button" visible="true" className="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
+								<button onClick={e => this.addBlock(e)} type="button" visible="true" className="components-button is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
 							</div>
 						</div>
 					</div>

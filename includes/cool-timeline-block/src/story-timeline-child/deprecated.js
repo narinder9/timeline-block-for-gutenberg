@@ -1,6 +1,6 @@
-import renderSVG from "../component/icon/renderIcon"
+import renderSVG from "../component/icon/renderIcon.js"
 import {__} from '@wordpress/i18n';
-import attributes from "./attributes";
+import attributes from "./attributes.js";
 const {useBlockProps} = wp.blockEditor;
 const {RichText} = wp.blockEditor
 
