@@ -21790,31 +21790,31 @@ const example = {
     "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon is born", 'timeline-block'),
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat enim res aperta. Ne discipulum abducam, times. Primum quid tu dicis breve? An haec ab eo non dicuntur?", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon1-600x338.jpg",
-    "t_date": "5/6/2019"
+    "t_date": "July 5, 1994"
   },
   'data2': {
     "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Prime debuts", 'timeline-block'),
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aliter homines, aliter philosophos loqui putas oportere? Sin aliud quid voles, postea. Mihi enim satis est, ipsis non satis. Negat enim summo bono afferre incrementum diem. Quod ea non occurrentia fingunt, vincunt Aristonem., you can change me anytime click here, ", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon2-600x338.jpg",
-    "t_date": "2/2/2020"
+    "t_date": "Feb 2, 2020"
   },
   'data3': {
     "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon acquires Audible", 'timeline-block'),
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
-    "t_date": "31/1/2021"
+    "t_date": "Jan 31, 2021"
   },
   'data4': {
     "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Kindle For Books", 'timeline-block'),
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
-    "t_date": "5/7/2022"
+    "t_date": "Jul 5, 2022"
   },
   'data5': {
     "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon App Store Launched", 'timeline-block'),
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
-    "t_date": "22/3/2011"
+    "t_date": "Mar 22, 2011"
   }
 };
 for (var i = 1; i <= ITEM_COUNT; i++) {
@@ -23384,7 +23384,7 @@ class Edit extends Component {
         onClick: e => this.addBlock(e),
         type: "button",
         visible: "true",
-        className: "components-button block-editor-button-block-appender is-primary",
+        className: "components-button is-primary",
         "aria-label": "Add Story"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("svg", {
         xmlns: "http://www.w3.org/2000/svg",
@@ -23531,7 +23531,7 @@ registerBlockType("cp-timeline/content-timeline-block", {
   // Block title.
   apiVersion: 2,
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Timeline", 'timeline-block')],
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Roadmap Timeline", 'timeline-block')],
   icon: _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_6__.CoolTMIcon,
   supports: {
     anchor: true

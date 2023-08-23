@@ -16,7 +16,8 @@ const {
 	TextareaControl,
 	Toolbar,
 	RadioControl,
-	SelectControl
+	SelectControl,
+	ButtonGroup
 } = wp.components;
 
 class Edit extends Component {
@@ -123,11 +124,11 @@ class Edit extends Component {
 									<div className="story-image">
 										<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 									</div>
-									<Button isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
+									<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
 										{__('Remove Image')}</Button>
 								</Fragment>
 								:
-								<Button isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
+								<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
 							}
 						</Fragment>
 					)}
@@ -164,6 +165,17 @@ class Edit extends Component {
 		);
 		const content_control = (
 			<InspectorControls>
+				<div style={{ 'margin-bottom': 15 + 'px','text-align':'center' }}>
+				<Button
+					isSecondary
+					icon={'arrow-left-alt'}
+					onClick={() => {
+						const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+						wp.data.dispatch('core/block-editor').selectBlock(parentBlockId);
+					}
+					}
+				>GO TO SETTINGS</Button>
+				</div>
 				<PanelBody title={__("Story Settings")}>
 					<TextControl
 						label="Story Heading"
@@ -180,7 +192,7 @@ class Edit extends Component {
 						value={t_date}
 						onChange={(value) => setAttributes({ t_date: value })}
 					/>
-					<RadioControl
+					{/* <RadioControl
 						label="Story Icon"
 						selected={iconToggle}
 						options={[
@@ -188,7 +200,12 @@ class Edit extends Component {
 							{ label: 'Custom(Font Awesome Icon)', value: "true" },
 						]}
 						onChange={(value) => setAttributes({ iconToggle: value })}
-					/>
+					/> */}
+					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>
+					<ButtonGroup className="cool-timeline-content-alignment-buttons">
+						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'false' }) }} className={iconToggle == 'false' ? 'active' : ''}>DOT</Button>
+						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'true' }) }} className={iconToggle == 'true' ? 'active' : ''}>Icon</Button>
+					</ButtonGroup>
 					{iconToggle == "true" ?
 						<Fragment>  <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({ icon: v })} /> </div>
 
@@ -216,11 +233,11 @@ class Edit extends Component {
 								{timeLineImage !== "none" ?
 									<Fragment>
 										<img src={timeLineImage} />
-										<Button isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
+										<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
 											{__('Remove Image')}</Button>
 									</Fragment>
 									:
-									<Button isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
+									<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
 								}
 							</Fragment>
 						)}
@@ -228,7 +245,7 @@ class Edit extends Component {
 					{timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
 						<Fragment>
 							<hr className="timeline-block-editor__separator"></hr>
-							<RadioControl
+							{/* <RadioControl
 								label="Story position"
 								selected={blockPosition}
 								options={[
@@ -236,7 +253,12 @@ class Edit extends Component {
 									{ label: 'Right', value: "right" },
 								]}
 								onChange={(value) => setAttributes({ blockPosition: value, block_position_active: true })}
-							/>
+							/> */}
+							<div className="timeline-block-settings-labels">{__("Story position", "timeline-block")}</div>
+							<ButtonGroup className="cool-timeline-content-alignment-buttons">
+								<Button isSmall onClick={(e) => { setAttributes({ blockPosition: 'left', block_position_active: true }) }} className={blockPosition == 'left' ? 'active' : ''}>Left</Button>
+								<Button isSmall onClick={(e) => { setAttributes({ blockPosition: 'right', block_position_active: true }) }} className={blockPosition == 'right' ? 'active' : ''}>Right</Button>
+							</ButtonGroup>
 						</Fragment>
 						: null
 					}

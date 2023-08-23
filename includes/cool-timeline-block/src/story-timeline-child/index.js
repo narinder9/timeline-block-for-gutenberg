@@ -14,7 +14,7 @@ const {
 } = wp.blocks
 
 registerBlockType("cp-timeline/content-timeline-block-child", {
-	title: __('Cool Timeline Story', 'cool-timeline'), // Block title.
+	title: __('Single Story Details', 'cool-timeline'), // Block title.
 	apiVersion: 2,
 	icon: CoolStoryIcon,
 	keywords: [

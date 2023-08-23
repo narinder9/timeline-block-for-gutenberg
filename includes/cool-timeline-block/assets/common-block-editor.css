@@ -1,3 +1,7 @@
+.timeline-block-iconpicker{
+	margin-top: 1rem;
+}
+
 .timeline-block-iconpicker .iconpicker-pickercontainer{
 	position: absolute;
     left: -2px;

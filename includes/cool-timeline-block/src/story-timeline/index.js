@@ -69,6 +69,8 @@ registerBlockType("cp-timeline/content-timeline-block", {
 	keywords: [
 		__("Content Timeline", 'timeline-block'),
 		__("Timeline", 'timeline-block'),
+		__("History Timeline", 'timeline-block'),
+		__("Roadmap Timeline", 'timeline-block'),
 	],
 	icon: CoolTMIcon,
 	supports: {

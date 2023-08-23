@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
  import { __ } from '@wordpress/i18n';
- import Select from "react-select"
+ import Select from "react-select";
 const {
 	SelectControl
 } = wp.components
