@@ -11,6 +11,7 @@ import Edit from './edit';
 //  Import CSS.
 import './style.scss';
 import './editor.scss';
+import ctlMigration from './migration';
 
 /**
  * Provides the initial data for new block
@@ -87,6 +88,7 @@ export const getStyles = attributes => {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
+
 registerBlockType('cooltimeline/timeline-block', {
     title: __( 'Timeline Block ', 'timeline-block' ),
     icon: CoolTMIcon,
@@ -251,4 +253,5 @@ registerBlockType('cooltimeline/timeline-block', {
             </div>
         );
     },
+    transforms: ctlMigration,
 } );

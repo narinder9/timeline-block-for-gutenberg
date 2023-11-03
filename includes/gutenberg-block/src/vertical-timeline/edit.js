@@ -7,7 +7,7 @@ import { InspectorContainer, ContainerEdit } from '../components/container/conta
 import { Plus } from '../components/icons/plus';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 // import {SortableContainer, SortableElement} from 'react-sortable-hoc';
-import arrayMove from 'array-move';
+import {arrayMoveImmutable} from 'array-move';
 let key = 0;
 /**
  * @param {Object} props - attributes
@@ -120,7 +120,7 @@ export default class Edit extends Component {
             );
         });
         const onSortEnd = ({ oldIndex, newIndex }) => {
-              let arr = arrayMove(attributes.items, oldIndex, newIndex);
+              let arr = arrayMoveImmutable(attributes.items, oldIndex, newIndex);
               for (let i = 0; i < arr.length; i++) {
                 arr[i].position = i;
               }
@@ -300,6 +300,11 @@ export default class Edit extends Component {
                     />
                 </InspectorControls>
                 <div className={ className ? className : '' } style={ otherStyles }>
+                <p style={{color: 'red', textAlign: 'center', fontSize: '23px'}}>
+                This block is now Deprecated. Please click{' '}
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">here</a> for more details on how to migrate it to our latest version.
+                </p>
+
                     <ContainerEdit
                         className={ `ctl-instant-timeline block-${ attributes.blockUniqId } ${ isSelected ? 'selected' : '' } ` }
                         attributes={ attributes }
