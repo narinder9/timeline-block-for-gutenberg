@@ -321,6 +321,9 @@ registerBlockType('cooltimeline/timeline-block', {
   keywords: [__('timeline', 'timeline-block', 'instant timeline', 'events timeline')],
   anchor: true,
   html: true,
+  supports: {
+    inserter: false
+  },
   attributes: _objectSpread(_objectSpread({}, _components_container_container__WEBPACK_IMPORTED_MODULE_1__.blockProps), {}, {
     timelineLayout: {
       type: 'string',

@@ -98,6 +98,9 @@ registerBlockType('cooltimeline/timeline-block', {
     ],
     anchor: true,
     html: true,
+    supports: {
+        inserter: false
+    },
     attributes: {
         ...blockProps,
         timelineLayout:{
