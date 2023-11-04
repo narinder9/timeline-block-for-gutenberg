@@ -15220,34 +15220,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function generateCSS(selectors, id) {
-  let isResponsive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  let responsiveType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+function generateCSS(selectors, id, layout) {
+  let isResponsive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  let responsiveType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
   var gen_styling_css = "";
   for (var i in selectors) {
+    const hrLayout = 'horizontal' === layout;
+    const hrStyle = i.includes('cool-horizontal-timeline-body');
     var sel = selectors[i];
     var css = "";
-    for (var j in sel) {
-      var checkString = true;
-      if (typeof sel[j] === "string" && sel[j].length === 0) {
-        checkString = false;
-      }
-      if ('font-family' === j && typeof sel[j] != "undefined" && 'Default' === sel[j]) {
-        continue;
-      }
-      if (typeof sel[j] != "undefined" && checkString) {
-        if ('font-family' === j) {
-          css += j + ": " + "'" + sel[j] + "'" + ";";
-        } else {
-          css += j + ": " + sel[j] + ";";
+    if (hrLayout || !hrStyle) {
+      for (var j in sel) {
+        var checkString = true;
+        if (typeof sel[j] === "string" && sel[j].length === 0) {
+          checkString = false;
+        }
+        if ('font-family' === j && typeof sel[j] != "undefined" && 'Default' === sel[j]) {
+          continue;
+        }
+        if (typeof sel[j] != "undefined" && checkString) {
+          if ('font-family' === j) {
+            css += j + ": " + "'" + sel[j] + "'" + ";";
+          } else {
+            css += j + ": " + sel[j] + ";";
+          }
         }
       }
-    }
-    if (css.length !== 0) {
-      gen_styling_css += id;
-      gen_styling_css += i + "{";
-      gen_styling_css += css;
-      gen_styling_css += "}";
+      if (css.length !== 0) {
+        gen_styling_css += id;
+        gen_styling_css += i + "{";
+        gen_styling_css += css;
+        gen_styling_css += "}";
+      }
     }
   }
   return gen_styling_css;
@@ -21776,6 +21780,53 @@ function RangeTypographyControl(props) {
 
 /***/ }),
 
+/***/ "./src/deprecated/generateCss-v1.js":
+/*!******************************************!*\
+  !*** ./src/deprecated/generateCss-v1.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function generateCSS(selectors, id) {
+  let isResponsive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  let responsiveType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+  var gen_styling_css = "";
+  for (var i in selectors) {
+    var sel = selectors[i];
+    var css = "";
+    for (var j in sel) {
+      var checkString = true;
+      if (typeof sel[j] === "string" && sel[j].length === 0) {
+        checkString = false;
+      }
+      if ('font-family' === j && typeof sel[j] != "undefined" && 'Default' === sel[j]) {
+        continue;
+      }
+      if (typeof sel[j] != "undefined" && checkString) {
+        if ('font-family' === j) {
+          css += j + ": " + "'" + sel[j] + "'" + ";";
+        } else {
+          css += j + ": " + sel[j] + ";";
+        }
+      }
+    }
+    if (css.length !== 0) {
+      gen_styling_css += id;
+      gen_styling_css += i + "{";
+      gen_styling_css += css;
+      gen_styling_css += "}";
+    }
+  }
+  return gen_styling_css;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSS);
+
+/***/ }),
+
 /***/ "./src/deprecated/parent-block-v1.js":
 /*!*******************************************!*\
   !*** ./src/deprecated/parent-block-v1.js ***!
@@ -21905,7 +21956,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/css/generateCSS.js */ "./src/component/css/generateCSS.js");
+/* harmony import */ var _generateCss_v1_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generateCss-v1.js */ "./src/deprecated/generateCss-v1.js");
 /* harmony import */ var _component_css_generateCSSUnit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/css/generateCSSUnit.js */ "./src/component/css/generateCSSUnit.js");
 /**
  * Returns Dynamic Generated CSS
@@ -22133,7 +22184,7 @@ function deprContentTimelineStyle(props) {
   };
   var styling_css = "";
   var id = `.cool-timeline-block-${block_id}`;
-  styling_css = (0,_component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
+  styling_css = (0,_generateCss_v1_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
   return styling_css;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deprContentTimelineStyle);
@@ -22222,7 +22273,8 @@ function contentTimelineStyle(props) {
     containerRightPadding,
     containerBottomPadding,
     containerLeftPadding,
-    desktopConatinerPaddingType
+    desktopConatinerPaddingType,
+    timelineLayout
   } = props.attributes;
   let arrow_position = iconBoxSize != '' && iconBoxSize > 20 ? "calc(" + Math.round(iconBoxSize / 2) + "px)" : '';
   let middleline_position = '';
@@ -22362,7 +22414,7 @@ function contentTimelineStyle(props) {
   };
   var styling_css = "";
   var id = `.cool-timeline-block-${block_id}`;
-  styling_css = (0,_component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id);
+  styling_css = (0,_component_css_generateCSS_js__WEBPACK_IMPORTED_MODULE_0__["default"])(selectors, id, timelineLayout);
   return styling_css;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (contentTimelineStyle);

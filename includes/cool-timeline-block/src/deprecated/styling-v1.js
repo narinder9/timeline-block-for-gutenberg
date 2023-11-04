@@ -2,7 +2,7 @@
  * Returns Dynamic Generated CSS
  */
 
-import generateCSS from "../component/css/generateCSS.js"
+import generateCSS from "./generateCss-v1.js"
 import generateCSSUnit from "../component/css/generateCSSUnit.js"
 
 const addAlpha = (color, opacity) => {
@@ -68,7 +68,7 @@ function deprContentTimelineStyle( props ) {
        containerRightPadding,
        containerBottomPadding,
        containerLeftPadding,
-       desktopConatinerPaddingType
+       desktopConatinerPaddingType,
    } = props.attributes
    let arrow_position=(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : '';
    let middleline_position = '';

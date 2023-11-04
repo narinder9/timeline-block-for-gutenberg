@@ -68,7 +68,8 @@ function contentTimelineStyle( props ) {
        containerRightPadding,
        containerBottomPadding,
        containerLeftPadding,
-       desktopConatinerPaddingType
+       desktopConatinerPaddingType,
+       timelineLayout
    } = props.attributes
    let arrow_position=(iconBoxSize != '' && iconBoxSize > 20) ? "calc("+Math.round(iconBoxSize / 2)+"px)" : '';
    let middleline_position = '';
@@ -209,7 +210,7 @@ function contentTimelineStyle( props ) {
 
    var styling_css = ""
    var id = `.cool-timeline-block-${ block_id }`
-   styling_css = generateCSS( selectors, id )
+   styling_css = generateCSS( selectors, id, timelineLayout )
    return styling_css
 }
 
