@@ -4,7 +4,7 @@
 import "./style.scss"
 import Save from "./save.js"
 import attributes from "./attributes.js"
-import deprecated from "./deprecated.js"
+import v1 from "../deprecated/child-block-v1.js";
 import Edit from "./edit.js"
 import { CoolStoryIcon } from '../component/icon/insertorIcon.js';
 const { useBlockProps } = wp.blockEditor;
@@ -14,7 +14,7 @@ const {
 } = wp.blocks
 
 registerBlockType("cp-timeline/content-timeline-block-child", {
-	title: __('Single Story Details', 'cool-timeline'), // Block title.
+	title: __('Single Story Details', 'timeline-block'), // Block title.
 	apiVersion: 2,
 	icon: CoolStoryIcon,
 	keywords: [
@@ -25,7 +25,7 @@ registerBlockType("cp-timeline/content-timeline-block-child", {
 		inserter: false,
 	},
 	attributes,
-	deprecated,
+	deprecated: [v1],
 	usesContext: ['cp-timeline/timelineDesign', 'cp-timeline/timelineLayout'],
 	edit: props => {
 		const chilblockProps = useBlockProps({

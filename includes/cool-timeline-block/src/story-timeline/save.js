@@ -17,16 +17,32 @@ export default function Save(props) {
 		slidePerView
 	} = props.attributes
 	const InnerBlocksLength = () => {
-		return wp.data.select("core/block-editor").getBlockCount(block_id);
+		let blocksCount = wp.data.select("core/block-editor").getBlockCount(block_id)
+		return blocksCount;
 	}
 	return (
-		<div className={"cool-timeline-block-" + block_id + ""}>
-			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle(props) }} />
-			<div className={"cool-" + timelineLayout + "-timeline-body " + timelineDesign + " " + Orientation + ""}>
-				<div className="cool-timeline-block-list" >
-					<InnerBlocks.Content />
+		<div className = {"cool-timeline-block-"+block_id+""}>
+			{'' !== contentTimelineStyle( props ) &&
+			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }}/>
+			}
+			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`}>
+		 		<div className="cool-timeline-block-list">
+				 {timelineLayout == "horizontal" ?
+				 <div class= "swiper-outer" id={block_id} data-slide={InnerBlocksLength < slidePerView ? InnerBlocksLength :slidePerView }>
+				 <div class="swiper">
+					   <div class="swiper-wrapper cvbt-horizontal-swiper">
+				 <InnerBlocks.Content />
+				 </div>
 				</div>
-			</div>
+				 <div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+				</div>
+				 :
+				 <InnerBlocks.Content />
+				 }
+		 		</div>
+		 	</div> 
 		</div>
 	)
 }

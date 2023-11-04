@@ -1,7 +1,8 @@
 import {
     InnerBlocks,
     useBlockProps,
-    __experimentalUseInnerBlocksProps as useInnerBlocksProps
+    useInnerBlocksProps as __stableUseInnerBlocksProps,
+	__experimentalUseInnerBlocksProps,
 } from '@wordpress/block-editor';
 
 const TEMPLATE = [
@@ -13,6 +14,9 @@ const TEMPLATE = [
     ] ]
 ];
 export function LayoutInit(props){
+    const useInnerBlocksProps = __stableUseInnerBlocksProps
+		? __stableUseInnerBlocksProps
+		: __experimentalUseInnerBlocksProps;
     const blockProps = useBlockProps();
     const innerBlocksProps = useInnerBlocksProps( blockProps, {
         allowedBlocks: [ 'cp-timeline/content-timeline-block-child' ],
@@ -27,8 +31,8 @@ export function LayoutInit(props){
                         { innerBlocksProps.children }
                     </div>
                 </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div>
             </div>
 </div>
     )

@@ -252,7 +252,7 @@ const attributes = {
 	},
 	subHeadLineHeightType: {
 		type: "string",
-		default: "em",
+		default: "px",
 	},
 	subHeadLineHeight: {
 		type: "number",
@@ -483,6 +483,10 @@ const attributes = {
 	OrientationCheckBox:{
 		type:"boolean",
 		default:false,
+	},
+	ImagePopup:{
+		type:"boolean",
+		default:false
 	}
 }
 

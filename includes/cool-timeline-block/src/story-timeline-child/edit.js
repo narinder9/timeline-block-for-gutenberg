@@ -22,31 +22,51 @@ const {
 
 class Edit extends Component {
 	componentDidMount() {
-		// Store client id.
-		this.props.setAttributes({ block_id: this.props.clientId });
-	}
-	
+		//Store client id.
+		this.props.setAttributes( { block_id: this.props.clientId } )
+		let root_id = select("core/block-editor").getBlockRootClientId(this.props.clientId);
+		
+		let index = select("core/block-editor").getBlockIndex(this.props.clientId,root_id);
+	   //  if(this.props.attributes.block_position_active == false){
+	   // 	if(index % 2 != 0){
+	   // 		this.props.setAttributes({blockPosition:"left"})
+	   // 	}
+	   // 	else{
+	   // 		this.props.setAttributes({blockPosition:"right"})
+	   // 	}
+	   //  }
+   }	
 
-	addBlock(e) {
+   addBlock(e){
+
+	   const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+	   const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+
+	   let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
+	   let index = select('core/block-editor').getBlockIndex(this.props.clientId);
+	   let timelineDesign= parentAttribute.timelineDesign
+	   let timelineLayout= parentAttribute.timelineLayout
+	   let name = 'cp-timeline/content-timeline-block-child';
+	   let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,
+	   timelineDesign :timelineDesign,
+	   timelineLayout:timelineLayout,
+	   blockPosition: position,
+	   storyPositionHide: !parentAttribute.OrientationCheckBox,
+	   headingTag: parentAttribute.headingTag} 	);
+
+	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
+
+	   if(parentAttribute.timelineLayout == "horizontal"){
+	   this.SwiperUpdate(index-1,parentAttribute.slidePerView)
+	   }
+
+	   this.UpdateOrientation();
+   }
+
+	UpdateOrientation() {
 		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
 		const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
 		
-		let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
-		let index = select('core/block-editor').getBlockIndex(this.props.clientId);
-		let name = 'cp-timeline/content-timeline-block-child';
-		let insertedBlock = wp.blocks.createBlock(name, {
-			block_position_active: false,
-			blockPosition: position,
-			storyPositionHide: !parentAttribute.OrientationCheck,
-			headingTag: parentAttribute.headingTag
-		});
-		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, parentBlockId);
-		this.updateOrientation();
-	}
-
-	updateOrientation() {
-		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
-			const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
 		if (parentAttribute.timelineLayout == "vertical" && parentAttribute.timelineDesign == "both-sided") {
 			const currentIndex = select('core/block-editor').getBlockIndex(this.props.clientId);
 			const currentBlockPostion ='left' === this.props.attributes.blockPosition ? 'right' : 'left';
@@ -55,7 +75,7 @@ class Edit extends Component {
 			blocks.forEach((block, index) => {
 				if(index > (currentIndex + 1)){
 					const blockpostion=index % 2 !== currentPostion ? currentBlockPostion : this.props.attributes.blockPosition;
-					block.attributes.blockPosition = blockpostion, block.attributes.storyPositionHide=!parentAttribute.OrientationCheckBox;
+					block.attributes.blockPosition = blockpostion, block.attributes.storyPositionHide=!parentAttribute.OrientationCheckBox
 				}
 			});
 		}
@@ -125,7 +145,7 @@ class Edit extends Component {
 										<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 									</div>
 									<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
-										{__('Remove Image')}</Button>
+										{__('Remove Image',"timeline-block")}</Button>
 								</Fragment>
 								:
 								<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
@@ -176,7 +196,7 @@ class Edit extends Component {
 					}
 				>GO TO SETTINGS</Button>
 				</div>
-				<PanelBody title={__("Story Settings")}>
+				<PanelBody title={__("Story Settings","timeline-block")}>
 					<TextControl
 						label="Story Heading"
 						value={time_heading}
@@ -234,7 +254,7 @@ class Edit extends Component {
 									<Fragment>
 										<img src={timeLineImage} />
 										<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
-											{__('Remove Image')}</Button>
+											{__('Remove Image','timeline-block')}</Button>
 									</Fragment>
 									:
 									<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>

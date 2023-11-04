@@ -13,7 +13,8 @@
 // //  Import CSS.
 // import ".././style.scss"
 import "./style.scss"
-import deprecated from "./deprecated.js"
+import v1 from "../deprecated/parent-block-v1.js"
+import v2 from "../deprecated/parent-block-v2.js"
 import Save from "./save.js"
 import attributes from "./attributes.js"
 import Edit from "./edit.js"
@@ -63,9 +64,9 @@ const withcontentTimeline = createHigherOrderComponent((BlockEdit) => {
 
 registerBlockType("cp-timeline/content-timeline-block", {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __('Timeline Block', 'cool-timeline'), // Block title.
+	title: __('Timeline Block', 'timeline-block'), // Block title.
 	apiVersion: 2,
-	description: __("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
+	description: __("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
 	keywords: [
 		__("Content Timeline", 'timeline-block'),
 		__("Timeline", 'timeline-block'),
@@ -77,7 +78,7 @@ registerBlockType("cp-timeline/content-timeline-block", {
 		anchor: true,
 	},
 	attributes,
-	deprecated,
+	deprecated: [v1,v2],
 	edit: props => {
 		const blockProps = useBlockProps({
 			className: 'Cool-Content-Timeline-' + props.attributes.timelineDesign,
