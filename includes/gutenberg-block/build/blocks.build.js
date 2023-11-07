@@ -477,6 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_icons_plus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/icons/plus */ "./src/components/icons/plus.js");
 /* harmony import */ var react_sortable_hoc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-sortable-hoc */ "./node_modules/react-sortable-hoc/dist/react-sortable-hoc.esm.js");
 /* harmony import */ var array_move__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! array-move */ "./node_modules/array-move/index.js");
+/* harmony import */ var _images_timeline_block_migration_gif__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images/timeline_block_migration.gif */ "./src/images/timeline_block_migration.gif");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -525,6 +526,7 @@ var _wp$components = wp.components,
 
 
 // import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+
 
 var key = 0;
 /**
@@ -856,11 +858,9 @@ var Edit = /*#__PURE__*/function (_Component) {
           textAlign: 'center',
           fontSize: '23px'
         }
-      }, "This block is now Deprecated. Please click", ' ', /*#__PURE__*/React.createElement("a", {
-        href: "https://youtube.com",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, "here"), " for more details on how to migrate it to our latest version."), /*#__PURE__*/React.createElement(_components_container_container__WEBPACK_IMPORTED_MODULE_1__.ContainerEdit, {
+      }, "This block is now Deprecated. Upgrade this deprecated block to the latest version for our Timeline Block.", /*#__PURE__*/React.createElement("img", {
+        src: _images_timeline_block_migration_gif__WEBPACK_IMPORTED_MODULE_5__["default"]
+      })), /*#__PURE__*/React.createElement(_components_container_container__WEBPACK_IMPORTED_MODULE_1__.ContainerEdit, {
         className: "ctl-instant-timeline block-".concat(attributes.blockUniqId, " ").concat(isSelected ? 'selected' : '', " "),
         attributes: attributes
       }, /*#__PURE__*/React.createElement(Lists, null), /*#__PURE__*/React.createElement("div", {
@@ -959,6 +959,21 @@ var innerBlock = function innerBlock(_ref) {
     }
   }]
 });
+
+/***/ }),
+
+/***/ "./src/images/timeline_block_migration.gif":
+/*!*************************************************!*\
+  !*** ./src/images/timeline_block_migration.gif ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "images/timeline_block_migration.gif");
 
 /***/ }),
 
@@ -37780,6 +37795,18 @@ function arrayMoveImmutable(array, fromIndex, toIndex) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -37803,6 +37830,29 @@ function arrayMoveImmutable(array, fromIndex, toIndex) {
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl + "../";
 /******/ 	})();
 /******/ 	
 /************************************************************************/

@@ -450,7 +450,7 @@ const attributes = {
 	},
 	slidePerView:{
 		type:"number",
-		default:3
+		default:1
 	},
 	iconColor:{
 		type:"string",
@@ -487,6 +487,10 @@ const attributes = {
 	ImagePopup:{
 		type:"boolean",
 		default:false
+	},
+	timelineStyle: {
+		type:"string",
+		default:"design-1"
 	}
 }
 

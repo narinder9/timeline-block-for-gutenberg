@@ -14,18 +14,20 @@ export default function Save(props) {
 		timelineLayout,
 		Orientation,
 		timelineDesign,
-		slidePerView
+		slidePerView,
+		timelineStyle
 	} = props.attributes
 	const InnerBlocksLength = () => {
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(block_id)
 		return blocksCount;
 	}
+	const timelineStyles='horizontal' === timelineLayout ? timelineStyle : '';
 	return (
 		<div className = {"cool-timeline-block-"+block_id+""}>
 			{'' !== contentTimelineStyle( props ) &&
 			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }}/>
 			}
-			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`}>
+			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`}>
 		 		<div className="cool-timeline-block-list">
 				 {timelineLayout == "horizontal" ?
 				 <div class= "swiper-outer" id={block_id} data-slide={InnerBlocksLength < slidePerView ? InnerBlocksLength :slidePerView }>

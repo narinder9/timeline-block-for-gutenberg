@@ -141,14 +141,14 @@ class Edit extends Component {
 						<Fragment>
 							{timeLineImage !== "none" ?
 								<Fragment>
-									<div className="story-image">
+									<div className="story-image" style={{paddingBottom: '10px'}}>
 										<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
-									</div>
-									<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
+										<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })} style={{marginTop: '10px'}}>
 										{__('Remove Image',"timeline-block")}</Button>
+									</div>
 								</Fragment>
 								:
-								<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
+								<Button isSmall isSecondary onClick={open} style={{marginTop: '10px'}}> {__('Upload/Choose Image', 'timeline-block')}</Button>
 							}
 						</Fragment>
 					)}

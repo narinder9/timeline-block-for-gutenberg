@@ -22877,7 +22877,7 @@ const attributes = {
   },
   slidePerView: {
     type: "number",
-    default: 3
+    default: 1
   },
   iconColor: {
     type: "string",
@@ -22914,6 +22914,10 @@ const attributes = {
   ImagePopup: {
     type: "boolean",
     default: false
+  },
+  timelineStyle: {
+    type: "string",
+    default: "design-1"
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -23150,7 +23154,6 @@ class Edit extends Component {
         iconBg,
         Orientation,
         timelineDesign,
-        slidePerView,
         iconColor,
         iconSize,
         iconSizeType,
@@ -23166,7 +23169,8 @@ class Edit extends Component {
         marginLink,
         isPreview,
         OrientationCheckBox,
-        ImagePopup
+        ImagePopup,
+        timelineStyle
       }
     } = this.props;
     var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId);
@@ -23640,7 +23644,7 @@ class Edit extends Component {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal", "timeline-block"),
         disabled: false
       }]
-    }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
+    }), timelineLayout == "vertical" && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Design", "timeline-block"),
       value: timelineDesign,
       onChange: value => {
@@ -23660,18 +23664,6 @@ class Edit extends Component {
         value: "one-sided",
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("One Sided", "timeline-block")
       }]
-    }) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(RangeControl, {
-      label: "Slides",
-      value: slidePerView,
-      onChange: value => {
-        setAttributes({
-          slidePerView: value,
-          sliderActive: false
-        });
-      },
-      min: 1,
-      max: 6,
-      step: 1
     }), timelineLayout == "vertical" && timelineDesign == 'both-sided' ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "components-base-control"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
@@ -23785,6 +23777,7 @@ class Edit extends Component {
         config: dateconfig
       });
     }
+    const timelineStyles = 'horizontal' === timelineLayout ? timelineStyle : '';
     return isPreview ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("img", {
       width: "100%",
       src: _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__,
@@ -23808,7 +23801,7 @@ class Edit extends Component {
     })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-" + this.props.clientId + " cool-timeline-block"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`
+      className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-list"
     }, timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InnerBlocks, {
@@ -24074,12 +24067,14 @@ function Save(props) {
     timelineLayout,
     Orientation,
     timelineDesign,
-    slidePerView
+    slidePerView,
+    timelineStyle
   } = props.attributes;
   const InnerBlocksLength = () => {
     let blocksCount = wp.data.select("core/block-editor").getBlockCount(block_id);
     return blocksCount;
   };
+  const timelineStyles = 'horizontal' === timelineLayout ? timelineStyle : '';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-" + block_id + ""
   }, '' !== (0,_styling_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
@@ -24087,7 +24082,7 @@ function Save(props) {
       __html: (0,_styling_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props)
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`
+    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-list"
   }, timelineLayout == "horizontal" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

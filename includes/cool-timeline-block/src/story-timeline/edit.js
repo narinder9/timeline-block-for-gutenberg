@@ -200,7 +200,6 @@ class Edit extends Component {
 				iconBg,
 				Orientation,
 				timelineDesign,
-				slidePerView,
 				iconColor,
 				iconSize,
 				iconSizeType,
@@ -216,7 +215,8 @@ class Edit extends Component {
 				marginLink,
 				isPreview,
 				OrientationCheckBox,
-				ImagePopup
+				ImagePopup,
+				timelineStyle
 			},
 		} = this.props
 		var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId)
@@ -514,7 +514,7 @@ class Edit extends Component {
 						
 					] }
 					/>
-				{timelineLayout == "vertical" ?
+				{timelineLayout == "vertical" &&
 		<SelectControl
 				label={ __( "Timeline Design","timeline-block" ) }
 					value={ timelineDesign }
@@ -529,18 +529,6 @@ class Edit extends Component {
 						
 					] }
 					/>
-					:
-					<RangeControl
-					label="Slides"
-					value={ slidePerView }
-					onChange={ ( value ) => {
-						setAttributes({slidePerView: value,sliderActive:false})
-					}
-					}
-					min={ 1 }
-					max={ 6 }
-					step={ 1 }
-				/>
 				}
 
 				{
@@ -646,6 +634,8 @@ class Edit extends Component {
 			)
 		}
 
+		const timelineStyles='horizontal' === timelineLayout ? timelineStyle : '';
+
 		return (
 			isPreview ? <img width='100%' src={ preview } alt=''/>:
 			<Fragment>
@@ -674,7 +664,7 @@ class Edit extends Component {
 			{loadDateGoogleFonts }
 		
 			<div className={"cool-timeline-block-" + this.props.clientId + " cool-timeline-block"}>
-							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`}>
+							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`}>
 								<div className="cool-timeline-block-list">
 								{timelineLayout == "vertical" ?
 									<InnerBlocks
