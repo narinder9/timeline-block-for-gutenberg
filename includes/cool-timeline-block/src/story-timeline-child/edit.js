@@ -35,6 +35,7 @@ class Edit extends Component {
 	   // 		this.props.setAttributes({blockPosition:"right"})
 	   // 	}
 	   //  }
+	   
    }	
 
    addBlock(e){
@@ -99,7 +100,8 @@ class Edit extends Component {
 				timeLineImage,
 				imageAlt,
 				storyPositionHide,
-				headingTag
+				headingTag,
+				timelineStyle
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
@@ -324,6 +326,8 @@ class Edit extends Component {
 				{content_control}
 				<div className={"timeline-content icon-" + iconToggle + ""}>
 					<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
+						{!('design-1' === timelineStyle && 'horizontal' === timelineLayout) &&
+						<>
 						<div className="ctl-6 timeline-block-time">
 							{t_date != '' &&
 								<div className="story-time">
@@ -332,6 +336,8 @@ class Edit extends Component {
 							}
 						</div>
 						{icon_div}
+						</>
+						}
 						<div className="ctl-6 timeline-block-detail">
 							{StoryDetail()}
 						</div>

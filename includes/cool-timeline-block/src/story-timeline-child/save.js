@@ -23,7 +23,8 @@ export default function Save(props) {
 		imageSize,
 		timeLineImage,
 		imageAlt,
-		headingTag
+		headingTag,
+		timelineStyle
 	} = props.attributes
 
 	const StoryDetail = () => (
@@ -62,14 +63,18 @@ export default function Save(props) {
 	return (
 		<div className={"timeline-content icon-" + iconToggle + " "}>
 			<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
-				<div className="ctl-6 timeline-block-time">
-					{t_date != '' &&
-						<div className="story-time">
-							{StoryTime()}
+				{!('design-1' === timelineStyle && 'horizontal' === timelineLayout) &&
+					<>
+						<div className="ctl-6 timeline-block-time">
+							{t_date != '' &&
+								<div className="story-time">
+									{StoryTime()}
+								</div>
+							}
 						</div>
-					}
-				</div>
-				{icon_div}
+						{icon_div}
+					</>
+				}
 				<div className="ctl-6 timeline-block-detail">
 					{StoryDetail()}
 				</div>

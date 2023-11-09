@@ -136,7 +136,11 @@ const attributes = {
 	headingTag:{
 		type:"string",
 		default:'h3',
-	}
+	},
+	timelineStyle: {
+		type:"string",
+		default:"design-1"
+	},
 }
 
 export default attributes

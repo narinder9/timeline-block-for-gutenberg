@@ -794,7 +794,8 @@
   display: table-cell;
 }
 
-.cool-horizontal-timeline-body .timeline-content .story-time p {
+.cool-horizontal-timeline-body .timeline-content .story-time p,
+.cool-horizontal-timeline-body.design-1 .ctlb-nav-swiper-outer .ctlb_nav_date {
   color: var(--ctlb-date-color);
   font-size: var(--ctlb-date-fontsize);
   font-family: var(--ctlb-date-font-family);
@@ -917,6 +918,7 @@
   margin-left: calc(32px + var(--ctlb-icon-box-size, 20px) - var(--ctlb-icon-box-size, 20px));
 }
 
+.cool-horizontal-timeline-body.ctlb-wrapper .cool-timeline-block-list > .ctlb-nav-swiper-outer > .swiper-initialized,
 .cool-horizontal-timeline-body.ctlb-wrapper .cool-timeline-block-list > .swiper-outer > .swiper-initialized {
   width: calc(100% - 50px);
   margin-inline: auto;
@@ -1626,6 +1628,38 @@
   font-weight: 500;
 }
 
+.cool-horizontal-timeline-body.design-1 .ctlb-nav-swiper-outer .swiper-wrapper {
+  padding-bottom: var(--ctlb-icon-box-size, 40px) !important;
+  align-items: end;
+}
+
+.cool-horizontal-timeline-body.design-1 .ctlb-nav-swiper-outer .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: calc(var(--ctlb-icon-box-size, 40px) + 15px);
+}
+
+.cool-horizontal-timeline-body.design-1 .swiper-outer {
+  top: calc(0px - var(--ctlb-icon-box-size, 40px) * 1.5);
+  z-index: 0;
+}
+
+.cool-horizontal-timeline-body.design-1 .swiper-outer .timeline-content::before,
+.cool-horizontal-timeline-body.design-1 .swiper-outer .timeline-content::after {
+  top: calc(var(--ctlb-icon-box-size, 40px) / 2);
+}
+
+.cool-horizontal-timeline-body.design-1 .swiper-outer .timeline-block-detail {
+  margin: calc(30px + var(--ctlb-icon-box-size, 20px)) 4px 10px;
+}
+
+.cool-horizontal-timeline-body.design-1 .swiper-outer .swiper-button-prev,
+.cool-horizontal-timeline-body.design-1 .swiper-outer .swiper-button-next {
+  top: calc(var(--ctlb-icon-box-size, 40px) * 0.5);
+  transform: unset;
+}
+
 .cool-horizontal-timeline-body.design-1 .timeline-block-detail {
   border-top-width: 0px;
 }
@@ -1635,8 +1669,8 @@
   display: flex;
 }
 
-.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .timeline-block-icon::before,
-.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .timeline-block-icon::after {
+.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .swiper-slide-active .ctlb_nav_icon::before,
+.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .swiper-slide-active .ctlb_nav_icon::after {
   content: "";
   width: 80% !important;
   height: 80% !important;
@@ -1651,14 +1685,14 @@
   box-shadow: 0 0 0 0 var(--ctlb-icon-bg);
 }
 
-.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .timeline-block-icon::before {
-  -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
+.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .ctlb_nav_icon::before {
+  -webkit-animation-delay: 0.9s !important;
+          animation-delay: 0.9s !important;
 }
 
-.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .timeline-block-icon::after {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
+.cool-horizontal-timeline-body.ctlb-wrapper.design-1 .ctlb_nav_icon::after {
+  -webkit-animation-delay: 0.6s !important;
+          animation-delay: 0.6s !important;
 }
 
 .cool-horizontal-timeline-body.design-1 .story-image ~ .story-content {
@@ -1672,6 +1706,40 @@
 
 .cool-horizontal-timeline-body:not(.design-1) .story-image img {
   max-height: 180px;
+}
+
+.ctlb-nav-swiper-outer .ctlb_nav_icon {
+  position: absolute;
+  bottom: 0px;
+  transform: translateY(50%);
+}
+
+.ctlb-nav-swiper-outer .ctlb_nav_icon:not(.ctlb_nav_icon_true) {
+  background-color: var(--ctlb-icon-bg);
+  width: var(--ctlb-icon-box-size, 20px);
+  height: var(--ctlb-icon-box-size, 20px);
+  border-radius: 50%;
+}
+
+.ctlb-nav-swiper-outer .ctlb_nav_icon.ctlb_nav_icon_true {
+  background-color: var(--ctlb-icon-bg);
+  width: var(--ctlb-icon-box-size, 40px);
+  height: var(--ctlb-icon-box-size, 40px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctlb-nav-swiper-outer .ctlb_nav_icon:not(.ctlb_nav_icon_true) svg {
+  fill: var(--ctlb-icon-bg);
+  width: var(--ctlb-icon-box-size, 20px);
+  height: var(--ctlb-icon-box-size, 20px);
+}
+
+.ctlb-nav-swiper-outer .ctlb_nav_icon.ctlb_nav_icon_true svg {
+  fill: var(--ctlb-icon-color);
+  position: relative;
 }
 
 @-webkit-keyframes iconAnimation {

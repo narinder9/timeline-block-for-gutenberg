@@ -79,6 +79,12 @@ for (var i = 1; i <= ITEM_COUNT; i++) {
 	)
 }
 
+const navItems={1: {t_date: 'July 5, 1994',icon:'', iconColor: 'white'},
+2:{t_date: 'Feb 2, 2020', icon: '', iconColor: 'white'},
+3:{t_date: 'Jan 31, 2021', icon: '', iconColor: 'white'},
+4:{t_date: 'Jul 5, 2022', icon: '', iconColor: 'white'},
+5:{t_date: 'Mar 22, 2011', icon: '', iconColor: 'white'}}
+
 const attributes = {
 	content_class: {
 		type : "string",
@@ -450,7 +456,7 @@ const attributes = {
 	},
 	slidePerView:{
 		type:"number",
-		default:1
+		default:3
 	},
 	iconColor:{
 		type:"string",
@@ -491,6 +497,10 @@ const attributes = {
 	timelineStyle: {
 		type:"string",
 		default:"design-1"
+	},
+	timelineNavItems:{
+		type: "string",
+		default: '',
 	}
 }
 

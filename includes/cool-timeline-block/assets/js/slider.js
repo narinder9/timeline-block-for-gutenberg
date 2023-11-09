@@ -7,14 +7,40 @@ jQuery(document).ready(function(){
       var swiper_id=jQuery(this).attr("id")
       var slides=jQuery(this).attr("data-slide")
 
-      const swiper =new Swiper('.cool-timeline-block-'+swiper_id+' .swiper', {
-          // Default parameters
+      const navSwiper= new Swiper('.cool-timeline-block-'+swiper_id+' .ctlb-nav-swiper-outer .swiper',{
           slidesPerView: slides,
-          // Navigation arrows
-          navigation: {
-              nextEl: '.cool-timeline-block-'+swiper_id+' .swiper-button-next',
-              prevEl: '.cool-timeline-block-'+swiper_id+' .swiper-button-prev',
+          centeredSlides: true,
+
+          breakpoints: {
+            // when window width is >= 320px
+            280: {
+              slidesPerView: 1,
+          
+            },
+            // when window width is >= 480px
+            480: {
+              slidesPerView: slides < 2 ? slides : 2,
+          
+            },
+            // when window width is >= 640px
+            640: {
+              slidesPerView: slides,
+        
+            }
+          }
+      });
+
+      const swiper =new Swiper('.cool-timeline-block-'+swiper_id+' .swiper-outer .swiper', {
+          // Default parameters
+          slidesPerView: 1,
+          thumbs: {
+            swiper: navSwiper
           },
+          navigation: {
+            nextEl: '.cool-timeline-block-'+swiper_id+' .swiper-button-next',
+            prevEl: '.cool-timeline-block-'+swiper_id+' .swiper-button-prev',
+          },
+          centeredSlides: true,
   
           breakpoints: {
             // when window width is >= 320px
@@ -24,16 +50,20 @@ jQuery(document).ready(function(){
             },
             // when window width is >= 480px
             480: {
-              slidesPerView: slides < 2 ? slides : 2,
+              slidesPerView: 1,
            
             },
             // when window width is >= 640px
             640: {
-              slidesPerView: slides,
+              slidesPerView: 1,
          
             }
           }
     })
+
+      // navSwiper.controller.control = swiper;
+      swiper.controller.control = navSwiper;
+
       const post_swiper =new Swiper('.cool-post-timeline-block-'+swiper_id+' .swiper', {
           // Default parameters
           slidesPerView: slides,

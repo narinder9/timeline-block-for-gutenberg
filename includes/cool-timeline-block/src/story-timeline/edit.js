@@ -14,8 +14,10 @@ import SpacingControl from "../component/customComponents/MultipleUnits.js";
 // // Import Web font loader for google fonts.y
 import WebfontLoader from "../component/typography/fontloader.js";
 
-const { dateI18n } = wp.date
+const { dateI18n,createSlice } = wp.date
 const { Component, Fragment } = wp.element
+
+import React from 'react';
 
 import { __ } from '@wordpress/i18n';
 const {
@@ -75,8 +77,9 @@ class Edit extends Component {
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);	
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
 		if(this.props.attributes.timelineLayout == "horizontal"){
-		this.SwiperUpdate(blocksCount-1,this.props.attributes.slidePerView)
+		this.SwiperUpdate(blocksCount-1,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
 		}
+		// this.navItemsUpdate(this.props.clientId);
 	}
 
 	onUpdateOrientation(newOrientation,position) {
@@ -107,9 +110,54 @@ class Edit extends Component {
 		blocks.forEach((block, index) => {block.attributes.headingTag=e});
 	};
 
-	SwiperUpdate(blockcount,slidePerView){
+	navItemsUpdate=(id,render)=>{
+		const childBlocks=wp.data.select('core/block-editor').getBlock(id).innerBlocks;
+		const currentBlock=wp.data.select('core/block-editor').getBlock(id).attributes;
+		const newNavItems={};
+		childBlocks.map(block=>{
+			newNavItems[block.attributes.block_id]=({t_date: block.attributes.t_date, icon: block.attributes.icon, iconColor: block.attributes.iconColor, iconToggle: block.attributes.iconToggle});
+		});
+		return JSON.stringify(newNavItems);
+	}
+
+	SwiperUpdate(blockcount,slidePerView,timelinStyle){
 		let block_id = this.props.clientId
-		var swiper = new Swiper('.cool-timeline-block-'+ block_id +' .swiper', {
+		const mainSwiperView='design-1' === timelinStyle ? 1 : slidePerView;
+		var mainSwiper = new Swiper('.cool-timeline-block-'+ block_id +' .swiper-outer .swiper', {
+			observer: true,
+			observeParents: true,
+			slidesPerView: mainSwiperView,
+			freeMode: true,
+			initialSlide:blockcount,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			preventClicks:false,
+			allowTouchMove: false,
+			preventClicksPropagation:false,
+			navigation: {
+				nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
+				prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
+			  },
+			  breakpoints: {
+				  // when window width is >= 320px
+				280: {
+				  slidesPerView: 1,
+				  
+				},
+				// when window width is >= 480px
+				480: {
+					slidesPerView: mainSwiperView < 2 ? mainSwiperView : 2,
+			
+				},
+				// when window width is >= 640px
+				640: {
+				  slidesPerView: mainSwiperView,
+				 
+				}
+			  }
+		})
+
+		var navSlider = new Swiper('.cool-timeline-block-'+ block_id +' .ctlb-nav-swiper-outer .swiper', {
 			observer: true,
 			observeParents: true,
 			slidesPerView: slidePerView,
@@ -120,6 +168,7 @@ class Edit extends Component {
 			preventClicks:false,
 			allowTouchMove: false,
 			preventClicksPropagation:false,
+			centeredSlides: true,
 			navigation: {
 				nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
 				prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
@@ -216,7 +265,9 @@ class Edit extends Component {
 				isPreview,
 				OrientationCheckBox,
 				ImagePopup,
-				timelineStyle
+				timelineStyle,
+				slidePerView,
+				timelineNavItems
 			},
 		} = this.props
 		var element = document.getElementById("cool-vertical-timeline-style-" + this.props.clientId)
@@ -514,8 +565,8 @@ class Edit extends Component {
 						
 					] }
 					/>
-				{timelineLayout == "vertical" &&
-		<SelectControl
+				{timelineLayout == "vertical" ?
+				<SelectControl
 				label={ __( "Timeline Design","timeline-block" ) }
 					value={ timelineDesign }
 					onChange={ ( value ) => {setAttributes( { timelineDesign: value } )
@@ -528,6 +579,17 @@ class Edit extends Component {
 						{ value: "one-sided", label: __( "One Sided","timeline-block") },
 						
 					] }
+					/>:
+					<RangeControl
+						label="Slides"
+						value={ slidePerView }
+						onChange={ ( value ) => {
+							setAttributes({slidePerView: value,sliderActive:false})
+						}
+						}
+						min={ 1 }
+						max={ 6 }
+						step={ 1 }
 					/>
 				}
 
@@ -635,7 +697,6 @@ class Edit extends Component {
 		}
 
 		const timelineStyles='horizontal' === timelineLayout ? timelineStyle : '';
-
 		return (
 			isPreview ? <img width='100%' src={ preview } alt=''/>:
 			<Fragment>
@@ -670,10 +731,11 @@ class Edit extends Component {
 									<InnerBlocks
 										allowedBlocks={ALLOWED_BLOCKS}
 										orientation="vertical"
-										template={ getContentTimelineTemplate( timelineItem, tm_content ) }
+										template={ getContentTimelineTemplate( timelineItem, tm_content ) } 
+										navItemUpdate={timelineNavItems}
 										// template={template}
 										/>:
-										<LayoutInit />
+										<LayoutInit attributes={this.props.attributes}/>
 									}
 							</div>	
 						</div><div  className="timeline-block-add-story">
@@ -689,24 +751,26 @@ class Edit extends Component {
 	componentDidMount() {
 		// //Store client id.
 		this.props.setAttributes( { block_id: this.props.clientId } )
-		
 		// Pushing Style tag for this block css.
 		const $style = document.createElement( "style" )
 		$style.setAttribute( "id", "cool-vertical-timeline-style-" + this.props.clientId )
 		document.head.appendChild( $style )
 		if(this.props.attributes.timelineLayout == "horizontal" ){
-		this.SwiperUpdate(0,this.props.attributes.slidePerView)
+		this.SwiperUpdate(0,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
 		this.props.setAttributes( { sliderActive:true} )
 		}
-		let timelineLayout= this.props.attributes.timelineLayout
-		let timelineDesign= this.props.attributes.timelineDesign
 	}
 	
-	componentDidUpdate(){
+	componentDidUpdate(prevProps){
 		let clientId= this.props.clientId 
 		if(this.props.attributes.timelineLayout == "horizontal" && this.props.attributes.sliderActive == false){
-			this.SwiperUpdate(0,this.props.attributes.slidePerView)
+			this.SwiperUpdate(0,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
 			this.props.setAttributes( { sliderActive:true} )
+		}
+
+		const  updateNavContent=this.navItemsUpdate(clientId);
+		if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
+			this.props.setAttributes( { timelineNavItems:updateNavContent} )
 		}
 	}
 } export default
