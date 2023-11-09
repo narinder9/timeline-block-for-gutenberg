@@ -77,7 +77,7 @@ class Edit extends Component {
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);	
 		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
 		if(this.props.attributes.timelineLayout == "horizontal"){
-		this.SwiperUpdate(blocksCount-1,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+			this.props.setAttributes({hrSliderUpdate: false});
 		}
 		// this.navItemsUpdate(this.props.clientId);
 	}
@@ -771,6 +771,11 @@ class Edit extends Component {
 		const  updateNavContent=this.navItemsUpdate(clientId);
 		if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
 			this.props.setAttributes( { timelineNavItems:updateNavContent} )
+			if(!prevProps.attributes.hrSliderUpdate){
+				const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+				this.SwiperUpdate(blocksCount,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+				this.props.setAttributes({hrSliderUpdate: true});
+			}
 		}
 	}
 } export default

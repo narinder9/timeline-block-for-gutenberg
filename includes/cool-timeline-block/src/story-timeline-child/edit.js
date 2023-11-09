@@ -57,10 +57,6 @@ class Edit extends Component {
 
 	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
 
-	   if(parentAttribute.timelineLayout == "horizontal"){
-	   this.SwiperUpdate(index-1,parentAttribute.slidePerView)
-	   }
-
 	   this.UpdateOrientation();
    }
 

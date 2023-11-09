@@ -495,6 +495,10 @@ const attributes = {
 	timelineNavItems:{
 		type: "string",
 		default: '',
+	},
+	hrSliderUpdate:{
+		type: 'boolean',
+		default: true
 	}
 }
 

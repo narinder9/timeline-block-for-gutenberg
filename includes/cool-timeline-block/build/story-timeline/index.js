@@ -32343,6 +32343,10 @@ const attributes = {
   timelineNavItems: {
     type: "string",
     default: ''
+  },
+  hrSliderUpdate: {
+    type: 'boolean',
+    default: true
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -32485,7 +32489,9 @@ class Edit extends Component {
     wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
     let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
     if (this.props.attributes.timelineLayout == "horizontal") {
-      this.SwiperUpdate(blocksCount - 1, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
+      this.props.setAttributes({
+        hrSliderUpdate: false
+      });
     }
     // this.navItemsUpdate(this.props.clientId);
   }
@@ -33351,6 +33357,13 @@ class Edit extends Component {
       this.props.setAttributes({
         timelineNavItems: updateNavContent
       });
+      if (!prevProps.attributes.hrSliderUpdate) {
+        const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+        this.SwiperUpdate(blocksCount, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
+        this.props.setAttributes({
+          hrSliderUpdate: true
+        });
+      }
     }
   }
 }
