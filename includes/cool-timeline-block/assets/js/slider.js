@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
       const navSwiper= new Swiper('.cool-timeline-block-'+swiper_id+' .ctlb-nav-swiper-outer .swiper',{
           slidesPerView: slides,
           centeredSlides: true,
-
+          allowTouchMove: false,
           breakpoints: {
             // when window width is >= 320px
             280: {
