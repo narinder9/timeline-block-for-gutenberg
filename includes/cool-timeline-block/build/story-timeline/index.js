@@ -32493,9 +32493,7 @@ class Edit extends Component {
         hrSliderUpdate: false
       });
     }
-    // this.navItemsUpdate(this.props.clientId);
   }
-
   onUpdateOrientation(newOrientation, position) {
     this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
       BothsidedOrientation: newOrientation
@@ -32518,6 +32516,10 @@ class Edit extends Component {
   SwiperUpdate(blockcount, slidePerView, timelinStyle) {
     let block_id = this.props.clientId;
     const mainSwiperView = 'design-1' === timelinStyle ? 1 : slidePerView;
+    const navigation = {
+      nextEl: '.cool-timeline-block-' + block_id + ' .swiper-button-next',
+      prevEl: '.cool-timeline-block-' + block_id + ' .swiper-button-prev'
+    };
     var mainSwiper = new Swiper('.cool-timeline-block-' + block_id + ' .swiper-outer .swiper', {
       observer: true,
       observeParents: true,
@@ -32529,10 +32531,7 @@ class Edit extends Component {
       preventClicks: false,
       allowTouchMove: false,
       preventClicksPropagation: false,
-      navigation: {
-        nextEl: '.cool-timeline-block-' + block_id + ' .swiper-button-next',
-        prevEl: '.cool-timeline-block-' + block_id + ' .swiper-button-prev'
-      },
+      navigation,
       breakpoints: {
         // when window width is >= 320px
         280: {
@@ -32545,6 +32544,16 @@ class Edit extends Component {
         // when window width is >= 640px
         640: {
           slidesPerView: mainSwiperView
+        }
+      },
+      on: {
+        slideChange: e => {
+          if (0 !== e.activeIndex) {
+            document.querySelector(navigation.prevEl).classList.remove('swiper-button-disabled');
+          }
+          if (e.activeIndex !== e.slides.length - 1) {
+            document.querySelector(navigation.nextEl).classList.remove('swiper-button-disabled');
+          }
         }
       }
     });

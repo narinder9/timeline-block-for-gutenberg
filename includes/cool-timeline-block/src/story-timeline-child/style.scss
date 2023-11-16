@@ -1736,6 +1736,8 @@ transform: translate(0%);
 .ctlb-nav-swiper-outer .ctlb_nav_icon.ctlb_nav_icon_true svg{
   fill: var(--ctlb-icon-color);
   position: relative;
+  width: var(--ctlb-icon-size);
+  height: var(--ctlb-icon-size);
 }
 
 @keyframes iconAnimation {

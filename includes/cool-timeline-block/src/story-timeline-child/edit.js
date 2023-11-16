@@ -23,26 +23,25 @@ const {
 class Edit extends Component {
 	componentDidMount() {
 		//Store client id.
+		
 		this.props.setAttributes( { block_id: this.props.clientId } )
 		let root_id = select("core/block-editor").getBlockRootClientId(this.props.clientId);
 		
 		let index = select("core/block-editor").getBlockIndex(this.props.clientId,root_id);
-	   //  if(this.props.attributes.block_position_active == false){
-	   // 	if(index % 2 != 0){
-	   // 		this.props.setAttributes({blockPosition:"left"})
-	   // 	}
-	   // 	else{
-	   // 		this.props.setAttributes({blockPosition:"right"})
-	   // 	}
-	   //  }
-	   
+		
+		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+		const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+		if(!parentAttribute.hrSliderUpdate && 'horizontal' === parentAttribute.timelineLayout){
+			setTimeout(()=>{
+				this.SwiperUpdate(parentBlockId, index ,parentAttribute.slidePerView,parentAttribute.timelineStyle)
+			},50);
+		}
    }	
 
    addBlock(e){
-
 	   const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
 	   const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
-
+		const blocksCount = wp.data.select("core/block-editor").getBlockCount(parentBlockId);
 	   let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
 	   let index = select('core/block-editor').getBlockIndex(this.props.clientId);
 	   let timelineDesign= parentAttribute.timelineDesign
@@ -56,8 +55,11 @@ class Edit extends Component {
 	   headingTag: parentAttribute.headingTag} 	);
 
 	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
-
+	   const parentBlock = select("core/block-editor").getBlock(parentBlockId);
 	   this.UpdateOrientation();
+	   if('horizontal' === parentAttribute.timelineLayout){
+		   parentBlock.attributes.hrSliderUpdate = false
+	   }
    }
 
 	UpdateOrientation() {
@@ -67,15 +69,98 @@ class Edit extends Component {
 		if (parentAttribute.timelineLayout == "vertical" && parentAttribute.timelineDesign == "both-sided") {
 			const currentIndex = select('core/block-editor').getBlockIndex(this.props.clientId);
 			const currentBlockPostion ='left' === this.props.attributes.blockPosition ? 'right' : 'left';
-			const blocks = select("core/block-editor").getBlock(parentBlockId).innerBlocks;
+			const parentBlock = select("core/block-editor").getBlock(parentBlockId);
+			const innerBlocks = parentBlock.innerBlocks;
 			const currentPostion=currentIndex % 2;
-			blocks.forEach((block, index) => {
+			innerBlocks.forEach((block, index) => {
 				if(index > (currentIndex + 1)){
 					const blockpostion=index % 2 !== currentPostion ? currentBlockPostion : this.props.attributes.blockPosition;
 					block.attributes.blockPosition = blockpostion, block.attributes.storyPositionHide=!parentAttribute.OrientationCheckBox
 				}
 			});
 		}
+	}
+
+	SwiperUpdate(blockId,blockcount,slidePerView,timelinStyle){
+		let block_id = blockId;
+		const mainSwiperView='design-1' === timelinStyle ? 1 : slidePerView;
+		const navigation={
+			nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
+			prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
+		};
+		var mainSwiper = new Swiper('.cool-timeline-block-'+ block_id +' .swiper-outer .swiper', {
+			observer: true,
+			observeParents: true,
+			slidesPerView: mainSwiperView,
+			freeMode: true,
+			initialSlide:blockcount,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			preventClicks:false,
+			allowTouchMove: false,
+			preventClicksPropagation:false,
+			navigation,
+			breakpoints: {
+				  // when window width is >= 320px
+				280: {
+				  slidesPerView: 1,
+				
+				},
+				// when window width is >= 480px
+				480: {
+					slidesPerView: mainSwiperView < 2 ? mainSwiperView : 2,
+				
+				},
+				// when window width is >= 640px
+				640: {
+				  slidesPerView: mainSwiperView,
+				
+				}
+			  },
+			on: {slideChange:(e)=>{
+				if(0 !== e.activeIndex){
+					document.querySelector(navigation.prevEl).classList.remove('swiper-button-disabled');
+				}
+				if(e.activeIndex !== e.slides.length - 1){
+					document.querySelector(navigation.nextEl).classList.remove('swiper-button-disabled');
+				}
+			}}
+		})
+
+		var navSlider = new Swiper('.cool-timeline-block-'+ block_id +' .ctlb-nav-swiper-outer .swiper', {
+			observer: true,
+			observeParents: true,
+			slidesPerView: slidePerView,
+			freeMode: true,
+			initialSlide:blockcount,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			preventClicks:false,
+			allowTouchMove: false,
+			preventClicksPropagation:false,
+			centeredSlides: true,
+			navigation: {
+				nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
+				prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
+			  },
+			  breakpoints: {
+				  // when window width is >= 320px
+				280: {
+				  slidesPerView: 1,
+				  
+				},
+				// when window width is >= 480px
+				480: {
+					slidesPerView: slidePerView < 2 ? slidePerView : 2,
+			
+				},
+				// when window width is >= 640px
+				640: {
+				  slidesPerView: slidePerView,
+				 
+				}
+			  }
+		})
 	}
 
 	render() {
