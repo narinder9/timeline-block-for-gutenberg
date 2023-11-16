@@ -28,14 +28,6 @@ class Edit extends Component {
 		let root_id = select("core/block-editor").getBlockRootClientId(this.props.clientId);
 		
 		let index = select("core/block-editor").getBlockIndex(this.props.clientId,root_id);
-		
-		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
-		const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
-		if(!parentAttribute.hrSliderUpdate && 'horizontal' === parentAttribute.timelineLayout){
-			setTimeout(()=>{
-				this.SwiperUpdate(parentBlockId, index ,parentAttribute.slidePerView,parentAttribute.timelineStyle)
-			},50);
-		}
    }	
 
    addBlock(e){
@@ -58,7 +50,9 @@ class Edit extends Component {
 	   const parentBlock = select("core/block-editor").getBlock(parentBlockId);
 	   this.UpdateOrientation();
 	   if('horizontal' === parentAttribute.timelineLayout){
-		   parentBlock.attributes.hrSliderUpdate = false
+		const parentBlock = select("core/block-editor").getBlock(parentBlockId);
+		const slideUpdate={update: false, index: index + 1};
+		parentBlock.attributes.hrSliderUpdate = slideUpdate
 	   }
    }
 
@@ -79,88 +73,6 @@ class Edit extends Component {
 				}
 			});
 		}
-	}
-
-	SwiperUpdate(blockId,blockcount,slidePerView,timelinStyle){
-		let block_id = blockId;
-		const mainSwiperView='design-1' === timelinStyle ? 1 : slidePerView;
-		const navigation={
-			nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
-			prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
-		};
-		var mainSwiper = new Swiper('.cool-timeline-block-'+ block_id +' .swiper-outer .swiper', {
-			observer: true,
-			observeParents: true,
-			slidesPerView: mainSwiperView,
-			freeMode: true,
-			initialSlide:blockcount,
-			watchSlidesVisibility: true,
-			watchSlidesProgress: true,
-			preventClicks:false,
-			allowTouchMove: false,
-			preventClicksPropagation:false,
-			navigation,
-			breakpoints: {
-				  // when window width is >= 320px
-				280: {
-				  slidesPerView: 1,
-				
-				},
-				// when window width is >= 480px
-				480: {
-					slidesPerView: mainSwiperView < 2 ? mainSwiperView : 2,
-				
-				},
-				// when window width is >= 640px
-				640: {
-				  slidesPerView: mainSwiperView,
-				
-				}
-			  },
-			on: {slideChange:(e)=>{
-				if(0 !== e.activeIndex){
-					document.querySelector(navigation.prevEl).classList.remove('swiper-button-disabled');
-				}
-				if(e.activeIndex !== e.slides.length - 1){
-					document.querySelector(navigation.nextEl).classList.remove('swiper-button-disabled');
-				}
-			}}
-		})
-
-		var navSlider = new Swiper('.cool-timeline-block-'+ block_id +' .ctlb-nav-swiper-outer .swiper', {
-			observer: true,
-			observeParents: true,
-			slidesPerView: slidePerView,
-			freeMode: true,
-			initialSlide:blockcount,
-			watchSlidesVisibility: true,
-			watchSlidesProgress: true,
-			preventClicks:false,
-			allowTouchMove: false,
-			preventClicksPropagation:false,
-			centeredSlides: true,
-			navigation: {
-				nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
-				prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
-			  },
-			  breakpoints: {
-				  // when window width is >= 320px
-				280: {
-				  slidesPerView: 1,
-				  
-				},
-				// when window width is >= 480px
-				480: {
-					slidesPerView: slidePerView < 2 ? slidePerView : 2,
-			
-				},
-				// when window width is >= 640px
-				640: {
-				  slidesPerView: slidePerView,
-				 
-				}
-			  }
-		})
 	}
 
 	render() {

@@ -74,10 +74,11 @@ class Edit extends Component {
 		storyPositionHide: !this.props.attributes.OrientationCheckBox,
 		headingTag: this.props.attributes.headingTag} 	);
 
-		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);	
-		let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId)
+		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		if(this.props.attributes.timelineLayout == "horizontal"){
-			this.props.setAttributes({hrSliderUpdate: false});
+			const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+			const slideUpdate={update: false, index:blocksCount};
+			this.props.setAttributes({hrSliderUpdate: slideUpdate});
 		}
 	}
 
@@ -778,10 +779,10 @@ class Edit extends Component {
 		const  updateNavContent=this.navItemsUpdate(clientId);
 		if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
 			this.props.setAttributes( { timelineNavItems:updateNavContent} )
-			if(!prevProps.attributes.hrSliderUpdate){
-				const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
-				this.SwiperUpdate(blocksCount,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
-				this.props.setAttributes({hrSliderUpdate: true});
+			if(!prevProps.attributes.hrSliderUpdate.update){
+				const index = prevProps.attributes.hrSliderUpdate.index;
+				this.SwiperUpdate(index,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+				this.props.setAttributes({hrSliderUpdate: {...prevProps.attributes.hrSliderUpdate,update: true}});
 			}
 		}
 	}

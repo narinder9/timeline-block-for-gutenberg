@@ -32345,8 +32345,11 @@ const attributes = {
     default: ''
   },
   hrSliderUpdate: {
-    type: 'boolean',
-    default: true
+    type: 'object',
+    default: {
+      update: true,
+      index: 0
+    }
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -32487,10 +32490,14 @@ class Edit extends Component {
       headingTag: this.props.attributes.headingTag
     });
     wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
-    let blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
     if (this.props.attributes.timelineLayout == "horizontal") {
+      const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
+      const slideUpdate = {
+        update: false,
+        index: blocksCount
+      };
       this.props.setAttributes({
-        hrSliderUpdate: false
+        hrSliderUpdate: slideUpdate
       });
     }
   }
@@ -33366,11 +33373,14 @@ class Edit extends Component {
       this.props.setAttributes({
         timelineNavItems: updateNavContent
       });
-      if (!prevProps.attributes.hrSliderUpdate) {
-        const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
-        this.SwiperUpdate(blocksCount, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
+      if (!prevProps.attributes.hrSliderUpdate.update) {
+        const index = prevProps.attributes.hrSliderUpdate.index;
+        this.SwiperUpdate(index, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
         this.props.setAttributes({
-          hrSliderUpdate: true
+          hrSliderUpdate: {
+            ...prevProps.attributes.hrSliderUpdate,
+            update: true
+          }
         });
       }
     }

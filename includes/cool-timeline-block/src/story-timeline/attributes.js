@@ -497,8 +497,11 @@ const attributes = {
 		default: '',
 	},
 	hrSliderUpdate:{
-		type: 'boolean',
-		default: true
+		type: 'object',
+		default: {
+			update: true,
+			index: 0,
+		}
 	}
 }
 
