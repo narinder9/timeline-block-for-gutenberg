@@ -25,6 +25,7 @@ class Edit extends Component {
 		//Store client id.
 		
 		this.props.setAttributes( { block_id: this.props.clientId } )
+		this.props.setAttributes( { timelineStyle: 'design-1' } )
 		let root_id = select("core/block-editor").getBlockRootClientId(this.props.clientId);
 		
 		let index = select("core/block-editor").getBlockIndex(this.props.clientId,root_id);

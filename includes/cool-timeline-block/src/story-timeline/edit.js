@@ -758,6 +758,7 @@ class Edit extends Component {
 	componentDidMount() {
 		// //Store client id.
 		this.props.setAttributes( { block_id: this.props.clientId } )
+		this.props.setAttributes( { timelineStyle: 'design-1' } )
 		// Pushing Style tag for this block css.
 		const $style = document.createElement( "style" )
 		$style.setAttribute( "id", "cool-vertical-timeline-style-" + this.props.clientId )

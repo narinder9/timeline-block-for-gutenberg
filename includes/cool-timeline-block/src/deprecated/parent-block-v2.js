@@ -4,9 +4,11 @@ import { __ } from '@wordpress/i18n';
 
 import deprContentTimelineStyle from "./styling-v2.js"
 const { useBlockProps,InnerBlocks } = wp.blockEditor;
-
 export default {
-		attributes,
+		attributes:{...attributes,subHeadLineHeightType: {
+            type: "string",
+            default: "em",
+        }},
 		save: props => {
 			const Save = (props) => {
 				const {

@@ -31335,7 +31335,13 @@ const {
   InnerBlocks
 } = wp.blockEditor;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  attributes: _story_timeline_attributes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  attributes: {
+    ..._story_timeline_attributes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+    subHeadLineHeightType: {
+      type: "string",
+      default: "em"
+    }
+  },
   save: props => {
     const Save = props => {
       const {
@@ -33348,6 +33354,9 @@ class Edit extends Component {
     // //Store client id.
     this.props.setAttributes({
       block_id: this.props.clientId
+    });
+    this.props.setAttributes({
+      timelineStyle: 'design-1'
     });
     // Pushing Style tag for this block css.
     const $style = document.createElement("style");
