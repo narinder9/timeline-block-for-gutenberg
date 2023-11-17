@@ -111,10 +111,9 @@ class Edit extends Component {
 	};
 
 	navItemsUpdate=(id,render)=>{
-		const childBlocks=wp.data.select('core/block-editor').getBlock(id).innerBlocks;
-		const currentBlock=wp.data.select('core/block-editor').getBlock(id).attributes;
+		const childBlocks=wp.data.select('core/block-editor').getBlock(id)?.innerBlocks;
 		const newNavItems={};
-		childBlocks.map(block=>{
+		childBlocks?.map(block=>{
 			newNavItems[block.attributes.block_id]=({t_date: block.attributes.t_date, icon: block.attributes.icon, iconColor: block.attributes.iconColor, iconToggle: block.attributes.iconToggle});
 		});
 		return JSON.stringify(newNavItems);
@@ -776,13 +775,15 @@ class Edit extends Component {
 			this.props.setAttributes( { sliderActive:true} )
 		}
 
-		const  updateNavContent=this.navItemsUpdate(clientId);
-		if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
-			this.props.setAttributes( { timelineNavItems:updateNavContent} )
-			if(!prevProps.attributes.hrSliderUpdate.update){
-				const index = prevProps.attributes.hrSliderUpdate.index;
-				this.SwiperUpdate(index,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
-				this.props.setAttributes({hrSliderUpdate: {...prevProps.attributes.hrSliderUpdate,update: true}});
+		if(!this.props.attributes.isPreview){
+			const  updateNavContent=this.navItemsUpdate(clientId);
+			if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
+				this.props.setAttributes( { timelineNavItems:updateNavContent} )
+				if(!prevProps.attributes.hrSliderUpdate.update){
+					const index = prevProps.attributes.hrSliderUpdate.index;
+					this.SwiperUpdate(index,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+					this.props.setAttributes({hrSliderUpdate: {...prevProps.attributes.hrSliderUpdate,update: true}});
+				}
 			}
 		}
 	}

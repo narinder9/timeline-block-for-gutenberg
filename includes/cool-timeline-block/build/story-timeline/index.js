@@ -32458,10 +32458,10 @@ class Edit extends Component {
       });
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "navItemsUpdate", (id, render) => {
-      const childBlocks = wp.data.select('core/block-editor').getBlock(id).innerBlocks;
-      const currentBlock = wp.data.select('core/block-editor').getBlock(id).attributes;
+      var _wp$data$select$getBl;
+      const childBlocks = (_wp$data$select$getBl = wp.data.select('core/block-editor').getBlock(id)) === null || _wp$data$select$getBl === void 0 ? void 0 : _wp$data$select$getBl.innerBlocks;
       const newNavItems = {};
-      childBlocks.map(block => {
+      childBlocks === null || childBlocks === void 0 ? void 0 : childBlocks.map(block => {
         newNavItems[block.attributes.block_id] = {
           t_date: block.attributes.t_date,
           icon: block.attributes.icon,
@@ -33368,20 +33368,22 @@ class Edit extends Component {
         sliderActive: true
       });
     }
-    const updateNavContent = this.navItemsUpdate(clientId);
-    if (prevProps.attributes.timelineNavItems !== updateNavContent || 4 > this.props.attributes.timelineNavItems.length) {
-      this.props.setAttributes({
-        timelineNavItems: updateNavContent
-      });
-      if (!prevProps.attributes.hrSliderUpdate.update) {
-        const index = prevProps.attributes.hrSliderUpdate.index;
-        this.SwiperUpdate(index, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
+    if (!this.props.attributes.isPreview) {
+      const updateNavContent = this.navItemsUpdate(clientId);
+      if (prevProps.attributes.timelineNavItems !== updateNavContent || 4 > this.props.attributes.timelineNavItems.length) {
         this.props.setAttributes({
-          hrSliderUpdate: {
-            ...prevProps.attributes.hrSliderUpdate,
-            update: true
-          }
+          timelineNavItems: updateNavContent
         });
+        if (!prevProps.attributes.hrSliderUpdate.update) {
+          const index = prevProps.attributes.hrSliderUpdate.index;
+          this.SwiperUpdate(index, this.props.attributes.slidePerView, this.props.attributes.timelineStyle);
+          this.props.setAttributes({
+            hrSliderUpdate: {
+              ...prevProps.attributes.hrSliderUpdate,
+              update: true
+            }
+          });
+        }
       }
     }
   }
