@@ -45,7 +45,8 @@ class Edit extends Component {
 	   timelineLayout:timelineLayout,
 	   blockPosition: position,
 	   storyPositionHide: !parentAttribute.OrientationCheckBox,
-	   headingTag: parentAttribute.headingTag} 	);
+	   headingTag: parentAttribute.headingTag,
+		timelineStyle: parentAttribute.timelineStyle} 	);
 
 	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
 	   const parentBlock = select("core/block-editor").getBlock(parentBlockId);

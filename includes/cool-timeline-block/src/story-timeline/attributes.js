@@ -490,7 +490,7 @@ const attributes = {
 	},
 	timelineStyle: {
 		type:"string",
-		default:"design-1"
+		default:""
 	},
 	timelineNavItems:{
 		type: "string",

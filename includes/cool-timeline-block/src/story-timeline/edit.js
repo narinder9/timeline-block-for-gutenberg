@@ -72,7 +72,8 @@ class Edit extends Component {
 		timelineLayout:timelineLayout,
 		blockPosition:index % 2 ? evenPosition : oddPosition,
 		storyPositionHide: !this.props.attributes.OrientationCheckBox,
-		headingTag: this.props.attributes.headingTag} 	);
+		headingTag: this.props.attributes.headingTag,
+		timelineStyle: this.props.attributes.timelinStyle} 	);
 
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		if(this.props.attributes.timelineLayout == "horizontal"){
@@ -559,10 +560,11 @@ class Edit extends Component {
 						}
 						else{
 							setAttributes({timelineLayout:value})
+							setAttributes( { timelineStyle: 'design-1' } )
 							jQuery(".timeline-block-pre-loader").css('display','block')
 						}
 						select('core/block-editor').getBlocksByClientId(this.props.clientId)[0].innerBlocks.forEach(function (block,key) {
-							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value }))
+							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value,timelineStyle: 'design-1' }))
 						})
 					}
 				}
@@ -758,7 +760,6 @@ class Edit extends Component {
 	componentDidMount() {
 		// //Store client id.
 		this.props.setAttributes( { block_id: this.props.clientId } )
-		this.props.setAttributes( { timelineStyle: 'design-1' } )
 		// Pushing Style tag for this block css.
 		const $style = document.createElement( "style" )
 		$style.setAttribute( "id", "cool-vertical-timeline-style-" + this.props.clientId )
