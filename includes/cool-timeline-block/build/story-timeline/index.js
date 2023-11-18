@@ -33126,24 +33126,25 @@ class Edit extends Component {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)("Timeline Layout", 'timeline-block'),
       value: timelineLayout,
       onChange: value => {
+        let style = '';
         if (value == "vertical") {
           setAttributes({
             timelineLayout: value,
-            sliderActive: false
+            sliderActive: false,
+            timelineStyle: style
           });
         } else {
+          style = 'design-1';
           setAttributes({
-            timelineLayout: value
-          });
-          setAttributes({
-            timelineStyle: 'design-1'
+            timelineLayout: value,
+            timelineStyle: style
           });
           jQuery(".timeline-block-pre-loader").css('display', 'block');
         }
         select('core/block-editor').getBlocksByClientId(this.props.clientId)[0].innerBlocks.forEach(function (block, key) {
           dispatch('core/block-editor').updateBlockAttributes(block.clientId, {
             timelineLayout: value,
-            timelineStyle: 'design-1'
+            timelineStyle: style
           });
         });
       },
@@ -33300,7 +33301,6 @@ class Edit extends Component {
         config: dateconfig
       });
     }
-    const timelineStyles = 'horizontal' === timelineLayout ? timelineStyle : '';
     return isPreview ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("img", {
       width: "100%",
       src: _component_icon_timeline_png__WEBPACK_IMPORTED_MODULE_3__,
@@ -33324,7 +33324,7 @@ class Edit extends Component {
     })) : null, loadHeadGoogleFonts, loadSubHeadGoogleFonts, settingTabs, loadDateGoogleFonts, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-" + this.props.clientId + " cool-timeline-block"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
-      className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`
+      className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       className: "cool-timeline-block-list"
     }, timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(InnerBlocks, {
@@ -33693,7 +33693,6 @@ function Save(props) {
     d: "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"
   }));
   const navItems = '' !== timelineNavItems ? JSON.parse(timelineNavItems) : '';
-  const timelineStyles = 'horizontal' === timelineLayout ? timelineStyle : '';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-" + block_id + ""
   }, '' !== (0,_styling_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
@@ -33701,7 +33700,7 @@ function Save(props) {
       __html: (0,_styling_js__WEBPACK_IMPORTED_MODULE_2__["default"])(props)
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`
+    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-list"
   }, timelineLayout == "horizontal" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, 'design-1' === timelineStyle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

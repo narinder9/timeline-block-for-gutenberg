@@ -555,16 +555,17 @@ class Edit extends Component {
 					label={ __( "Timeline Layout",'timeline-block' ) }
 					value={ timelineLayout }
 					onChange={(value)=>{
+						let style='';
 						if(value == "vertical"){
-						setAttributes({timelineLayout:value,sliderActive:false})
+						setAttributes({timelineLayout:value, sliderActive:false, timelineStyle: style})
 						}
 						else{
-							setAttributes({timelineLayout:value})
-							setAttributes( { timelineStyle: 'design-1' } )
+							style='design-1';
+							setAttributes({timelineLayout:value, timelineStyle: style});
 							jQuery(".timeline-block-pre-loader").css('display','block')
 						}
 						select('core/block-editor').getBlocksByClientId(this.props.clientId)[0].innerBlocks.forEach(function (block,key) {
-							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value,timelineStyle: 'design-1' }))
+							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value,timelineStyle: style }))
 						})
 					}
 				}
@@ -705,7 +706,6 @@ class Edit extends Component {
 			)
 		}
 
-		const timelineStyles='horizontal' === timelineLayout ? timelineStyle : '';
 		return (
 			isPreview ? <img width='100%' src={ preview } alt=''/>:
 			<Fragment>
@@ -734,7 +734,7 @@ class Edit extends Component {
 			{loadDateGoogleFonts }
 		
 			<div className={"cool-timeline-block-" + this.props.clientId + " cool-timeline-block"}>
-							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`}>
+							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`}>
 								<div className="cool-timeline-block-list">
 								{timelineLayout == "vertical" ?
 									<InnerBlocks

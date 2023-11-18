@@ -26,13 +26,12 @@ export default function Save(props) {
 
 	const circleIcons=<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>;
 	const navItems='' !== timelineNavItems ? JSON.parse(timelineNavItems) : '';
-	const timelineStyles='horizontal' === timelineLayout ? timelineStyle : '';
 	return (
 		<div className = {"cool-timeline-block-"+block_id+""}>
 			{'' !== contentTimelineStyle( props ) &&
 			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }}/>
 			}
-			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyles}`}>
+			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`}>
 		 		<div className="cool-timeline-block-list">
 				 {timelineLayout == "horizontal" ?
 				 <>
