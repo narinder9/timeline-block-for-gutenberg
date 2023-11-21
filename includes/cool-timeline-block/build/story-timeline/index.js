@@ -33419,7 +33419,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attributes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes.js */ "./src/story-timeline/attributes.js");
 /* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit.js */ "./src/story-timeline/edit.js");
 /* harmony import */ var _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/icon/insertorIcon.js */ "./src/component/icon/insertorIcon.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _migration_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./migration.js */ "./src/story-timeline/migration.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 
 /**
  * Register: as Gutenberg Block.
@@ -33435,6 +33436,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 // //  Import CSS.
 // import ".././style.scss"
+
 
 
 
@@ -33495,11 +33497,11 @@ const withcontentTimeline = createHigherOrderComponent(BlockEdit => {
 }, 'withcontentTimeline');
 registerBlockType("cp-timeline/content-timeline-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)('Timeline Block', 'timeline-block'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)('Timeline Block', 'timeline-block'),
   // Block title.
   apiVersion: 2,
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Roadmap Timeline", 'timeline-block')],
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__.__)("Roadmap Timeline", 'timeline-block')],
   icon: _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_7__.CoolTMIcon,
   supports: {
     anchor: true
@@ -33530,7 +33532,8 @@ registerBlockType("cp-timeline/content-timeline-block", {
       radius: 10,
       isPreview: true
     }
-  }
+  },
+  transforms: _migration_js__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
 addFilter('editor.BlockEdit', 'cp-timeline/content-timeline-block', withcontentTimeline);
 
@@ -33639,6 +33642,54 @@ function LayoutInit(props) {
     className: "swiper-button-next"
   })));
 }
+
+/***/ }),
+
+/***/ "./src/story-timeline/migration.js":
+/*!*****************************************!*\
+  !*** ./src/story-timeline/migration.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const {
+  createBlock
+} = wp.blocks;
+const {
+  select
+} = wp.data;
+const innerBlock = prop => {
+  const innerBlock = [];
+  const blocks = select("core/block-editor").getBlock(prop.block_id).innerBlocks;
+  const innerBlocks = Array.prototype.slice.call(blocks);
+  innerBlocks.map((prop, index) => {
+    innerBlock.push({
+      name: 'cp-timeline/content-timeline-child',
+      attributes: prop.attributes
+    });
+  });
+  return innerBlock;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  to: [{
+    type: 'block',
+    blocks: ['cp-timeline/content-timeline'],
+    // Parent timeline block
+    transform: props => {
+      const parentBlock = {
+        name: 'cp-timeline/content-timeline',
+        // Child timeline block
+        attributes: props,
+        innerBlocks: innerBlock(props)
+      };
+      return createBlock(parentBlock.name, parentBlock.attributes, parentBlock.innerBlocks.map(innerBlock => createBlock(innerBlock.name, innerBlock.attributes)));
+    }
+  }]
+});
 
 /***/ }),
 
