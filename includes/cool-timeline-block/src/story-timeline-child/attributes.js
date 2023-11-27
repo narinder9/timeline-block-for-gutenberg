@@ -42,7 +42,7 @@ const attributes = {
 	},
 	timeLineImage:{
 		type:"string",
-		default:"none"
+		default:""
 	},
 	dateFormat: {
 		type: "string",
@@ -141,6 +141,10 @@ const attributes = {
 		type:"string",
 		default:""
 	},
+	wodpressBlock:{
+		type: "bollean",
+		default: false
+	}
 }
 
 export default attributes

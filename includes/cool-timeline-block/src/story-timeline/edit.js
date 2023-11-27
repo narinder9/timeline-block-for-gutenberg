@@ -3,6 +3,7 @@ import preview from "../component/icon/timeline.png"
 import times from "lodash/times.js";
 import memoize from "memize"
 import {LayoutInit} from "./layout.js";
+import GoogleFontFamily from "../component/typography/font-family.js";
 
 import contentTimelineStyle from "./styling.js";
 
@@ -14,7 +15,6 @@ import SpacingControl from "../component/customComponents/MultipleUnits.js";
 // // Import Web font loader for google fonts.y
 import WebfontLoader from "../component/typography/fontloader.js";
 
-const { dateI18n,createSlice } = wp.date
 const { Component, Fragment } = wp.element
 
 import React from 'react';
@@ -23,8 +23,6 @@ import { __ } from '@wordpress/i18n';
 const {
 	BlockControls,
 	InspectorControls,
-	BlockAlignmentToolbar,
-	PanelColorSettings,
 	InnerBlocks,
 } = wp.blockEditor
 
@@ -33,23 +31,18 @@ const {
 	SelectControl,
 	RangeControl,
 	TabPanel,
-	Toolbar,
 	ToolbarDropdownMenu,
-	Spinner,
-	ColorPicker,
 	ColorPalette,
 	Card,
 	CardBody,
 	Button,
 	ButtonGroup,
-	ToggleControl,
-	headingTag
+	ToggleControl
 } = wp.components
 
 const {
 	dispatch,
-	select,
-	withSelect,
+	select
 } = wp.data
 const ALLOWED_BLOCKS = ["cp-timeline/content-timeline-block-child"]
 
@@ -68,13 +61,12 @@ class Edit extends Component {
 		const oddPosition = position,
 		evenPosition = position == 'right' ? 'left' : 'right';
 		let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,
-		timelineDesign :timelineDesign,
-		timelineLayout:timelineLayout,
-		blockPosition:index % 2 ? evenPosition : oddPosition,
-		storyPositionHide: !this.props.attributes.OrientationCheckBox,
-		headingTag: this.props.attributes.headingTag,
-		timelineStyle: this.props.attributes.timelinStyle} 	);
-
+			timelineDesign :timelineDesign,
+			timelineLayout:timelineLayout,
+			blockPosition:index % 2 ? evenPosition : oddPosition,
+			storyPositionHide: !this.props.attributes.OrientationCheckBox,
+			headingTag: this.props.attributes.headingTag,
+			timelineStyle: this.props.attributes.timelineStyle});
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		if(this.props.attributes.timelineLayout == "horizontal"){
 			const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
@@ -211,34 +203,14 @@ class Edit extends Component {
 				LineColor,
 				timelineLayout,
 				tm_content,
-				headingColor,
-				subHeadingColor,
 				titileBtSpacing,
-				headFontSizeType,
-				headFontSize,
-				headFontSizeTablet,
-				headFontSizeMobile,
 				headFontFamily,
 				headFontWeight,
-				headFontSubset,
-				headLineHeightType,
-				headLineHeight,
-				headLineHeightTablet,
-				headLineHeightMobile,
 				headLoadGoogleFonts,
 				timelineItem,
 				descBtSpacing,
-				subHeadFontSizeType,
-				subHeadFontSize,
-				subHeadFontSizeTablet,
-				subHeadFontSizeMobile,
 				subHeadFontFamily,
 				subHeadFontWeight,
-				subHeadFontSubset,
-				subHeadLineHeightType,
-				subHeadLineHeight,
-				subHeadLineHeightTablet,
-				subHeadLineHeightMobile,
 				subHeadLoadGoogleFonts,
 				dateColor,
 				storyBorderColor,
@@ -259,11 +231,8 @@ class Edit extends Component {
 				timelineDesign,
 				iconColor,
 				iconSize,
-				iconSizeType,
 				iconBoxSize,
-				iconBoxSizeType,
 				middleLineSize,
-				middleLineSizeType,
 				containerTopPadding,
 				containerRightPadding,
 				containerBottomPadding,
@@ -272,7 +241,6 @@ class Edit extends Component {
 				marginLink,
 				isPreview,
 				OrientationCheckBox,
-				ImagePopup,
 				timelineStyle,
 				slidePerView,
 				timelineNavItems
@@ -295,47 +263,13 @@ class Edit extends Component {
 			</Fragment>:null;
 		const general_setting=<CardBody>
 		<h2 className="timeline-block-settings-labels">Story Heading</h2>
-		<TypographyControl
-		label={ __( "Typography",'timeline-block' ) }
-		attributes = { this.props.attributes }
-		setAttributes = { setAttributes }
-		loadGoogleFonts = { { value: headLoadGoogleFonts, label: 'headLoadGoogleFonts' } }
-		fontFamily = { { value: headFontFamily, label: 'headFontFamily' } }
-		fontWeight = { { value: headFontWeight, label: 'headFontWeight' } }
-		fontSubset = { { value: headFontSubset, label: 'headFontSubset' } }
-		fontSizeType = { { value: headFontSizeType, label: 'headFontSizeType' } }
-		fontSize = { { value: headFontSize, label: 'headFontSize' } }
-		fontSizeMobile = { { value: headFontSizeMobile, label: 'headFontSizeMobile' } }
-		fontSizeTablet= { { value: headFontSizeTablet, label: 'headFontSizeTablet' } }
-		lineHeightType = { { value: headLineHeightType, label: 'headLineHeightType' } }
-		lineHeight = { { value: headLineHeight, label: 'headLineHeight' } }
-		lineHeightMobile = { { value: headLineHeightMobile, label: 'headLineHeightMobile' } }
-		lineHeightTablet= { { value: headLineHeightTablet, label: 'headLineHeightTablet' } }
-	/>
-	<div style ={{'margin-top':15 +'px'}}></div>
-	<CardBody className="cp-timeline-block-style-settings">
-	<div>{__("Text Color","timeline-block")}</div>
-	<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({headingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
-	<ColorPalette className="cp-timeline-block-color-palates"
-		clearable={false}
-		value={headingColor}
-		onChange = {( colorValue ) => setAttributes( { headingColor: colorValue } )}
-	/>
-	</CardBody>
-	<div style ={{'margin-top':15 +'px','margin-bottom' : 10+'px'}}>{__("Select Heading Tag","timeline-block")}</div>
-	<SelectControl
-			// label={ __("Select Heading Tag") }
-			value={ headingTag }
-			onChange={ (e) => this.onUpdateHeadingTag(e) }
-			options={ [
-				{ value: "h1", label: __( "H1","timeline-block") },
-				{ value: "h2", label: __( "H2","timeline-block") },
-				{ value: "h3", label: __( "H3","timeline-block") },
-				{ value: "h4", label: __( "H4","timeline-block") },
-				{ value: "h5", label: __( "H5","timeline-block") },
-				{ value: "h6", label: __( "H6","timeline-block") },
-			] }
-	/>
+		<GoogleFontFamily
+			label={ __( "Typography",'timeline-block' ) }
+			setAttributes = { setAttributes }
+			fontFamily = { { value: headFontFamily, label: 'headFontFamily' } }
+			fontWeight = { { value: headFontWeight, label: 'headFontWeight' } }
+			loadGoogleFonts = { { value: headLoadGoogleFonts, label: 'headLoadGoogleFonts' } }
+		/>
 	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"
@@ -348,33 +282,13 @@ class Edit extends Component {
 	/>
 	<hr className="timeline-block-editor__separator"></hr>
 	<h2 className="timeline-block-settings-labels">Story Description</h2>
-		<TypographyControl
-		label={ __( "Typography",'timeline-block' ) }
-		attributes = { this.props.attributes }
-		setAttributes = { setAttributes }
-		loadGoogleFonts = { { value: subHeadLoadGoogleFonts, label: 'subHeadLoadGoogleFonts' } }
-		fontFamily = { { value: subHeadFontFamily, label: 'subHeadFontFamily' } }
-		fontWeight = { { value: subHeadFontWeight, label: 'subHeadFontWeight' } }
-		fontSubset = { { value: subHeadFontSubset, label: 'subHeadFontSubset' } }
-		fontSizeType = { { value: subHeadFontSizeType, label: 'subHeadFontSizeType' } }
-		fontSize = { { value: subHeadFontSize, label: 'subHeadFontSize' } }
-		fontSizeMobile = { { value: subHeadFontSizeMobile, label: 'subHeadFontSizeMobile' } }
-		fontSizeTablet= { { value: subHeadFontSizeTablet, label: 'subHeadFontSizeTablet' } }
-		lineHeightType = { { value: subHeadLineHeightType, label: 'subHeadLineHeightType' } }
-		lineHeight = { { value: subHeadLineHeight, label: 'subHeadLineHeight' } }
-		lineHeightMobile = { { value: subHeadLineHeightMobile, label: 'subHeadLineHeightMobile' } }
-		lineHeightTablet= { { value: subHeadLineHeightTablet, label: 'subHeadLineHeightTablet' } }
-	/>
-	<div style ={{'margin-top':10 +'px'}}></div>
-	<CardBody className="cp-timeline-block-style-settings">
-	<div>{__("Text Color","timeline-block")}</div>
-	<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`}  onClick={e => this.resetcolorpalate({subHeadingColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
-	<ColorPalette className="cp-timeline-block-color-palates"
-		clearable={false}
-		value={subHeadingColor}
-		onChange = {( colorValue ) => setAttributes( { subHeadingColor: colorValue } )}
-	/>
-	</CardBody>
+		<GoogleFontFamily
+			label={ __( "Typography",'timeline-block' ) }
+			setAttributes = { setAttributes }
+			fontFamily = { { value: subHeadFontFamily, label: 'subHeadFontFamily' } }
+			fontWeight = { { value: subHeadFontWeight, label: 'subHeadFontWeight' } }
+			loadGoogleFonts = { { value: subHeadLoadGoogleFonts, label: 'subHeadLoadGoogleFonts' } }
+		/>
 	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"
@@ -417,17 +331,6 @@ class Edit extends Component {
 </CardBody>
 		const advanced_setting =
 		<CardBody>
-		{/* <div className="cp-timeline-block-style-settings">
-		<h2>{__("Image PopUp","timeline-block")}</h2>
-		<ToggleControl
-		className="timeline-block-Orientation_checkbox"
-		checked={ ImagePopup }
-		onChange={ ( state ) => {
-			this.ctlImagePopUp(state);
-			setAttributes( { ImagePopup: state } );
-		} }
-		/>
-		</div> */}
 		<div className="cp-timeline-block-style-settings">
 		<h2>Line Color</h2>
 		<div class={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({LineColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>

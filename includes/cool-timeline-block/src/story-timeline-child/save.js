@@ -3,10 +3,11 @@
  */
 
 import { IconPickerItem } from 'react-fa-icon-picker-alen';
-
 const {
+	InnerBlocks,
 	RichText
 } = wp.blockEditor
+
 
 export default function Save(props) {
 	const {
@@ -18,35 +19,39 @@ export default function Save(props) {
 		iconColor,
 		time_image,
 		blockPosition,
-		timelineDesign,
 		timelineLayout,
-		imageSize,
 		timeLineImage,
 		imageAlt,
 		headingTag,
-		timelineStyle
+		timelineStyle,
+		wodpressBlock
 	} = props.attributes
 
 	const StoryDetail = () => (
 		<div className="story-details">
-			{timeLineImage !== "none" ?
+			{( timeLineImage !== "none" && !wodpressBlock ) ?
 				<div className={`story-image`}>
 					<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 				</div>
 				:
 				null}
 			<div className="story-content">
-				<RichText.Content
-					className="timeline-block_title"
-					tagName={headingTag}
-					value={time_heading}
-				/>
-				<div className='timeline-block_desc'>
+				{!wodpressBlock ? 
+				<>
 					<RichText.Content
-						tagName="p"
-						value={time_desc}
+						className="timeline-block_title"
+						tagName={headingTag}
+						value={time_heading}
 					/>
-				</div>
+					<div className='timeline-block_desc'>
+						<RichText.Content
+							tagName="p"
+							value={time_desc}
+						/>
+					</div> 
+				</>:
+				<InnerBlocks.Content />
+				}
 			</div>
 		</div>
 	)

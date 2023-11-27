@@ -46,4 +46,3 @@ registerBlockType("cp-timeline/content-timeline-block-child", {
 		)
 	}
 })
-

@@ -31,6 +31,10 @@
 	min-height: 300px;
 	height: 100%;
 }
+
+.timeline-block-font-family-option .timeline-block-typography-advanced{
+	min-height: unset;
+}
 .timeline-block-typography-advanced::before,
 .timeline-block-box-shadow-advanced::before {
 	border: 8px solid #e2e4e7;
@@ -866,9 +870,7 @@ i.fipicon-angle-left:before {
     margin-bottom: 8px;
     padding: 0px;
   }
-  /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-    !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/@wordpress/scripts/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/component/customComponents/styling.scss ***!
-    \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+
   .timeline-block-spacing-control {
     position: relative;
     display: inline-block;
@@ -985,4 +987,8 @@ i.fipicon-angle-left:before {
 }
 .ctl-timeline-media-remove-button{
 	margin-right: 10px;
+}
+
+.cool-horizontal-timeline-body .story-content{
+	display: unset !important;
 }

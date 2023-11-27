@@ -1,8 +1,9 @@
 import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
+const { InnerBlocks } = wp.editor;
 
-const { RichText, InspectorControls, PanelColorSettings, MediaUpload, BlockControls, AlignmentToolbar } = wp.blockEditor;
+const { RichText, InspectorControls,  BlockControls } = wp.blockEditor;
 
 const {
 	dispatch,
@@ -13,10 +14,7 @@ const {
 	PanelBody,
 	TextControl,
 	Button,
-	TextareaControl,
 	Toolbar,
-	RadioControl,
-	SelectControl,
 	ButtonGroup
 } = wp.components;
 
@@ -25,15 +23,12 @@ class Edit extends Component {
 		//Store client id.
 		
 		this.props.setAttributes( { block_id: this.props.clientId } )
-		let root_id = select("core/block-editor").getBlockRootClientId(this.props.clientId);
-		
-		let index = select("core/block-editor").getBlockIndex(this.props.clientId,root_id);
+		this.props.setAttributes( { wodpressBlock: true } )
    }	
 
    addBlock(e){
 	   const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
 	   const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
-		const blocksCount = wp.data.select("core/block-editor").getBlockCount(parentBlockId);
 	   let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
 	   let index = select('core/block-editor').getBlockIndex(this.props.clientId);
 	   let timelineDesign= parentAttribute.timelineDesign
@@ -48,7 +43,6 @@ class Edit extends Component {
 		timelineStyle: parentAttribute.timelineStyle} 	);
 
 	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
-	   const parentBlock = select("core/block-editor").getBlock(parentBlockId);
 	   this.UpdateOrientation();
 	   if('horizontal' === parentAttribute.timelineLayout){
 		const parentBlock = select("core/block-editor").getBlock(parentBlockId);
@@ -85,17 +79,13 @@ class Edit extends Component {
 				t_date,
 				time_heading,
 				time_desc,
-				time_image,
 				iconToggle,
 				iconColor,
 				blockPosition,
-				imageSize,
-				imageOption,
 				timeLineImage,
-				imageAlt,
 				storyPositionHide,
 				headingTag,
-				timelineStyle
+				timelineStyle,
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
@@ -119,52 +109,24 @@ class Edit extends Component {
 				image_size_url
 			);
 		};
+
+		const headingLevel=()=>{
+			const headingLevel=parseInt(headingTag.replace('h',''));
+			return headingLevel;
+		}
+
 		const StoryDetail = () => (
 			<div className="story-details">
-				<MediaUpload
-					onSelect={(value) => {
-						let image_sizes = Object.keys(value.sizes);
-						let image_size_option = [];
-						image_sizes.map(size => {
-							image_size_option.push({ label: size.charAt(0).toUpperCase() + size.slice(1), value: size });
-						});
-						let img = getImage(imageSize, value.sizes);
-						setAttributes({ timeLineImage: img, imageOption: image_size_option, time_image: value, imageAlt: value.alt });
-					}}
-					value={timeLineImage}
-					allowedTypes={['image']}
-					render={({ open }) => (
-						<Fragment>
-							{timeLineImage !== "none" ?
-								<Fragment>
-									<div className="story-image" style={{paddingBottom: '10px'}}>
-										<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
-										<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })} style={{marginTop: '10px'}}>
-										{__('Remove Image',"timeline-block")}</Button>
-									</div>
-								</Fragment>
-								:
-								<Button isSmall isSecondary onClick={open} style={{marginTop: '10px'}}> {__('Upload/Choose Image', 'timeline-block')}</Button>
-							}
-						</Fragment>
-					)}
-				/>
 				<div className="story-content">
-					<RichText
-						className="timeline-block_title"
-						tagName={headingTag}
-						placeholder={__('Enter Story Title', 'timeline-block')}
-						value={time_heading}
-						onChange={(value) => setAttributes({ time_heading: value })}
-						keepplaceholderonfocus="true"
-					/>
 					<div className='timeline-block_desc'>
-						<RichText
-							tagName="p"
-							placeholder={__('Enter story description here.', 'timeline-block')}
-							value={time_desc}
-							onChange={(value) => setAttributes({ time_desc: value })}
-							keepplaceholderonfocus="true"
+					<InnerBlocks
+						templateLock="all" // Lock the template to prevent users from removing blocks
+						template={[
+							['core/image', { url: timeLineImage, className: 'ctlb-block-image'}], // Default: Image block with a default image URL
+							['core/heading', { level: headingLevel(), content: time_heading, className: 'ctlb-block-title'}], // Default: Heading block with level 2 and default content
+							['core/paragraph', { content: time_desc, className: 'ctlb-block-desc'}], // Default: Paragraph block with default content
+						]}
+						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
 						/>
 					</div>
 				</div>
@@ -179,6 +141,7 @@ class Edit extends Component {
 				onChange={(value) => setAttributes({ t_date: value })}
 			/>
 		);
+
 		const content_control = (
 			<InspectorControls>
 				<div style={{ 'margin-bottom': 15 + 'px','text-align':'center' }}>
@@ -194,29 +157,11 @@ class Edit extends Component {
 				</div>
 				<PanelBody title={__("Story Settings","timeline-block")}>
 					<TextControl
-						label="Story Heading"
-						value={time_heading}
-						onChange={(value) => setAttributes({ time_heading: value })}
-					/>
-					<TextareaControl
-						label="Story Description"
-						value={time_desc}
-						onChange={(value) => setAttributes({ time_desc: value })}
-					/>
-					<TextControl
 						label="Primary Label(Date/Steps)"
 						value={t_date}
 						onChange={(value) => setAttributes({ t_date: value })}
 					/>
-					{/* <RadioControl
-						label="Story Icon"
-						selected={iconToggle}
-						options={[
-							{ label: 'Default(dot)', value: "false" },
-							{ label: 'Custom(Font Awesome Icon)', value: "true" },
-						]}
-						onChange={(value) => setAttributes({ iconToggle: value })}
-					/> */}
+					<hr className="timeline-block-editor__separator"></hr>
 					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>
 					<ButtonGroup className="cool-timeline-content-alignment-buttons">
 						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'false' }) }} className={iconToggle == 'false' ? 'active' : ''}>DOT</Button>
@@ -227,49 +172,9 @@ class Edit extends Component {
 
 						</Fragment>
 						: null}
-					<hr className="timeline-block-editor__separator"></hr>
-					<label className="timeline-block-settings-labels">Story Image</label>
-					<br></br>
-					<MediaUpload
-						title="Story Image"
-						onSelect={(value) => {
-							let image_sizes = Object.keys(value.sizes)
-							let image_size_option = []
-							image_sizes.map(size => {
-								image_size_option.push({ label: size.charAt(0).toUpperCase() + size.slice(1), value: size })
-							});
-							let img = getImage(imageSize, value.sizes)
-							setAttributes({ timeLineImage: img, imageOption: image_size_option, time_image: value })
-						}}
-						value={timeLineImage}
-						allowedTypes={['image']}
-						modalClass=""
-						render={({ open }) => (
-							<Fragment>
-								{timeLineImage !== "none" ?
-									<Fragment>
-										<img src={timeLineImage} />
-										<Button isSmall isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
-											{__('Remove Image','timeline-block')}</Button>
-									</Fragment>
-									:
-									<Button isSmall isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
-								}
-							</Fragment>
-						)}
-					/>
 					{timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
 						<Fragment>
 							<hr className="timeline-block-editor__separator"></hr>
-							{/* <RadioControl
-								label="Story position"
-								selected={blockPosition}
-								options={[
-									{ label: 'Left', value: "left" },
-									{ label: 'Right', value: "right" },
-								]}
-								onChange={(value) => setAttributes({ blockPosition: value, block_position_active: true })}
-							/> */}
 							<div className="timeline-block-settings-labels">{__("Story position", "timeline-block")}</div>
 							<ButtonGroup className="cool-timeline-content-alignment-buttons">
 								<Button isSmall onClick={(e) => { setAttributes({ blockPosition: 'left', block_position_active: true }) }} className={blockPosition == 'left' ? 'active' : ''}>Left</Button>
@@ -277,19 +182,6 @@ class Edit extends Component {
 							</ButtonGroup>
 						</Fragment>
 						: null
-					}
-					<hr className="timeline-block-editor__separator"></hr>
-					{timelineLayout == "vertical" && timeLineImage !== "none" ?
-						<SelectControl
-							label="Image Size"
-							value={imageSize}
-							options={imageOption}
-							onChange={(newSize) => {
-								let img = getImage(newSize, time_image.sizes)
-								setAttributes({ timeLineImage: img, imageSize: newSize })
-							}}
-						/> :
-						null
 					}
 				</PanelBody>
 			</InspectorControls>

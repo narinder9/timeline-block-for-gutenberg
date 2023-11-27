@@ -1,7 +1,6 @@
 /**
  * BLOCK: Timeline - Save Block
  */
-import { Fragment } from "react"
 import contentTimelineStyle from "./styling.js"
 import { IconPickerItem } from 'react-fa-icon-picker-alen';
 

@@ -27,7 +27,7 @@ import { __ } from '@wordpress/i18n';
 const {
 	registerBlockType
 } = wp.blocks
-const { useBlockProps, InnerBlocks } = wp.blockEditor;
+const { useBlockProps } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { withSelect } = wp.data;

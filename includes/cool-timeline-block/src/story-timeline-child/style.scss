@@ -1178,8 +1178,10 @@ transform: translate(0%);
 
 // core block css start
 
-.cool-horizontal-timeline-body.design-1 .story-content .ctlb-block-title{
+.cool-vertical-timeline-body .story-content .ctlb-block-title,
+.cool-horizontal-timeline-body .story-content .ctlb-block-title{
   font-family: var(--ctlb-head-font-family);
+  font-weight: var(--ctlb-head-font-weight);
 }
 
 .cool-horizontal-timeline-body.design-1 .story-content:not(.cp-block-image-not),
