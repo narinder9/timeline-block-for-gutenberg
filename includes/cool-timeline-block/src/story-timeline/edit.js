@@ -203,14 +203,34 @@ class Edit extends Component {
 				LineColor,
 				timelineLayout,
 				tm_content,
+				headingColor,
+				subHeadingColor,
 				titileBtSpacing,
+				headFontSizeType,
+				headFontSize,
+				headFontSizeTablet,
+				headFontSizeMobile,
 				headFontFamily,
 				headFontWeight,
+				headFontSubset,
+				headLineHeightType,
+				headLineHeight,
+				headLineHeightTablet,
+				headLineHeightMobile,
 				headLoadGoogleFonts,
 				timelineItem,
 				descBtSpacing,
+				subHeadFontSizeType,
+				subHeadFontSize,
+				subHeadFontSizeTablet,
+				subHeadFontSizeMobile,
 				subHeadFontFamily,
 				subHeadFontWeight,
+				subHeadFontSubset,
+				subHeadLineHeightType,
+				subHeadLineHeight,
+				subHeadLineHeightTablet,
+				subHeadLineHeightMobile,
 				subHeadLoadGoogleFonts,
 				dateColor,
 				storyBorderColor,
@@ -263,13 +283,33 @@ class Edit extends Component {
 			</Fragment>:null;
 		const general_setting=<CardBody>
 		<h2 className="timeline-block-settings-labels">Story Heading</h2>
-		<GoogleFontFamily
+		<TypographyControl
 			label={ __( "Typography",'timeline-block' ) }
+			attributes = { this.props.attributes }
 			setAttributes = { setAttributes }
+			loadGoogleFonts = { { value: headLoadGoogleFonts, label: 'headLoadGoogleFonts' } }
 			fontFamily = { { value: headFontFamily, label: 'headFontFamily' } }
 			fontWeight = { { value: headFontWeight, label: 'headFontWeight' } }
-			loadGoogleFonts = { { value: headLoadGoogleFonts, label: 'headLoadGoogleFonts' } }
+			fontSubset = { { value: headFontSubset, label: 'headFontSubset' } }
+			fontSizeType = { { value: headFontSizeType, label: 'headFontSizeType' } }
+			fontSize = { { value: headFontSize, label: 'headFontSize' } }
+			fontSizeMobile = { { value: headFontSizeMobile, label: 'headFontSizeMobile' } }
+			fontSizeTablet= { { value: headFontSizeTablet, label: 'headFontSizeTablet' } }
+			lineHeightType = { { value: headLineHeightType, label: 'headLineHeightType' } }
+			lineHeight = { { value: headLineHeight, label: 'headLineHeight' } }
+			lineHeightMobile = { { value: headLineHeightMobile, label: 'headLineHeightMobile' } }
+			lineHeightTablet= { { value: headLineHeightTablet, label: 'headLineHeightTablet' } }
 		/>
+		<div style={{ 'margin-top': 10 + 'px' }}></div>
+			<CardBody className="cp-timeline-block-style-settings">
+				<div>{__("Text Color", "timeline-block")}</div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+					clearable={false}
+					value={headingColor}
+					onChange={(colorValue) => setAttributes({ headingColor: colorValue })}
+				/>
+			</CardBody>
 	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"
@@ -282,13 +322,33 @@ class Edit extends Component {
 	/>
 	<hr className="timeline-block-editor__separator"></hr>
 	<h2 className="timeline-block-settings-labels">Story Description</h2>
-		<GoogleFontFamily
-			label={ __( "Typography",'timeline-block' ) }
-			setAttributes = { setAttributes }
-			fontFamily = { { value: subHeadFontFamily, label: 'subHeadFontFamily' } }
-			fontWeight = { { value: subHeadFontWeight, label: 'subHeadFontWeight' } }
-			loadGoogleFonts = { { value: subHeadLoadGoogleFonts, label: 'subHeadLoadGoogleFonts' } }
-		/>
+	<TypographyControl
+		label={ __( "Typography",'timeline-block' ) }
+		attributes = { this.props.attributes }
+		setAttributes = { setAttributes }
+		loadGoogleFonts = { { value: subHeadLoadGoogleFonts, label: 'subHeadLoadGoogleFonts' } }
+		fontFamily = { { value: subHeadFontFamily, label: 'subHeadFontFamily' } }
+		fontWeight = { { value: subHeadFontWeight, label: 'subHeadFontWeight' } }
+		fontSubset = { { value: subHeadFontSubset, label: 'subHeadFontSubset' } }
+		fontSizeType = { { value: subHeadFontSizeType, label: 'subHeadFontSizeType' } }
+		fontSize = { { value: subHeadFontSize, label: 'subHeadFontSize' } }
+		fontSizeMobile = { { value: subHeadFontSizeMobile, label: 'subHeadFontSizeMobile' } }
+		fontSizeTablet= { { value: subHeadFontSizeTablet, label: 'subHeadFontSizeTablet' } }
+		lineHeightType = { { value: subHeadLineHeightType, label: 'subHeadLineHeightType' } }
+		lineHeight = { { value: subHeadLineHeight, label: 'subHeadLineHeight' } }
+		lineHeightMobile = { { value: subHeadLineHeightMobile, label: 'subHeadLineHeightMobile' } }
+		lineHeightTablet= { { value: subHeadLineHeightTablet, label: 'subHeadLineHeightTablet' } }
+	/>
+		<div style={{ 'margin-top': 15 + 'px' }}></div>
+			<CardBody className="cp-timeline-block-style-settings">
+				<div>{__("Text Color", "timeline-block")}</div>
+				<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<ColorPalette className="cp-timeline-block-color-palates"
+					clearable={false}
+					value={subHeadingColor}
+					onChange={(colorValue) => setAttributes({ subHeadingColor: colorValue })}
+				/>
+			</CardBody>
 	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"

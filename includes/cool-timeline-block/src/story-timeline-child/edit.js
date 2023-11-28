@@ -18,6 +18,41 @@ const {
 	ButtonGroup
 } = wp.components;
 
+const blockTemplate=(props)=>{
+	const attr=props.attributes;
+
+	const headingLevel=()=>{
+		const headingLevel=parseInt(attr.headingTag.replace('h',''));
+		return headingLevel;
+	}
+
+	return (
+		[
+			['core/image',
+				{
+					url: attr.timeLineImage,
+					className: 'ctlb-block-image'
+				}
+			], // Default: Image block with a default image URL
+			['core/heading',
+				{
+					level: headingLevel(),
+					content: attr.time_heading,
+					className: 'ctlb-block-title',
+					style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}
+				}
+			], // Default: Heading block with level 2 and default content
+			['core/paragraph',
+				{
+					content: attr.time_desc,
+					className: 'ctlb-block-desc',
+					style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}
+				}
+			], // Default: Paragraph block with default content
+		]
+	);
+}
+
 class Edit extends Component {
 	componentDidMount() {
 		//Store client id.
@@ -110,25 +145,14 @@ class Edit extends Component {
 			);
 		};
 
-		const headingLevel=()=>{
-			const headingLevel=parseInt(headingTag.replace('h',''));
-			return headingLevel;
-		}
-
 		const StoryDetail = () => (
 			<div className="story-details">
 				<div className="story-content">
-					<div className='timeline-block_desc'>
 					<InnerBlocks
 						templateLock="all" // Lock the template to prevent users from removing blocks
-						template={[
-							['core/image', { url: timeLineImage, className: 'ctlb-block-image'}], // Default: Image block with a default image URL
-							['core/heading', { level: headingLevel(), content: time_heading, className: 'ctlb-block-title'}], // Default: Heading block with level 2 and default content
-							['core/paragraph', { content: time_desc, className: 'ctlb-block-desc'}], // Default: Paragraph block with default content
-						]}
+						template={blockTemplate(this.props)}
 						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
 						/>
-					</div>
 				</div>
 			</div>
 		);

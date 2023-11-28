@@ -264,7 +264,7 @@
 
 }
 
-.cool-vertical-timeline-body .timeline-content .story-details p {
+.cool-vertical-timeline-body .timeline-content .story-details p:not(.timeline-block_desc,.ctlb-block-desc) {
   font-size: 14px;
   margin: 0;
   font-weight: 400;
@@ -764,12 +764,12 @@
   text-align: var(--ctlb-content-alignment);
 }
 
-.cool-vertical-timeline-body .story-details .timeline-block_title,
-.cool-horizontal-timeline-body .story-details .timeline-block_title  {
-  font-size: var(--ctlb-title-font-size);
+.cool-vertical-timeline-body .story-details :where(.timeline-block_title, .ctlb-block-title),
+.cool-horizontal-timeline-body .story-details :where(.timeline-block_title, .ctlb-block-title)  {
+  font-size: var(--ctlb-head-font-size);
   font-family: var(--ctlb-head-font-family);
   font-weight: var(--ctlb-head-font-weight);
-  line-height: var(--ctlb-head-line-height,calc(var(--ctlb-title-font-size) + 7px));
+  line-height: var(--ctlb-head-line-height,calc(var(--ctlb-head-font-size) + 7px));
   color: var(--ctlb-heading-color);
   margin: 2px 0px var(--ctlb-titile-bt-spacing) 0px;
 }
@@ -790,14 +790,14 @@
   padding: 0;
 }
 
-.cool-vertical-timeline-body.ctlb-wrapper .story-details .timeline-block_desc p,
-.cool-horizontal-timeline-body.ctlb-wrapper .story-details .timeline-block_desc p {
+.cool-vertical-timeline-body.ctlb-wrapper .story-details :where(.timeline-block_desc p,.ctlb-block-desc),
+.cool-horizontal-timeline-body.ctlb-wrapper .story-details :where(.timeline-block_desc p,.ctlb-block-desc) {
   font-size: var(--ctlb-sub-head-font-size);
   font-family: var(--ctlb-sub-head-font-family);
   font-weight: var(--ctlb-sub-head-font-weight);
   line-height: var(--ctlb-sub-head-line-height);
   color: var(--ctlb-sub-heading-color);
-  margin-bottom: var(--ctlb-desc-bt-spacing) !important;
+  margin-bottom: var(--ctlb-desc-bt-spacing);
 }
 
 .cool-vertical-timeline-body.ctlb-wrapper::before {
@@ -1023,7 +1023,7 @@ transform: translate(0%);
   left: auto;
 }
 
-.cool-vertical-timeline-body .story-details h3:not(.timeline-block_title) {
+.cool-vertical-timeline-body .story-details h3:not(.timeline-block_title,.ctlb-block-title) {
   font-size: 18px;
   margin: 2px 0px 5px 0px;
   font-weight: 500;
@@ -1177,12 +1177,6 @@ transform: translate(0%);
 
 
 // core block css start
-
-.cool-vertical-timeline-body .story-content .ctlb-block-title,
-.cool-horizontal-timeline-body .story-content .ctlb-block-title{
-  font-family: var(--ctlb-head-font-family);
-  font-weight: var(--ctlb-head-font-weight);
-}
 
 .cool-horizontal-timeline-body.design-1 .story-content:not(.cp-block-image-not),
 .cool-horizontal-timeline-body.design-1 .story-content .block-editor-block-list__layout{

@@ -32817,14 +32817,34 @@ class Edit extends Component {
         LineColor,
         timelineLayout,
         tm_content,
+        headingColor,
+        subHeadingColor,
         titileBtSpacing,
+        headFontSizeType,
+        headFontSize,
+        headFontSizeTablet,
+        headFontSizeMobile,
         headFontFamily,
         headFontWeight,
+        headFontSubset,
+        headLineHeightType,
+        headLineHeight,
+        headLineHeightTablet,
+        headLineHeightMobile,
         headLoadGoogleFonts,
         timelineItem,
         descBtSpacing,
+        subHeadFontSizeType,
+        subHeadFontSize,
+        subHeadFontSizeTablet,
+        subHeadFontSizeMobile,
         subHeadFontFamily,
         subHeadFontWeight,
+        subHeadFontSubset,
+        subHeadLineHeightType,
+        subHeadLineHeight,
+        subHeadLineHeightTablet,
+        subHeadLineHeightMobile,
         subHeadLoadGoogleFonts,
         dateColor,
         storyBorderColor,
@@ -32878,9 +32898,14 @@ class Edit extends Component {
     })) : null;
     const general_setting = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
       className: "timeline-block-settings-labels"
-    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_font_family_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, "Story Heading"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_13__.__)("Typography", 'timeline-block'),
+      attributes: this.props.attributes,
       setAttributes: setAttributes,
+      loadGoogleFonts: {
+        value: headLoadGoogleFonts,
+        label: 'headLoadGoogleFonts'
+      },
       fontFamily: {
         value: headFontFamily,
         label: 'headFontFamily'
@@ -32889,11 +32914,63 @@ class Edit extends Component {
         value: headFontWeight,
         label: 'headFontWeight'
       },
-      loadGoogleFonts: {
-        value: headLoadGoogleFonts,
-        label: 'headLoadGoogleFonts'
+      fontSubset: {
+        value: headFontSubset,
+        label: 'headFontSubset'
+      },
+      fontSizeType: {
+        value: headFontSizeType,
+        label: 'headFontSizeType'
+      },
+      fontSize: {
+        value: headFontSize,
+        label: 'headFontSize'
+      },
+      fontSizeMobile: {
+        value: headFontSizeMobile,
+        label: 'headFontSizeMobile'
+      },
+      fontSizeTablet: {
+        value: headFontSizeTablet,
+        label: 'headFontSizeTablet'
+      },
+      lineHeightType: {
+        value: headLineHeightType,
+        label: 'headLineHeightType'
+      },
+      lineHeight: {
+        value: headLineHeight,
+        label: 'headLineHeight'
+      },
+      lineHeightMobile: {
+        value: headLineHeightMobile,
+        label: 'headLineHeightMobile'
+      },
+      lineHeightTablet: {
+        value: headLineHeightTablet,
+        label: 'headLineHeightTablet'
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 10 + 'px'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_13__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`,
+      onClick: e => this.resetcolorpalate({
+        headingColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: headingColor,
+      onChange: colorValue => setAttributes({
+        headingColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 15 + 'px'
       }
@@ -32911,9 +32988,14 @@ class Edit extends Component {
       className: "timeline-block-editor__separator"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("h2", {
       className: "timeline-block-settings-labels"
-    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_font_family_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, "Story Description"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_component_typography_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_13__.__)("Typography", 'timeline-block'),
+      attributes: this.props.attributes,
       setAttributes: setAttributes,
+      loadGoogleFonts: {
+        value: subHeadLoadGoogleFonts,
+        label: 'subHeadLoadGoogleFonts'
+      },
       fontFamily: {
         value: subHeadFontFamily,
         label: 'subHeadFontFamily'
@@ -32922,11 +33004,63 @@ class Edit extends Component {
         value: subHeadFontWeight,
         label: 'subHeadFontWeight'
       },
-      loadGoogleFonts: {
-        value: subHeadLoadGoogleFonts,
-        label: 'subHeadLoadGoogleFonts'
+      fontSubset: {
+        value: subHeadFontSubset,
+        label: 'subHeadFontSubset'
+      },
+      fontSizeType: {
+        value: subHeadFontSizeType,
+        label: 'subHeadFontSizeType'
+      },
+      fontSize: {
+        value: subHeadFontSize,
+        label: 'subHeadFontSize'
+      },
+      fontSizeMobile: {
+        value: subHeadFontSizeMobile,
+        label: 'subHeadFontSizeMobile'
+      },
+      fontSizeTablet: {
+        value: subHeadFontSizeTablet,
+        label: 'subHeadFontSizeTablet'
+      },
+      lineHeightType: {
+        value: subHeadLineHeightType,
+        label: 'subHeadLineHeightType'
+      },
+      lineHeight: {
+        value: subHeadLineHeight,
+        label: 'subHeadLineHeight'
+      },
+      lineHeightMobile: {
+        value: subHeadLineHeightMobile,
+        label: 'subHeadLineHeightMobile'
+      },
+      lineHeightTablet: {
+        value: subHeadLineHeightTablet,
+        label: 'subHeadLineHeightTablet'
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      style: {
+        'margin-top': 15 + 'px'
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(CardBody, {
+      className: "cp-timeline-block-style-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_13__.__)("Text Color", "timeline-block")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
+      class: `components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`,
+      onClick: e => this.resetcolorpalate({
+        subHeadingColor: ''
+      })
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
+      class: "dashicon dashicons dashicons-image-rotate"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(ColorPalette, {
+      className: "cp-timeline-block-color-palates",
+      clearable: false,
+      value: subHeadingColor,
+      onChange: colorValue => setAttributes({
+        subHeadingColor: colorValue
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
       style: {
         'margin-top': 15 + 'px'
       }
