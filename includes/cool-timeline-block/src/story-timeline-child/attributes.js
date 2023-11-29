@@ -140,6 +140,14 @@ const attributes = {
 	wodpressBlock:{
 		type: "bollean",
 		default: false
+	},
+	innerBlockTemplate:{
+		type: "object",
+		default: {}
+	},
+	mediaBlock:{
+		type: "bollean",
+		default: false
 	}
 }
 

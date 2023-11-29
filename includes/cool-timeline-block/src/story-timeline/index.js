@@ -63,14 +63,13 @@ const withcontentTimeline = createHigherOrderComponent((BlockEdit) => {
 	});
 }, 'withcontentTimeline');
 
-registerBlockType("cp-timeline/content-timeline", {
+registerBlockType("cp-timeline/content-timeline-block", {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __('Cool Timeline Block', 'timeline-block'), // Block title.
+	title: __('Timeline Block', 'timeline-block'), // Block title.
 	apiVersion: 2,
 	description: __("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
 	keywords: [
 		__("Content Timeline", 'timeline-block'),
-		__("Cool Timeline", 'timeline-block'),
 		__("Timeline", 'timeline-block'),
 		__("History Timeline", 'timeline-block'),
 		__("Roadmap Timeline", 'timeline-block'),
@@ -114,6 +113,6 @@ registerBlockType("cp-timeline/content-timeline", {
 })
 addFilter(
 	'editor.BlockEdit',
-	'cp-timeline/content-timeline',
+	'cp-timeline/content-timeline-block',
 	withcontentTimeline
 );

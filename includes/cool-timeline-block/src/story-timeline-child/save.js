@@ -27,7 +27,7 @@ export default function Save(props) {
 
 	const StoryDetail = () => (
 		<div className="story-details">
-			{( timeLineImage !== "none" && !wodpressBlock ) ?
+			{( !["none",""].includes(timeLineImage) && !wodpressBlock ) ?
 				<div className={`story-image`}>
 					<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
 				</div>

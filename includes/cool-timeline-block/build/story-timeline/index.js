@@ -33029,11 +33029,9 @@ class Edit extends Component {
       options: [{
         value: "vertical",
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Vertical", "timeline-block")
-      }, {
-        value: "horizontal",
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Horizontal (PRO)", "timeline-block"),
-        disabled: true
-      }]
+      }
+      // { value: "horizontal", label: __( "Horizontal (PRO)","timeline-block"), disabled: true }
+      ]
     }), timelineLayout == "vertical" ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)("Timeline Design", "timeline-block"),
       value: timelineDesign,
@@ -33350,13 +33348,13 @@ const withcontentTimeline = createHigherOrderComponent(BlockEdit => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props));
   });
 }, 'withcontentTimeline');
-registerBlockType("cp-timeline/content-timeline", {
+registerBlockType("cp-timeline/content-timeline-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)('Cool Timeline Block', 'timeline-block'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)('Timeline Block', 'timeline-block'),
   // Block title.
   apiVersion: 2,
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Cool Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Roadmap Timeline", 'timeline-block')],
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Content Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("History Timeline", 'timeline-block'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__.__)("Roadmap Timeline", 'timeline-block')],
   icon: _component_icon_insertorIcon_js__WEBPACK_IMPORTED_MODULE_7__.CoolTMIcon,
   supports: {
     anchor: true
@@ -33391,7 +33389,7 @@ registerBlockType("cp-timeline/content-timeline", {
   // transforms: CtbMigration,
 });
 
-addFilter('editor.BlockEdit', 'cp-timeline/content-timeline', withcontentTimeline);
+addFilter('editor.BlockEdit', 'cp-timeline/content-timeline-block', withcontentTimeline);
 
 /***/ }),
 

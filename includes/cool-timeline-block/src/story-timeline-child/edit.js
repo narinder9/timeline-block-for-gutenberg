@@ -18,49 +18,14 @@ const {
 	ButtonGroup
 } = wp.components;
 
-const blockTemplate=(props)=>{
-	const attr=props.attributes;
-
-	const headingLevel=()=>{
-		const headingLevel=parseInt(attr.headingTag.replace('h',''));
-		return headingLevel;
-	}
-
-	return (
-		[
-			['core/image',
-				{
-					url: attr.timeLineImage,
-					aspectRatio: "4/3",
-					scale: "cover",
-					className: 'ctlb-block-image'
-				}
-			], // Default: Image block with a default image URL
-			['core/heading',
-				{
-					level: headingLevel(),
-					content: attr.time_heading,
-					className: 'ctlb-block-title',
-					style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}
-				}
-			], // Default: Heading block with level 2 and default content
-			['core/paragraph',
-				{
-					content: attr.time_desc,
-					className: 'ctlb-block-desc',
-					style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}
-				}
-			], // Default: Paragraph block with default content
-		]
-	);
-}
-
 class Edit extends Component {
 	componentDidMount() {
 		//Store client id.
 		
 		this.props.setAttributes( { block_id: this.props.clientId } )
 		this.props.setAttributes( { wodpressBlock: true } )
+		const mediaBlock=!['none',''].includes(this.props.attributes.timeLineImage);
+		this.innerBlockTemplate(mediaBlock);
    }	
 
    addBlock(e){
@@ -102,6 +67,23 @@ class Edit extends Component {
 		}
 	}
 
+	innerBlockTemplate(mediaBlock){
+		const innerBlocks=[];
+
+			const headingLevel=()=>{
+				const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
+				return headingLevel;
+			}
+			mediaBlock && innerBlocks.push(['core/image', { url: this.props.attributes.timeLineImage, className: 'ctlb-block-image',aspectRatio: "4/3", scale: "cover", }]); // Default: Image block with a default image URL
+
+			innerBlocks.push(
+				['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
+				['core/paragraph', { content: this.props.attributes.time_desc, className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
+			);
+
+			this.props.setAttributes({innerBlockTemplate: innerBlocks,mediaBlock: mediaBlock});
+	}
+
 	render() {
 		// Setup the attributes.
 		const {
@@ -113,6 +95,8 @@ class Edit extends Component {
 				iconColor,
 				blockPosition,
 				storyPositionHide,
+				mediaBlock,
+				innerBlockTemplate
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
@@ -122,10 +106,14 @@ class Edit extends Component {
 
 		const StoryDetail = () => (
 			<div className="story-details">
+				{ mediaBlock ?
+				<Button isSmall isSecondary onClick={() => this.innerBlockTemplate(false)} style={{marginBottom: '10px'}}>{__('Remove Media Block',"timeline-block")}</Button> :
+				<Button isSmall isSecondary onClick={()=> this.innerBlockTemplate(true)} style={{marginBottom: '10px'}}> {__('Add Media Block', 'timeline-block')}</Button>
+				}
 				<div className="story-content">
 					<InnerBlocks
 						templateLock="all" // Lock the template to prevent users from removing blocks
-						template={blockTemplate(this.props)}
+						template={innerBlockTemplate}
 						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
 						/>
 				</div>
