@@ -19,7 +19,7 @@ import Save from "./save.js"
 import attributes from "./attributes.js"
 import Edit from "./edit.js"
 import { CoolTMIcon } from '../component/icon/insertorIcon.js';
-import CtbMigration from './migration.js';
+// import CtbMigration from './migration.js';
 // Components
 import { __ } from '@wordpress/i18n';
 
@@ -63,13 +63,14 @@ const withcontentTimeline = createHigherOrderComponent((BlockEdit) => {
 	});
 }, 'withcontentTimeline');
 
-registerBlockType("cp-timeline/content-timeline-block", {
+registerBlockType("cp-timeline/content-timeline", {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __('Timeline Block', 'timeline-block'), // Block title.
+	title: __('Cool Timeline Block', 'timeline-block'), // Block title.
 	apiVersion: 2,
 	description: __("Responsive timeline block for Gutenberg editor.", 'timeline-block'),
 	keywords: [
 		__("Content Timeline", 'timeline-block'),
+		__("Cool Timeline", 'timeline-block'),
 		__("Timeline", 'timeline-block'),
 		__("History Timeline", 'timeline-block'),
 		__("Roadmap Timeline", 'timeline-block'),
@@ -109,10 +110,10 @@ registerBlockType("cp-timeline/content-timeline-block", {
 			isPreview: true,
 		}
 	},
-	transforms: CtbMigration,
+	// transforms: CtbMigration,
 })
 addFilter(
 	'editor.BlockEdit',
-	'cp-timeline/content-timeline-block',
+	'cp-timeline/content-timeline',
 	withcontentTimeline
 );

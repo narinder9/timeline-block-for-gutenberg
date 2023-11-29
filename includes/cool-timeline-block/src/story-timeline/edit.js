@@ -479,8 +479,8 @@ class Edit extends Component {
 					}
 				}
 					options={ [
-						{ value: "vertical", label: __( "Vertical","timeline-block") }
-						
+						{ value: "vertical", label: __( "Vertical","timeline-block") },
+						{ value: "horizontal", label: __( "Horizontal (PRO)","timeline-block"), disabled: true }
 					] }
 					/>
 				{timelineLayout == "vertical" ?

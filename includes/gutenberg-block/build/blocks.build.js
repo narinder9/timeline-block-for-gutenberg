@@ -915,7 +915,7 @@ var parentAttributes = function parentAttributes(props) {
 };
 
 // Return Child block
-var innerBlock = function innerBlock(_ref) {
+var innerBlock = function innerBlock(_ref, blockName) {
   var items = _ref.items,
     timelineLayout = _ref.timelineLayout;
   var innerBlock = [];
@@ -929,7 +929,7 @@ var innerBlock = function innerBlock(_ref) {
       date = prop.time,
       storyImage = prop.storyImage;
     innerBlock.push({
-      name: 'cp-timeline/content-timeline-block-child',
+      name: blockName,
       attributes: {
         blockPosition: blockPosition,
         timeLineImage: storyImage,
@@ -951,7 +951,22 @@ var innerBlock = function innerBlock(_ref) {
         name: 'cp-timeline/content-timeline-block',
         // Child timeline block
         attributes: parentAttributes(props),
-        innerBlocks: innerBlock(props)
+        innerBlocks: innerBlock(props, 'cp-timeline/content-timeline-block-child')
+      };
+      return createBlock(parentBlock.name, parentBlock.attributes, parentBlock.innerBlocks.map(function (innerBlock) {
+        return createBlock(innerBlock.name, innerBlock.attributes);
+      }));
+    }
+  }, {
+    type: 'block',
+    blocks: ['cp-timeline/content-timeline'],
+    // Parent timeline block
+    transform: function transform(props) {
+      var parentBlock = {
+        name: 'cp-timeline/content-timeline',
+        // Child timeline block
+        attributes: parentAttributes(props),
+        innerBlocks: innerBlock(props, 'cp-timeline/content-timeline-child')
       };
       return createBlock(parentBlock.name, parentBlock.attributes, parentBlock.innerBlocks.map(function (innerBlock) {
         return createBlock(innerBlock.name, innerBlock.attributes);

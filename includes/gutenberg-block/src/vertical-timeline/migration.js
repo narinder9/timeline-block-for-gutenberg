@@ -27,7 +27,7 @@ const parentAttributes=(props)=>{
 };
 
 // Return Child block
-const innerBlock=({items,timelineLayout})=>{
+const innerBlock=({items,timelineLayout},blockName)=>{
     const innerBlock=[];
 
     items.map((prop,index)=>{
@@ -44,7 +44,7 @@ const innerBlock=({items,timelineLayout})=>{
         }=prop;
 
         innerBlock.push({
-            name: 'cp-timeline/content-timeline-block-child',
+            name: blockName,
             attributes: {
                 blockPosition: blockPosition,
                 timeLineImage: storyImage,
@@ -67,7 +67,23 @@ export default {
                 const parentBlock = {
                     name: 'cp-timeline/content-timeline-block', // Child timeline block
                     attributes: parentAttributes(props),
-                    innerBlocks: innerBlock(props),
+                    innerBlocks: innerBlock(props, 'cp-timeline/content-timeline-block-child'),
+                };
+                return createBlock(
+                    parentBlock.name,
+                    parentBlock.attributes,
+                    parentBlock.innerBlocks.map(innerBlock => createBlock(innerBlock.name, innerBlock.attributes))
+                );
+            },
+        },
+        {
+            type: 'block',
+            blocks: ['cp-timeline/content-timeline'], // Parent timeline block
+            transform: (props) => {
+                const parentBlock = {
+                    name: 'cp-timeline/content-timeline', // Child timeline block
+                    attributes: parentAttributes(props),
+                    innerBlocks: innerBlock(props, 'cp-timeline/content-timeline-child'),
                 };
                 return createBlock(
                     parentBlock.name,
