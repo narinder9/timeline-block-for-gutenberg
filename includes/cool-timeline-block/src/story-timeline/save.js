@@ -14,7 +14,6 @@ export default function Save(props) {
 		timelineLayout,
 		Orientation,
 		timelineDesign,
-		timelineStyle,
 	} = props.attributes
 
 	return (
@@ -22,7 +21,7 @@ export default function Save(props) {
 			{'' !== contentTimelineStyle( props ) &&
 			<style dangerouslySetInnerHTML={{ __html: contentTimelineStyle( props ) }}/>
 			}
-			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`}>
+			<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`}>
 		 		<div className="cool-timeline-block-list">
 				 <InnerBlocks.Content />
 		 		</div>

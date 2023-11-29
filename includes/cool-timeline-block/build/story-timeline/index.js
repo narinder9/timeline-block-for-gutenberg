@@ -33467,8 +33467,7 @@ function Save(props) {
     block_id,
     timelineLayout,
     Orientation,
-    timelineDesign,
-    timelineStyle
+    timelineDesign
   } = props.attributes;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-" + block_id + ""
@@ -33477,7 +33476,7 @@ function Save(props) {
       __html: (0,_styling_js__WEBPACK_IMPORTED_MODULE_1__["default"])(props)
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`
+    className: `cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "cool-timeline-block-list"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null))));
