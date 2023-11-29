@@ -31,6 +31,8 @@ const blockTemplate=(props)=>{
 			['core/image',
 				{
 					url: attr.timeLineImage,
+					aspectRatio: "4/3",
+					scale: "cover",
 					className: 'ctlb-block-image'
 				}
 			], // Default: Image block with a default image URL
