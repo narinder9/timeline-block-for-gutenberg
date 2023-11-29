@@ -137,10 +137,6 @@ const attributes = {
 		type:"string",
 		default:'h3',
 	},
-	timelineStyle: {
-		type:"string",
-		default:""
-	},
 	wodpressBlock:{
 		type: "bollean",
 		default: false

@@ -74,16 +74,11 @@ class Edit extends Component {
 	   timelineLayout:timelineLayout,
 	   blockPosition: position,
 	   storyPositionHide: !parentAttribute.OrientationCheckBox,
-	   headingTag: parentAttribute.headingTag,
-		timelineStyle: parentAttribute.timelineStyle} 	);
+	   headingTag: parentAttribute.headingTag
+		});
 
 	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
 	   this.UpdateOrientation();
-	   if('horizontal' === parentAttribute.timelineLayout){
-		const parentBlock = select("core/block-editor").getBlock(parentBlockId);
-		const slideUpdate={update: false, index: index + 1};
-		parentBlock.attributes.hrSliderUpdate = slideUpdate
-	   }
    }
 
 	UpdateOrientation() {
@@ -112,38 +107,16 @@ class Edit extends Component {
 			attributes: {
 				icon,
 				t_date,
-				time_heading,
-				time_desc,
 				iconToggle,
 				iconColor,
 				blockPosition,
-				timeLineImage,
 				storyPositionHide,
-				headingTag,
-				timelineStyle,
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
 				'cp-timeline/timelineLayout': timelineLayout,
 			}
 		} = this.props;
-		const getImage = (size, image_value) => {
-			let image_size_url = "";
-			if (timelineLayout == "vertical") {
-				let images = Object.entries(image_value);
-				images.map(image => {
-					if (image[0] == size) {
-						image_size_url = image[1].url;
-					}
-				});
-			}
-			else {
-				image_size_url = image_value.full.url;
-			}
-			return (
-				image_size_url
-			);
-		};
 
 		const StoryDetail = () => (
 			<div className="story-details">
@@ -236,8 +209,6 @@ class Edit extends Component {
 				{content_control}
 				<div className={"timeline-content icon-" + iconToggle + ""}>
 					<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
-						{!('design-1' === timelineStyle && 'horizontal' === timelineLayout) &&
-						<>
 						<div className="ctl-6 timeline-block-time">
 							{t_date != '' &&
 								<div className="story-time">
@@ -246,8 +217,6 @@ class Edit extends Component {
 							}
 						</div>
 						{icon_div}
-						</>
-						}
 						<div className="ctl-6 timeline-block-detail">
 							{StoryDetail()}
 						</div>

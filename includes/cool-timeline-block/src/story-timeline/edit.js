@@ -2,8 +2,6 @@ import preview from "../component/icon/timeline.png"
 // import map from "lodash/map.js";
 import times from "lodash/times.js";
 import memoize from "memize"
-import {LayoutInit} from "./layout.js";
-import GoogleFontFamily from "../component/typography/font-family.js";
 
 import contentTimelineStyle from "./styling.js";
 
@@ -65,8 +63,7 @@ class Edit extends Component {
 			timelineLayout:timelineLayout,
 			blockPosition:index % 2 ? evenPosition : oddPosition,
 			storyPositionHide: !this.props.attributes.OrientationCheckBox,
-			headingTag: this.props.attributes.headingTag,
-			timelineStyle: this.props.attributes.timelineStyle});
+			headingTag: this.props.attributes.headingTag});
 		wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,this.props.clientId);
 		if(this.props.attributes.timelineLayout == "horizontal"){
 			const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
@@ -103,18 +100,9 @@ class Edit extends Component {
 		blocks.forEach((block, index) => {block.attributes.headingTag=e});
 	};
 
-	navItemsUpdate=(id,render)=>{
-		const childBlocks=wp.data.select('core/block-editor').getBlock(id)?.innerBlocks;
-		const newNavItems={};
-		childBlocks?.map(block=>{
-			newNavItems[block.attributes.block_id]=({t_date: block.attributes.t_date, icon: block.attributes.icon, iconColor: block.attributes.iconColor, iconToggle: block.attributes.iconToggle});
-		});
-		return JSON.stringify(newNavItems);
-	}
-
-	SwiperUpdate(blockcount,slidePerView,timelinStyle){
-		let block_id = this.props.clientId
-		const mainSwiperView='design-1' === timelinStyle ? 1 : slidePerView;
+	SwiperUpdate(blockcount,slidePerView){
+		let block_id = this.props.clientId;
+		const mainSwiperView=slidePerView;
 		const navigation={
 			nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
 			prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
@@ -155,41 +143,6 @@ class Edit extends Component {
 					document.querySelector(navigation.nextEl).classList.remove('swiper-button-disabled');
 				}
 			}}
-		})
-
-		var navSlider = new Swiper('.cool-timeline-block-'+ block_id +' .ctlb-nav-swiper-outer .swiper', {
-			observer: true,
-			observeParents: true,
-			slidesPerView: slidePerView,
-			freeMode: true,
-			initialSlide:blockcount,
-			watchSlidesVisibility: true,
-			watchSlidesProgress: true,
-			preventClicks:false,
-			allowTouchMove: false,
-			preventClicksPropagation:false,
-			centeredSlides: true,
-			navigation: {
-				nextEl: '.cool-timeline-block-'+ block_id +' .swiper-button-next',
-				prevEl: '.cool-timeline-block-'+ block_id +' .swiper-button-prev',
-			  },
-			  breakpoints: {
-				  // when window width is >= 320px
-				280: {
-				  slidesPerView: 1,
-				  
-				},
-				// when window width is >= 480px
-				480: {
-					slidesPerView: slidePerView < 2 ? slidePerView : 2,
-			
-				},
-				// when window width is >= 640px
-				640: {
-				  slidesPerView: slidePerView,
-				 
-				}
-			  }
 		})
 	}
 
@@ -261,7 +214,6 @@ class Edit extends Component {
 				marginLink,
 				isPreview,
 				OrientationCheckBox,
-				timelineStyle,
 				slidePerView,
 				timelineNavItems
 			},
@@ -518,23 +470,16 @@ class Edit extends Component {
 					label={ __( "Timeline Layout",'timeline-block' ) }
 					value={ timelineLayout }
 					onChange={(value)=>{
-						let style='';
 						if(value == "vertical"){
-						setAttributes({timelineLayout:value, sliderActive:false, timelineStyle: style})
-						}
-						else{
-							style='design-1';
-							setAttributes({timelineLayout:value, timelineStyle: style});
-							jQuery(".timeline-block-pre-loader").css('display','block')
+						setAttributes({timelineLayout:value, sliderActive:false})
 						}
 						select('core/block-editor').getBlocksByClientId(this.props.clientId)[0].innerBlocks.forEach(function (block,key) {
-							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value,timelineStyle: style }))
+							dispatch('core/block-editor').updateBlockAttributes(block.clientId, ({ timelineLayout: value}))
 						})
 					}
 				}
 					options={ [
-						{ value: "vertical", label: __( "Vertical","timeline-block") },
-						{ value: "horizontal", label: __( "Horizontal","timeline-block"),disabled:false },
+						{ value: "vertical", label: __( "Vertical","timeline-block") }
 						
 					] }
 					/>
@@ -697,18 +642,15 @@ class Edit extends Component {
 			{loadDateGoogleFonts }
 		
 			<div className={"cool-timeline-block-" + this.props.clientId + " cool-timeline-block"}>
-							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation} ${timelineStyle}`}>
+							<div className={`cool-${timelineLayout}-timeline-body ctlb-wrapper ${timelineDesign} ${Orientation}`}>
 								<div className="cool-timeline-block-list">
-								{timelineLayout == "vertical" ?
 									<InnerBlocks
-										allowedBlocks={ALLOWED_BLOCKS}
-										orientation="vertical"
-										template={ getContentTimelineTemplate( timelineItem, tm_content ) } 
-										navItemUpdate={timelineNavItems}
-										// template={template}
-										/>:
-										<LayoutInit attributes={this.props.attributes}/>
-									}
+									allowedBlocks={ALLOWED_BLOCKS}
+									orientation="vertical"
+									template={ getContentTimelineTemplate( timelineItem, tm_content ) } 
+									navItemUpdate={timelineNavItems}
+									// template={template}
+									/>
 							</div>	
 						</div><div  className="timeline-block-add-story">
 								<button type="button" visible="true" onClick={e => this.addBlock(e)} className="components-button block-editor-button-block-appender is-primary" aria-label="Add Story"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-hidden="true" focusable="false"><path d="M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"></path></svg>Add Story</button>
@@ -728,28 +670,15 @@ class Edit extends Component {
 		$style.setAttribute( "id", "cool-vertical-timeline-style-" + this.props.clientId )
 		document.head.appendChild( $style )
 		if(this.props.attributes.timelineLayout == "horizontal" ){
-		this.SwiperUpdate(0,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+		this.SwiperUpdate(0,this.props.attributes.slidePerView)
 		this.props.setAttributes( { sliderActive:true} )
 		}
 	}
 	
-	componentDidUpdate(prevProps){
-		let clientId= this.props.clientId 
+	componentDidUpdate(){
 		if(this.props.attributes.timelineLayout == "horizontal" && this.props.attributes.sliderActive == false){
-			this.SwiperUpdate(0,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
+			this.SwiperUpdate(0,this.props.attributes.slidePerView)
 			this.props.setAttributes( { sliderActive:true} )
-		}
-
-		if(!this.props.attributes.isPreview){
-			const  updateNavContent=this.navItemsUpdate(clientId);
-			if((prevProps.attributes.timelineNavItems !== updateNavContent) || 4 > this.props.attributes.timelineNavItems.length){
-				this.props.setAttributes( { timelineNavItems:updateNavContent} )
-				if(!prevProps.attributes.hrSliderUpdate.update){
-					const index = prevProps.attributes.hrSliderUpdate.index;
-					this.SwiperUpdate(index,this.props.attributes.slidePerView,this.props.attributes.timelineStyle)
-					this.props.setAttributes({hrSliderUpdate: {...prevProps.attributes.hrSliderUpdate,update: true}});
-				}
-			}
 		}
 	}
 } export default

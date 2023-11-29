@@ -488,14 +488,6 @@ const attributes = {
 		type:"boolean",
 		default:false
 	},
-	timelineStyle: {
-		type:"string",
-		default:""
-	},
-	timelineNavItems:{
-		type: "string",
-		default: '',
-	},
 	hrSliderUpdate:{
 		type: 'object',
 		default: {

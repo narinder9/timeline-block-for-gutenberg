@@ -19,11 +19,9 @@ export default function Save(props) {
 		iconColor,
 		time_image,
 		blockPosition,
-		timelineLayout,
 		timeLineImage,
 		imageAlt,
 		headingTag,
-		timelineStyle,
 		wodpressBlock
 	} = props.attributes
 
@@ -68,18 +66,14 @@ export default function Save(props) {
 	return (
 		<div className={"timeline-content icon-" + iconToggle + " "}>
 			<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
-				{!('design-1' === timelineStyle && 'horizontal' === timelineLayout) &&
-					<>
-						<div className="ctl-6 timeline-block-time">
-							{t_date != '' &&
-								<div className="story-time">
-									{StoryTime()}
-								</div>
-							}
+				<div className="ctl-6 timeline-block-time">
+					{t_date != '' &&
+						<div className="story-time">
+							{StoryTime()}
 						</div>
-						{icon_div}
-					</>
-				}
+					}
+				</div>
+				{icon_div}
 				<div className="ctl-6 timeline-block-detail">
 					{StoryDetail()}
 				</div>
