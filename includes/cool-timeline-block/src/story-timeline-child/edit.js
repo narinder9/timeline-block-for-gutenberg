@@ -215,6 +215,107 @@ class Edit extends Component {
 			</Fragment>
 		);
 	}
+
+	componentDidUpdate(){
+		const childBlocks=select("core/editor").getBlock(this.props.clientId).innerBlocks;
+		const paragraphBlock=childBlocks.filter(block=>{ return "core/paragraph" === block.name })[0];
+		const paragraphBlockId=paragraphBlock?.clientId;
+		const selectBlockId=select('core/editor').getSelectedBlockClientId();
+		if(selectBlockId){
+			if(paragraphBlockId === selectBlockId){
+				this.paragraphToolBarPosition(selectBlockId);
+			}
+		}
+
+	}
+
+	paragraphToolBarPosition(id){
+		// Getting the root element for that is a overflow Y axis auto
+		const getParentOverflowElement = (parentElement) => {
+			let element = parentElement;
+			while (element) {
+				const { overflowY } = getComputedStyle(element);
+				if (overflowY !== 'auto') {
+					if(element.parentElement){
+						element = element.parentElement;
+					}
+				} else {
+					return element;
+				}
+			}
+			return element;
+		};
+
+		setTimeout(() => {
+			const parentBlockId = select('core/block-editor').getBlockHierarchyRootClientId(this.props.clientId),
+			paragraphBlock = document.querySelector(`#block-${id}`),
+			parentBlock = paragraphBlock.closest(`#block-${parentBlockId}`),
+			scrollElement = getParentOverflowElement(parentBlock),
+			paragraphToolbar = document.querySelector("div.components-popover");
+			if (paragraphBlock && paragraphToolbar) {
+
+				const toolStyleValue = paragraphToolbar?.style?.transform;
+
+				// Get Toolbar updated transform position.
+				const updatedValue = () => {
+					const paragraphBlock = document.querySelector(`#block-${id}`),
+					paragraphStyle = getComputedStyle(paragraphBlock),
+					scrollTop = scrollElement.scrollTop,
+					rect = paragraphBlock.getBoundingClientRect(),
+					paragraphBlockYAxis = 0 > rect.top ? -Math.abs(rect.top) : Math.abs(rect.top),
+					paragraphTopSpacing = parseInt(paragraphStyle.marginTop.match(/\d+\.\d+|\d+/g)[0]),
+					toolbarParentOffsetTop = paragraphToolbar.offsetParent?.offsetTop ?? 0,
+					parentYPosition = Math.floor(scrollTop + paragraphBlockYAxis + paragraphBlock.clientHeight - paragraphTopSpacing - paragraphToolbar.clientHeight - toolbarParentOffsetTop + 40);
+					return parentYPosition;
+				};
+
+				// Update ToolBar transform position.
+				const updateToolBarStyle = (newTranslateY) => {
+					if (toolStyleValue) {
+						const style = toolStyleValue.replace(
+							/translateY\(\d+px\)/,
+							`translateY(${newTranslateY}px)`
+						);
+						paragraphToolbar.style.transform = style;
+					}
+				};
+
+				// ToolBar Observer.
+				const observerCallback = (mutationsList) => {
+					const selectBlockId = select('core/editor').getSelectedBlockClientId();
+					if (selectBlockId === id) {
+						for (const mutation of mutationsList) {
+							if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+								const currentToolBarValue = document.querySelector("div.components-popover");
+								const currentTranslateY = getTranslateYValue(
+									currentToolBarValue?.style?.transform
+								);
+								const updateValue = updatedValue();
+								if (updateValue > currentTranslateY) {
+									// update toolbar position
+									updateToolBarStyle(updateValue);
+								}
+							}
+						}
+					}
+				};
+
+				const observerConfig = { attributes: true };
+				const observer = new MutationObserver(observerCallback);
+				// Observer toolBar transform position
+				observer.observe(paragraphToolbar, observerConfig);
+
+				// update toolbar position.
+				updateToolBarStyle(updatedValue());
+
+				// Function to extract translateY value from a transform string.
+				function getTranslateYValue(transform) {
+					const match = transform.match(/translateY\(([-+]?\d+)px\)/);
+					return match ? parseInt(match[1]) : 0;
+				}
+			}
+		}, 10);
+	}
 }
 
 export default Edit;
