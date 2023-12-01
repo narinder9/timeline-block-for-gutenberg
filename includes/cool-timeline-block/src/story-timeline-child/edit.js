@@ -80,7 +80,7 @@ class Edit extends Component {
 				['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
 				['core/paragraph', { content: this.props.attributes.time_desc, className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
 			);
-
+			!mediaBlock && this.props.setAttributes({timeLineImage: ''});
 			this.props.setAttributes({innerBlockTemplate: innerBlocks,mediaBlock: mediaBlock});
 	}
 
