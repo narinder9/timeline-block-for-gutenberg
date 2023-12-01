@@ -61,7 +61,7 @@ export default function Save(props) {
 		/>
 	)
 	const icon_div = <div className="timeline-block-icon">
-		{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" style={{ fill: iconColor }}><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
+		{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" style={{ fill: iconColor }}><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
 	</div>
 	return (
 		<div className={"timeline-content icon-" + iconToggle + " "}>

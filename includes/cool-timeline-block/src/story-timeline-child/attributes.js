@@ -142,7 +142,7 @@ const attributes = {
 		default: false
 	},
 	innerBlockTemplate:{
-		type: "object",
+		type: "array",
 		default: {}
 	},
 	mediaBlock:{

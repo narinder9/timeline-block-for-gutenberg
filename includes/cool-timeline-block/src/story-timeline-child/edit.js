@@ -1,9 +1,8 @@
 import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
-const { InnerBlocks } = wp.editor;
 
-const { RichText, InspectorControls,  BlockControls } = wp.blockEditor;
+const { RichText, InspectorControls,  BlockControls, InnerBlocks } = wp.blockEditor;
 
 const {
 	dispatch,
@@ -14,18 +13,19 @@ const {
 	PanelBody,
 	TextControl,
 	Button,
-	Toolbar,
+	ToolbarGroup,
+	ToolbarButton,
 	ButtonGroup
 } = wp.components;
 
 class Edit extends Component {
 	componentDidMount() {
 		//Store client id.
-		
 		this.props.setAttributes( { block_id: this.props.clientId } )
 		this.props.setAttributes( { wodpressBlock: true } )
+		const wordpressBlock=this.props.attributes.wodpressBlock;
 		const mediaBlock=!['none',''].includes(this.props.attributes.timeLineImage);
-		this.innerBlockTemplate(mediaBlock);
+		!wordpressBlock && this.innerBlockTemplate(mediaBlock);
    }	
 
    addBlock(e){
@@ -80,8 +80,7 @@ class Edit extends Component {
 				['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
 				['core/paragraph', { content: this.props.attributes.time_desc, className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
 			);
-			!mediaBlock && this.props.setAttributes({timeLineImage: ''});
-			this.props.setAttributes({innerBlockTemplate: innerBlocks,mediaBlock: mediaBlock});
+			this.props.setAttributes({innerBlockTemplate: innerBlocks, mediaBlock: mediaBlock});
 	}
 
 	render() {
@@ -103,7 +102,6 @@ class Edit extends Component {
 				'cp-timeline/timelineLayout': timelineLayout,
 			}
 		} = this.props;
-
 		const StoryDetail = () => (
 			<div className="story-details">
 				{ mediaBlock ?
@@ -174,27 +172,27 @@ class Edit extends Component {
 			</InspectorControls>
 		);
 		const icon_div = <div className="timeline-block-icon">
-			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
+			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
 		</div>;
 		return (
 			<Fragment>
 				<BlockControls>
-					<Toolbar>
-						<Button
+					<ToolbarGroup>
+						<ToolbarButton
 							label="Delete Block"
 							icon="trash"
 							onClick={() => dispatch('core/block-editor').removeBlock(this.props.clientId, true)}
 						/>
-					</Toolbar>
-					<Toolbar >
-						<Button
+					</ToolbarGroup>
+					<ToolbarGroup >
+						<ToolbarButton
 							label="Add Block"
 							icon="plus"
 							onClick={() => 	
 								this.addBlock()
 							}
 						/>
-					</Toolbar>
+					</ToolbarGroup>
 				</BlockControls>
 				{content_control}
 				<div className={"timeline-content icon-" + iconToggle + ""}>
@@ -217,10 +215,10 @@ class Edit extends Component {
 	}
 
 	componentDidUpdate(){
-		const childBlocks=select("core/editor").getBlock(this.props.clientId).innerBlocks;
+		const childBlocks=select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
 		const paragraphBlock=childBlocks.filter(block=>{ return "core/paragraph" === block.name })[0];
 		const paragraphBlockId=paragraphBlock?.clientId;
-		const selectBlockId=select('core/editor').getSelectedBlockClientId();
+		const selectBlockId=select('core/block-editor').getSelectedBlockClientId();
 		if(selectBlockId){
 			if(paragraphBlockId === selectBlockId){
 				this.paragraphToolBarPosition(selectBlockId);
