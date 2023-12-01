@@ -19,7 +19,7 @@ import Save from "./save.js"
 import attributes from "./attributes.js"
 import Edit from "./edit.js"
 import { CoolTMIcon } from '../component/icon/insertorIcon.js';
-// import CtbMigration from './migration.js';
+import CtbMigration from './migration.js';
 // Components
 import { __ } from '@wordpress/i18n';
 
@@ -109,7 +109,7 @@ registerBlockType("cp-timeline/content-timeline-block", {
 			isPreview: true,
 		}
 	},
-	// transforms: CtbMigration,
+	transforms: CtbMigration,
 })
 addFilter(
 	'editor.BlockEdit',
