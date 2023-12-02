@@ -86,7 +86,7 @@ const attributes = {
 	},
 	t_date : {
 		type: "string",
-		default: 'date/step',
+		default: undefined,
 	},
 	displayPostDate:{
 		type: "boolean",

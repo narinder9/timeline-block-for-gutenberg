@@ -57,7 +57,7 @@ export default function Save(props) {
 
 		<RichText.Content
 			tagName="p"
-			value={t_date}
+			value={'undefined' === typeof t_date ? '1/1/2019' : t_date}
 		/>
 	)
 	const icon_div = <div className="timeline-block-icon">

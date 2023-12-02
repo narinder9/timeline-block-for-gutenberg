@@ -135,7 +135,7 @@ class Edit extends Component {
 			<RichText
 				tagName="p"
 				placeholder={__('Date / Custom Text', 'timeline-block')}
-				value={t_date}
+				value={'undefined' === typeof t_date ? 'date/step' : t_date}
 				onChange={(value) => setAttributes({ t_date: value })}
 			/>
 		);
@@ -228,13 +228,15 @@ class Edit extends Component {
 	}
 
 	componentDidUpdate(){
-		const childBlocks=select("core/block-editor").getBlock(this.props.clientId).innerBlocks;
-		const paragraphBlock=childBlocks.filter(block=>{ return "core/paragraph" === block.name })[0];
-		const paragraphBlockId=paragraphBlock?.clientId;
-		const selectBlockId=select('core/block-editor').getSelectedBlockClientId();
-		if(selectBlockId){
-			if(paragraphBlockId === selectBlockId){
-				this.paragraphToolBarPosition(selectBlockId);
+		const childBlocks=select("core/block-editor").getBlock(this.props.clientId)?.innerBlocks;
+		if(childBlocks){
+			const paragraphBlock=childBlocks.filter(block=>{ return "core/paragraph" === block.name })[0];
+			const paragraphBlockId=paragraphBlock?.clientId;
+			const selectBlockId=select('core/block-editor').getSelectedBlockClientId();
+			if(selectBlockId){
+				if(paragraphBlockId === selectBlockId){
+					this.paragraphToolBarPosition(selectBlockId);
+				}
 			}
 		}
 
