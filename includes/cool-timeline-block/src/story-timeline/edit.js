@@ -252,17 +252,17 @@ class Edit extends Component {
 			lineHeightMobile = { { value: headLineHeightMobile, label: 'headLineHeightMobile' } }
 			lineHeightTablet= { { value: headLineHeightTablet, label: 'headLineHeightTablet' } }
 		/>
-		<div style={{ 'margin-top': 10 + 'px' }}></div>
+		<div style={{ 'marginTop': 10 + 'px' }}></div>
 			<CardBody className="cp-timeline-block-style-settings">
 				<div>{__("Text Color", "timeline-block")}</div>
-				<div class={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div className={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
 					value={headingColor}
 					onChange={(colorValue) => setAttributes({ headingColor: colorValue })}
 				/>
 			</CardBody>
-	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
+	<div style ={{'marginTop':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"
 	value={ titileBtSpacing != '' ? titileBtSpacing : 0 }
@@ -291,17 +291,17 @@ class Edit extends Component {
 		lineHeightMobile = { { value: subHeadLineHeightMobile, label: 'subHeadLineHeightMobile' } }
 		lineHeightTablet= { { value: subHeadLineHeightTablet, label: 'subHeadLineHeightTablet' } }
 	/>
-		<div style={{ 'margin-top': 15 + 'px' }}></div>
+		<div style={{ 'marginTop': 15 + 'px' }}></div>
 			<CardBody className="cp-timeline-block-style-settings">
 				<div>{__("Text Color", "timeline-block")}</div>
-				<div class={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+				<div className={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
 					value={subHeadingColor}
 					onChange={(colorValue) => setAttributes({ subHeadingColor: colorValue })}
 				/>
 			</CardBody>
-	<div style ={{'margin-top':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
+	<div style ={{'marginTop':15 +'px'}}>{__("Bottom Spacing","timeline-block")}</div>
 	<RangeControl
 	className="cp-timeline-block-range__control"
 	value={descBtSpacing != '' ? descBtSpacing : 0 }
@@ -330,10 +330,10 @@ class Edit extends Component {
 		lineHeightMobile = { { value: dateLineHeightMobile, label: 'dateLineHeightMobile' } }
 		lineHeightTablet= { { value: dateLineHeightTablet, label: 'dateLineHeightTablet' } }
 	/>
-	<div style ={{'margin-top':10 +'px'}}></div>
+	<div style ={{'marginTop':10 +'px'}}></div>
 	<div className="cp-timeline-block-style-settings">
 	<div>{__("Text Color","timeline-block")}</div>
-	<div class={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({dateColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+	<div className={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({dateColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 	<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
 		value={dateColor}
@@ -345,7 +345,7 @@ class Edit extends Component {
 		<CardBody>
 		<div className="cp-timeline-block-style-settings">
 		<h2>Line Color</h2>
-		<div class={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({LineColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div className={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({LineColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
 		value={LineColor}
@@ -354,7 +354,7 @@ class Edit extends Component {
 		</div>
 		<div className="cp-timeline-block-style-settings">
 		<h2>Icon Color</h2>
-		<div class={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div className={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
 		value={iconColor}
@@ -363,7 +363,7 @@ class Edit extends Component {
 		</div>
 		<div className="cp-timeline-block-style-settings">
 		<h2>Icon Background</h2>
-		<div class={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconBg : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div className={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconBg : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
 		value={iconBg}
@@ -372,7 +372,7 @@ class Edit extends Component {
 		</div>
 		<div className="cp-timeline-block-style-settings">
 		<h2>Story Border Color</h2>
-		<div class={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span class="dashicon dashicons dashicons-image-rotate"></span></div>
+		<div className={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
 		value={storyBorderColor}
@@ -544,19 +544,19 @@ class Edit extends Component {
 					{
 						name: 'timeline_setting',
 						title: 'General',
-						className: 'tab-one',
+						className: 'ctlb-tabs ctlb-general-tab',
 						content: timeline_setting
 					},
 					{
 						name: 'general_setting',
 						title: 'Style',
-						className: 'tab-two',
+						className: 'ctlb-tabs  ctlb-style-tab',
 						content: general_setting
 					},
 					{
 						name: 'advanced_setting',
 						title: 'Advanced',
-						className: 'tab-three',
+						className: 'ctlb-tabs ctlb-advanced-tab',
 						content: advanced_setting
 					},
 				] }
@@ -566,8 +566,8 @@ class Edit extends Component {
 			{/* demo video link button */}
 			<PanelBody title={__("View Timeline Demos","timeline-block")} initialOpen={false}>
 				<CardBody className="cp-timeline-block-demo-button">
-					<a target="_blank" class="button button-primary" href="https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos">View Demos</a>
-					<a target="_blank" class="button button-primary" href="https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/">Watch Videos</a>
+					<a target="_blank" className="button button-primary" href="https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos">View Demos</a>
+					<a target="_blank" className="button button-primary" href="https://docs.coolplugins.net/docs/cool-timeline-pro/create-timeline-using-instant-timeline-builder/">Watch Videos</a>
 				</CardBody>
 			</PanelBody>
 			{rating_box}

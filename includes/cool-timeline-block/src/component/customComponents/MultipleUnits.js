@@ -137,9 +137,10 @@ const SpacingControl = ( props ) => {
 
 	const onUnitSizeClick = ( uSizes ) => {
 		const items = [];
-		uSizes.map( ( key ) =>
+		uSizes.map( ( key ) =>{
 			items.push(
 				<Tooltip
+					key={key.name}
 					text={ sprintf(
 						/* translators: abbreviation for units */
 						__( '%s units', 'timeline-block' ),
@@ -170,7 +171,7 @@ const SpacingControl = ( props ) => {
 					</Button>
 				</Tooltip>
 			)
-		);
+		});
 
 		return items;
 	};
@@ -267,7 +268,7 @@ const SpacingControl = ( props ) => {
                         onClick={()=>{resetValues()}}
                         className={`timeline-block-control__actions_reset${settingsapply != '' ? ' '+settingsapply : ' '}`}
                         isSmall
-                        ><span class="dashicons dashicons-image-rotate"></span></Button>
+                        ><span className="dashicons dashicons-image-rotate"></span></Button>
 						<ButtonGroup
 							className="timeline-block-control__units"
 							aria-label={ __(

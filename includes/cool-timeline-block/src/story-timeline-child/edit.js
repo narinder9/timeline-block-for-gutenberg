@@ -78,7 +78,7 @@ class Edit extends Component {
 
 			innerBlocks.push(
 				['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
-				['core/paragraph', { content: this.props.attributes.time_desc, className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
+				['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
 			);
 			this.props.setAttributes({innerBlockTemplate: innerBlocks, mediaBlock: mediaBlock});
 	}
@@ -106,7 +106,20 @@ class Edit extends Component {
 			<div className="story-details">
 				{ mediaBlock ?
 				<Button isSmall isSecondary onClick={() => this.innerBlockTemplate(false)} style={{marginBottom: '10px'}}>{__('Remove Media Block',"timeline-block")}</Button> :
-				<Button isSmall isSecondary onClick={()=> this.innerBlockTemplate(true)} style={{marginBottom: '10px'}}> {__('Add Media Block', 'timeline-block')}</Button>
+				<Button isSmall isSecondary 
+				onClick={
+					()=> 
+					{
+						this.innerBlockTemplate(true);
+						setTimeout(()=>{
+							const mediaBlock=select( 'core/block-editor' ).getBlock(this.props.clientId).innerBlocks[0].clientId;
+							wp.data.dispatch('core/block-editor').selectBlock(mediaBlock);
+						},50);
+					}
+					}
+					style={{marginBottom: '10px'}}>
+					{__('Add Media Block', 'timeline-block')}
+				</Button>
 				}
 				<div className="story-content">
 					<InnerBlocks
@@ -129,7 +142,7 @@ class Edit extends Component {
 
 		const content_control = (
 			<InspectorControls>
-				<div style={{ 'margin-bottom': 15 + 'px','text-align':'center' }}>
+				<div style={{ 'marginBottom': 15 + 'px','textAlign':'center' }}>
 				<Button
 					isSecondary
 					icon={'arrow-left-alt'}

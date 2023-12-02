@@ -30,7 +30,7 @@ const attributes = {
 	},
 	time_heading:{
 		type: "string",
-		default:__( "Timeline Heading ",'timeline-block' )
+		default:''
 	},
 	time_image:{
 		type: "object",
@@ -38,7 +38,7 @@ const attributes = {
 	},
 	time_desc:{
 		type: "string",
-		default:__( "This is Timeline description, you can change me anytime click here ",'timeline-block' )
+		default:''
 	},
 	timeLineImage:{
 		type:"string",
@@ -86,7 +86,7 @@ const attributes = {
 	},
 	t_date : {
 		type: "string",
-		default: '1/1/2019',
+		default: 'date/step',
 	},
 	displayPostDate:{
 		type: "boolean",
