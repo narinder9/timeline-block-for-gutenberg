@@ -4,7 +4,7 @@
 
 import { __ } from '@wordpress/i18n';
 
-const ITEM_COUNT = 5
+const ITEM_COUNT = 3
 
 const item = [];
 const date_arr = [];
@@ -26,18 +26,6 @@ const example = {
 		"time_desc": __( "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",'timeline-block' ),
 		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
 		"t_date": "Jan 31, 2021",
-	},
-	'data4' : {
-		"time_heading": __( "Amazon Kindle For Books",'timeline-block' ),
-		"time_desc": __( "Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.",'timeline-block' ),
-		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
-		"t_date": "Jul 5, 2022",
-	},
-	'data5' : {
-		"time_heading": __( "Amazon App Store Launched",'timeline-block' ),
-		"time_desc": __( "Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere",'timeline-block' ),
-		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
-		"t_date": "Mar 22, 2011",
 	},
 };
 for (var i = 1; i <= ITEM_COUNT; i++) {

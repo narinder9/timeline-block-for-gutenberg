@@ -135,7 +135,7 @@ class Edit extends Component {
 			<RichText
 				tagName="p"
 				placeholder={__('Date/Steps', 'timeline-block')}
-				value={'undefined' === typeof t_date ? 'Date/Steps' : t_date}
+				value={t_date}
 				onChange={(value) => setAttributes({ t_date: value })}
 			/>
 		);
@@ -212,11 +212,9 @@ class Edit extends Component {
 				<div className={"timeline-content icon-" + iconToggle + ""}>
 					<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
 						<div className="ctl-6 timeline-block-time">
-							{t_date != '' &&
-								<div className="story-time">
-									{StoryTime()}
-								</div>
-							}
+							<div className="story-time">
+								{StoryTime()}
+							</div>
 						</div>
 						{icon_div}
 						<div className="ctl-6 timeline-block-detail">

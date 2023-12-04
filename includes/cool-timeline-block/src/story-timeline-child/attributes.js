@@ -30,7 +30,7 @@ const attributes = {
 	},
 	time_heading:{
 		type: "string",
-		default:''
+		default:undefined
 	},
 	time_image:{
 		type: "object",

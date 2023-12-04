@@ -25,6 +25,7 @@ export default function Save(props) {
 		headingTag,
 		wodpressBlock
 	} = props.attributes
+	const timeline_title = 'undefined' === typeof time_heading ? __( "Timeline Heading ",'timeline-block' ) : time_heading;
 	const timeline_desc = 'undefined' === typeof time_desc ? __('This is Timeline description, you can change me anytime click here','timeline-block') : time_desc;
 
 	const StoryDetail = () => (
@@ -41,7 +42,7 @@ export default function Save(props) {
 					<RichText.Content
 						className="timeline-block_title"
 						tagName={headingTag}
-						value={time_heading}
+						value={timeline_title}
 					/>
 					<div className='timeline-block_desc'>
 						<RichText.Content
@@ -69,7 +70,7 @@ export default function Save(props) {
 		<div className={"timeline-content icon-" + iconToggle + " "}>
 			<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
 				<div className="ctl-6 timeline-block-time">
-					{t_date != '' &&
+					{(t_date === '' || 'undefined' === typeof t_date) ? '' :
 						<div className="story-time">
 							{StoryTime()}
 						</div>

@@ -32689,7 +32689,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-const ITEM_COUNT = 5;
+const ITEM_COUNT = 3;
 const item = [];
 const date_arr = [];
 const example = {
@@ -32710,18 +32710,6 @@ const example = {
     "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'timeline-block'),
     "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
     "t_date": "Jan 31, 2021"
-  },
-  'data4': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon Kindle For Books", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Eam tum adesse, cum dolor omnis absit; Nonne igitur tibi videntur, inquit, mala? Et ille ridens: Video, inquit, quid agas; Eam tum adesse, cum dolor omnis absit; Duo Reges: constructio interrete. Si longus, levis; Bonum incolumis acies: misera caecitas.", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-7-600x320.png",
-    "t_date": "Jul 5, 2022"
-  },
-  'data5': {
-    "time_heading": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Amazon App Store Launched", 'timeline-block'),
-    "time_desc": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hunc vos beatum; Tecum optime, deinde etiam cum mediocri amico. Sed haec nihil sane ad rem; Summum a vobis bonum voluptas dicitur. Duo Reges: constructio interrete. Optime, inquam. Bonum incolumis acies: misera caecitas. Restatis igitur vos; Scisse enim te quis coarguere", 'timeline-block'),
-    "timeLineImage": "https://cooltimeline.com/wp-content/uploads/2019/08/amazon-6-600x320.png",
-    "t_date": "Mar 22, 2011"
   }
 };
 for (var i = 1; i <= ITEM_COUNT; i++) {
@@ -33911,7 +33899,7 @@ class Edit extends Component {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       target: "_blank",
       className: "button button-primary",
-      href: "https://cooltimeline.com/instant-timeline-builder/?utm_source=tbg_plugin&utm_medium=link&utm_campaign=tbg_admin_demos"
+      href: "https://cooltimeline.com/demo/gutenberg-timeline-block/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=demo&utm_content=timeline_block"
     }, "View Demos"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       target: "_blank",
       className: "button button-primary",
