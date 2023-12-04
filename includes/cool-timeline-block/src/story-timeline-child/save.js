@@ -3,6 +3,7 @@
  */
 
 import { IconPickerItem } from 'react-fa-icon-picker-alen';
+import { __ } from '@wordpress/i18n';
 const {
 	InnerBlocks,
 	RichText
@@ -24,6 +25,7 @@ export default function Save(props) {
 		headingTag,
 		wodpressBlock
 	} = props.attributes
+	const timeline_desc = 'undefined' === typeof time_desc ? __('This is Timeline description, you can change me anytime click here','timeline-block') : time_desc;
 
 	const StoryDetail = () => (
 		<div className="story-details">
@@ -44,7 +46,7 @@ export default function Save(props) {
 					<div className='timeline-block_desc'>
 						<RichText.Content
 							tagName="p"
-							value={time_desc}
+							value={timeline_desc}
 						/>
 					</div> 
 				</>:

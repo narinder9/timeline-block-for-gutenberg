@@ -38,7 +38,7 @@ const attributes = {
 	},
 	time_desc:{
 		type: "string",
-		default:''
+		default:undefined
 	},
 	timeLineImage:{
 		type:"string",

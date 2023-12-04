@@ -8,7 +8,6 @@ import { Plus } from '../components/icons/plus';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 // import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import {arrayMoveImmutable} from 'array-move';
-import migration_image from '../images/timeline_block_migration.gif';
 let key = 0;
 /**
  * @param {Object} props - attributes
@@ -301,9 +300,8 @@ export default class Edit extends Component {
                     />
                 </InspectorControls>
                 <div className={ className ? className : '' } style={ otherStyles }>
-                <p style={{color: 'red', textAlign: 'center', fontSize: '23px'}}>
-                This block is now Deprecated. Upgrade this deprecated block to the latest version for our Timeline Block.
-                <img src={migration_image}/>
+                <p className='notice notice-warning is-dismissible'>
+                This block is now Deprecated. Upgrade this deprecated block to the latest version for our Timeline Block, Click <a href='https://cooltimeline.com/timeline-block-migration/'>here</a> for more details.
                 </p>
 
                     <ContainerEdit
