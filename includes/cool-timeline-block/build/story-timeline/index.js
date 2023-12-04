@@ -33263,16 +33263,6 @@ class Edit extends Component {
       headingTag: this.props.attributes.headingTag
     });
     wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock, index + 1, this.props.clientId);
-    if (this.props.attributes.timelineLayout == "horizontal") {
-      const blocksCount = wp.data.select("core/block-editor").getBlockCount(this.props.clientId);
-      const slideUpdate = {
-        update: false,
-        index: blocksCount
-      };
-      this.props.setAttributes({
-        hrSliderUpdate: slideUpdate
-      });
-    }
   }
   onUpdateOrientation(newOrientation, position) {
     this.props.attributes.timelineDesign == "both-sided" && this.props.setAttributes({
@@ -33310,51 +33300,6 @@ class Edit extends Component {
       block.attributes.headingTag = e;
     });
   };
-  SwiperUpdate(blockcount, slidePerView) {
-    let block_id = this.props.clientId;
-    const mainSwiperView = slidePerView;
-    const navigation = {
-      nextEl: '.cool-timeline-block-' + block_id + ' .swiper-button-next',
-      prevEl: '.cool-timeline-block-' + block_id + ' .swiper-button-prev'
-    };
-    var mainSwiper = new Swiper('.cool-timeline-block-' + block_id + ' .swiper-outer .swiper', {
-      observer: true,
-      observeParents: true,
-      slidesPerView: mainSwiperView,
-      freeMode: true,
-      initialSlide: blockcount,
-      watchSlidesVisibility: true,
-      watchSlidesProgress: true,
-      preventClicks: false,
-      allowTouchMove: false,
-      preventClicksPropagation: false,
-      navigation,
-      breakpoints: {
-        // when window width is >= 320px
-        280: {
-          slidesPerView: 1
-        },
-        // when window width is >= 480px
-        480: {
-          slidesPerView: mainSwiperView < 2 ? mainSwiperView : 2
-        },
-        // when window width is >= 640px
-        640: {
-          slidesPerView: mainSwiperView
-        }
-      },
-      on: {
-        slideChange: e => {
-          if (0 !== e.activeIndex) {
-            document.querySelector(navigation.prevEl).classList.remove('swiper-button-disabled');
-          }
-          if (e.activeIndex !== e.slides.length - 1) {
-            document.querySelector(navigation.nextEl).classList.remove('swiper-button-disabled');
-          }
-        }
-      }
-    });
-  }
   render() {
     // Setup the attributes.
     const {
@@ -34069,20 +34014,6 @@ class Edit extends Component {
     const $style = document.createElement("style");
     $style.setAttribute("id", "cool-vertical-timeline-style-" + this.props.clientId);
     document.head.appendChild($style);
-    if (this.props.attributes.timelineLayout == "horizontal") {
-      this.SwiperUpdate(0, this.props.attributes.slidePerView);
-      this.props.setAttributes({
-        sliderActive: true
-      });
-    }
-  }
-  componentDidUpdate() {
-    if (this.props.attributes.timelineLayout == "horizontal" && this.props.attributes.sliderActive == false) {
-      this.SwiperUpdate(0, this.props.attributes.slidePerView);
-      this.props.setAttributes({
-        sliderActive: true
-      });
-    }
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);

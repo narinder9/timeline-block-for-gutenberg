@@ -54,7 +54,6 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 			 // Setup your plugin object here
 			/* including required files */
 			add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'timeline_block_editor_assets' ) );
-			add_action( 'enqueue_block_assets', array( __CLASS__, 'timeline_block_frontend_assets' ) );
 			add_action( 'plugins_loaded', array( $this, 'ctlb_include_files' ) );
 			add_action( 'init', array( __CLASS__, 'create_block_cool_plugin_timeline_block_init' ) );
 		}
@@ -80,61 +79,6 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 
 		public static function timeline_block_editor_assets() {
 			wp_enqueue_style( 'cp_timeline-cgb-style-css', plugin_dir_url( __FILE__ ) . 'includes/cool-timeline-block/assets/common-block-editor.css', array( 'wp-edit-blocks' ) );
-
-			wp_enqueue_style(
-				'timeline-block
-            -block-swiper-css', // Handle
-				Timeline_Block_Url . 'includes/cool-timeline-block/assets/swiper/swiper.css',
-			);
-
-			wp_enqueue_script(
-				'timeline-block
-            -block-swiper-js', // Handle.
-				Timeline_Block_Url . 'includes/cool-timeline-block/assets/swiper/swiper.js',
-				array(),
-				null,
-				true
-			);
-
-			wp_enqueue_script(
-				'timeline-block
-            -block-slider-js', // Handle.
-				Timeline_Block_Url . 'includes/cool-timeline-block/assets/js/slider.js',
-				array( 'jquery' ),
-				null,
-				true
-			);
-		}
-
-		public static function timeline_block_frontend_assets() {
-			$id = get_the_ID();
-
-			if ( has_block( 'cp-timeline/content-timeline-block', $id ) ) {
-				wp_enqueue_style(
-					'timeline-block
-				-block-swiper-css', // Handle.
-					Timeline_Block_Url . 'includes/cool-timeline-block/assets/swiper/swiper.css',
-				);
-
-				wp_enqueue_script(
-					'timeline-block
-				-block-swiper-js', // Handle.
-					Timeline_Block_Url . 'includes/cool-timeline-block/assets/swiper/swiper.js',
-					array(),
-					null,
-					true
-				);
-
-				wp_enqueue_script(
-					'timeline-block
-				-block-slider-js', // Handle.
-					Timeline_Block_Url . 'includes/cool-timeline-block/assets/js/slider.js',
-					array( 'jquery' ),
-					null,
-					true
-				);
-
-			}
 		}
 	}
 }
