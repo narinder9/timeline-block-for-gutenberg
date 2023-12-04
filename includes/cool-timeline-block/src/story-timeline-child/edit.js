@@ -134,8 +134,8 @@ class Edit extends Component {
 		const StoryTime = () => (
 			<RichText
 				tagName="p"
-				placeholder={__('Date / Custom Text', 'timeline-block')}
-				value={'undefined' === typeof t_date ? 'date/step' : t_date}
+				placeholder={__('Date/Steps', 'timeline-block')}
+				value={'undefined' === typeof t_date ? 'Date/Steps' : t_date}
 				onChange={(value) => setAttributes({ t_date: value })}
 			/>
 		);
@@ -156,6 +156,7 @@ class Edit extends Component {
 				<PanelBody title={__("Story Settings","timeline-block")}>
 					<TextControl
 						label="Primary Label(Date/Steps)"
+						placeholder={ __( 'Date/Steps', 'timeline-block' ) }
 						value={t_date}
 						onChange={(value) => setAttributes({ t_date: value })}
 					/>
