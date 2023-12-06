@@ -2,10 +2,27 @@ import renderSVG from "../component/icon/renderIcon.js"
 import {__} from '@wordpress/i18n';
 import attributes from "../story-timeline-child/attributes.js";
 const {useBlockProps} = wp.blockEditor;
-const {RichText} = wp.blockEditor
+const {RichText} = wp.blockEditor;
 
 export default {
-		attributes,
+		attributes:{...attributes,
+			t_date : {
+				type: "string",
+				default: '1/1/2019',
+			},
+			time_heading:{
+				type: "string",
+				default:__( "Timeline Heading ",'timeline-block' ),
+			},
+			time_desc:{
+				type: "string",
+				default:__( "This is Timeline description, you can change me anytime click here ",'timeline-block' ),
+			},
+			timeLineImage:{
+                type:"string",
+                default:"none",
+            },
+		},
 		save: props => {
 			const Save = (props) => {
 				const {

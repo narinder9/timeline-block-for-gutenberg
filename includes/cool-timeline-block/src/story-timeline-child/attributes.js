@@ -86,7 +86,7 @@ const attributes = {
 	},
 	t_date : {
 		type: "string",
-		default: undefined,
+		default: 'ctl_date_undefined',
 	},
 	displayPostDate:{
 		type: "boolean",

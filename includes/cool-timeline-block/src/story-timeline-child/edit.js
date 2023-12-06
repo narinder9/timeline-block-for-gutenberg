@@ -68,19 +68,44 @@ class Edit extends Component {
 	}
 
 	innerBlockTemplate(mediaBlock){
-		const innerBlocks=[];
+		const newBlocks=[];
+		const mediaBlocks=[];
+		let oldBlocks=[];
+		let innerBlocks;
+		const prevInnerBlock = select('core/block-editor').getBlock(this.props.clientId)?.innerBlocks;
+		const headingLevel=()=>{
+			const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
+			return headingLevel;
+		}
+		
+		//  retrieve attributes of old paragraph and heading blocks
+		prevInnerBlock && Array.prototype.map.call(prevInnerBlock,(block)=>{
+			if(['core/paragraph','core/heading'].includes(block.name)){
+				oldBlocks.push([block.name, block.attributes ]);
+			};
+		})
+		// filter out undefined blocks from oldBlocks
+		oldBlocks = Array.prototype.filter.call(oldBlocks,(block)=>{
+			return undefined !==  block;
+		})
+		
+		// Add media block inside the mediaBlocks.
+		const imageUrl='none' === this.props.attributes.timeLineImage ? '' : this.props.attributes.timeLineImage;
+		mediaBlock && mediaBlocks.push(['core/image', { url: imageUrl, className: 'ctlb-block-image',aspectRatio: "4/3", scale: "cover", }]); // Default: Image block with a default image URL
+		newBlocks.push(
+			['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
+			['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
+		);
 
-			const headingLevel=()=>{
-				const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
-				return headingLevel;
-			}
-			mediaBlock && innerBlocks.push(['core/image', { url: this.props.attributes.timeLineImage, className: 'ctlb-block-image',aspectRatio: "4/3", scale: "cover", }]); // Default: Image block with a default image URL
 
-			innerBlocks.push(
-				['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
-				['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
-			);
-			this.props.setAttributes({innerBlockTemplate: innerBlocks, mediaBlock: mediaBlock});
+		// Spread all blocks in innerBlocks.
+		if(oldBlocks && oldBlocks.length > 0){
+			innerBlocks=[...mediaBlocks,...oldBlocks];
+		}else{
+			innerBlocks=[...mediaBlocks,...newBlocks];
+		}
+
+		this.props.setAttributes({innerBlockTemplate: innerBlocks, mediaBlock: mediaBlock});
 	}
 
 	render() {
@@ -135,8 +160,10 @@ class Edit extends Component {
 			<RichText
 				tagName="p"
 				placeholder={__('Date/Steps', 'timeline-block')}
-				value={t_date}
-				onChange={(value) => setAttributes({ t_date: value })}
+				value={'ctl_date_undefined' === t_date ? undefined : t_date}
+				onChange={ ( value ) => {
+				const date='' === value ? 'ctl_date_undefined' : value;
+				setAttributes({t_date:date })}}										
 			/>
 		);
 
@@ -157,8 +184,11 @@ class Edit extends Component {
 					<TextControl
 						label="Primary Label(Date/Steps)"
 						placeholder={ __( 'Date/Steps', 'timeline-block' ) }
-						value={t_date}
-						onChange={(value) => setAttributes({ t_date: value })}
+						value={'ctl_date_undefined' === t_date ? undefined : t_date}
+						onChange={ ( value ) => {
+							const date='' === value ? 'ctl_date_undefined' : value;
+							setAttributes({t_date:date })
+						}}	
 					/>
 					<hr className="timeline-block-editor__separator"></hr>
 					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>

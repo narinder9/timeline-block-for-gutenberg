@@ -60,7 +60,7 @@ export default function Save(props) {
 
 		<RichText.Content
 			tagName="p"
-			value={'undefined' === typeof t_date ? '1/1/2019' : t_date}
+			value={'ctl_date_undefined' === t_date ? '1/1/2019' : t_date}
 		/>
 	)
 	const icon_div = <div className="timeline-block-icon">
@@ -70,7 +70,7 @@ export default function Save(props) {
 		<div className={"timeline-content icon-" + iconToggle + " "}>
 			<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
 				<div className="ctl-6 timeline-block-time">
-					{(t_date === '' || 'undefined' === typeof t_date) ? '' :
+					{(t_date === '' || ('ctl_date_undefined' === t_date && wodpressBlock)) ? '' :
 						<div className="story-time">
 							{StoryTime()}
 						</div>
