@@ -33446,6 +33446,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: headingColor
+      }],
       value: headingColor,
       onChange: colorValue => setAttributes({
         headingColor: colorValue
@@ -33536,6 +33540,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: subHeadingColor
+      }],
       value: subHeadingColor,
       onChange: colorValue => setAttributes({
         subHeadingColor: colorValue
@@ -33626,6 +33634,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: dateColor
+      }],
       value: dateColor,
       onChange: colorValue => setAttributes({
         dateColor: colorValue
@@ -33643,6 +33655,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: LineColor
+      }],
       value: LineColor,
       onChange: colorValue => setAttributes({
         LineColor: colorValue
@@ -33659,6 +33675,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: iconColor
+      }],
       value: iconColor,
       onChange: colorValue => setAttributes({
         iconColor: colorValue
@@ -33675,6 +33695,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: iconBg
+      }],
       value: iconBg,
       onChange: colorValue => setAttributes({
         iconBg: colorValue
@@ -33691,6 +33715,10 @@ class Edit extends Component {
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ColorPalette, {
       className: "cp-timeline-block-color-palates",
       clearable: false,
+      colors: [{
+        name: 'default',
+        color: storyBorderColor
+      }],
       value: storyBorderColor,
       onChange: colorValue => setAttributes({
         storyBorderColor: colorValue

@@ -207,6 +207,11 @@ class Edit extends Component {
 				<div className={`components-button timeline-block-colorpallete-reset is-small ${headingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ headingColor: '' })}><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
+					colors={
+						[
+							{ name: 'default', color: headingColor }
+						]
+					}
 					value={headingColor}
 					onChange={(colorValue) => setAttributes({ headingColor: colorValue })}
 				/>
@@ -246,6 +251,11 @@ class Edit extends Component {
 				<div className={`components-button timeline-block-colorpallete-reset is-small ${subHeadingColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({ subHeadingColor: '' })}><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 				<ColorPalette className="cp-timeline-block-color-palates"
 					clearable={false}
+					colors={
+						[
+							{ name: 'default', color: subHeadingColor }
+						]
+					}
 					value={subHeadingColor}
 					onChange={(colorValue) => setAttributes({ subHeadingColor: colorValue })}
 				/>
@@ -285,6 +295,11 @@ class Edit extends Component {
 	<div className={`components-button timeline-block-colorpallete-reset is-small ${dateColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({dateColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 	<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
+		colors={
+			[
+				{ name: 'default', color: dateColor }
+			]
+		}
 		value={dateColor}
 		onChange = {( colorValue ) => setAttributes( { dateColor: colorValue} )}
 	/>
@@ -297,6 +312,11 @@ class Edit extends Component {
 		<div className={`components-button timeline-block-colorpallete-reset is-small ${LineColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({LineColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
+		colors={
+			[
+				{ name: 'default', color: LineColor }
+			]
+		}
 		value={LineColor}
 		onChange = {( colorValue ) => setAttributes( { LineColor: colorValue} )}
 		/>
@@ -306,6 +326,11 @@ class Edit extends Component {
 		<div className={`components-button timeline-block-colorpallete-reset is-small ${iconColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
+		colors={
+			[
+				{ name: 'default', color: iconColor }
+			]
+		}
 		value={iconColor}
 		onChange = {( colorValue ) => setAttributes( { iconColor: colorValue } )}
 		/>
@@ -315,6 +340,11 @@ class Edit extends Component {
 		<div className={`components-button timeline-block-colorpallete-reset is-small ${iconBg != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({iconBg : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
+		colors={
+			[
+				{ name: 'default', color: iconBg }
+			]
+		}
 		value={iconBg}
 		onChange = {( colorValue ) => setAttributes( { iconBg: colorValue } )}
 		/>
@@ -324,6 +354,11 @@ class Edit extends Component {
 		<div className={`components-button timeline-block-colorpallete-reset is-small ${storyBorderColor != '' && 'timeline-color-setting_apply'}`} onClick={e => this.resetcolorpalate({storyBorderColor : ''}) }><span className="dashicon dashicons dashicons-image-rotate"></span></div>
 		<ColorPalette className="cp-timeline-block-color-palates"
 		clearable={false}
+		colors={
+			[
+				{ name: 'default', color: storyBorderColor }
+			]
+		}
 		value={storyBorderColor}
 		onChange = {( colorValue ) => setAttributes( { storyBorderColor: colorValue } )}
 		/>
