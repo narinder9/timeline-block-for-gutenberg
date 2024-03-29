@@ -143,7 +143,7 @@ const attributes = {
 	},
 	innerBlockTemplate:{
 		type: "array",
-		default: {}
+		default: []
 	},
 	mediaBlock:{
 		type: "bollean",
