@@ -297,9 +297,6 @@ const SpacingControl = ( props ) => {
 					<span className="cp-block-timeline-number_control-label cp-timeline-block_control__link-label"></span>
 				</div>
 			</div>
-			{ props.help && (
-				<p className="uag-control-help-notice">{ props.help }</p>
-				) }
 		</div>
 	);
 
