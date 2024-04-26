@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg, block, events, steps
 Tested up to:6.5
 Requires PHP: 5.6
-Stable tag:1.6.1
+Stable tag:1.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Showcase your story or company history, events, process steps, milestones, and r
 
 **Timeline Block** is a responsive WordPress block plugin for the Gutenberg block editor that allows you to create a beautiful vertical history timeline with one click. Just search '**Timeline Block**' from the block editor '**Add Block**' section and create a beautiful story timeline immediately.
 
-[ View Demo ](https://cooltimeline.com/demo/gutenberg-timeline-block?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=top_view_demo) | [ Buy Pro ](https://cooltimeline.com/plugin/gutenberg-timeline-block/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=top_view_demo)
+[ View Demo ](https://cooltimeline.com/demo/gutenberg-timeline-block?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=top_view_demo) | [Watch Video Tutorials](https://cooltimeline.com/docs/timeline-block-pro/video-tutorials/free-plugin-video/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=videos)| [ Buy Pro ](https://cooltimeline.com/plugin/gutenberg-timeline-block/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=buy_pro)
 
 It is essential to let your audience know about the **history** of your brand especially when you are promoting it through a website. Our plugin will help you **highlight events** and stories precise way.
 You can show history/future stories, events, appointments, and many other cool things using the **Timeline Block** plugin. Here are all areas where you can use this plugin:-
@@ -83,7 +83,9 @@ Dive into creativity with seamless integration of various media types, including
         <strong>Connector Style:</strong> 
         Customize connector styles between stories with options like Arrow, Line, or None for seamless visual continuity.
     </li>
+
 </ul>
+<a href="https://cooltimeline.com/plugin/gutenberg-timeline-block/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=buy_pro">Buy Timeline Block Pro</a>
 ### Check our other Timeline plugins
 <ul>
 <li><strong>Cool Timeline [Free]</strong>- <a href="https://cooltimeline.com/demo/cool-timeline-free/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=view_free_demo" target="_blank">View Demo</a></li>
@@ -131,7 +133,12 @@ Many thanks to <a href="https://github.com/drzraf"><strong>@drzraf</strong></a> 
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
 Upgrade to <strong>Version 1.6.1</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
-</p>
+</p
+<h4>Version 1.6.2 | 25 Apr 2024</h4>
+<ul>
+<strong>Fixed:</strong>
+<li>- Fixed fatal error that arises when Cool Timeline Free is already activated.</li>
+</ul>>
 <h4>Version 1.6.1 | 24 Apr 2024</h4>
 <ul>
 <strong>Added:</strong>
