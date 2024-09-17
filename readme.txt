@@ -137,9 +137,6 @@ The Timeline Block plugin is a responsive WordPress block plugin designed for th
 #### 2. How do I add a Timeline Block in the Gutenberg editor?
 You can add a Timeline Block by searching for 'Timeline Block' in the 'Add Block' section of the Gutenberg block editor and selecting it.
 
-= How can I report security bugs? =
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
-
 #### 3. What can I use the Timeline Block plugin for?
 The Timeline Block plugin can be used for various purposes, including:
 - Representing your company story.
@@ -184,6 +181,9 @@ You can make your timeline more interactive by enabling scrolling navigation for
 
 #### 9. Can I customize the appearance of icons in my timeline?
 Yes, with Timeline Block Pro, you can customize the icons in your timeline with options including dot, icon, image
+
+#### 10. How can I report security bugs?
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
 
 == Upgrade Notice ==
 
