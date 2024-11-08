@@ -137,9 +137,10 @@ const SpacingControl = ( props ) => {
 
 	const onUnitSizeClick = ( uSizes ) => {
 		const items = [];
-		uSizes.map( ( key ) =>
+		uSizes.map( ( key ) =>{
 			items.push(
 				<Tooltip
+					key={key.name}
 					text={ sprintf(
 						/* translators: abbreviation for units */
 						__( '%s units', 'timeline-block' ),
@@ -170,7 +171,7 @@ const SpacingControl = ( props ) => {
 					</Button>
 				</Tooltip>
 			)
-		);
+		});
 
 		return items;
 	};
@@ -248,8 +249,8 @@ const SpacingControl = ( props ) => {
 	};
 	const valueupdate=(...value)=>{
 		for(let i=0; i<value.length; i++){
-			if(value[i] > 0 || value[i] < 0){
-				updateSettingsapply(' timeline-container_pd_apply');
+			if(value[i] !== 0){
+				updateSettingsapply('timeline-container_pd_apply');
 				break;
 			}else{
 				updateSettingsapply('');
@@ -265,9 +266,9 @@ const SpacingControl = ( props ) => {
 						<Button
                         type='button'
                         onClick={()=>{resetValues()}}
-                        className={`timeline-block-control__actions_reset${settingsapply}`}
+                        className={`timeline-block-control__actions_reset${settingsapply != '' ? ' '+settingsapply : ' '}`}
                         isSmall
-                        ><span class="dashicons dashicons-image-rotate"></span></Button>
+                        ><span className="dashicons dashicons-image-rotate"></span></Button>
 						<ButtonGroup
 							className="timeline-block-control__units"
 							aria-label={ __(
@@ -296,9 +297,6 @@ const SpacingControl = ( props ) => {
 					<span className="cp-block-timeline-number_control-label cp-timeline-block_control__link-label"></span>
 				</div>
 			</div>
-			{ props.help && (
-				<p className="uag-control-help-notice">{ props.help }</p>
-				) }
 		</div>
 	);
 

@@ -1,12 +1,11 @@
-import "./style.scss"
-import attributes from "./attributes"
+import "../story-timeline/style.scss"
+import attributes from "../story-timeline/attributes.js"
 import { __ } from '@wordpress/i18n';
 
-import deprContentTimelineStyle from "./depr_styling"
+import deprContentTimelineStyle from "./styling-v1.js"
 const { useBlockProps,InnerBlocks } = wp.blockEditor;
 
-export default [
-	{
+export default {
 		attributes,
 		save: props => {
 			const Save = (props) => {
@@ -38,4 +37,3 @@ export default [
             </div> );
 		}
 	}
-]

@@ -13,11 +13,13 @@
 // //  Import CSS.
 // import ".././style.scss"
 import "./style.scss"
-import deprecated from "./deprecated"
-import Save from "./save"
-import attributes from "./attributes"
-import Edit from "./edit"
-import { CoolTMIcon } from '../component/icon/insertorIcon';
+import v1 from "../deprecated/parent-block-v1.js"
+import v2 from "../deprecated/parent-block-v2.js"
+import Save from "./save.js"
+import attributes from "./attributes.js"
+import Edit from "./edit.js"
+import { CoolTMIcon } from '../component/icon/insertorIcon.js';
+import CtbMigration from './migration.js';
 // Components
 import { __ } from '@wordpress/i18n';
 
@@ -25,7 +27,7 @@ import { __ } from '@wordpress/i18n';
 const {
 	registerBlockType
 } = wp.blocks
-const { useBlockProps, InnerBlocks } = wp.blockEditor;
+const { useBlockProps } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { Fragment } = wp.element;
 const { withSelect } = wp.data;
@@ -63,19 +65,21 @@ const withcontentTimeline = createHigherOrderComponent((BlockEdit) => {
 
 registerBlockType("cp-timeline/content-timeline-block", {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __('Timeline Block', 'cool-timeline'), // Block title.
+	title: __('Timeline Block', 'timeline-block'), // Block title.
 	apiVersion: 2,
-	description: __("Responsive timeline block for Gutenberg editor.", 'cool-timeline'),
+	description: __("Create an ultimate timeline easily and share your story or roadmap.", 'timeline-block'),
 	keywords: [
 		__("Content Timeline", 'timeline-block'),
 		__("Timeline", 'timeline-block'),
+		__("History Timeline", 'timeline-block'),
+		__("Roadmap Timeline", 'timeline-block'),
 	],
 	icon: CoolTMIcon,
 	supports: {
 		anchor: true,
 	},
 	attributes,
-	deprecated,
+	deprecated: [v1,v2],
 	edit: props => {
 		const blockProps = useBlockProps({
 			className: 'Cool-Content-Timeline-' + props.attributes.timelineDesign,
@@ -105,6 +109,7 @@ registerBlockType("cp-timeline/content-timeline-block", {
 			isPreview: true,
 		}
 	},
+	transforms: CtbMigration,
 })
 addFilter(
 	'editor.BlockEdit',

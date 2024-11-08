@@ -2,7 +2,7 @@ import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
 
-const { RichText, InspectorControls, PanelColorSettings, MediaUpload, BlockControls, AlignmentToolbar } = wp.blockEditor;
+const { RichText, InspectorControls,  BlockControls, InnerBlocks } = wp.blockEditor;
 
 const {
 	dispatch,
@@ -13,16 +13,99 @@ const {
 	PanelBody,
 	TextControl,
 	Button,
-	TextareaControl,
-	Toolbar,
-	RadioControl,
-	SelectControl
+	ToolbarGroup,
+	ToolbarButton,
+	ButtonGroup
 } = wp.components;
 
 class Edit extends Component {
 	componentDidMount() {
-		// Store client id.
-		this.props.setAttributes({ block_id: this.props.clientId });
+		//Store client id.
+		this.props.setAttributes( { block_id: this.props.clientId } )
+		this.props.setAttributes( { wodpressBlock: true } )
+		const wordpressBlock=this.props.attributes.wodpressBlock;
+		const mediaBlock=!['none',''].includes(this.props.attributes.timeLineImage);
+		!wordpressBlock && this.innerBlockTemplate(mediaBlock);
+   }	
+
+   addBlock(e){
+	   const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+	   const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+	   let position='one-sided' === parentAttribute.timelineDesign ? parentAttribute.Orientation : 'left' === this.props.attributes.blockPosition ? 'right' : 'left';
+	   let index = select('core/block-editor').getBlockIndex(this.props.clientId);
+	   let timelineDesign= parentAttribute.timelineDesign
+	   let timelineLayout= parentAttribute.timelineLayout
+	   let name = 'cp-timeline/content-timeline-block-child';
+	   let insertedBlock = wp.blocks.createBlock(name, {block_position_active:false,
+	   timelineDesign :timelineDesign,
+	   timelineLayout:timelineLayout,
+	   blockPosition: position,
+	   storyPositionHide: !parentAttribute.OrientationCheckBox,
+	   headingTag: parentAttribute.headingTag
+		});
+
+	   wp.data.dispatch('core/block-editor').insertBlocks(insertedBlock,index+1,parentBlockId);
+	   this.UpdateOrientation();
+   }
+
+	UpdateOrientation() {
+		const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+		const parentAttribute=select('core/block-editor').getBlockAttributes( parentBlockId );
+		
+		if (parentAttribute.timelineLayout == "vertical" && parentAttribute.timelineDesign == "both-sided") {
+			const currentIndex = select('core/block-editor').getBlockIndex(this.props.clientId);
+			const currentBlockPostion ='left' === this.props.attributes.blockPosition ? 'right' : 'left';
+			const parentBlock = select("core/block-editor").getBlock(parentBlockId);
+			const innerBlocks = parentBlock.innerBlocks;
+			const currentPostion=currentIndex % 2;
+			innerBlocks.forEach((block, index) => {
+				if(index > (currentIndex + 1)){
+					const blockpostion=index % 2 !== currentPostion ? currentBlockPostion : this.props.attributes.blockPosition;
+					block.attributes.blockPosition = blockpostion, block.attributes.storyPositionHide=!parentAttribute.OrientationCheckBox
+				}
+			});
+		}
+	}
+
+	innerBlockTemplate(mediaBlock){
+		const newBlocks=[];
+		const mediaBlocks=[];
+		let oldBlocks=[];
+		let innerBlocks;
+		const prevInnerBlock = select('core/block-editor').getBlock(this.props.clientId)?.innerBlocks;
+		const headingLevel=()=>{
+			const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
+			return headingLevel;
+		}
+		
+		//  retrieve attributes of old paragraph and heading blocks
+		prevInnerBlock && Array.prototype.map.call(prevInnerBlock,(block)=>{
+			if(['core/paragraph','core/heading'].includes(block.name)){
+				oldBlocks.push([block.name, block.attributes ]);
+			};
+		})
+		// filter out undefined blocks from oldBlocks
+		oldBlocks = Array.prototype.filter.call(oldBlocks,(block)=>{
+			return undefined !==  block;
+		})
+		
+		// Add media block inside the mediaBlocks.
+		const imageUrl='none' === this.props.attributes.timeLineImage ? '' : this.props.attributes.timeLineImage;
+		mediaBlock && mediaBlocks.push(['core/image', { url: imageUrl, className: 'ctlb-block-image',aspectRatio: "4/3", scale: "cover", }]); // Default: Image block with a default image URL
+		newBlocks.push(
+			['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
+			['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
+		);
+
+
+		// Spread all blocks in innerBlocks.
+		if(oldBlocks && oldBlocks.length > 0){
+			innerBlocks=[...mediaBlocks,...oldBlocks];
+		}else{
+			innerBlocks=[...mediaBlocks,...newBlocks];
+		}
+
+		this.props.setAttributes({innerBlockTemplate: innerBlocks, mediaBlock: mediaBlock});
 	}
 
 	render() {
@@ -32,89 +115,43 @@ class Edit extends Component {
 			attributes: {
 				icon,
 				t_date,
-				time_heading,
-				time_desc,
-				time_image,
 				iconToggle,
 				iconColor,
 				blockPosition,
-				imageSize,
-				imageOption,
-				timeLineImage,
-				imageAlt,
 				storyPositionHide,
-				headingTag
+				mediaBlock,
+				innerBlockTemplate
 			},
 			context: {
 				'cp-timeline/timelineDesign': timelineDesign,
 				'cp-timeline/timelineLayout': timelineLayout,
 			}
 		} = this.props;
-		const getImage = (size, image_value) => {
-			let image_size_url = "";
-			if (timelineLayout == "vertical") {
-				let images = Object.entries(image_value);
-				images.map(image => {
-					if (image[0] == size) {
-						image_size_url = image[1].url;
-					}
-				});
-			}
-			else {
-				image_size_url = image_value.full.url;
-			}
-			return (
-				image_size_url
-			);
-		};
 		const StoryDetail = () => (
 			<div className="story-details">
-				<MediaUpload
-					onSelect={(value) => {
-						let image_sizes = Object.keys(value.sizes);
-						let image_size_option = [];
-						image_sizes.map(size => {
-							image_size_option.push({ label: size.charAt(0).toUpperCase() + size.slice(1), value: size });
-						});
-						let img = getImage(imageSize, value.sizes);
-						setAttributes({ timeLineImage: img, imageOption: image_size_option, time_image: value, imageAlt: value.alt });
-					}}
-					value={timeLineImage}
-					allowedTypes={['image']}
-					render={({ open }) => (
-						<Fragment>
-							{timeLineImage !== "none" ?
-								<Fragment>
-									<div className="story-image">
-										<img src={timeLineImage} alt={imageAlt} className={time_image.id ? `wp-image-${time_image.id}` : null} />
-									</div>
-									<Button isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
-										{__('Remove Image')}</Button>
-								</Fragment>
-								:
-								<Button isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
-							}
-						</Fragment>
-					)}
-				/>
+				{ mediaBlock ?
+				<Button isSmall isSecondary onClick={() => this.innerBlockTemplate(false)} style={{marginBottom: '10px'}}>{__('Remove Media Block',"timeline-block")}</Button> :
+				<Button isSmall isSecondary 
+				onClick={
+					()=> 
+					{
+						this.innerBlockTemplate(true);
+						setTimeout(()=>{
+							const mediaBlock=select( 'core/block-editor' ).getBlock(this.props.clientId).innerBlocks[0].clientId;
+							wp.data.dispatch('core/block-editor').selectBlock(mediaBlock);
+						},50);
+					}
+					}
+					style={{marginBottom: '10px'}}>
+					{__('Add Media Block', 'timeline-block')}
+				</Button>
+				}
 				<div className="story-content">
-					<RichText
-						className="timeline-block_title"
-						tagName={headingTag}
-						placeholder={__('Enter Story Title', 'timeline-block')}
-						value={time_heading}
-						onChange={(value) => setAttributes({ time_heading: value })}
-						keepplaceholderonfocus="true"
-					/>
-					<div className='timeline-block_desc'>
-						<RichText
-							tagName="p"
-							placeholder={__('Enter story description here.', 'timeline-block')}
-							value={time_desc}
-							onChange={(value) => setAttributes({ time_desc: value })}
-							keepplaceholderonfocus="true"
+					<InnerBlocks
+						templateLock="all" // Lock the template to prevent users from removing blocks
+						template={innerBlockTemplate}
+						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
 						/>
-					</div>
 				</div>
 			</div>
 		);
@@ -122,128 +159,92 @@ class Edit extends Component {
 		const StoryTime = () => (
 			<RichText
 				tagName="p"
-				placeholder={__('Date / Custom Text', 'timeline-block')}
-				value={t_date}
-				onChange={(value) => setAttributes({ t_date: value })}
+				placeholder={__('Date/Steps', 'timeline-block')}
+				value={'ctl_date_undefined' === t_date ? undefined : t_date}
+				onChange={ ( value ) => {
+				const date='' === value ? 'ctl_date_undefined' : value;
+				setAttributes({t_date:date })}}										
 			/>
 		);
+
 		const content_control = (
 			<InspectorControls>
-				<PanelBody title={__("Story Settings")}>
-					<TextControl
-						label="Story Heading"
-						value={time_heading}
-						onChange={(value) => setAttributes({ time_heading: value })}
-					/>
-					<TextareaControl
-						label="Story Description"
-						value={time_desc}
-						onChange={(value) => setAttributes({ time_desc: value })}
-					/>
+				<div style={{ 'marginBottom': 15 + 'px','textAlign':'center' }}>
+				<Button
+					isSecondary
+					icon={'arrow-left-alt'}
+					onClick={() => {
+						const parentBlockId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( this.props.clientId );
+						wp.data.dispatch('core/block-editor').selectBlock(parentBlockId);
+					}
+					}
+				>GO TO SETTINGS</Button>
+				</div>
+				<PanelBody title={__("Story Settings","timeline-block")}>
 					<TextControl
 						label="Primary Label(Date/Steps)"
-						value={t_date}
-						onChange={(value) => setAttributes({ t_date: value })}
+						placeholder={ __( 'Date/Steps', 'timeline-block' ) }
+						value={'ctl_date_undefined' === t_date ? undefined : t_date}
+						onChange={ ( value ) => {
+							const date='' === value ? 'ctl_date_undefined' : value;
+							setAttributes({t_date:date })
+						}}	
 					/>
-					<RadioControl
-						label="Story Icon"
-						selected={iconToggle}
-						options={[
-							{ label: 'Default(dot)', value: "false" },
-							{ label: 'Custom(Font Awesome Icon)', value: "true" },
-						]}
-						onChange={(value) => setAttributes({ iconToggle: value })}
-					/>
+					<hr className="timeline-block-editor__separator"></hr>
+					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>
+					<ButtonGroup className="cool-timeline-content-alignment-buttons">
+						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'false' }) }} className={iconToggle == 'false' ? 'active' : ''}>DOT</Button>
+						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'true' }) }} className={iconToggle == 'true' ? 'active' : ''}>Icon</Button>
+					</ButtonGroup>
 					{iconToggle == "true" ?
 						<Fragment>  <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({ icon: v })} /> </div>
 
 						</Fragment>
 						: null}
-					<hr className="timeline-block-editor__separator"></hr>
-					<label className="timeline-block-settings-labels">Story Image</label>
-					<br></br>
-					<MediaUpload
-						title="Story Image"
-						onSelect={(value) => {
-							let image_sizes = Object.keys(value.sizes)
-							let image_size_option = []
-							image_sizes.map(size => {
-								image_size_option.push({ label: size.charAt(0).toUpperCase() + size.slice(1), value: size })
-							});
-							let img = getImage(imageSize, value.sizes)
-							setAttributes({ timeLineImage: img, imageOption: image_size_option, time_image: value })
-						}}
-						value={timeLineImage}
-						allowedTypes={['image']}
-						modalClass=""
-						render={({ open }) => (
-							<Fragment>
-								{timeLineImage !== "none" ?
-									<Fragment>
-										<img src={timeLineImage} />
-										<Button isSecondary onClick={(value) => setAttributes({ timeLineImage: 'none' })}>
-											{__('Remove Image')}</Button>
-									</Fragment>
-									:
-									<Button isSecondary onClick={open}> {__('Upload/Choose Image', 'timeline-block')}</Button>
-								}
-							</Fragment>
-						)}
-					/>
 					{timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
 						<Fragment>
 							<hr className="timeline-block-editor__separator"></hr>
-							<RadioControl
-								label="Story position"
-								selected={blockPosition}
-								options={[
-									{ label: 'Left', value: "left" },
-									{ label: 'Right', value: "right" },
-								]}
-								onChange={(value) => setAttributes({ blockPosition: value, block_position_active: true })}
-							/>
+							<div className="timeline-block-settings-labels">{__("Story position", "timeline-block")}</div>
+							<ButtonGroup className="cool-timeline-content-alignment-buttons">
+								<Button isSmall onClick={(e) => { setAttributes({ blockPosition: 'left', block_position_active: true }) }} className={blockPosition == 'left' ? 'active' : ''}>Left</Button>
+								<Button isSmall onClick={(e) => { setAttributes({ blockPosition: 'right', block_position_active: true }) }} className={blockPosition == 'right' ? 'active' : ''}>Right</Button>
+							</ButtonGroup>
 						</Fragment>
 						: null
-					}
-					<hr className="timeline-block-editor__separator"></hr>
-					{timelineLayout == "vertical" && timeLineImage !== "none" ?
-						<SelectControl
-							label="Image Size"
-							value={imageSize}
-							options={imageOption}
-							onChange={(newSize) => {
-								let img = getImage(newSize, time_image.sizes)
-								setAttributes({ timeLineImage: img, imageSize: newSize })
-							}}
-						/> :
-						null
 					}
 				</PanelBody>
 			</InspectorControls>
 		);
 		const icon_div = <div className="timeline-block-icon">
-			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
+			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
 		</div>;
 		return (
 			<Fragment>
 				<BlockControls>
-					<Toolbar>
-						<Button
+					<ToolbarGroup>
+						<ToolbarButton
 							label="Delete Block"
 							icon="trash"
 							onClick={() => dispatch('core/block-editor').removeBlock(this.props.clientId, true)}
 						/>
-					</Toolbar>
+					</ToolbarGroup>
+					<ToolbarGroup >
+						<ToolbarButton
+							label="Add Block"
+							icon="plus"
+							onClick={() => 	
+								this.addBlock()
+							}
+						/>
+					</ToolbarGroup>
 				</BlockControls>
 				{content_control}
 				<div className={"timeline-content icon-" + iconToggle + ""}>
 					<div className={`timeline-block-timeline ctl-row  position-${blockPosition}${t_date == '' ? ' ctl_timeFalse' : ''}`}>
 						<div className="ctl-6 timeline-block-time">
-							{t_date != '' &&
-								<div className="story-time">
-									{StoryTime()}
-								</div>
-							}
+							<div className="story-time">
+								{StoryTime()}
+							</div>
 						</div>
 						{icon_div}
 						<div className="ctl-6 timeline-block-detail">
@@ -253,6 +254,109 @@ class Edit extends Component {
 				</div>
 			</Fragment>
 		);
+	}
+
+	componentDidUpdate(){
+		const childBlocks=select("core/block-editor").getBlock(this.props.clientId)?.innerBlocks;
+		if(childBlocks){
+			const paragraphBlock=childBlocks.filter(block=>{ return "core/paragraph" === block.name })[0];
+			const paragraphBlockId=paragraphBlock?.clientId;
+			const selectBlockId=select('core/block-editor').getSelectedBlockClientId();
+			if(selectBlockId){
+				if(paragraphBlockId === selectBlockId){
+					this.paragraphToolBarPosition(selectBlockId);
+				}
+			}
+		}
+
+	}
+
+	paragraphToolBarPosition(id){
+		// Getting the root element for that is a overflow Y axis auto
+		const getParentOverflowElement = (parentElement) => {
+			let element = parentElement;
+			while (element) {
+				const { overflowY } = getComputedStyle(element);
+				if (overflowY !== 'auto') {
+					if(element.parentElement){
+						element = element.parentElement;
+					}
+				} else {
+					return element;
+				}
+			}
+			return element;
+		};
+
+		setTimeout(() => {
+			const parentBlockId = select('core/block-editor').getBlockHierarchyRootClientId(this.props.clientId),
+			paragraphBlock = document.querySelector(`#block-${id}`),
+			parentBlock = paragraphBlock.closest(`#block-${parentBlockId}`),
+			scrollElement = getParentOverflowElement(parentBlock),
+			paragraphToolbar = document.querySelector("div.components-popover");
+			if (paragraphBlock && paragraphToolbar) {
+
+				const toolStyleValue = paragraphToolbar?.style?.transform;
+
+				// Get Toolbar updated transform position.
+				const updatedValue = () => {
+					const paragraphBlock = document.querySelector(`#block-${id}`),
+					paragraphStyle = getComputedStyle(paragraphBlock),
+					scrollTop = scrollElement.scrollTop,
+					rect = paragraphBlock.getBoundingClientRect(),
+					paragraphBlockYAxis = 0 > rect.top ? -Math.abs(rect.top) : Math.abs(rect.top),
+					paragraphTopSpacing = parseInt(paragraphStyle.marginTop.match(/\d+\.\d+|\d+/g)[0]),
+					toolbarParentOffsetTop = paragraphToolbar.offsetParent?.offsetTop ?? 0,
+					parentYPosition = Math.floor(scrollTop + paragraphBlockYAxis + paragraphBlock.clientHeight - paragraphTopSpacing - paragraphToolbar.clientHeight - toolbarParentOffsetTop + 40);
+					return parentYPosition;
+				};
+
+				// Update ToolBar transform position.
+				const updateToolBarStyle = (newTranslateY) => {
+					if (toolStyleValue) {
+						const style = toolStyleValue.replace(
+							/translateY\(\d+px\)/,
+							`translateY(${newTranslateY}px)`
+						);
+						paragraphToolbar.style.transform = style;
+					}
+				};
+
+				// ToolBar Observer.
+				const observerCallback = (mutationsList) => {
+					const selectBlockId = select('core/editor').getSelectedBlockClientId();
+					if (selectBlockId === id) {
+						for (const mutation of mutationsList) {
+							if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+								const currentToolBarValue = document.querySelector("div.components-popover");
+								const currentTranslateY = getTranslateYValue(
+									currentToolBarValue?.style?.transform
+								);
+								const updateValue = updatedValue();
+								if (updateValue > currentTranslateY) {
+									// update toolbar position
+									updateToolBarStyle(updateValue);
+								}
+							}
+						}
+					}
+				};
+
+				const observerConfig = { attributes: true };
+				const observer = new MutationObserver(observerCallback);
+				// Observer toolBar transform position
+				observer.observe(paragraphToolbar, observerConfig);
+
+				// update toolbar position.
+				updateToolBarStyle(updatedValue());
+
+				// Function to extract translateY value from a transform string.
+				function getTranslateYValue(transform) {
+					const match = transform.match(/translateY\(([-+]?\d+)px\)/);
+					return match ? parseInt(match[1]) : 0;
+				}
+			}
+		}, 10);
 	}
 }
 

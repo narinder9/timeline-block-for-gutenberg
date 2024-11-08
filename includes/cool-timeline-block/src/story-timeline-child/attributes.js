@@ -30,7 +30,7 @@ const attributes = {
 	},
 	time_heading:{
 		type: "string",
-		default:__( "Timeline Heading ",'timeline-block' )
+		default:undefined
 	},
 	time_image:{
 		type: "object",
@@ -38,11 +38,11 @@ const attributes = {
 	},
 	time_desc:{
 		type: "string",
-		default:__( "This is Timeline description, you can change me anytime click here ",'timeline-block' )
+		default:undefined
 	},
 	timeLineImage:{
 		type:"string",
-		default:"none"
+		default:""
 	},
 	dateFormat: {
 		type: "string",
@@ -86,7 +86,7 @@ const attributes = {
 	},
 	t_date : {
 		type: "string",
-		default: '1/1/2019',
+		default: 'ctl_date_undefined',
 	},
 	displayPostDate:{
 		type: "boolean",
@@ -136,6 +136,18 @@ const attributes = {
 	headingTag:{
 		type:"string",
 		default:'h3',
+	},
+	wodpressBlock:{
+		type: "bollean",
+		default: false
+	},
+	innerBlockTemplate:{
+		type: "array",
+		default: []
+	},
+	mediaBlock:{
+		type: "bollean",
+		default: false
 	}
 }
 

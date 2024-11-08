@@ -2,11 +2,11 @@
  * BLOCK: Content Timeline Child
  */
 import "./style.scss"
-import Save from "./save"
-import attributes from "./attributes"
-import deprecated from "./deprecated"
-import Edit from "./edit"
-import { CoolStoryIcon } from '../component/icon/insertorIcon';
+import Save from "./save.js"
+import attributes from "./attributes.js"
+import v1 from "../deprecated/child-block-v1.js";
+import Edit from "./edit.js"
+import { CoolStoryIcon } from '../component/icon/insertorIcon.js';
 const { useBlockProps } = wp.blockEditor;
 import { __ } from '@wordpress/i18n';
 const {
@@ -14,7 +14,7 @@ const {
 } = wp.blocks
 
 registerBlockType("cp-timeline/content-timeline-block-child", {
-	title: __('Cool Timeline Story', 'cool-timeline'), // Block title.
+	title: __('Single Story Details', 'timeline-block'), // Block title.
 	apiVersion: 2,
 	icon: CoolStoryIcon,
 	keywords: [
@@ -25,7 +25,7 @@ registerBlockType("cp-timeline/content-timeline-block-child", {
 		inserter: false,
 	},
 	attributes,
-	deprecated,
+	deprecated: [v1],
 	usesContext: ['cp-timeline/timelineDesign', 'cp-timeline/timelineLayout'],
 	edit: props => {
 		const chilblockProps = useBlockProps({
@@ -46,4 +46,3 @@ registerBlockType("cp-timeline/content-timeline-block-child", {
 		)
 	}
 })
-
