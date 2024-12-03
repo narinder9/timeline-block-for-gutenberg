@@ -148,9 +148,8 @@ class Edit extends Component {
 				}
 				<div className="story-content">
 					<InnerBlocks
-						templateLock="all" // Lock the template to prevent users from removing blocks
 						template={innerBlockTemplate}
-						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
+						allowedBlocks={['core/image', 'core/heading', 'core/paragraph', 'core/list','core/buttons']}
 						/>
 				</div>
 			</div>
