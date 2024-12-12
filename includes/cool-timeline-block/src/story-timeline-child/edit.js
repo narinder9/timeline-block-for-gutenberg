@@ -73,6 +73,16 @@ class Edit extends Component {
 		let oldBlocks=[];
 		let innerBlocks;
 		const prevInnerBlock = select('core/block-editor').getBlock(this.props.clientId)?.innerBlocks;
+		const prevBlocksName=prevInnerBlock.map((data)=>{
+			return data.name;
+		});
+		let mediaIndex = prevBlocksName.findIndex((data) => ['core/image'].includes(data));
+		mediaIndex = mediaIndex < 0 ? 0 : mediaIndex;
+
+		const prevMediaBlock=prevInnerBlock.filter((data)=>{
+			return ['core/image'].includes(data.name);
+		});
+		
 		const headingLevel=()=>{
 			const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
 			return headingLevel;
@@ -96,6 +106,14 @@ class Edit extends Component {
 			['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
 			['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
 		);
+
+		
+		if(prevMediaBlock.length > 0 && !mediaBlock){
+			dispatch('core/block-editor').removeBlock(prevInnerBlock[mediaIndex].clientId, true)
+		}else if(mediaBlock && prevBlocksName.length > 0 && !prevBlocksName.includes('core/image')){
+			const insertedBlock = wp.blocks.createBlock(mediaBlocks[0][0], mediaBlocks[0][1]);
+			dispatch('core/block-editor').insertBlocks(insertedBlock, 0, this.props.clientId)
+		}
 
 
 		// Spread all blocks in innerBlocks.
