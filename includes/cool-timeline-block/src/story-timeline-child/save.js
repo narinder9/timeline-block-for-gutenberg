@@ -3,12 +3,16 @@
  */
 
 import { IconPickerItem } from 'react-fa-icon-picker-alen';
+import DOMPurify from 'dompurify';
 import { __ } from '@wordpress/i18n';
 const {
 	InnerBlocks,
 	RichText
 } = wp.blockEditor
 
+const filterDate = (data) => {
+	return DOMPurify.sanitize(data);
+}
 
 export default function Save(props) {
 	const {
@@ -56,11 +60,12 @@ export default function Save(props) {
 			</div>
 		</div>
 	)
+
 	const StoryTime = () => (
 
 		<RichText.Content
 			tagName="p"
-			value={'ctl_date_undefined' === t_date ? '1/1/2019' : t_date}
+			value={'ctl_date_undefined' === filterDate(t_date) ? '1/1/2019' : filterDate(t_date)}
 		/>
 	)
 	const icon_div = <div className="timeline-block-icon">
