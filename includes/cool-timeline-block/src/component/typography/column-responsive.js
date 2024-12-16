@@ -20,7 +20,7 @@ import map from 'lodash/map.js';
  */
 export default function Columnresponsive ( props ) {
 	const deviceType = useSelect( ( select ) => {
-		return select( 'core/edit-post' ).__experimentalGetPreviewDeviceType();
+		return select( 'core/editor' ).getDeviceType();
     }, [] );
 	const {
 		__experimentalSetPreviewDeviceType: setPreviewDeviceType,

@@ -2,7 +2,6 @@
  * BLOCK: Timeline - Save Block
  */
 import contentTimelineStyle from "./styling.js"
-import { IconPickerItem } from 'react-fa-icon-picker-alen';
 
 const {
 	InnerBlocks,

@@ -47,7 +47,7 @@
 	display: grid;
     height: calc(100% - 30px);
     overflow-y: auto;
-	gap: .8rem;
+	row-gap: .8rem;
 	grid-template-columns: auto auto auto auto;
 }
 

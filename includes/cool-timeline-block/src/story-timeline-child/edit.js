@@ -1,4 +1,4 @@
-import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
+import {IconPicker, IconPickerItem} from "../component/Icons/index.js";
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
 
@@ -206,6 +206,7 @@ class Edit extends Component {
 							const date='' === value ? 'ctl_date_undefined' : value;
 							setAttributes({t_date:date })
 						}}	
+						__nextHasNoMarginBottom={true}
 					/>
 					<hr className="timeline-block-editor__separator"></hr>
 					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>
@@ -214,8 +215,9 @@ class Edit extends Component {
 						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'true' }) }} className={iconToggle == 'true' ? 'active' : ''}>Icon</Button>
 					</ButtonGroup>
 					{iconToggle == "true" ?
-						<Fragment>  <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({ icon: v })} /> </div>
-
+						<Fragment>  <div className="timeline-block-iconpicker" >
+							<IconPicker icon={icon} onChange={v => setAttributes({ icon: v })}/>
+							</div>
 						</Fragment>
 						: null}
 					{timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
@@ -233,7 +235,9 @@ class Edit extends Component {
 			</InspectorControls>
 		);
 		const icon_div = <div className="timeline-block-icon">
-			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
+			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" >
+				<IconPickerItem icon={icon} size={24} color={iconColor} />
+				</span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
 		</div>;
 		return (
 			<Fragment>
