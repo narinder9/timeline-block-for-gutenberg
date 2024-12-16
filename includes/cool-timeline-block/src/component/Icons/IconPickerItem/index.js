@@ -3,7 +3,7 @@ import * as IconsList from "react-icons/fa";
 const IconPickerItem = ({ icon = 24, size, color }) => {
 
 	if(icon === 'fab fa fa-calendar-alt'){
-		icon = 'FaCalendarAlt';
+		icon = 'FaQuestion';
 	}
 
 	return (

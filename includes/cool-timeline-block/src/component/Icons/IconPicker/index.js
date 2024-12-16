@@ -7,8 +7,10 @@ const IconPicker = ({ icon, setIcon, onChange }) => {
     const [searchText, setSearchText] = useState('');
 
     if(icon === 'fab fa fa-calendar-alt'){
-		icon = 'FaCalendarAlt';
+		icon = 'FaQuestion';
 	}
+
+    console.log(icon);
     
     const toggleIconPicker = () => {
         setIsOpen(!isOpen);
