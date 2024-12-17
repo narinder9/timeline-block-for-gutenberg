@@ -3,8 +3,8 @@ Contributors:coolplugins,narinder-singh
 Donate link:https://paypal.me/CoolPlugins/10USD/
 Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
-Tested up to:6.6
-Requires PHP: 5.6
+Tested up to:6.7
+Requires PHP: 7.2
 Stable tag:1.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -131,59 +131,109 @@ Many thanks to <a href="https://github.com/drzraf"><strong>@drzraf</strong></a> 
 3. Install in one 1-click
 == Frequently Asked Questions ==
 
-#### 1. What is the Timeline Block plugin?
+
+#### What is the Timeline Block plugin?
 The Timeline Block plugin is a responsive WordPress block plugin designed for the Gutenberg block editor. It allows users to create beautiful vertical history timelines with just one click.
 
-#### 2. How do I add a Timeline Block in the Gutenberg editor?
+#### How do I add a Timeline Block in the Gutenberg editor? 
 You can add a Timeline Block by searching for 'Timeline Block' in the 'Add Block' section of the Gutenberg block editor and selecting it.
 
-#### 3. What can I use the Timeline Block plugin for?
-The Timeline Block plugin can be used for various purposes, including:
-- Representing your company story.
-- Showcasing tutorial or process steps in a timeline format.
-- Creating a program timeline.
-- Representing history in an engaging way.
-- Creating events or appointments timelines.
-- Displaying job stories or achievements.
-- Sharing personal stories.
-- Highlighting a product roadmap.
+#### What can I use the Timeline Block plugin for?  
+The Timeline Block plugin can be used for various purposes, including:  
+- Representing your company story.  
+- Showcasing tutorial or process steps in a timeline format.  
+- Creating a program timeline.  
+- Representing history in an engaging way.  
+- Creating events or appointments timelines.  
+- Displaying job stories or achievements.  
+- Sharing personal stories.  
+- Highlighting a product roadmap.  
 
-#### 4. What additional features does Timeline Block Pro offer?
-Timeline Block Pro offers several advanced features, including:
-- Horizontal Layouts (Default and Simple Designs).
-- The ability to create and display multiple timelines on one website.
-- Integration of various media types such as video, images, and slideshows.
-- Customizable icons with options including dot, icon, image, and text.
-- Over 15 animation effects to enhance visual appeal.
-- Adjustable icon, arrow, and label positioning.
-- Center line filling effect for vertical layouts.
-- Year labels for improved timeline readability.
-- Scrolling navigation for quick access to specific year stories.
-- “Read more” links within timeline stories.
-- The ability to rearrange story content.
-- Customizable connector styles between stories.
 
-#### 5. Can I add videos to my timeline?
+#### What additional features does Timeline Block Pro offer? 
+Timeline Block Pro offers several advanced features, including:  
+- Horizontal Layouts (Default and Simple Designs).  
+- The ability to create and display multiple timelines on one website.  
+- Integration of various media types such as video, images, and slideshows.  
+- Customizable icons with options including dot, icon, image, and text.  
+- Over 15 animation effects to enhance visual appeal.  
+- Adjustable icon, arrow, and label positioning.  
+- Center line filling effect for vertical layouts.  
+- Year labels for improved timeline readability.  
+- Scrolling navigation for quick access to specific year stories.  
+- “Read more” links within timeline stories.  
+- The ability to rearrange story content.  
+- Customizable connector styles between stories.  
+
+#### Can I add videos to my timeline?
 Yes, with Timeline Block Pro, you can seamlessly integrate videos (including YouTube), images, and slideshows into your timelines.
 
-#### 6. Is it possible to create multiple timelines on a single website?
+#### Is it possible to create multiple timelines on a single website?  
 Yes, Timeline Block Pro allows you to create and display multiple timelines on one website, categorized by different layouts.
 
-#### 7. How can I improve the visual presentation of my timeline?
-You can enhance the visual appeal of your timeline by using the various customization options available in Timeline Block Pro, such as:
-- Choosing from over 15 animation effects.
-- Adding a center line filling effect to vertical layouts.
-- Adjusting the placement of icons, arrows, and labels.
-- Customizing connector styles between stories (Arrow, Line, or None).
 
-#### 8. How do I make my timeline more interactive?
+#### How can I improve the visual presentation of my timeline? 
+You can enhance the visual appeal of your timeline by using the various customization options available in Timeline Block Pro, such as:  
+- Choosing from over 15 animation effects.  
+- Adding a center line filling effect to vertical layouts.  
+- Adjusting the placement of icons, arrows, and labels.  
+- Customizing connector styles between stories (Arrow, Line, or None).  
+
+#### How do I make my timeline more interactive? 
 You can make your timeline more interactive by enabling scrolling navigation for quick access to specific year stories and including “read more” links within timeline stories to provide additional content or direct users to custom URLs.
 
-#### 9. Can I customize the appearance of icons in my timeline?
-Yes, with Timeline Block Pro, you can customize the icons in your timeline with options including dot, icon, image
+#### Can I customize the appearance of icons in my timeline?  
+Yes, with Timeline Block Pro, you can customize the icons in your timeline with options including dot, icon, image.
 
-#### 10. How can I report security bugs?
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
+#### Can I use the Timeline Block on non-Gutenberg websites or with other page builders?  
+No, the Timeline Block is specifically designed for the Gutenberg editor. However, Cool Plugins offers other timeline plugins compatible with page builders like Elementor.
+
+
+#### Is this plugin translation-ready?  
+Yes, the plugin is fully translation-ready. You can use translation tools like Loco Translate to translate it into your desired language.
+
+
+#### Does the plugin support RTL (Right-to-Left) languages?  
+Yes, the Timeline Block is compatible with RTL languages and adjusts layouts accordingly for better usability.
+
+#### Can I add custom styles to the timeline? 
+Yes, you can use the block settings to customize colors, typography, and layouts. For advanced styling, custom CSS can be added through the WordPress Customizer or a child theme.
+
+#### Is the plugin mobile-friendly?
+Yes, the Timeline Block is fully responsive and adjusts seamlessly to different screen sizes, including mobile devices.
+
+
+#### Can I display dynamic content in the timeline? 
+Currently, the plugin does not support dynamic content directly. However, you can manually add custom stories or events.
+
+
+#### Does the plugin work with multisite WordPress installations? 
+Yes, the plugin is compatible with WordPress multisite setups.
+
+
+#### How can I migrate existing timelines from other plugins? 
+The plugin provides migration options for certain timeline setups. Check the settings for available migration tools or refer to the documentation for guidance.
+
+#### Can I schedule timeline updates for future dates?  
+Currently, the plugin does not support scheduling timeline updates. You will need to manually update or publish new stories when needed.
+
+#### How do I handle conflicts with other plugins?
+If you encounter a conflict, try deactivating other plugins to identify the issue. Ensure all plugins and WordPress are updated to the latest versions. If the issue persists, contact support.
+
+
+#### Can I change the timeline's default font family?  
+Yes, you can customize fonts through the block settings or by adding custom CSS.
+
+#### Can I create a timeline for multiple categories or topics?  
+Yes, you can create separate timelines for different categories or topics and display them on various pages using Gutenberg blocks.
+
+#### How do I get priority support for the plugin?
+Priority support is included with the Pro version. After purchasing, you can submit tickets through the official Cool Plugins support portal.
+
+#### How can I report security bugs?  
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage, and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
+
+
 
 == Upgrade Notice ==
 
