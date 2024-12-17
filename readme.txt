@@ -3,9 +3,9 @@ Contributors:coolplugins,narinder-singh
 Donate link:https://paypal.me/CoolPlugins/10USD/
 Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
-Tested up to:6.7
+Tested up to:6.7.1
 Requires PHP: 7.2
-Stable tag:1.6.2
+Stable tag:1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -239,9 +239,22 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
-Upgrade to <strong>Version 1.6.1</strong> to enjoy these new features, enhancements, and bug fixes. 
+Upgrade to <strong>Version 1.6.3</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
 </p>
+<h4>Version 1.7.0 | 17 Dec 2024</h4>
+<ul>
+<strong>Added:</strong>
+<li>Support for List & Button blocks in timeline description.</li>
+<li>Function load_plugin_textdomain() for translations.</li>
+<li>Option to change or remove element positions (e.g., media after description or title).</li>
+<strong>Fixed:</strong>
+<li>Deprecated JavaScript component error in the block editor.</li>
+<strong>Improved:</strong>
+<li>Update Icon Library to prevent JavaScript errors.</li>
+<strong>Tested:</strong>
+<li>Tested Upto WordPress 6.7.1</li>
+</ul>
 <h4>Version 1.6.2 | 25 Apr 2024</h4>
 <ul>
 <strong>Fixed:</strong>
