@@ -177,10 +177,11 @@ class Edit extends Component {
 			<RichText
 				tagName="p"
 				placeholder={__('Date/Steps', 'timeline-block')}
-				value={'ctl_date_undefined' === t_date ? undefined : t_date}
+				value={t_date === 'ctl_date_undefined' ? '' : t_date} // Change undefined to an empty string for controlled input
 				onChange={ ( value ) => {
-				const date='' === value ? 'ctl_date_undefined' : value;
-				setAttributes({t_date:date })}}										
+					const date='' === value ? 'ctl_date_undefined' : value;
+					setAttributes({t_date: date });
+				}}
 			/>
 		);
 
@@ -201,7 +202,7 @@ class Edit extends Component {
 					<TextControl
 						label="Primary Label(Date/Steps)"
 						placeholder={ __( 'Date/Steps', 'timeline-block' ) }
-						value={'ctl_date_undefined' === t_date ? undefined : t_date}
+						value={t_date === 'ctl_date_undefined' ? '' : t_date} 
 						onChange={ ( value ) => {
 							const date='' === value ? 'ctl_date_undefined' : value;
 							setAttributes({t_date:date })
