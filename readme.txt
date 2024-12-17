@@ -241,114 +241,132 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
 Upgrade to <strong>Version 1.6.1</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
-</p
+</p>
 <h4>Version 1.6.2 | 25 Apr 2024</h4>
 <ul>
 <strong>Fixed:</strong>
-<li>- Fixed fatal error that arises when Cool Timeline Free is already activated.</li>
-</ul>>
+<li>Fixed fatal error that arises when Cool Timeline Free is already activated.</li>
+</ul>
 <h4>Version 1.6.1 | 24 Apr 2024</h4>
 <ul>
 <strong>Added:</strong>
-<li>- Integrated a share feedback popup upon plugin deactivation.</li>
+<li>Integrated a share feedback popup upon plugin deactivation.</li>
 <strong>Improved:</strong>
-<li>- Update the View Demos & Watch Videos link in the settings panel.</li>
-<li>- Update readme file content.</li>
+<li>Update the View Demos & Watch Videos link in the settings panel.</li>
+<li>Update readme file content.</li>
 </ul>
 <h4>Version 1.6 | 11 Dec 2023</h4>
 <ul>
 <strong>New Features:</strong>
-<li>- Added WordPress default Image, Heading, and Paragraph core blocks for more features.</li>
-<li>- Added migration option in instant timeline builder to migrate into Timeline Block.</li>
-<li>- Added migration option in Timeline Block to migrate into Cool Timeline Block.</li>
+<li>Added WordPress default Image, Heading, and Paragraph core blocks for more features.</li>
+<li>Added migration option in instant timeline builder to migrate into Timeline Block.</li>
+<li>Added migration option in Timeline Block to migrate into Cool Timeline Block.</li>
 <strong>Improved:</strong>
-<li>- Cool Timeline Block static CSS replaced with variable-based CSS.</li>
+<li>Cool Timeline Block static CSS replaced with variable-based CSS.</li>
 <strong>Removed:</strong>
-<li>- Remove Heading, Image, and Paragraph settings from Cool Timeline Block.</li>
+<li>Remove Heading, Image, and Paragraph settings from Cool Timeline Block.</li>
 </ul>
 <h4>Version 1.5.2 | 17 Oct 2023</h4>
 <ul>
 <strong>Bug Fixes:</strong>
-<li>- Fixed Minor security update.</li>
+<li>Fixed Minor security update.</li>
 </ul>
 <h4>Version 1.5 | 24 Aug 2023</h4>
 <ul>
 <strong>New Features:</strong>
-<li>- Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.</li>
+<li>Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.</li>
 <strong>Enhancements:</strong>
-<li>- Conveniently access the settings panel with the newly added Timeline Settings button, now available within each nested block.</li>
+<li>Conveniently access the settings panel with the newly added Timeline Settings button, now available within each nested block.</li>
 <strong>Bug Fixes:</strong>
-<li>- Resolved conditional loading of styles and assets, ensuring optimal performance and loading only when necessary.</li>
-<li>- Eliminated duplicate loading of the style.css file for a cleaner and more efficient codebase.</li>
-<li>- Rectified the Font Family issue, ensuring the consistent and accurate rendering of fonts throughout the application.</li>
+<li>Resolved conditional loading of styles and assets, ensuring optimal performance and loading only when necessary.</li>
+<li>Eliminated duplicate loading of the style.css file for a cleaner and more efficient codebase.</li>
+<li>Rectified the Font Family issue, ensuring the consistent and accurate rendering of fonts throughout the application.</li>
 <strong>Compatibility:</strong>
-<li>- Successfully tested with WordPress 6.3 to ensure a smooth user experience.</li>
+<li>Successfully tested with WordPress 6.3 to ensure a smooth user experience.</li>
 </ul>
 <h4>Version 1.4 | 05 Apr 2023</h4>
 <ul>
-<li>Fixed: Icon && center line position issue</li>
-<li>Integrated: New settings for Heading Tag</li>
-<li>Integrated: New Font Icon library. Special Thanks to <a href="https://github.com/drzraf">@drzraf</a></li> for contributions.
-<li>Removed: Font icon library</li>
-<li>Fixed: ALT Tag issue in image</li>
-<li>Tested: Tested Upto WordPress 6.2</li>
+<strong>Added:</strong>
+<li>New settings for Heading Tag</li>
+<li>New Font Icon library. Special Thanks to <a href="https://github.com/drzraf">@drzraf</a> for contributions.</li>
+<strong>Fixed:</strong>
+<li>Icon && center line position issue</li>
+<li>ALT Tag issue in image</li>
+<strong>Removed:</strong>
+<li>Font icon library</li>
+<strong>Tested:</strong>
+<li>Tested Upto WordPress 6.2</li>
 </ul>
 <h4>Version 1.3.3 | 23 Jan 2023</h4>
 <ul>
-<li>Fixed: styles not loading on frontend issue</li>
+<strong>Fixed:</strong>
+<li>styles not loading on frontend issue</li>
 </ul>
 <h4>Version 1.3.2 | 18 Jan 2023</h4>
 <ul>
-<li>Fixed: Timeline disappeared on frontend side</li>
-<li>Fixed: Icon position issue.</li>
-<li>Fixed: Minor CSS issue.</li>
-<li>Added: Active controller reset button when style is applied.</li>
+<strong>Added:</strong>
+<li>Active controller reset button when style is applied.</li>
+<strong>Fixed:</strong>
+<li>Timeline disappeared on frontend side</li>
+<li>Icon position issue.</li>
+<li>Minor CSS issue.</li>
 </ul>
 <h4>Version 1.3.1 | 09 Jan 2023</h4>
 <ul>
-<li>Added: responsive device CSS.</li>
-<li>Fixed: responsive device style issue.</li>
-<li>Fixed: the Attempt recovery option after clicking on Reset Typography.</li>
+<strong>Added:</strong>
+<li>responsive device CSS.</li>
+<strong>Fixed:</strong>
+<li>responsive device style issue.</li>
+<li>the Attempt recovery option after clicking on Reset Typography.</li>
 </ul>
 
 <h4>Version 1.3 | 03 Jan 2023</h4>
 <ul>
-<li>Added: Alternating Sided in both side settings </li>
-<li>New: Content alignment setting </li>
-<li>New: Heading and description bottom spacing setting </li>
-<li>New: Item spacing setting </li>
-<li>New: Icon box size setting </li>
-<li>New: Icon size setting </li>
-<li>New: Line size setting </li>
-<li>New: Content box padding setting integration </li>
-<li>New: Share review option  </li>
-<li>Added: Content update </li>
-<li>Update: Swiper file removes </li>
-<li>Improved: tested Upto WP.6.1</li>
+<strong>Added:</strong>
+<li>Alternating Sided in both side settings</li>
+<li>Content alignment setting</li>
+<li>Heading and description bottom spacing setting</li>
+<li>Item spacing setting</li>
+<li>Icon box size setting</li>
+<li>Icon size setting</li>
+<li>Line size setting</li>
+<li>Content box padding setting integration</li>
+<li>Share review option </li>
+<strong>Updated:</strong>
+<li>Content update</li>
+<li>Swiper file removes</li>
+<strong>Improved:</strong>
+<li>tested Upto WP.6.1</li>
 </ul>
 
 <h4>Version 1.2.2 | 04 July 2022</h4>
 <ul>
-<li>Added: Added source code.</li>
+<strong>Added:</strong>
+<li>Added source code.</li>
 </ul>
 <h4>Version 1.2.1 | 09 June 2022</h4>
 <ul>
-<li>Improved: tested Upto WP.6.0</li>
+<strong>Tested:</strong>
+<li>tested Upto WP.6.0</li>
 </ul>
 <h4>Version 1.2 | 06 JAN, 2022</h4>
 <ul>
-<li>Added: Integrated New Block with an advanced story ordering functionality.</li>
-<li>New: Added image size option, Font Awesome icons, color and typography settings for each element of Cool Timeline Gutenberg Timeline Block</li>
-<li>New: Added right-aligned one-sided timeline layout in  Gutenberg Timeline Block</li>
-<li>New: Story position(left/right) option or both-sided layout of Gutenberg Timeline Block</li>
-<li>Updated: tested upto 5.8.2</li>
+<strong>Added:</strong>
+<li>Integrated New Block with an advanced story ordering functionality.</li>
+<li>Added image size option, Font Awesome icons, color and typography settings for each element of Cool Timeline Gutenberg Timeline Block</li>
+<li>Added right-aligned one-sided timeline layout in  Gutenberg Timeline Block</li>
+<li>Story position(left/right) option or both-sided layout of Gutenberg Timeline Block</li>
+<strong>Tested:</strong>
+<li>tested upto 5.8.2</li>
 </ul>
 <h4>Version 1.1 | 30 June 2021</h4>
 <ul>
-<li>Added: integrated story ordering feature</li>
-<li>Fixed: minor bug fixes</li>
+<strong>Added:</strong>
+<li>integrated story ordering feature</li>
+<strong>Fixed:</strong>
+<li>minor bug fixes</li>
 </ul>
 <h4>Version 1.0 | 18 AUG, 2020</h4>
  <ul>
-<li>- Initial release</li>
+<li>Initial release</li>
 </ul>
