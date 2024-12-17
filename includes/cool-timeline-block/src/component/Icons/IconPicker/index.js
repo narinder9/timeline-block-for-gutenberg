@@ -9,8 +9,6 @@ const IconPicker = ({ icon, setIcon, onChange }) => {
     if(icon === 'fab fa fa-calendar-alt'){
 		icon = 'FaQuestion';
 	}
-
-    console.log(icon);
     
     const toggleIconPicker = () => {
         setIsOpen(!isOpen);

@@ -21,7 +21,6 @@ function create_timeline_block_init() {
 		'create-block-timeline-block-editor-css', // Handle.
 		plugins_url( 'gutenberg-block/build/blocks.editor.build.css', $dir ), // Block editor CSS.
 		array( 'wp-edit-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 	wp_register_style(
 		'gctl-timeline-styles-css',
