@@ -96,6 +96,9 @@ Dive into creativity with seamless integration of various media types, including
 <li><strong>Timeline Widget For Elementor [Free]</strong>- <a href="https://wordpress.org/plugins/timeline-widget-addon-for-elementor/#description" target="_blank">Check it</a> | <a href="https://cooltimeline.com/demo/elementor-timeline/free/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=twea_free_demo">View Demo</a></li>
 <li><strong>Timeline Widget For Elementor PRO [PRO]</strong>- <a href="https://cooltimeline.com/demo/elementor-timeline/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=twea_pro_demo">View Demo</a></li>
 <li><strong>Timeline Builder PRO [PRO]</strong>- <a href="https://cooltimeline.com/demo/timeline-builder-pro/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo">View Demo</a></li>
+<li><strong>Timeline Module for Divi [Free]</strong>- <a href="https://wordpress.org/plugins/timeline-module-for-divi">Check it</a></li>
+<li><strong>Timeline Module for Divi [PRO]</strong>- <a href="https://cooltimeline.com/divi/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo">View Demo</a></li>
+
 </ul>
 #### 😎 Who's Behind
 
@@ -239,10 +242,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
-Upgrade to <strong>Version 1.6.3</strong> to enjoy these new features, enhancements, and bug fixes. 
+Upgrade to <strong>Version 1.7.0</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
 </p>
-<h4>Version 1.7.0 | 17 Dec 2024</h4>
+<h4>Version 1.7.0 | 18 Dec 2024</h4>
 <ul>
 <strong>Added:</strong>
 <li>Support for List & Button blocks in timeline description.</li>
