@@ -521,7 +521,8 @@
   padding: 0;
 }
 
-.cool-vertical-timeline-body.ctlb-wrapper .story-details :where(.timeline-block_desc p,.ctlb-block-desc) {
+.cool-vertical-timeline-body.ctlb-wrapper .story-details .timeline-block_desc p,
+.cool-vertical-timeline-body.ctlb-wrapper .story-details .ctlb-block-desc {
   font-size: var(--ctlb-sub-head-font-size);
   font-family: var(--ctlb-sub-head-font-family);
   font-weight: var(--ctlb-sub-head-font-weight);

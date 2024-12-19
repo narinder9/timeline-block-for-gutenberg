@@ -3,9 +3,9 @@ Contributors:coolplugins,narinder-singh
 Donate link:https://paypal.me/CoolPlugins/10USD/
 Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
-Tested up to:6.6
-Requires PHP: 5.6
-Stable tag:1.6.2
+Tested up to:6.7.1
+Requires PHP: 7.2
+Stable tag:1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,9 @@ Dive into creativity with seamless integration of various media types, including
 <li><strong>Timeline Widget For Elementor [Free]</strong>- <a href="https://wordpress.org/plugins/timeline-widget-addon-for-elementor/#description" target="_blank">Check it</a> | <a href="https://cooltimeline.com/demo/elementor-timeline/free/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=twea_free_demo">View Demo</a></li>
 <li><strong>Timeline Widget For Elementor PRO [PRO]</strong>- <a href="https://cooltimeline.com/demo/elementor-timeline/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=twea_pro_demo">View Demo</a></li>
 <li><strong>Timeline Builder PRO [PRO]</strong>- <a href="https://cooltimeline.com/demo/timeline-builder-pro/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo">View Demo</a></li>
+<li><strong>Timeline Module for Divi [Free]</strong>- <a href="https://wordpress.org/plugins/timeline-module-for-divi">Check it</a></li>
+<li><strong>Timeline Module for Divi [PRO]</strong>- <a href="https://cooltimeline.com/divi/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo">View Demo</a></li>
+
 </ul>
 #### 😎 Who's Behind
 
@@ -131,174 +134,255 @@ Many thanks to <a href="https://github.com/drzraf"><strong>@drzraf</strong></a> 
 3. Install in one 1-click
 == Frequently Asked Questions ==
 
-#### 1. What is the Timeline Block plugin?
+
+#### What is the Timeline Block plugin?
 The Timeline Block plugin is a responsive WordPress block plugin designed for the Gutenberg block editor. It allows users to create beautiful vertical history timelines with just one click.
 
-#### 2. How do I add a Timeline Block in the Gutenberg editor?
+#### How do I add a Timeline Block in the Gutenberg editor? 
 You can add a Timeline Block by searching for 'Timeline Block' in the 'Add Block' section of the Gutenberg block editor and selecting it.
 
-#### 3. What can I use the Timeline Block plugin for?
-The Timeline Block plugin can be used for various purposes, including:
-- Representing your company story.
-- Showcasing tutorial or process steps in a timeline format.
-- Creating a program timeline.
-- Representing history in an engaging way.
-- Creating events or appointments timelines.
-- Displaying job stories or achievements.
-- Sharing personal stories.
-- Highlighting a product roadmap.
+#### What can I use the Timeline Block plugin for?  
+The Timeline Block plugin can be used for various purposes, including:  
+- Representing your company story.  
+- Showcasing tutorial or process steps in a timeline format.  
+- Creating a program timeline.  
+- Representing history in an engaging way.  
+- Creating events or appointments timelines.  
+- Displaying job stories or achievements.  
+- Sharing personal stories.  
+- Highlighting a product roadmap.  
 
-#### 4. What additional features does Timeline Block Pro offer?
-Timeline Block Pro offers several advanced features, including:
-- Horizontal Layouts (Default and Simple Designs).
-- The ability to create and display multiple timelines on one website.
-- Integration of various media types such as video, images, and slideshows.
-- Customizable icons with options including dot, icon, image, and text.
-- Over 15 animation effects to enhance visual appeal.
-- Adjustable icon, arrow, and label positioning.
-- Center line filling effect for vertical layouts.
-- Year labels for improved timeline readability.
-- Scrolling navigation for quick access to specific year stories.
-- “Read more” links within timeline stories.
-- The ability to rearrange story content.
-- Customizable connector styles between stories.
 
-#### 5. Can I add videos to my timeline?
+#### What additional features does Timeline Block Pro offer? 
+Timeline Block Pro offers several advanced features, including:  
+- Horizontal Layouts (Default and Simple Designs).  
+- The ability to create and display multiple timelines on one website.  
+- Integration of various media types such as video, images, and slideshows.  
+- Customizable icons with options including dot, icon, image, and text.  
+- Over 15 animation effects to enhance visual appeal.  
+- Adjustable icon, arrow, and label positioning.  
+- Center line filling effect for vertical layouts.  
+- Year labels for improved timeline readability.  
+- Scrolling navigation for quick access to specific year stories.  
+- “Read more” links within timeline stories.  
+- The ability to rearrange story content.  
+- Customizable connector styles between stories.  
+
+#### Can I add videos to my timeline?
 Yes, with Timeline Block Pro, you can seamlessly integrate videos (including YouTube), images, and slideshows into your timelines.
 
-#### 6. Is it possible to create multiple timelines on a single website?
+#### Is it possible to create multiple timelines on a single website?  
 Yes, Timeline Block Pro allows you to create and display multiple timelines on one website, categorized by different layouts.
 
-#### 7. How can I improve the visual presentation of my timeline?
-You can enhance the visual appeal of your timeline by using the various customization options available in Timeline Block Pro, such as:
-- Choosing from over 15 animation effects.
-- Adding a center line filling effect to vertical layouts.
-- Adjusting the placement of icons, arrows, and labels.
-- Customizing connector styles between stories (Arrow, Line, or None).
 
-#### 8. How do I make my timeline more interactive?
+#### How can I improve the visual presentation of my timeline? 
+You can enhance the visual appeal of your timeline by using the various customization options available in Timeline Block Pro, such as:  
+- Choosing from over 15 animation effects.  
+- Adding a center line filling effect to vertical layouts.  
+- Adjusting the placement of icons, arrows, and labels.  
+- Customizing connector styles between stories (Arrow, Line, or None).  
+
+#### How do I make my timeline more interactive? 
 You can make your timeline more interactive by enabling scrolling navigation for quick access to specific year stories and including “read more” links within timeline stories to provide additional content or direct users to custom URLs.
 
-#### 9. Can I customize the appearance of icons in my timeline?
-Yes, with Timeline Block Pro, you can customize the icons in your timeline with options including dot, icon, image
+#### Can I customize the appearance of icons in my timeline?  
+Yes, with Timeline Block Pro, you can customize the icons in your timeline with options including dot, icon, image.
 
-#### 10. How can I report security bugs?
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
+#### Can I use the Timeline Block on non-Gutenberg websites or with other page builders?  
+No, the Timeline Block is specifically designed for the Gutenberg editor. However, Cool Plugins offers other timeline plugins compatible with page builders like Elementor.
+
+
+#### Is this plugin translation-ready?  
+Yes, the plugin is fully translation-ready. You can use translation tools like Loco Translate to translate it into your desired language.
+
+
+#### Does the plugin support RTL (Right-to-Left) languages?  
+Yes, the Timeline Block is compatible with RTL languages and adjusts layouts accordingly for better usability.
+
+#### Can I add custom styles to the timeline? 
+Yes, you can use the block settings to customize colors, typography, and layouts. For advanced styling, custom CSS can be added through the WordPress Customizer or a child theme.
+
+#### Is the plugin mobile-friendly?
+Yes, the Timeline Block is fully responsive and adjusts seamlessly to different screen sizes, including mobile devices.
+
+
+#### Can I display dynamic content in the timeline? 
+Currently, the plugin does not support dynamic content directly. However, you can manually add custom stories or events.
+
+
+#### Does the plugin work with multisite WordPress installations? 
+Yes, the plugin is compatible with WordPress multisite setups.
+
+
+#### How can I migrate existing timelines from other plugins? 
+The plugin provides migration options for certain timeline setups. Check the settings for available migration tools or refer to the documentation for guidance.
+
+#### Can I schedule timeline updates for future dates?  
+Currently, the plugin does not support scheduling timeline updates. You will need to manually update or publish new stories when needed.
+
+#### How do I handle conflicts with other plugins?
+If you encounter a conflict, try deactivating other plugins to identify the issue. Ensure all plugins and WordPress are updated to the latest versions. If the issue persists, contact support.
+
+
+#### Can I change the timeline's default font family?  
+Yes, you can customize fonts through the block settings or by adding custom CSS.
+
+#### Can I create a timeline for multiple categories or topics?  
+Yes, you can create separate timelines for different categories or topics and display them on various pages using Gutenberg blocks.
+
+#### How do I get priority support for the plugin?
+Priority support is included with the Pro version. After purchasing, you can submit tickets through the official Cool Plugins support portal.
+
+#### How can I report security bugs?  
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage, and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
+
+
 
 == Upgrade Notice ==
 
 == Changelog ==
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
-Upgrade to <strong>Version 1.6.1</strong> to enjoy these new features, enhancements, and bug fixes. 
+Upgrade to <strong>Version 1.7.0</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
-</p
+</p>
+<h4>Version 1.7.0 | 18 Dec 2024</h4>
+<ul>
+<strong>Added:</strong>
+<li>Support for List & Button blocks in timeline description.</li>
+<li>Function load_plugin_textdomain() for translations.</li>
+<li>Option to change or remove element positions (e.g., media after description or title).</li>
+<strong>Fixed:</strong>
+<li>Deprecated JavaScript component error in the block editor.</li>
+<strong>Improved:</strong>
+<li>Update Icon Library to prevent JavaScript errors.</li>
+<strong>Tested:</strong>
+<li>Tested Upto WordPress 6.7.1</li>
+</ul>
 <h4>Version 1.6.2 | 25 Apr 2024</h4>
 <ul>
 <strong>Fixed:</strong>
-<li>- Fixed fatal error that arises when Cool Timeline Free is already activated.</li>
-</ul>>
+<li>Fixed fatal error that arises when Cool Timeline Free is already activated.</li>
+</ul>
 <h4>Version 1.6.1 | 24 Apr 2024</h4>
 <ul>
 <strong>Added:</strong>
-<li>- Integrated a share feedback popup upon plugin deactivation.</li>
+<li>Integrated a share feedback popup upon plugin deactivation.</li>
 <strong>Improved:</strong>
-<li>- Update the View Demos & Watch Videos link in the settings panel.</li>
-<li>- Update readme file content.</li>
+<li>Update the View Demos & Watch Videos link in the settings panel.</li>
+<li>Update readme file content.</li>
 </ul>
 <h4>Version 1.6 | 11 Dec 2023</h4>
 <ul>
 <strong>New Features:</strong>
-<li>- Added WordPress default Image, Heading, and Paragraph core blocks for more features.</li>
-<li>- Added migration option in instant timeline builder to migrate into Timeline Block.</li>
-<li>- Added migration option in Timeline Block to migrate into Cool Timeline Block.</li>
+<li>Added WordPress default Image, Heading, and Paragraph core blocks for more features.</li>
+<li>Added migration option in instant timeline builder to migrate into Timeline Block.</li>
+<li>Added migration option in Timeline Block to migrate into Cool Timeline Block.</li>
 <strong>Improved:</strong>
-<li>- Cool Timeline Block static CSS replaced with variable-based CSS.</li>
+<li>Cool Timeline Block static CSS replaced with variable-based CSS.</li>
 <strong>Removed:</strong>
-<li>- Remove Heading, Image, and Paragraph settings from Cool Timeline Block.</li>
+<li>Remove Heading, Image, and Paragraph settings from Cool Timeline Block.</li>
 </ul>
 <h4>Version 1.5.2 | 17 Oct 2023</h4>
 <ul>
 <strong>Bug Fixes:</strong>
-<li>- Fixed Minor security update.</li>
+<li>Fixed Minor security update.</li>
 </ul>
 <h4>Version 1.5 | 24 Aug 2023</h4>
 <ul>
 <strong>New Features:</strong>
-<li>- Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.</li>
+<li>Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.</li>
 <strong>Enhancements:</strong>
-<li>- Conveniently access the settings panel with the newly added Timeline Settings button, now available within each nested block.</li>
+<li>Conveniently access the settings panel with the newly added Timeline Settings button, now available within each nested block.</li>
 <strong>Bug Fixes:</strong>
-<li>- Resolved conditional loading of styles and assets, ensuring optimal performance and loading only when necessary.</li>
-<li>- Eliminated duplicate loading of the style.css file for a cleaner and more efficient codebase.</li>
-<li>- Rectified the Font Family issue, ensuring the consistent and accurate rendering of fonts throughout the application.</li>
+<li>Resolved conditional loading of styles and assets, ensuring optimal performance and loading only when necessary.</li>
+<li>Eliminated duplicate loading of the style.css file for a cleaner and more efficient codebase.</li>
+<li>Rectified the Font Family issue, ensuring the consistent and accurate rendering of fonts throughout the application.</li>
 <strong>Compatibility:</strong>
-<li>- Successfully tested with WordPress 6.3 to ensure a smooth user experience.</li>
+<li>Successfully tested with WordPress 6.3 to ensure a smooth user experience.</li>
 </ul>
 <h4>Version 1.4 | 05 Apr 2023</h4>
 <ul>
-<li>Fixed: Icon && center line position issue</li>
-<li>Integrated: New settings for Heading Tag</li>
-<li>Integrated: New Font Icon library. Special Thanks to <a href="https://github.com/drzraf">@drzraf</a></li> for contributions.
-<li>Removed: Font icon library</li>
-<li>Fixed: ALT Tag issue in image</li>
-<li>Tested: Tested Upto WordPress 6.2</li>
+<strong>Added:</strong>
+<li>New settings for Heading Tag</li>
+<li>New Font Icon library. Special Thanks to <a href="https://github.com/drzraf">@drzraf</a> for contributions.</li>
+<strong>Fixed:</strong>
+<li>Icon && center line position issue</li>
+<li>ALT Tag issue in image</li>
+<strong>Removed:</strong>
+<li>Font icon library</li>
+<strong>Tested:</strong>
+<li>Tested Upto WordPress 6.2</li>
 </ul>
 <h4>Version 1.3.3 | 23 Jan 2023</h4>
 <ul>
-<li>Fixed: styles not loading on frontend issue</li>
+<strong>Fixed:</strong>
+<li>styles not loading on frontend issue</li>
 </ul>
 <h4>Version 1.3.2 | 18 Jan 2023</h4>
 <ul>
-<li>Fixed: Timeline disappeared on frontend side</li>
-<li>Fixed: Icon position issue.</li>
-<li>Fixed: Minor CSS issue.</li>
-<li>Added: Active controller reset button when style is applied.</li>
+<strong>Added:</strong>
+<li>Active controller reset button when style is applied.</li>
+<strong>Fixed:</strong>
+<li>Timeline disappeared on frontend side</li>
+<li>Icon position issue.</li>
+<li>Minor CSS issue.</li>
 </ul>
 <h4>Version 1.3.1 | 09 Jan 2023</h4>
 <ul>
-<li>Added: responsive device CSS.</li>
-<li>Fixed: responsive device style issue.</li>
-<li>Fixed: the Attempt recovery option after clicking on Reset Typography.</li>
+<strong>Added:</strong>
+<li>responsive device CSS.</li>
+<strong>Fixed:</strong>
+<li>responsive device style issue.</li>
+<li>the Attempt recovery option after clicking on Reset Typography.</li>
 </ul>
 
 <h4>Version 1.3 | 03 Jan 2023</h4>
 <ul>
-<li>Added: Alternating Sided in both side settings </li>
-<li>New: Content alignment setting </li>
-<li>New: Heading and description bottom spacing setting </li>
-<li>New: Item spacing setting </li>
-<li>New: Icon box size setting </li>
-<li>New: Icon size setting </li>
-<li>New: Line size setting </li>
-<li>New: Content box padding setting integration </li>
-<li>New: Share review option  </li>
-<li>Added: Content update </li>
-<li>Update: Swiper file removes </li>
-<li>Improved: tested Upto WP.6.1</li>
+<strong>Added:</strong>
+<li>Alternating Sided in both side settings</li>
+<li>Content alignment setting</li>
+<li>Heading and description bottom spacing setting</li>
+<li>Item spacing setting</li>
+<li>Icon box size setting</li>
+<li>Icon size setting</li>
+<li>Line size setting</li>
+<li>Content box padding setting integration</li>
+<li>Share review option </li>
+<strong>Updated:</strong>
+<li>Content update</li>
+<li>Swiper file removes</li>
+<strong>Improved:</strong>
+<li>tested Upto WP.6.1</li>
 </ul>
 
 <h4>Version 1.2.2 | 04 July 2022</h4>
 <ul>
-<li>Added: Added source code.</li>
+<strong>Added:</strong>
+<li>Added source code.</li>
 </ul>
 <h4>Version 1.2.1 | 09 June 2022</h4>
 <ul>
-<li>Improved: tested Upto WP.6.0</li>
+<strong>Tested:</strong>
+<li>tested Upto WP.6.0</li>
 </ul>
 <h4>Version 1.2 | 06 JAN, 2022</h4>
 <ul>
-<li>Added: Integrated New Block with an advanced story ordering functionality.</li>
-<li>New: Added image size option, Font Awesome icons, color and typography settings for each element of Cool Timeline Gutenberg Timeline Block</li>
-<li>New: Added right-aligned one-sided timeline layout in  Gutenberg Timeline Block</li>
-<li>New: Story position(left/right) option or both-sided layout of Gutenberg Timeline Block</li>
-<li>Updated: tested upto 5.8.2</li>
+<strong>Added:</strong>
+<li>Integrated New Block with an advanced story ordering functionality.</li>
+<li>Added image size option, Font Awesome icons, color and typography settings for each element of Cool Timeline Gutenberg Timeline Block</li>
+<li>Added right-aligned one-sided timeline layout in  Gutenberg Timeline Block</li>
+<li>Story position(left/right) option or both-sided layout of Gutenberg Timeline Block</li>
+<strong>Tested:</strong>
+<li>tested upto 5.8.2</li>
 </ul>
 <h4>Version 1.1 | 30 June 2021</h4>
 <ul>
-<li>Added: integrated story ordering feature</li>
-<li>Fixed: minor bug fixes</li>
+<strong>Added:</strong>
+<li>integrated story ordering feature</li>
+<strong>Fixed:</strong>
+<li>minor bug fixes</li>
 </ul>
 <h4>Version 1.0 | 18 AUG, 2020</h4>
  <ul>
-<li>- Initial release</li>
+<li>Initial release</li>
 </ul>

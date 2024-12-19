@@ -1,4 +1,4 @@
-import { IconPicker, IconPickerItem } from 'react-fa-icon-picker-alen';
+import {IconPicker, IconPickerItem} from "../component/Icons/index.js";
 const { Component, Fragment } = wp.element;
 import { __ } from '@wordpress/i18n';
 
@@ -73,6 +73,16 @@ class Edit extends Component {
 		let oldBlocks=[];
 		let innerBlocks;
 		const prevInnerBlock = select('core/block-editor').getBlock(this.props.clientId)?.innerBlocks;
+		const prevBlocksName=prevInnerBlock.map((data)=>{
+			return data.name;
+		});
+		let mediaIndex = prevBlocksName.findIndex((data) => ['core/image'].includes(data));
+		mediaIndex = mediaIndex < 0 ? 0 : mediaIndex;
+
+		const prevMediaBlock=prevInnerBlock.filter((data)=>{
+			return ['core/image'].includes(data.name);
+		});
+		
 		const headingLevel=()=>{
 			const headingLevel=parseInt(this.props.attributes.headingTag.replace('h',''));
 			return headingLevel;
@@ -96,6 +106,14 @@ class Edit extends Component {
 			['core/heading', { level: headingLevel(), content: this.props.attributes.time_heading, className: 'ctlb-block-title', style: {spacing: {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Heading block with level 2 and default content
 			['core/paragraph', { content: this.props.attributes.time_desc, placeholder: __('Add your description here','timeline-block'), className: 'ctlb-block-desc', style: {spacing : {padding:{top: '0px',left: '0px',bottom: '0px', right: '0px'}}}}], // Default: Paragraph block with default content
 		);
+
+		
+		if(prevMediaBlock.length > 0 && !mediaBlock){
+			dispatch('core/block-editor').removeBlock(prevInnerBlock[mediaIndex].clientId, true)
+		}else if(mediaBlock && prevBlocksName.length > 0 && !prevBlocksName.includes('core/image')){
+			const insertedBlock = wp.blocks.createBlock(mediaBlocks[0][0], mediaBlocks[0][1]);
+			dispatch('core/block-editor').insertBlocks(insertedBlock, 0, this.props.clientId)
+		}
 
 
 		// Spread all blocks in innerBlocks.
@@ -148,9 +166,8 @@ class Edit extends Component {
 				}
 				<div className="story-content">
 					<InnerBlocks
-						templateLock="all" // Lock the template to prevent users from removing blocks
 						template={innerBlockTemplate}
-						allowedBlocks={['core/image', 'core/heading', 'core/paragraph']}
+						allowedBlocks={['core/image', 'core/heading', 'core/paragraph', 'core/list','core/buttons']}
 						/>
 				</div>
 			</div>
@@ -160,10 +177,11 @@ class Edit extends Component {
 			<RichText
 				tagName="p"
 				placeholder={__('Date/Steps', 'timeline-block')}
-				value={'ctl_date_undefined' === t_date ? undefined : t_date}
+				value={t_date === 'ctl_date_undefined' ? '' : t_date} // Change undefined to an empty string for controlled input
 				onChange={ ( value ) => {
-				const date='' === value ? 'ctl_date_undefined' : value;
-				setAttributes({t_date:date })}}										
+					const date='' === value ? 'ctl_date_undefined' : value;
+					setAttributes({t_date: date });
+				}}
 			/>
 		);
 
@@ -184,11 +202,12 @@ class Edit extends Component {
 					<TextControl
 						label="Primary Label(Date/Steps)"
 						placeholder={ __( 'Date/Steps', 'timeline-block' ) }
-						value={'ctl_date_undefined' === t_date ? undefined : t_date}
+						value={t_date === 'ctl_date_undefined' ? '' : t_date} 
 						onChange={ ( value ) => {
 							const date='' === value ? 'ctl_date_undefined' : value;
 							setAttributes({t_date:date })
 						}}	
+						__nextHasNoMarginBottom={true}
 					/>
 					<hr className="timeline-block-editor__separator"></hr>
 					<div className="timeline-block-settings-labels">{__("Story Icon", "timeline-block")}</div>
@@ -197,8 +216,9 @@ class Edit extends Component {
 						<Button isSmall onClick={(e) => { setAttributes({ iconToggle: 'true' }) }} className={iconToggle == 'true' ? 'active' : ''}>Icon</Button>
 					</ButtonGroup>
 					{iconToggle == "true" ?
-						<Fragment>  <div className="timeline-block-iconpicker" ><IconPicker value={icon} onChange={v => setAttributes({ icon: v })} /> </div>
-
+						<Fragment>  <div className="timeline-block-iconpicker" >
+							<IconPicker icon={icon} onChange={v => setAttributes({ icon: v })}/>
+							</div>
 						</Fragment>
 						: null}
 					{timelineLayout == "vertical" && timelineDesign == "both-sided" && storyPositionHide ? //hide story position if alternating sided on
@@ -216,7 +236,9 @@ class Edit extends Component {
 			</InspectorControls>
 		);
 		const icon_div = <div className="timeline-block-icon">
-			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" ><IconPickerItem icon={icon} size={24} color={iconColor} /></span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
+			{icon !== "" && iconToggle == "true" ? <span className="timeline-block-render-icon" >
+				<IconPickerItem icon={icon} size={24} color={iconColor} />
+				</span> : <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>}
 		</div>;
 		return (
 			<Fragment>

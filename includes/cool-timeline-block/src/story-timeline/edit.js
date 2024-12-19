@@ -180,6 +180,7 @@ class Edit extends Component {
 				{ value: "right", label: __( "Right Sided","timeline-block") },
 				{ value: "left", label: __( "Left Sided","timeline-block") },
 			] }
+			__nextHasNoMarginBottom={ true }
 			/>
 			</Fragment>:null;
 		const general_setting=<CardBody>
@@ -466,6 +467,7 @@ class Edit extends Component {
 						{ value: "vertical", label: __( "Vertical","timeline-block") },
 						// { value: "horizontal", label: __( "Horizontal (PRO)","timeline-block"), disabled: true }
 					] }
+					__nextHasNoMarginBottom={ true }
 					/>
 				{timelineLayout == "vertical" ?
 				<SelectControl
@@ -481,6 +483,7 @@ class Edit extends Component {
 						{ value: "one-sided", label: __( "One Sided","timeline-block") },
 						
 					] }
+					__nextHasNoMarginBottom={ true }
 					/>:
 					<RangeControl
 						label="Slides"
@@ -505,6 +508,7 @@ class Edit extends Component {
 					onChange={ (state) => {
 						setAttributes({OrientationCheckBox : state}),this.OrientationCheck(state);
 					} }
+					__nextHasNoMarginBottom={ true }
 					/>
 					</div>
 					: null

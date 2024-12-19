@@ -142,6 +142,7 @@ function FontFamilyControl( props ) {
 				options={
 					fontWeightObj
 				}
+				__nextHasNoMarginBottom={ true }
 			/>
 			<SelectControl
 				label={ __( "Font Subset",'timeline-block' ) }
@@ -150,6 +151,7 @@ function FontFamilyControl( props ) {
 				options={
 					fontSubsetObj
 				}
+				__nextHasNoMarginBottom={ true }
 			/>
 		</div>
 	)

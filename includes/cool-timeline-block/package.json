@@ -7,21 +7,23 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
-    "build": "wp-scripts build",
+    "build": "wp-scripts build --output-path=./dist",
     "format": "wp-scripts format",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start"
+    "start": "wp-scripts start --output-path=./dist"
   },
   "devDependencies": {
     "@wordpress/scripts": "^25.4.0",
-    "react-fa-icon-picker-alen": "^1.0.6",
     "webfontloader": "^1.6.28"
   },
   "dependencies": {
+    "dompurify": "^3.2.3",
     "memize": "^1.1.0",
+    "react-icons": "^5.4.0",
+    "react-is": "^18.3.1",
     "react-select": "^5.7.1",
     "styled-components": "^5.3.9"
   }
