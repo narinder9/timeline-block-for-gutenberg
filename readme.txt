@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
 Tested up to:6.7.1
 Requires PHP: 7.2
-Stable tag:1.7.0
+Stable tag:1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -240,9 +240,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 <p>We're committed to delivering a seamless and enhanced experience with every update. 
-Upgrade to <strong>Version 1.7.0</strong> to enjoy these new features, enhancements, and bug fixes. 
+Upgrade to <strong>Version 1.7.1</strong> to enjoy these new features, enhancements, and bug fixes. 
 <strong>Your feedback is invaluable as we continue to refine and improve our plugins.</strong>
 </p>
+<h4>Version 1.7.1 | 27 Jan 2025</h4>
+<ul>
+<strong>Fixed:</strong>
+<li>Javascript edtior side error</li>
+</ul>
 <h4>Version 1.7.0 | 18 Dec 2024</h4>
 <ul>
 <strong>Added:</strong>
