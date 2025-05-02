@@ -45,11 +45,14 @@ postcss.config.js   export-ignore
 includes/shortcode-blocks/src/  export-ignore
 *.map   export-ignore
 *.scss  export-ignore
-includes/cool-timeline-block/src/components/    export-ignore
+includes/cool-timeline-block/src/component/    export-ignore
 includes/cool-timeline-block/src/deprecated/    export-ignore
 includes/cool-timeline-block/src/story-timeline/    export-ignore
 includes/cool-timeline-block/src/story-timeline-child/  export-ignore
 includes/cool-timeline-block/src/*.css  export-ignore
+includes/cool-timeline-block/src/*.json  export-ignore
+includes/cool-timeline-block/src/*.js  export-ignore
 includes/gutenberg-blocks/src/components/   export-ignore
 includes/gutenberg-blocks/src/vertical-timeline/    export-ignore
 includes/gutenberg-blocks/src/*.css export-ignore
+includes/gutenberg-blocks/src/*.json export-ignore

@@ -46,11 +46,12 @@ postcss.config.js
 includes/shortcode-blocks/src/
 *.map
 *.scss
-includes/cool-timeline-block/src/components/
+includes/cool-timeline-block/src/component/
 includes/cool-timeline-block/src/deprecated/
 includes/cool-timeline-block/src/story-timeline/
 includes/cool-timeline-block/src/story-timeline-child/
 includes/cool-timeline-block/src/*.css
-includes/gutenberg-blocks/src/components/
-includes/gutenberg-blocks/src/vertical-timeline/
-includes/gutenberg-blocks/src/*.css
+includes/gutenberg-block/src/components/
+includes/gutenberg-block/src/vertical-timeline/
+includes/gutenberg-block/src/*.css
+includes/gutenberg-block/src/*.json
