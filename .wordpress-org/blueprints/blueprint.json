@@ -1,0 +1,47 @@
+{
+    "landingPage": "/wp-admin/post.php?post=64437&action=edit",
+    "preferredVersions": {
+      "php": "8.2",
+      "wp": "latest"
+    },
+    "phpExtensionBundles": [
+      "kitchen-sink"
+    ],
+    "features": {
+      "networking": true
+    },
+    "steps": [
+      {
+        "step": "login",
+        "username": "admin",
+        "password": "password"
+      },
+      {
+        "step": "installPlugin",
+        "pluginData": {
+          "resource": "wordpress.org/plugins",
+          "slug": "timeline-block"
+        },
+        "options": {
+          "activate": true
+        }
+      },
+      {
+        "step": "importWxr",
+        "file": {
+          "resource": "url",
+          "url": "https://raw.githubusercontent.com/CoolPluginsTeam/wp-playground-repo/main/timeline/timeline-block.xml"
+        }
+      },
+      {
+        "step": "writeFile",
+        "path": "/wordpress/wp-content/mu-plugins/timeline-block-notice.php",
+        "data": "<?php\nadd_action('admin_footer', function () {\n    $home_url = esc_url(home_url());\n    $edit_url = esc_url(admin_url('post.php?post=64437&action=edit'));\n    $events_url = esc_url(admin_url('edit.php?post_type=tribe_events'));\n    ?>\n    <script>\n    document.addEventListener('DOMContentLoaded', function () {\n        const notice = document.createElement('div');\n        notice.className = 'notice notice-info is-dismissible';\n        notice.style = 'padding: 25px; font-family: sans-serif; margin: 25px 20px; border-left: 5px solid #00a0d2; background: #fff;';\n        notice.innerHTML = `\n            <h2 style='margin-top: 0; display: flex; align-items: center; gap: 10px;'>\n                Display beautiful timelines anywhere using the Timeline Block\n            </h2>\n            <p style='margin-bottom: 15px; font-size: 15px;'>\n              Timeline Block is a responsive WordPress block plugin for the Gutenberg block editor that allows you to create a beautiful vertical history timeline with one click.\n            </p>\n            <div style='display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px;'>\n                <a href='<?= $home_url ?>' class='button button-primary' target='_blank' style='padding: 10px 24px; font-size: 14px;'>🔍 View Demo</a>\n                <a href='<?= $edit_url ?>' class='button button-secondary' style='padding: 10px 24px; font-size: 14px;'>🛠 Timeline Block</a>\n       <a href='https://cooltimeline.com/plugin/timeline-block-pro-for-gutenberg/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=wp_preview_buy_pro' target='_blank' class='button' style='padding: 10px 24px; font-size: 14px; background: linear-gradient(90deg, #d54e21, #ff851b); color: white; border: none;'>⭐ Get PRO — Unlock All Features</a>\n            </div>\n            <p style='font-size: 13px; margin-top: 15px; color: #555;'>🧩 Pro is the upgraded edition of our Timeline Block plugin, offering advanced design controls, unique layouts, and premium features to help you build stunning, professional timelines.</p>\n        `;\n        const wrap = document.getElementById('wpbody-content');\n        if (wrap && !document.getElementById('my-timeline-notice')) {\n            notice.id = 'my-timeline-notice';\n            wrap.prepend(notice);\n        }\n    });\n    </script>\n    <?php\n});"
+      },
+      {
+        "step": "runPHP",
+        "code": "<?php\nob_start();\nrequire_once '/wordpress/wp-load.php';\nob_end_clean();\n\n// Set 'Timeline Block' as homepage\n$page = get_page_by_title('Timeline Block');\nif ($page) {\n  update_option('show_on_front', 'page');\n  update_option('page_on_front', $page->ID);\n  echo \"✅ 'Timeline Block' page set as homepage.\";\n} else {\n  echo \"❌ 'Timeline Block' page not found.\";\n}"
+      }
+    ]
+  }
+  
