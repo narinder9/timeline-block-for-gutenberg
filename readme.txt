@@ -2,7 +2,7 @@
 Contributors:coolplugins,narinder-singh
 Donate link:https://paypal.me/CoolPlugins/10USD/
 Requires at least: 5.0
-Tags: timeline, history, roadmap, company history, Gutenberg
+Tags: timeline, history, roadmap, vertical timeline,horizontal timeline
 Tested up to:6.8.1
 Requires PHP: 7.2
 Stable tag:1.7.2
@@ -234,7 +234,9 @@ Yes, you can create separate timelines for different categories or topics and di
 Priority support is included with the Pro version. After purchasing, you can submit tickets through the official Cool Plugins support portal.
 
 #### How can I report security bugs?  
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/timeline-block/vdp)
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage, and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/timeline-block)
+
+
 
 == Upgrade Notice ==
 
