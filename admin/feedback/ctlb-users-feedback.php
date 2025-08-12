@@ -132,10 +132,15 @@ class CtlbUsersFeedback {
 
 
 	function submit_deactivation_response() {
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], '_cool-plugins_deactivate_feedback_nonce' ) ) {
+
+		if(!current_user_can('manage_options')){
+			wp_send_json_error();
+		}
+		
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), '_cool-plugins_deactivate_feedback_nonce' ) ) {
 			wp_send_json_error();
 		} else {
-			$reason             = sanitize_text_field( $_POST['reason'] );
+			$reason             = sanitize_text_field( wp_unslash( $_POST['reason'] ) );
 			$deactivate_reasons = array(
 				'didnt_work_as_expected'         => array(
 					'title'             => esc_html( __( 'The plugin didn\'t work as expected', 'timeline-block' ) ),
@@ -161,10 +166,10 @@ class CtlbUsersFeedback {
 
 			$deativation_reason = array_key_exists( $reason, $deactivate_reasons ) ? $reason : 'other';
 
-			$sanitized_message = sanitize_text_field( $_POST['message'] ) == '' ? 'N/A' : sanitize_text_field( $_POST['message'] );
+			$sanitized_message = sanitize_text_field( wp_unslash( $_POST['message'] ) ) == '' ? 'N/A' : sanitize_text_field( wp_unslash( $_POST['message'] ) );
 			$admin_email       = sanitize_email( get_option( 'admin_email' ) );
 			$site_url          = esc_url( site_url() );
-			$feedback_url      = esc_url( 'http://feedback.coolplugins.net/wp-json/coolplugins-feedback/v1/feedback' );
+			$feedback_url      = esc_url( 'https://feedback.coolplugins.net/wp-json/coolplugins-feedback/v1/feedback' );
 			$response          = wp_remote_post(
 				$feedback_url,
 				array(
