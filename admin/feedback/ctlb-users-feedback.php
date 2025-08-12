@@ -137,7 +137,7 @@ class CtlbUsersFeedback {
 			wp_send_json_error();
 		}
 		
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), '_cool-plugins_deactivate_feedback_nonce' ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! check_ajax_referer( '_cool-plugins_deactivate_feedback_nonce', '_wpnonce' ) ) {
 			wp_send_json_error();
 		} else {
 			$reason             = sanitize_text_field( wp_unslash( $_POST['reason'] ) );
@@ -185,7 +185,9 @@ class CtlbUsersFeedback {
 				)
 			);
 
-			die( json_encode( array( 'response' => $response ) ) );
+			wp_send_json_success( $response );
+			die();
+			// die( json_encode( array( 'response' => $response ) ) );
 		}
 
 	}
