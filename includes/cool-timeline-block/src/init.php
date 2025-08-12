@@ -75,7 +75,7 @@ function cltb_timeline_block_load_post_assets() {
 						if ( isset( $block['attrs']['headFontSubset'] ) ) {
 							array_push( $headFont, $block['attrs']['headFontSubset'] );
 						}
-						echo '<link href="//fonts.googleapis.com/css?family=' . esc_attr( implode( ':', $headFont ) ) . '" rel="stylesheet">';
+						echo '<link href="'.esc_url("//fonts.googleapis.com/css?family=".esc_attr( implode( ':', $headFont ) )).'" rel="stylesheet">';
 					}
 				}
 				if ( isset( $block['attrs']['subHeadFontFamily'] ) ) {
@@ -88,7 +88,7 @@ function cltb_timeline_block_load_post_assets() {
 						if ( isset( $block['attrs']['subHeadFontSubset'] ) ) {
 							array_push( $subheadFont, $block['attrs']['subHeadFontSubset'] );
 						}
-						echo '<link href="//fonts.googleapis.com/css?family=' . esc_attr( implode( ':', $subheadFont ) ) . '" rel="stylesheet">';
+						echo '<link href="'.esc_url("//fonts.googleapis.com/css?family=".esc_attr( implode( ':', $subheadFont ) )).'" rel="stylesheet">';
 					}
 				}
 				if ( isset( $block['attrs']['dateFontFamily'] ) ) {
@@ -101,7 +101,7 @@ function cltb_timeline_block_load_post_assets() {
 						if ( isset( $block['attrs']['dateFontSubset'] ) ) {
 							array_push( $dateFont, $block['attrs']['dateFontSubset'] );
 						}
-						echo '<link href="//fonts.googleapis.com/css?family=' . esc_attr( implode( ':', $dateFont ) ) . '" rel="stylesheet">';
+						echo '<link href="'.esc_url("//fonts.googleapis.com/css?family=".esc_attr( implode( ':', $dateFont ) )).'" rel="stylesheet">';
 					}
 				}
 			}
@@ -132,16 +132,6 @@ function cltb_cp_timeline_cgb_block_assets() {
 		Timeline_Block_Url . 'includes/cool-timeline-block/dist/index.css',
 		array( 'wp-edit-blocks' ),
 		null
-	);
-
-	wp_localize_script(
-		'cltb_cp_timeline-cgb-block-js',
-		'cgbGlobal',
-		array(
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
-
-		)
 	);
 
 	if ( function_exists( 'register_block_type' ) ) {
