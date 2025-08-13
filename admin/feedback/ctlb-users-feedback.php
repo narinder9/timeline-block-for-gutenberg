@@ -187,7 +187,6 @@ class CtlbUsersFeedback {
 
 			wp_send_json_success( $response );
 			die();
-			// die( json_encode( array( 'response' => $response ) ) );
 		}
 
 	}
