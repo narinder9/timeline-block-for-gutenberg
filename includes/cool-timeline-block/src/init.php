@@ -76,7 +76,7 @@ function cltb_timeline_block_load_post_assets() {
 							array_push( $headFont, $block['attrs']['headFontSubset'] );
 						}
 
-						$head_font_url = cltb_get_font_url( $headFont );
+						$head_font_url = ctlb_timeline_get_font_url( $headFont );
 
 						echo '<link href="'.esc_url($head_font_url).'" rel="stylesheet">';
 					}
@@ -92,7 +92,7 @@ function cltb_timeline_block_load_post_assets() {
 							array_push( $subheadFont, $block['attrs']['subHeadFontSubset'] );
 						}
 
-						$subhead_font_url = cltb_get_font_url( $subheadFont );
+						$subhead_font_url = ctlb_timeline_get_font_url( $subheadFont );
 
 						echo '<link href="'.esc_url($subhead_font_url).'" rel="stylesheet">';
 					}
@@ -108,7 +108,7 @@ function cltb_timeline_block_load_post_assets() {
 							array_push( $dateFont, $block['attrs']['dateFontSubset'] );
 						}
 
-						$date_font_url = cltb_get_font_url( $dateFont );
+						$date_font_url = ctlb_timeline_get_font_url( $dateFont );
 
 						echo '<link href="'.esc_url($date_font_url).'" rel="stylesheet">';
 					}
@@ -119,7 +119,7 @@ function cltb_timeline_block_load_post_assets() {
 
 }
 
-function cltb_get_font_url( $font_set ) {
+function ctlb_timeline_get_font_url( $font_set ) {
 	$font_url = add_query_arg(
 		array(
 			'family' => rawurlencode( implode( ':', $font_set ) ),
