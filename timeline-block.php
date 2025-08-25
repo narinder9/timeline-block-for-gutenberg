@@ -5,7 +5,7 @@
  * Description:Responsive timeline block for Gutenberg editor.
  * Version:1.7.3
  * Author:Cool Plugins
- * Author URI:https://coolplugins.net
+ * Author URI:https://coolplugins.net/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list
  * License:GPLv2 or later
  * License URI:https://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path:/languages
@@ -74,8 +74,16 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 			require Timeline_Block_Dir . 'includes/cool-timeline-block/src/init.php'; // Includes the Cool Timeline Block source initialization file.
 
 			if ( is_admin() ) { // Checks if the current request is for an administrative interface page.
+				$pluginpath= plugin_basename( __FILE__ );
 				require_once Timeline_Block_Dir . 'admin/feedback/ctlb-users-feedback.php'; // Includes the admin feedback functionality file.
+			    add_filter( "plugin_action_links_$pluginpath", array( $this, 'ctlb_settings_link' ) );
 			}
+		}
+		   public function ctlb_settings_link( $links ) {
+			
+			$links[] = '<a style="font-weight:bold; color:#852636;" href="https://cooltimeline.com/plugin/timeline-block-pro-for-gutenberg/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=get_pro&utm_content=plugins_list#pricing">Get Pro</a>';
+
+			return $links;
 		}
 	}
 }

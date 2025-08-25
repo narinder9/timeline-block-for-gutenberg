@@ -843,6 +843,9 @@ i.fipicon-angle-left:before {
     transform: translateX(-50%);
 	flex-direction: initial !important;
   }
+  .cp-timeline-block-demo-button a{
+	margin-right: 5px !important;
+  }
   
   .timeline-block-add-story {
     margin: 10px 0px 20px 0px;
