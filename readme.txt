@@ -53,7 +53,7 @@ Just search **‘Timeline Block‘** from the block editor **‘Add Block‘** s
 * **Cool Timeline:** Display your company’s history, product roadmaps, personal stories, or key events using the built-in block or via simple shortcode. **[View Demo](https://cooltimeline.com/demo/cool-timeline-free/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=ctl_free_demo)**
 * **Timeline Widget For Elementor:** Showcase your company history, product roadmap, and personal journey in vertical & horizontal layout directly inside Elementor. **[View Demo](https://cooltimeline.com/demo/elementor-timeline-widget/free/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=twea_free_demo)**
 * **Timeline Builder:** Create a small timeline inside the Gutenberg block editor using a vertical or horizontal timeline. **[View Demo](https://cooltimeline.com/demo/timeline-builder-pro/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo)**
-Timeline Module Pro For Divi: Showcase your personal story or company history using stunning vertical or horizontal timelines directly inside the Divi Builder. **[View Demo](https://cooltimeline.com/divi/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tmdivi_view_demo)**
+* **Timeline Module Pro For Divi:** Showcase your personal story or company history using stunning vertical or horizontal timelines directly inside the Divi Builder. **[View Demo](https://cooltimeline.com/divi/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tmdivi_view_demo)**
 
 == Screenshots ==
 1. Gutenberg Timeline Block Preview
@@ -82,6 +82,7 @@ Yes, Timeline Block Pro allows you to create and display multiple timelines on o
 
 =How can I improve the visual presentation of my timeline?=
 You can enhance the visual appeal of your timeline by using the various customization options available in Timeline Block Pro, such as:
+
 * Choosing from over 15 animation effects.
 * Adding a center line filling effect to vertical layouts.
 * Adjusting the placement of icons, arrows, and labels.
