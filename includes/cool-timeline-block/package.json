@@ -17,6 +17,9 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^25.4.0",
+    "sass": "^1.90.0",
+    "sass-embedded": "^1.90.0",
+    "sass-loader": "^16.0.5",
     "webfontloader": "^1.6.28"
   },
   "dependencies": {
