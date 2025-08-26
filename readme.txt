@@ -132,9 +132,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-Upgrade to Version 1.7.2 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+Upgrade to Version 1.7.3 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
 
-= Version 1.7.3 | 25 Aug 2025 =
+= Version 1.7.3 | 26 Aug 2025 =
 - **Fixed:** Addressed security vulnerabilities.
 
 = Version 1.7.2 | 02 May 2025 =
