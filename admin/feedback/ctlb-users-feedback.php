@@ -170,8 +170,8 @@ class CtlbUsersFeedback {
 			$admin_email       = sanitize_email( get_option( 'admin_email' ) );
 			$site_url          = esc_url( site_url() );
 			$feedback_url      = esc_url( 'https://feedback.coolplugins.net/wp-json/coolplugins-feedback/v1/feedback' );
-			$plugin_initial    = get_option('ctlb_initial_save_version') ?: 'N/A';
-            $install_date      = get_option('ctlb-install-date') ?: 'N/A';
+			$plugin_initial    = get_option('ctlb-initial-save-version') ? get_option('ctlb-initial-save-version'): 'N/A';
+            $install_date      = get_option('ctlb-install-date') ? get_option('ctlb-install-date'): 'N/A';
             $unique_key        = '60';
             $site_id            = $site_url . '-' . $install_date . '-' . $unique_key;
 			$response          = wp_remote_post(

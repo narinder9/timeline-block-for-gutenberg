@@ -68,13 +68,20 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 		 */
 		public function ctlb_load_plugin_textdomain() {
 			load_plugin_textdomain('timeline-block', false, basename( dirname( __FILE__ ) ) . '/languages/');
+
+			if ( ! get_option( 'ctlb-initial-save-version' ) ) {
+				add_option( 'ctlb-initial-save-version', Timeline_Block_Version );
+			}
+			if ( ! get_option( 'ctlb-install-date' ) ) {
+				add_option( 'ctlb-install-date', gmdate( 'Y-m-d H:i:s' ) );
+			}
 		}
 
 
 
 		 public function ctlb_plugin_activate() {
-			if ( ! get_option( 'ctlb_initial_save_version' ) ) {
-				add_option( 'ctlb_initial_save_version', Timeline_Block_Version );
+			if ( ! get_option( 'ctlb-initial-save-version' ) ) {
+				add_option( 'ctlb-initial-save-version', Timeline_Block_Version );
 			}
 			if ( ! get_option( 'ctlb-install-date' ) ) {
 				add_option( 'ctlb-install-date', gmdate( 'Y-m-d H:i:s' ) );

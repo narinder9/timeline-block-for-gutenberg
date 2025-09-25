@@ -132,7 +132,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-Upgrade to Version 1.7.3 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+Upgrade to Version 1.7.4 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
 
 = Version 1.7.4 | 25 Sep 2025 =
 - **Improved:** Improved the deactivation popup.
