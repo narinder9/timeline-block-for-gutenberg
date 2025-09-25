@@ -103,7 +103,7 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 		}
 
 
-		public static function fcb_get_user_info(){
+		public static function ctlb_get_user_info(){
          global $wpdb;
         // Server and WP environment details
         $server_info = [

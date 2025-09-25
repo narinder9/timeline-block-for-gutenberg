@@ -179,8 +179,8 @@ class CtlbUsersFeedback {
 				array(
 					'timeout' => 30,
 					'body'    => array(
-						'server_info' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['server_info']),
-                    	'extra_details' => serialize(\Floating_Contact_Buttons::fcb_get_user_info()['extra_details']),
+						'server_info' => serialize(\CoolTimelineBlock::ctlb_get_user_info()['server_info']),
+                    	'extra_details' => serialize(\CoolTimelineBlock::ctlb_get_user_info()['extra_details']),
 						'plugin_version' => $this->plugin_version,
 						'plugin_name'    => $this->plugin_name,
 						'reason'         => $deativation_reason,
