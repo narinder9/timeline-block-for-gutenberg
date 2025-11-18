@@ -148,7 +148,10 @@ class Edit extends Component {
 		const StoryDetail = () => (
 			<div className="story-details">
 				{ mediaBlock ?
-				<Button isSmall isSecondary onClick={() => this.innerBlockTemplate(false)} style={{marginBottom: '10px'}}>{__('Remove Media Block',"timeline-block")}</Button> :
+				<Button isSmall isSecondary onClick={() => this.innerBlockTemplate(false)} 
+				style={{marginBottom: '10px',
+                        marginLeft: '9px',
+                        marginTop: '9px'}}>{__('Remove Media Block',"timeline-block")}</Button> :
 				<Button isSmall isSecondary 
 				onClick={
 					()=> 
@@ -160,7 +163,7 @@ class Edit extends Component {
 						},50);
 					}
 					}
-					style={{marginBottom: '10px'}}>
+					style={{marginBottom: '10px' , marginLeft: '9px', marginTop: '9px'}}>
 					{__('Add Media Block', 'timeline-block')}
 				</Button>
 				}

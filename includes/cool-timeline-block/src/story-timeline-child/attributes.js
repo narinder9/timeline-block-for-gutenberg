@@ -130,7 +130,7 @@ const attributes = {
 		default:"",
 	},
 	storyPositionHide:{
-		type:"bollean",
+		type:"boolean",
 		default:true,
 	},
 	headingTag:{
@@ -138,7 +138,7 @@ const attributes = {
 		default:'h3',
 	},
 	wodpressBlock:{
-		type: "bollean",
+		type: "boolean",
 		default: false
 	},
 	innerBlockTemplate:{
@@ -146,7 +146,7 @@ const attributes = {
 		default: []
 	},
 	mediaBlock:{
-		type: "bollean",
+		type: "boolean",
 		default: false
 	}
 }
