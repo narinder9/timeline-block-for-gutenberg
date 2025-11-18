@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
 Tested up to:6.8.2
 Requires PHP: 7.2
-Stable tag:1.7.4
+Stable tag:1.7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Showcase your company history, process steps, milestones, and roadmap inside Gutenberg using the powerful Timeline Block
@@ -132,7 +132,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-Upgrade to Version 1.7.4 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+Upgrade to Version 1.7.5 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+
+= Version 1.7.5 | 18 Nov 2025 =
+- **Improved:** Styling for media block Button.
+- **Improved:**  Textual changes.
 
 = Version 1.7.4 | 25 Sep 2025 =
 - **Improved:** Improved the deactivation popup.
