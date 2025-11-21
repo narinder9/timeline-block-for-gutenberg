@@ -6,19 +6,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action( 'enqueue_block_assets', 'cltb_timeline_block_editor_assets' );
-function cltb_timeline_block_editor_assets() {
+// add_action( 'enqueue_block_assets', 'cltb_timeline_block_editor_assets' );
+// function cltb_timeline_block_editor_assets() {
 
-	$id = get_the_ID();
+// 	$id = get_the_ID();
 
-	if ( has_block( 'cp-timeline/content-timeline-block', $id ) ) {
-		wp_enqueue_style( 'cltb_cp_timeline-cgb-style' );
-	} else {
-		if ( ! is_admin() ) {
-			wp_dequeue_style( 'cltb_cp_timeline-cgb-style' );
-		}
-	}
-}
+// 	if ( has_block( 'cp-timeline/content-timeline-block', $id ) ) {
+// 		wp_enqueue_style( 'cltb_cp_timeline-cgb-style' );
+// 	} else {
+// 		// if ( ! is_admin() ) {
+// 			// wp_dequeue_style( 'cltb_cp_timeline-cgb-style' );
+// 		// }
+// 	}
+// }
 
 
 

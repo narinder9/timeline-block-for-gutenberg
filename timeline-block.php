@@ -93,8 +93,8 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 		 * It loads files for the Gutenberg block, the Cool Timeline Block source, and admin feedback functionality.
 		 */
 		public function ctlb_include_files() {
-			require Timeline_Block_Dir . 'includes/gutenberg-block/init.php'; // Includes the Gutenberg block initialization file.
 			require Timeline_Block_Dir . 'includes/cool-timeline-block/src/init.php'; // Includes the Cool Timeline Block source initialization file.
+			require Timeline_Block_Dir . 'includes/gutenberg-block/init.php'; // Includes the Gutenberg block initialization file.
 
 			if ( is_admin() ) { // Checks if the current request is for an administrative interface page.
 				$pluginpath= plugin_basename( __FILE__ );

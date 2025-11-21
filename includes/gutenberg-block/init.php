@@ -42,13 +42,13 @@ function create_timeline_block_init() {
 }
 
 // dequeue instant timeline block css file
-function cltb_gctl_block_editor_assets() {
-	$id = get_the_ID();
+// function cltb_gctl_block_editor_assets() {
+// 	$id = get_the_ID();
 
-	if ( ! has_block( 'cooltimeline/timeline-block', $id ) ) {
-		wp_dequeue_style( 'gctl-timeline-styles-css' );
-	}
-}
+// 	if ( ! has_block( 'cooltimeline/timeline-block', $id ) ) {
+// 		wp_dequeue_style( 'gctl-timeline-styles-css' );
+// 	}
+// }
 
-add_action( 'enqueue_block_assets', 'cltb_gctl_block_editor_assets' );
+// add_action( 'enqueue_block_assets', 'cltb_gctl_block_editor_assets' );
 add_action( 'init', 'create_timeline_block_init' );
