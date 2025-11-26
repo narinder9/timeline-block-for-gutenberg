@@ -255,9 +255,16 @@ background: whitesmoke;
     box-shadow: none;
 }
 .timeline-block-typography-options .timeline-block-size-btn {
-    float: right;
+	float: right;
+    line-height: 1;
+	background: transparent !important;
+	color: var(--wp-components-color-foreground-inverted, #000) !important;
   }
 
+.timeline-block-typography-options .timeline-block-size-btn.timeline-block-typography-reset-btn {
+    height: auto !important;
+    width: auto !important;
+  }
 
   .timeline-block-typography-options .timeline-block-typography-font-family-options input[type=text]:focus {
     box-shadow: none !important;
@@ -709,6 +716,21 @@ i.fipicon-angle-left:before {
     margin: 0px !important;
     align-items: center;
   }
+
+  .cp-timeline-block-style-settings{
+	margin-bottom: 15px !important;
+  }
+
+  .cp-timeline-block-style-settings h2{
+	margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  .cp-timeline-block-style-settings button{
+	display: block;
+  }
+
   .cp-timeline-typography_apply .timeline-block-typography-control-btn,
   .cp-timeline-typography_apply .timeline-block-typography-reset-btn,
   .timeline-color-setting_apply,
@@ -756,14 +778,15 @@ i.fipicon-angle-left:before {
 	content: unset;
   }
   
+  .timeline-block-custom-inline-control .components-toggle-control__label {
+	display: none;
+  }
+  
   .timeline-block-typography-reset-btn,
   .timeline-block-colorpallete-reset,
   .timeline-block-control__actions_reset {
-	height: 23px !important;
-	width: 23px !important;
-	margin-left: 6px;
     margin-right: auto;
-	padding: 0px 4px !important;
+	padding: 4px !important;
   }
   
   .timeline-block-colorpallete-reset span,
@@ -888,6 +911,10 @@ i.fipicon-angle-left:before {
     text-transform: uppercase;
     margin-bottom: 8px;
     padding: 0px;
+  }
+
+  .components-base-control .timeline-block-settings-labels {
+    margin-bottom: 0px;
   }
 
   .timeline-block-spacing-control {
