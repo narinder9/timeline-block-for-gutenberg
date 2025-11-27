@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
 Tested up to:6.8.2
 Requires PHP: 7.2
-Stable tag:1.7.6
+Stable tag:1.7.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Showcase your company history, process steps, milestones, and roadmap inside Gutenberg using the powerful Timeline Block
@@ -132,7 +132,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-Upgrade to Version 1.7.6 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+Upgrade to Version 1.7.7 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+
+= Version 1.7.7 | 27 Nov 2025 =
+- **Fixed:** Deactivation Feedback conflict with other timeline plugins.
+- **Removed:** Instant timeline plugin (Before updating to this version, you need to migrate your instant timeline block into Timeline Block).
+- **Improved:** Deactivation Feedback styling.
 
 = Version 1.7.6 | 21 Nov 2025 =
 - **Fixed:** Timeline Block style not loading issue.
@@ -258,6 +263,8 @@ Enhancements:
 - **Initial release**
 
 == Upgrade Notice ==
+= Version 1.7.7 | 27 Nov 2025 =
+- **Removed:** Instant timeline plugin (Before updating to this version, you need to migrate your instant timeline block into Timeline Block click [here](https://cooltimeline.com/timeline-block-migration//?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=docs&utm_content=video_tutorial) to migrate process).
 = Version 1.5 | 24 Aug 2023 =
 - **New Features:**
    * Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.

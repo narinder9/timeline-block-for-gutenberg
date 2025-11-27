@@ -51,7 +51,3 @@ includes/cool-timeline-block/src/deprecated/
 includes/cool-timeline-block/src/story-timeline/
 includes/cool-timeline-block/src/story-timeline-child/
 includes/cool-timeline-block/src/*.css
-includes/gutenberg-block/src/components/
-includes/gutenberg-block/src/vertical-timeline/
-includes/gutenberg-block/src/*.css
-includes/gutenberg-block/src/*.json
