@@ -2,12 +2,11 @@
  * External dependencies
  */
 import './styling.scss';
-import { __, sprintf } from '@wordpress/i18n';
-import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { Button, Tooltip } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 const SpacingControl = ( props ) => {
-	const responsive = true;
 	let [settingsapply,updateSettingsapply]=useState('');
 	const {
 		label,
@@ -19,11 +18,13 @@ const SpacingControl = ( props ) => {
 		valueTop,
 		link,
 		setAttributes,
+		id,
 	} = props;
 
 	const onChangeUnits = ( value ) => {
-			setAttributes( { [ unit.label ]: value.unitValue } );
+		setAttributes( { [ unit.label ]: value.unitValue } );
 	};
+
 	const changeLinkedValues = ( newValue ) => {
 				setAttributes( { [ valueTop.label ]: newValue } );
 				setAttributes( { [ valueRight.label ]: newValue } );
@@ -119,11 +120,11 @@ const SpacingControl = ( props ) => {
 
 	let unitSizes = [
 		{
-			name: __( 'Pixel', 'timeline-block' ),
+			name: __( 'px', 'timeline-block' ),
 			unitValue: 'px',
 		},
 		{
-			name: __( 'Em', 'timeline-block' ),
+			name: __( 'em', 'timeline-block' ),
 			unitValue: 'em',
 		},
 		{
@@ -139,37 +140,7 @@ const SpacingControl = ( props ) => {
 		const items = [];
 		uSizes.map( ( key ) =>{
 			items.push(
-				<Tooltip
-					key={key.name}
-					text={ sprintf(
-						/* translators: abbreviation for units */
-						__( '%s units', 'timeline-block' ),
-						key.name
-					) }
-				>
-					<Button
-						key={ key.unitValue }
-						className={ 'timeline-block-range-control__units--' + key.name }
-						isSmall
-						isPrimary={
-							( unit.value === key.unitValue )
-						}
-						isSecondary={
-							unit.value !== key.unitValue
-						}
-						aria-pressed={
-							( unit.value === key.unitValue )
-						}
-						aria-label={ sprintf(
-							/* translators: abbreviation for units */
-							__( '%s units', 'timeline-block' ),
-							key.name
-						) }
-						onClick={ () => onChangeUnits( key ) }
-					>
-						{ key.unitValue }
-					</Button>
-				</Tooltip>
+				<option value={key.unitValue} key={key.unitValue}>{key.name}</option>
 			)
 		});
 
@@ -269,15 +240,9 @@ const SpacingControl = ( props ) => {
                         className={`timeline-block-control__actions_reset${settingsapply != '' ? ' '+settingsapply : ' '}`}
                         isSmall
                         ><span className="dashicons dashicons-image-rotate"></span></Button>
-						<ButtonGroup
-							className="timeline-block-control__units"
-							aria-label={ __(
-								'Select Units',
-								'timeline-block'
-								) }
-								>
+						<select className="timeline-block-control__units" id={id} value={unit.value} onChange={(e)=>onChangeUnits({unitValue:e.target.value})}>
 							{ !disableUnits && onUnitSizeClick( unitSizes ) }
-						</ButtonGroup>
+						</select>
 					</div>
 				</div>
                 { output.Desktop }

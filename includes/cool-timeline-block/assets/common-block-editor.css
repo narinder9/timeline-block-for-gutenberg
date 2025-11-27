@@ -786,6 +786,7 @@ i.fipicon-angle-left:before {
   .timeline-block-colorpallete-reset,
   .timeline-block-control__actions_reset {
     margin-right: auto;
+	margin-left: 6px !important;
 	padding: 4px !important;
   }
   
@@ -1009,6 +1010,14 @@ i.fipicon-angle-left:before {
   .timeline-block-Orientation_checkbox {
     margin-left: auto;
   }
+
+  .timeline-block-control__units{
+	border-radius: 15px !important;
+    min-height: unset !important;
+    padding: 3px 21px 3px 7px !important;
+	line-height: 1 !important;
+  }
+
   .ctl-slider-images-view_box {
     display: flex;
     flex-wrap: wrap;
