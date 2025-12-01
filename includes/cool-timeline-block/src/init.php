@@ -206,8 +206,8 @@ function cltb_asset_loading_update() {
 		wp_send_json_error( 'Assets loading meta parameter missing' );
 	}
 	
-	$value=sanitize_text_field($_POST['assets_loading_meta']);
-	$post_id=sanitize_text_field($_POST['post_id']);
+	$value=sanitize_text_field(wp_unslash($_POST['assets_loading_meta']));
+	$post_id=sanitize_text_field(wp_unslash($_POST['post_id']));
 
 	if($value === 'true'){
 		update_post_meta( $post_id, 'ctlb_assets_loading', $value );
