@@ -6,21 +6,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// add_action( 'enqueue_block_assets', 'cltb_timeline_block_editor_assets' );
-// function cltb_timeline_block_editor_assets() {
+add_action( 'enqueue_block_assets', 'cltb_timeline_block_editor_assets' );
+function cltb_timeline_block_editor_assets() {
+	if(!function_exists('get_the_ID')){
+		return;
+	}
 
-// 	$id = get_the_ID();
+	$id = get_the_ID();
 
-// 	if ( has_block( 'cp-timeline/content-timeline-block', $id ) ) {
-// 		wp_enqueue_style( 'cltb_cp_timeline-cgb-style' );
-// 	} else {
-// 		// if ( ! is_admin() ) {
-// 			// wp_dequeue_style( 'cltb_cp_timeline-cgb-style' );
-// 		// }
-// 	}
-// }
+	$assets_loading_meta=get_post_meta($id, 'ctlb_assets_loading', true);
 
+	wp_localize_script(
+		'cltb_cp_timeline-cgb-block-js',
+		'CtlbCPTimelineBlock',
+		array(
+			'ajaxURL' => admin_url( '/admin-ajax.php' ),
+			'assetsLoadingMeta' => $assets_loading_meta,
+			'assetLoadingUpdateKey'=>wp_create_nonce('ctlb_asset_loading_update_key')
+		)
+	);
 
+	if ( has_block( 'cp-timeline/content-timeline-block', $id ) || 'true' === $assets_loading_meta || is_admin() ) {
+		wp_enqueue_style( 'cltb_cp_timeline-cgb-style' );
+	} else {
+		if ( ! is_admin() ) {
+			wp_dequeue_style( 'cltb_cp_timeline-cgb-style' );
+		}
+	}
+}
 
 add_action( 'enqueue_block_editor_assets', 'cltb_editor_side_css' );
 function cltb_editor_side_css() {
@@ -177,3 +190,31 @@ function cltb_cp_timeline_cgb_block_assets() {
 
 // Hook: Block assets.
 add_action( 'init', 'cltb_cp_timeline_cgb_block_assets' );
+
+add_action( 'wp_ajax_ctlb_asset_loading_update', 'cltb_asset_loading_update' );
+
+function cltb_asset_loading_update() {
+	if ( ! wp_verify_nonce( $_POST['assets_loading_key'], 'ctlb_asset_loading_update_key' ) ) {
+		wp_send_json_error( 'Invalid nonce' );
+	}
+	
+	if(!isset($_POST['post_id'])){
+		wp_send_json_error( 'Post ID parameter missing' );
+	}
+	
+	if(!isset($_POST['assets_loading_meta'])){
+		wp_send_json_error( 'Assets loading meta parameter missing' );
+	}
+	
+	$value=sanitize_text_field($_POST['assets_loading_meta']);
+	$post_id=sanitize_text_field($_POST['post_id']);
+
+	if($value === 'true'){
+		update_post_meta( $post_id, 'ctlb_assets_loading', $value );
+	}else{
+		delete_post_meta( $post_id, 'ctlb_assets_loading' );
+	}
+
+	wp_send_json_success(array('status'=>'success', 'updateValue'=>$value));
+}
+

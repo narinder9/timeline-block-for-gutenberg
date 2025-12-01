@@ -18,6 +18,8 @@ const { Component, Fragment } = wp.element
 import React from 'react';
 
 import { __ } from '@wordpress/i18n';
+import '../onSave/index.js';
+
 const {
 	BlockControls,
 	InspectorControls,
