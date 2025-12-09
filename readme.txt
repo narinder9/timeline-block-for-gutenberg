@@ -3,7 +3,7 @@ Contributors:coolplugins,narinder-singh
 Donate link:https://paypal.me/CoolPlugins/10USD/
 Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
-Tested up to:6.8.2
+Tested up to:6.9
 Requires PHP: 7.2
 Stable tag:1.7.7
 License: GPLv2 or later
