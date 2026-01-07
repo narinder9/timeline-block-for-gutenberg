@@ -12,19 +12,19 @@ const example = {
 	'data1' : {
 		"time_heading": __( "Amazon is born",'timeline-block' ),
 		"time_desc": __( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat enim res aperta. Ne discipulum abducam, times. Primum quid tu dicis breve? An haec ab eo non dicuntur?",'timeline-block' ),
-		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon1-600x338.jpg",
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2025/11/amazon1-16.jpg",
 		"t_date": "July 5, 1994",
 	},
 	'data2' : {
 		"time_heading": __( "Amazon Prime debuts",'timeline-block' ),
 		"time_desc": __( "Aliter homines, aliter philosophos loqui putas oportere? Sin aliud quid voles, postea. Mihi enim satis est, ipsis non satis. Negat enim summo bono afferre incrementum diem. Quod ea non occurrentia fingunt, vincunt Aristonem., you can change me anytime click here, ",'timeline-block' ),
-		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon2-600x338.jpg",
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2025/11/amazon2-15.jpg",
 		"t_date": "Feb 2, 2020",
 	},
 	'data3' : {
 		"time_heading": __( "Amazon acquires Audible",'timeline-block' ),
 		"time_desc": __( "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",'timeline-block' ),
-		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2022/11/amazon3-1-600x338.png",
+		"timeLineImage": "https://cooltimeline.com/wp-content/uploads/2025/11/amazon3-15.png",
 		"t_date": "Jan 31, 2021",
 	},
 };
