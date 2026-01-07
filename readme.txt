@@ -132,7 +132,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-Upgrade to Version 1.7.7 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+Upgrade to Version 1.7.8 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
 
 = Version 1.7.8 | 07 Jan 2026 =
 - **Updated:** Default story image links in timeline block.
