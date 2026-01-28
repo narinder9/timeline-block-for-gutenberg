@@ -30,6 +30,7 @@ if ( ! defined( 'Timeline_Block_Version' ) ) {
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 if ( ! class_exists( 'CoolTimelineBlock' ) ) {
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 	final class CoolTimelineBlock {
 
 
@@ -64,11 +65,11 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
 		}
 
 		/**
-		 * Load plugin textdomain
+		 * Initialize plugin options
+		 * Note: load_plugin_textdomain() is not needed for WordPress.org hosted plugins
+		 * as translations are automatically loaded since WordPress 4.6
 		 */
 		public function ctlb_load_plugin_textdomain() {
-			load_plugin_textdomain('timeline-block', false, basename( dirname( __FILE__ ) ) . '/languages/');
-
 			if ( ! get_option( 'ctlb-initial-save-version' ) ) {
 				add_option( 'ctlb-initial-save-version', Timeline_Block_Version );
 			}
@@ -113,7 +114,8 @@ if ( ! class_exists( 'CoolTimelineBlock' ) ) {
          global $wpdb;
         // Server and WP environment details
         $server_info = [
-            'server_software'        => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field($_SERVER['SERVER_SOFTWARE']) : 'N/A',
+            'server_software'        => isset($_SERVER['SERVER_SOFTWARE']) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : 'N/A',
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             'mysql_version'          => $wpdb ? sanitize_text_field($wpdb->get_var("SELECT VERSION()")) : 'N/A',
             'php_version'            => sanitize_text_field(phpversion() ?: 'N/A'),
             'wp_version'             => sanitize_text_field(get_bloginfo('version') ?: 'N/A'),

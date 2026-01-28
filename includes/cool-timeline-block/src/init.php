@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'enqueue_block_editor_assets', 'cltb_editor_side_css' );
 function cltb_editor_side_css() {
 		// Common Editor style.
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		wp_enqueue_style(
 			'timeline-block
 		-block-common-editor-css', // Handle.
@@ -40,6 +41,7 @@ function cltb_timeline_block_load_post_assets() {
 	if ( ! is_object( $this_post ) ) {
 		return;
 	}
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	$this_post = apply_filters( 'timeline-block_post_for_stylesheet', $this_post );
 	if ( ! is_object( $this_post ) ) {
 		return;
@@ -78,6 +80,7 @@ function cltb_timeline_block_load_post_assets() {
 
 						$head_font_url = ctlb_timeline_get_font_url( $headFont );
 
+						// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 						echo '<link href="'.esc_url($head_font_url).'" rel="stylesheet">';
 					}
 				}
@@ -94,6 +97,7 @@ function cltb_timeline_block_load_post_assets() {
 
 						$subhead_font_url = ctlb_timeline_get_font_url( $subheadFont );
 
+						// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 						echo '<link href="'.esc_url($subhead_font_url).'" rel="stylesheet">';
 					}
 				}
@@ -110,6 +114,7 @@ function cltb_timeline_block_load_post_assets() {
 
 						$date_font_url = ctlb_timeline_get_font_url( $dateFont );
 
+						// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 						echo '<link href="'.esc_url($date_font_url).'" rel="stylesheet">';
 					}
 				}
@@ -134,14 +139,14 @@ function cltb_cp_timeline_cgb_block_assets() {
 		'cltb_cp_timeline-cgb-style', // Handle.
 		Timeline_Block_Url . 'includes/cool-timeline-block/dist/style-index.css',
 		is_admin() ? array( 'wp-editor' ) : null,
-		null
+		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	);
 
 	wp_register_script(
 		'cltb_cp_timeline-cgb-block-js', // Handle.
 		Timeline_Block_Url . 'includes/cool-timeline-block/dist/block.build.js',
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-		null,
+		null, // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		true
 	);
 
@@ -149,7 +154,7 @@ function cltb_cp_timeline_cgb_block_assets() {
 		'cltb_cp_timeline-cgb-block-editor-css', // Handle.
 		Timeline_Block_Url . 'includes/cool-timeline-block/dist/index.css',
 		array( 'wp-edit-blocks' ),
-		null
+		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	);
 
 	if ( function_exists( 'register_block_type' ) ) {
