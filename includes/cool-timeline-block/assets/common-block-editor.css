@@ -205,6 +205,18 @@
 .timeline-block-typography-advanced .timeline-block-typography-range-options .timeline-block-size-type-field-tabs .components-base-control.components-range-control .components-base-control__field{
     display:block;
 }
+ 
+.cooltimeline-tab-settings .components-range-control__wrapper{
+	z-index: 0;
+}
+ .cooltimeline-tab-settings .timeline-block-control__units .components-button{
+	z-index: 0 !important;
+ }
+ .timeline-block-typography-advanced .timeline-block-typography-range-options{
+	padding-bottom: 15px;
+}
+
+
 
 .components-button-group.timeline-block-size-type-field {
 	margin: 0;
