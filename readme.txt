@@ -55,6 +55,8 @@ Just search **‘Timeline Block‘** from the block editor **‘Add Block‘** s
 * **Timeline Builder:** Create a small timeline inside the Gutenberg block editor using a vertical or horizontal timeline. **[View Demo](https://cooltimeline.com/demo/timeline-builder-pro/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tbp_view_demo)**
 * **Timeline Module Pro For Divi:** Showcase your personal story or company history using stunning vertical or horizontal timelines directly inside the Divi Builder. **[View Demo](https://cooltimeline.com/divi/?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=demo&utm_content=tmdivi_view_demo)**
 
+**Use of 3rd Party Services:** This plugin connects to the Cool Plugins feedback server only for optional usage data sharing and voluntary feedback submission (for example, during plugin deactivation). Data is transmitted solely after explicit user consent. No hidden tracking is performed, and no frontend visitor or site user data is collected.  For more details, please review our [Data Usage Policy](https://my.coolplugins.net/terms/usage-tracking/), [TOS](https://my.coolplugins.net/terms/), and [Privacy Policy](https://my.coolplugins.net/terms/privacy-policy/).
+
 == Screenshots ==
 1. Gutenberg Timeline Block Preview
 2. Gutenberg Timeline Edit Story settings
