@@ -53,24 +53,24 @@ class CtlbUsersFeedback {
 		}
 		$deactivate_reasons = array(
 			'didnt_work_as_expected'         => array(
-				'title'             => esc_html( __( 'The plugin didn\'t work as expected', 'timeline-block-for-gutenberg' ) ),
+				'title'             => esc_html( __( 'The plugin didn\'t work as expected', 'timeline-block' ) ),
 				'input_placeholder' => 'What did you expect?',
 			),
 			'found_a_better_plugin'          => array(
-				'title'             => esc_html( __( 'I found a better plugin', 'timeline-block-for-gutenberg' ) ),
-				'input_placeholder' => esc_html( __( 'Please share which plugin', 'timeline-block-for-gutenberg' ) ),
+				'title'             => esc_html( __( 'I found a better plugin', 'timeline-block' ) ),
+				'input_placeholder' => esc_html( __( 'Please share which plugin', 'timeline-block' ) ),
 			),
 			'couldnt_get_the_plugin_to_work' => array(
-				'title'             => esc_html( __( 'The plugin is not working', 'timeline-block-for-gutenberg' ) ),
+				'title'             => esc_html( __( 'The plugin is not working', 'timeline-block' ) ),
 				'input_placeholder' => 'Please share your issue. So we can fix that for other users.',
 			),
 			'temporary_deactivation'         => array(
-				'title'             => esc_html( __( 'It\'s a temporary deactivation', 'timeline-block-for-gutenberg' ) ),
+				'title'             => esc_html( __( 'It\'s a temporary deactivation', 'timeline-block' ) ),
 				'input_placeholder' => '',
 			),
 			'other'                          => array(
-				'title'             => esc_html( __( 'Other', 'timeline-block-for-gutenberg' ) ),
-				'input_placeholder' => esc_html( __( 'Please share the reason', 'timeline-block-for-gutenberg' ) ),
+				'title'             => esc_html( __( 'Other', 'timeline-block' ) ),
+				'input_placeholder' => esc_html( __( 'Please share the reason', 'timeline-block' ) ),
 			),
 		);
 
@@ -79,7 +79,7 @@ class CtlbUsersFeedback {
 						
 			<div class="cool-plugins-deactivation-response">
 			<div id="cool-plugins-deactivate-feedback-dialog-header">
-				<span id="cool-plugins-feedback-form-title"><?php echo esc_html( __( 'Quick Feedback', 'timeline-block-for-gutenberg' ) ); ?></span>
+				<span id="cool-plugins-feedback-form-title"><?php echo esc_html( __( 'Quick Feedback', 'timeline-block' ) ); ?></span>
 			</div>
 			<div id="cool-plugins-loader-wrapper">
 				<div class="cool-plugins-loader-container">
@@ -92,7 +92,7 @@ class CtlbUsersFeedback {
 				wp_nonce_field( '_cool-plugins_deactivate_feedback_nonce', '_wpnonce' );
 				?>
 				<input type="hidden" name="action" value="cool-plugins_deactivate_feedback" />
-				<div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php echo esc_html( __( 'If you have a moment, please share why you are deactivating this plugin.', 'timeline-block-for-gutenberg' ) ); ?></div>
+				<div id="cool-plugins-deactivate-feedback-dialog-form-caption"><?php echo esc_html( __( 'If you have a moment, please share why you are deactivating this plugin.', 'timeline-block' ) ); ?></div>
 				<div id="cool-plugins-deactivate-feedback-dialog-form-body">
 					<?php
 					$reason_key_arr = array( 'didnt_work_as_expected', 'found_a_better_plugin', 'couldnt_get_the_plugin_to_work' );
@@ -108,7 +108,7 @@ class CtlbUsersFeedback {
 									$twae_plugin_url = 'https://wordpress.org/plugins/timeline-widget-addon-for-elementor/';
 									?>
 								  <div class="cool-plugins-extra-links">
-									<?php echo esc_html__( 'Please try ', 'timeline-block-for-gutenberg' ); ?><a href="<?php echo esc_url( $twae_plugin_url ); ?>" target="_blank"><?php echo esc_html__( 'Timeline Widget For Elementor', 'timeline-block-for-gutenberg' ); ?></a> <?php echo esc_html__( 'plugin.', 'timeline-block-for-gutenberg' ); ?>
+									<?php echo esc_html__( 'Please try ', 'timeline-block' ); ?><a href="<?php echo esc_url( $twae_plugin_url ); ?>" target="_blank"><?php echo esc_html__( 'Timeline Widget For Elementor', 'timeline-block' ); ?></a> <?php echo esc_html__( 'plugin.', 'timeline-block' ); ?>
 									</div>
 									<?php
 								}
@@ -122,13 +122,13 @@ class CtlbUsersFeedback {
 						</div>
 					<?php endforeach; ?>
 
-					<input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice-<?php echo esc_attr( $this->plugin_slug ); ?>" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php echo esc_html__( 'I agree to share anonymous usage data and basic site details (such as server, PHP, and WordPress versions) to support Timeline Block improvement efforts. Additionally, I allow Cool Plugins to store all information provided through this form and to respond to my inquiry.', 'timeline-block-for-gutenberg' ); ?></label>
+					<input class="cool-plugins-GDPR-data-notice" id="cool-plugins-GDPR-data-notice-<?php echo esc_attr( $this->plugin_slug ); ?>" type="checkbox"><label for="cool-plugins-GDPR-data-notice"><?php echo esc_html__( 'I agree to share anonymous usage data and basic site details (such as server, PHP, and WordPress versions) to support Timeline Block improvement efforts. Additionally, I allow Cool Plugins to store all information provided through this form and to respond to my inquiry.', 'timeline-block' ); ?></label>
 					
 
 				</div>
 				<div class="cool-plugin-popup-button-wrapper">
-					<a class="cool-plugins-button button-deactivate" id="ctlb-cool-plugin-submitNdeactivate"><?php echo esc_html__( 'Submit and Deactivate', 'timeline-block-for-gutenberg' ); ?></a>
-					<a class="cool-plugins-button" id="ctlb-cool-plugin-skipNdeactivate"><?php echo esc_html__( 'Skip and Deactivate', 'timeline-block-for-gutenberg' ); ?></a>
+					<a class="cool-plugins-button button-deactivate" id="ctlb-cool-plugin-submitNdeactivate"><?php echo esc_html__( 'Submit and Deactivate', 'timeline-block' ); ?></a>
+					<a class="cool-plugins-button" id="ctlb-cool-plugin-skipNdeactivate"><?php echo esc_html__( 'Skip and Deactivate', 'timeline-block' ); ?></a>
 				</div>
 			</form>
 			</div>
@@ -141,7 +141,7 @@ class CtlbUsersFeedback {
 	function submit_deactivation_response() {
 		// Check user capabilities
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Unauthorized access.', 'timeline-block-for-gutenberg' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized access.', 'timeline-block' ) ) );
 			wp_die();
 		}
 
@@ -152,24 +152,24 @@ class CtlbUsersFeedback {
 			$message            = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : ''; // Sanitize message input
 			$deactivate_reasons = array(
 				'didnt_work_as_expected'         => array(
-					'title'             => esc_html( __( 'The plugin didn\'t work as expected', 'timeline-block-for-gutenberg' ) ),
+					'title'             => esc_html( __( 'The plugin didn\'t work as expected', 'timeline-block' ) ),
 					'input_placeholder' => 'What did you expect?',
 				),
 				'found_a_better_plugin'          => array(
-					'title'             => esc_html( __( 'I found a better plugin', 'timeline-block-for-gutenberg' ) ),
-					'input_placeholder' => esc_html( __( 'Please share which plugin', 'timeline-block-for-gutenberg' ) ),
+					'title'             => esc_html( __( 'I found a better plugin', 'timeline-block' ) ),
+					'input_placeholder' => esc_html( __( 'Please share which plugin', 'timeline-block' ) ),
 				),
 				'couldnt_get_the_plugin_to_work' => array(
-					'title'             => esc_html( __( 'The plugin is not working', 'timeline-block-for-gutenberg' ) ),
+					'title'             => esc_html( __( 'The plugin is not working', 'timeline-block' ) ),
 					'input_placeholder' => 'Please share your issue. So we can fix that for other users.',
 				),
 				'temporary_deactivation'         => array(
-					'title'             => esc_html( __( 'It\'s a temporary deactivation', 'timeline-block-for-gutenberg' ) ),
+					'title'             => esc_html( __( 'It\'s a temporary deactivation', 'timeline-block' ) ),
 					'input_placeholder' => '',
 				),
 				'other'                          => array(
-					'title'             => esc_html( __( 'Other', 'timeline-block-for-gutenberg' ) ),
-					'input_placeholder' => esc_html( __( 'Please share the reason', 'timeline-block-for-gutenberg' ) ),
+					'title'             => esc_html( __( 'Other', 'timeline-block' ) ),
+					'input_placeholder' => esc_html( __( 'Please share the reason', 'timeline-block' ) ),
 				),
 			);
 

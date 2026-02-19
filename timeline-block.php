@@ -3,12 +3,11 @@
  * Plugin Name:Timeline Block
  * Plugin URI:https://cooltimeline.com
  * Description:Responsive timeline block for Gutenberg editor.
- * Version:1.8.0
+ * Version:1.8.1
  * Author:Cool Plugins
  * Author URI:https://coolplugins.net/?utm_source=tbg_plugin&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list
  * License:GPLv2 or later
  * License URI:https://www.gnu.org/licenses/gpl-2.0.html
- * Domain Path:/languages
  * Text Domain:timeline-block
  */
 
@@ -21,7 +20,7 @@ define( 'Timeline_Block_File', __FILE__ );
 define( 'Timeline_Block_Url', plugin_dir_url( Timeline_Block_File ) );
 define( 'Timeline_Block_Dir', plugin_dir_path( __FILE__ ) );
 if ( ! defined( 'Timeline_Block_Version' ) ) {
-	define( 'Timeline_Block_Version', '1.8.0' );
+	define( 'Timeline_Block_Version', '1.8.1' );
 }
 
 /**

@@ -5,7 +5,7 @@ Requires at least: 5.0
 Tags: timeline, history, roadmap, company history, Gutenberg
 Tested up to:6.9
 Requires PHP: 7.2
-Stable tag:1.8.0
+Stable tag:1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Showcase your company history, process steps, milestones, and roadmap inside Gutenberg using the powerful Timeline Block
@@ -135,6 +135,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 == Changelog ==
 
 Upgrade to Version 1.8.0 to enjoy these new features, enhancements, and bug fixes. Your feedback is invaluable as we continue to refine and improve our plugins.
+
+= Version 1.8.1| 19 Feb 2026 =
+- **Fixed:** Issues reported by “Plugin Check” plugin.
 
 = Version 1.8.0| 12 Feb 2026 =
 - **Updated:** Textual Changes.
@@ -275,15 +278,6 @@ Enhancements:
 - **Initial release**
 
 == Upgrade Notice ==
-= Version 1.7.7 | 27 Nov 2025 =
-- **Removed:** Instant timeline plugin (Before updating to this version, you need to migrate your instant timeline block into Timeline Block click [here](https://cooltimeline.com/timeline-block-migration//?utm_source=tbg_plugin&utm_medium=readme&utm_campaign=docs&utm_content=video_tutorial) to migrate process).
-= Version 1.5 | 24 Aug 2023 =
-- **New Features:**
-   * Introducing the "Add New Story" button within the Story toolbar, allowing you to seamlessly add new stories at any position you prefer.
-Enhancements:
-   * Conveniently access the settings panel with the newly added Timeline Settings button, now available within each nested block.
-- **Bug Fixes:**
-    * Resolved conditional loading of styles and assets, ensuring optimal performance and loading only when necessary.
-    * Eliminated duplicate loading of the style.css file for a cleaner and more efficient codebase.
-    * Rectified the Font Family issue, ensuring the consistent and accurate rendering of fonts throughout the application.
-- **Compatibility:** Successfully tested with WordPress 6.3 to ensure a smooth user experience.
+
+= 1.8.1 =
+Fixed issues reported by the Plugin Check plugin.
